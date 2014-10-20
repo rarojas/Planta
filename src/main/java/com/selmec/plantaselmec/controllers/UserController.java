@@ -7,6 +7,7 @@ package com.selmec.plantaselmec.controllers;
 
 import com.selmec.plantaselmec.Models.Usuarios;
 import com.selmec.plantaselmec.services.IUsuariosServices;
+import java.security.Principal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,6 +31,12 @@ public class UserController {
 
     @Autowired
     private IUsuariosServices usuariosServices;
+
+    @RequestMapping(value = "/Current", method = RequestMethod.GET)
+    @ResponseBody
+    public String Current(Principal principal) {
+        return principal.getName();
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody

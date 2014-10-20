@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 14/10/2014 10:35:52 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 20, 2014 5:05:43 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.selmec.plantaselmec.Models.Cariles" table="cariles" catalog="test" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
@@ -10,6 +10,12 @@
         </id>
         <property name="noCarril" type="int">
             <column name="NoCarril" not-null="true" unique="true" />
+        </property>
+        <property name="equipo" type="string">
+            <column name="equipo" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="planta" type="string">
+            <column name="planta" length="45" not-null="true" unique="true" />
         </property>
         <set name="ensambles" table="ensamble" inverse="true" lazy="true" fetch="select">
             <key>

@@ -27,7 +27,7 @@ var Routes = ['$routeProvider',
                 }).
                 when('/PruebaConCargaSubita/:EnsambleID', {
                     templateUrl: '/templates/PruebaSinCarga.html',
-                    controller: 'PruebaSinCargaController'
+                    controller: 'PruebaConCargaSubitaCtrl'
                 }).
                 when('/Motores', {
                     templateUrl: '/templates/Motores/Index.html',

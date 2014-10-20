@@ -46,6 +46,7 @@
             <ref bean="dataSource"/>
         </constructor-arg>    
     </bean>
+    <bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
     <tx:annotation-driven />
     <mvc:annotation-driven />
     <bean id="transactionManager"
@@ -78,7 +79,7 @@
         realm="Protected API"        
         auto-config="true"                
         authentication-manager-ref="authenticationManager">        
-        <security:intercept-url pattern="/Incidencias" access="ROLE_ADMIN"  />        
+        <security:intercept-url pattern="/" access="ROLE_ADMIN"  />        
     </security:http>
    
     <bean id="authenticationTokenProcessingFilter" class="com.selmec.rest.AuthenticationTokenProcessingFilter" >

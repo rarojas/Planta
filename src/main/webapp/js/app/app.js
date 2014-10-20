@@ -312,7 +312,17 @@ app.controller("PruebaConCargaController", [
                     , function (response) {
                         $scope.now = response;
                         $scope.now.time = $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current;
-                        $scope.lastMinute.push({x: $scope.AccumulateTime, val_0: $scope.now.L1N, val_1: $scope.now.L2N, val_2: $scope.now.L3N});
+                        $scope.lastMinute.push({
+                            x: $scope.AccumulateTime,
+                            val_0: $scope.now.L1N,
+                            val_1: $scope.now.L2N,
+                            val_2: $scope.now.L3N,
+                            I1: $scope.now.I1,
+                            I2: $scope.now.I2,
+                            I3: $scope.now.I3,
+                            HZ: $scope.now.HZ,
+                            Temp: $scope.now.Temp
+                        });
                         if ($scope.lastMinute.length > (30 / $scope.RefreshTime)) {
                             $scope.lastMinute.shift();
                         }
@@ -327,9 +337,9 @@ app.controller("PruebaConCargaController", [
         };
     }]);
 app.controller("PruebaConCargaSubitaCtrl", [
-    "$scope", "$http", "$interval", "$routeParams", "PlantaServices",
-    function ($scope, $http, $interval, $routeParams, PlantaServices) {
-        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices);
+    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout",
+    function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout) {
+        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout);
         $scope.Iteraciones = {current: 0,
             Iteracciones: [
                 {No: 1, Time: 1 * 60, current: 0},
@@ -352,15 +362,26 @@ app.controller("PruebaConCargaSubitaCtrl", [
             $scope.prueba.$save(function () {
                 noty({text: "Comenzando Prueba de Carga Subita"});
                 $scope.timer = $interval(function () {
-
-                    // $scope.Accumulate.push(current);                   
-                    if ($scope.now >= $scope.valores.Min.L1L2) {
-                        $scope.Iteraciones.current++;
+                    if ($scope.now.L1N >= $scope.valores.Min.L1L2 && $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].active) {                        
                         var current = $scope.now;
                         current.index = $scope.Iteraciones.current;
+                         $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current;
                         $scope.Accumulate.push(current);
+                        $scope.Iteraciones.current++;
+                        if ($scope.Iteraciones.Iteracciones.length === $scope.Iteraciones.current) {
+                            noty({text: "Terminando prueba¡¡¡", type: 'success'});
+                            return $scope.Stop();
+                        }
+                        else {
+                            $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current = 0;
+                            noty({text: "Comenzando Iteracion " + $scope.Iteraciones.current + "¡¡¡", type: 'success'});
+                        }
                     }
-                    $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current++;
+                    if (!$scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].active)
+                        if ($scope.now.L1N < $scope.valores.Min.L1L2)
+                            $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].active = true;
+                    if ($scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].active)
+                        $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current++;
                     $scope.AccumulateTime++;
                 }, 1000);
                 $scope.Poller = $interval(function () {
@@ -368,7 +389,17 @@ app.controller("PruebaConCargaSubitaCtrl", [
                     , function (response) {
                         $scope.now = response;
                         $scope.now.time = $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current;
-                        $scope.lastMinute.push({x: $scope.AccumulateTime, val_0: $scope.now.L1N, val_1: $scope.now.L2N, val_2: $scope.now.L3N});
+                        $scope.lastMinute.push({
+                            x: $scope.AccumulateTime,
+                            val_0: $scope.now.L1N,
+                            val_1: $scope.now.L2N,
+                            val_2: $scope.now.L3N,
+                            I1: $scope.now.I1,
+                            I2: $scope.now.I2,
+                            I3: $scope.now.I3,
+                            HZ: $scope.now.HZ,
+                            Temp: $scope.now.Temp
+                        });
                         if ($scope.lastMinute.length > (30 / $scope.RefreshTime)) {
                             $scope.lastMinute.shift();
                         }

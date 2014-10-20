@@ -141,13 +141,6 @@ public class PlantaController {
         read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "FASE 3|VOLTAJE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
         result.L3N = read.tagvalue;
 
-//        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "FASE 1|CORRIENTE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-//        result.I1 = read.tagvalue;
-//        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "FASE 2|CORRIENTE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-//        result.I2 = read.tagvalue;
-//        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "FASE 3|CORRIENTE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-//        result.I3 = read.tagvalue;
-
         read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "MOTOR|PRESION ACEITE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
         result.Presion = read.tagvalue;
         read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "MOTOR|TEMPERATURA%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));

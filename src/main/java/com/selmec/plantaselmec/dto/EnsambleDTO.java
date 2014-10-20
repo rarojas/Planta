@@ -25,10 +25,10 @@ public class EnsambleDTO implements java.io.Serializable {
         this.guardas = ensamble.getGuardas();
         this.patin = ensamble.getPatin();
         this.rediador = ensamble.getRediador();
-        this.usuarioId = ensamble.getUsuarioId();
+        this.usuarioId = new UsuarioDTO(ensamble.getUsuarios());
         this.pruebas = new ArrayList<>();
         for (Object prueba : ensamble.getPruebas()) {
-            this.pruebas.add(new PruebaDTO((Prueba)prueba));
+            this.pruebas.add(new PruebaDTO((Prueba) prueba));
         }
     }
 
@@ -44,13 +44,13 @@ public class EnsambleDTO implements java.io.Serializable {
         this.guardas = ensamble.getGuardas();
         this.patin = ensamble.getPatin();
         this.rediador = ensamble.getRediador();
-        this.usuarioId = ensamble.getUsuarioId();
+        this.usuarioId = new UsuarioDTO(ensamble.getUsuarios());
     }
 
     public int id;
     public PlantaDTO planta;
     public String folio;
-    public int usuarioId;
+    public UsuarioDTO usuarioId;
     public int dtCreacion;
     public CarrilDTO carriles;
     public int altitud;

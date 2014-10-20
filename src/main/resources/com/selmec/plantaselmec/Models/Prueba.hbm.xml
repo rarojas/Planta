@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 14/10/2014 10:35:52 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 20, 2014 5:05:43 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.selmec.plantaselmec.Models.Prueba" table="prueba" catalog="test" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
@@ -28,6 +28,18 @@
         </property>
         <property name="comentario" type="string">
             <column name="Comentario" length="250" />
+        </property>
+        <property name="aprueba" type="java.lang.Integer">
+            <column name="Aprueba" />
+        </property>
+        <property name="dtAprueba" type="timestamp">
+            <column name="dtAprueba" length="19" />
+        </property>
+        <property name="apruebaSupervisor" type="java.lang.Integer">
+            <column name="ApruebaSupervisor" />
+        </property>
+        <property name="dtApruebaSupervisor" type="timestamp">
+            <column name="dtApruebaSupervisor" length="19" />
         </property>
     </class>
 </hibernate-mapping>

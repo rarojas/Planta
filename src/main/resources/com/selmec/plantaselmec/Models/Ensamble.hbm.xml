@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 14/10/2014 10:35:52 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 20, 2014 5:05:43 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.selmec.plantaselmec.Models.Ensamble" table="ensamble" catalog="test" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
@@ -14,11 +14,11 @@
         <many-to-one name="planta" class="com.selmec.plantaselmec.Models.Planta" fetch="select">
             <column name="PlantaID" length="50" not-null="true" />
         </many-to-one>
+        <many-to-one name="usuarios" class="com.selmec.plantaselmec.Models.Usuarios" fetch="select">
+            <column name="UsuarioID" not-null="true" />
+        </many-to-one>
         <property name="folio" type="string">
             <column name="Folio" length="50" not-null="true" unique="true" />
-        </property>
-        <property name="usuarioId" type="int">
-            <column name="UsuarioID" not-null="true" />
         </property>
         <property name="dtCreacion" type="timestamp">
             <column name="dtCreacion" length="19" not-null="true" />

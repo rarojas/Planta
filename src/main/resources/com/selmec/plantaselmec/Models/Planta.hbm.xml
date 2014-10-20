@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 14/10/2014 10:35:52 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 20, 2014 5:05:43 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.selmec.plantaselmec.Models.Planta" table="planta" catalog="test" optimistic-lock="version">
         <id name="noSerie" type="string">
@@ -31,7 +31,7 @@
         </property>
         <property name="capInt" type="java.lang.Integer">
             <column name="CapInt" />
-        </property>   
+        </property>
         <set name="ensambles" table="ensamble" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="PlantaID" length="50" not-null="true" />

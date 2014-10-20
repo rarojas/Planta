@@ -1,5 +1,6 @@
 <%@tag description="Master Page" pageEncoding="UTF-8"%> 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@attribute name="header" fragment="true" %> 
 <%@attribute name="titlePage" fragment="true" %> 
 <%@attribute name="app" fragment="true" %> 
@@ -75,7 +76,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li >
+                        <li>
                             <a href="#/NuevaPrueba">Nueva</a></li>
                         <li><a href="#/Pruebas">Pruebas</a></li>
                         <li>
@@ -90,10 +91,16 @@
                     </ul>                                
                     <ul class="nav navbar-nav navbar-right">
                         <li>
+                            <a href="#/MisDatos" >
+                                <security:authorize access="isAuthenticated()">
+                                    Bienvenid@: <security:authentication property="principal.username" /> 
+                                </security:authorize>
+                            </a>
+                        </li>                        <li>
                             <a href="#" style="padding:0px">
                                 <img src="<c:url value="/img/Logo Selmec.png"/>" class="img-responsive" width="150" alt=""/>
                             </a>
-                        </li>
+                        </li>                        
                         <li><a href="#/Logout">Cerrar Sesión</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->

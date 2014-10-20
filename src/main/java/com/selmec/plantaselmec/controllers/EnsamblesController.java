@@ -1,7 +1,10 @@
 package com.selmec.plantaselmec.controllers;
 
 import com.selmec.plantaselmec.Models.Ensamble;
+import com.selmec.plantaselmec.Models.Usuarios;
 import com.selmec.plantaselmec.dto.EnsambleDTO;
+import com.selmec.plantaselmec.services.IUsuariosServices;
+import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -24,7 +27,9 @@ public class EnsamblesController extends BaseController<Ensamble, EnsambleDTO> {
     
     @Autowired
     SessionFactory session;
-    
+     @Autowired
+    private IUsuariosServices usuariosServices;
+     
     @RequestMapping("/Pruebas")
     public ModelAndView Pruebas() {
         return new ModelAndView("/Pruebas/index");
@@ -50,10 +55,12 @@ public class EnsamblesController extends BaseController<Ensamble, EnsambleDTO> {
     @Transactional
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public EnsambleDTO Post(@RequestBody Ensamble Ensamble) {
+    public EnsambleDTO Post(@RequestBody Ensamble Ensamble,Principal principal) {
         DateFormat df = new SimpleDateFormat("yyMMddss");
         Date today = Calendar.getInstance().getTime();
         String reportDate = df.format(today);
+        Usuarios usuario  = usuariosServices.GetByUsername(principal.getName());        
+        Ensamble.setUsuarios(usuario);
         Ensamble.setFolio(reportDate);
         sessionFactory.getCurrentSession().save(Ensamble);
         return DTO(Ensamble, Ensamble.class, EnsambleDTO.class);

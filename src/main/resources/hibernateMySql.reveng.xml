@@ -5,8 +5,10 @@
     <table-filter match-name="planta"/>
     <table-filter match-name="ensamble"/>
     <table-filter match-name="motores"/>  
+    <table-filter match-name="lecturas"/>  
     <table-filter match-name="prueba"/>   
     <table-filter match-name="cariles"/> 
     <table-filter match-name="incidencias"/> 
     <table-filter match-name="usuarios"/> 
+    <table-filter match-name="pruebacontrol"/> 
 </hibernate-reverse-engineering>

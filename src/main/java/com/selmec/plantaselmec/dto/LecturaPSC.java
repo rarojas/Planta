@@ -15,6 +15,8 @@ public class LecturaPSC {
     public Double I1;
     public Double I2;
     public Double I3;
+    public Double RMP;
+    public Double Timer;
 
     public LecturaPSC() {
     }

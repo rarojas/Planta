@@ -29,6 +29,6 @@ public class LecturaDTO {
         this.val_2 = lectura.getL2l3();
         this.val_0 = lectura.getL3l1();
 
-        this.x = lectura.getTimeStamp();
+        //this.x = lectura.getTimeStamp();
     }
 }

@@ -55,10 +55,10 @@ public class EnsambleService implements IEnsambleService {
         Ensamble prueba = (Ensamble) dao.getCurrentSession().get(Ensamble.class, estado);
         String equipo = prueba.getCariles().getPlanta();
         queryString = String.format(
-                "update  tablaescritura  set  tagvalue = 510 where  variable = 'CONTROL1' AND EQUIPO = '%s';"
-                + "update tablaescritura set tagvalue = 1 where variable = 'MODO CONTROL' AND EQUIPO = '%s';"
-                + "update  tablaescritura set  tagvalue = 0 where  variable = 'CONTROL2' AND EQUIPO = '%s';"
-                + "update  tablaescritura set  tagvalue = 1 where  variable = 'CONTROL3' AND EQUIPO = '%s';", equipo, equipo, equipo, equipo);
+                "update  tablaescritura  set  tagvalue = 510 where  variable = 'CONTROL1' AND IDEQUIPO = '%s';"
+                + "update tablaescritura set tagvalue = 1 where variable = 'MODOCONTROL' AND IDEQUIPO = '%s';"
+                + "update  tablaescritura set  tagvalue = 0 where  variable = 'CONTROL2' AND IDEQUIPO = '%s';"
+                + "update  tablaescritura set  tagvalue = 1 where  variable = 'CONTROL3' AND IDEQUIPO = '%s';", equipo, equipo, equipo, equipo);
         logger.info(estado);
         logger.info(queryString);
         this.jdbctemplate = new JdbcTemplate(dataSource);
@@ -72,10 +72,10 @@ public class EnsambleService implements IEnsambleService {
         Ensamble prueba = (Ensamble) dao.getCurrentSession().get(Ensamble.class, estado);
         String equipo = prueba.getCariles().getPlanta();
         queryString = String.format(
-                "update tablaescritura set tagvalue = 1 where variable = 'MODO CONTROL' AND EQUIPO = '%s';"
-                + "update  tablaescritura set  tagvalue = 765 where  variable = 'CONTROL1' AND EQUIPO = '%s';"
-                + "update  tablaescritura set  tagvalue = 0 where  variable = 'CONTROL2' AND EQUIPO = '%s';"
-                + "update  tablaescritura set  tagvalue = 1 where  variable = 'CONTROL3' AND EQUIPO = '%s';", equipo, equipo, equipo, equipo);
+                "update tablaescritura set tagvalue = 1 where variable = 'MODOCONTROL' AND IDEQUIPO = '%s';"
+                + "update  tablaescritura set  tagvalue = 765 where  variable = 'CONTROL1' AND IDEQUIPO = '%s';"
+                + "update  tablaescritura set  tagvalue = 0 where  variable = 'CONTROL2' AND IDEQUIPO = '%s';"
+                + "update  tablaescritura set  tagvalue = 1 where  variable = 'CONTROL3' AND IDEQUIPO = '%s';", equipo, equipo, equipo, equipo);
         logger.info(estado);
         logger.info(queryString);
         this.jdbctemplate = new JdbcTemplate(dataSource);

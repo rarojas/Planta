@@ -11,10 +11,13 @@ import com.selmec.plantaselmec.Models.Usuarios;
  *
  * @author cognos
  */
-public class UsuarioDTO {
+public class UsuarioDTO implements java.io.Serializable {
 
     public String email;
     public String nombres;
+
+    public UsuarioDTO() {
+    }
 
     public UsuarioDTO(Usuarios usuarios) {
         this.nombres = usuarios.getNombres();

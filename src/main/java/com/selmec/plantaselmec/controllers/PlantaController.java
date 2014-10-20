@@ -99,7 +99,7 @@ public class PlantaController {
     }
 
     @Transactional
-    @RequestMapping(value = "On/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "On/{id}", method = RequestMethod.GET)
     @ResponseBody
     public String On(@PathVariable("id") int id) {
         logger.info(ensambleService);
@@ -116,7 +116,7 @@ public class PlantaController {
     }
 
     @Transactional
-    @RequestMapping(value = "Off/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "Off/{id}", method = RequestMethod.GET)
     @ResponseBody
     public String Off(@PathVariable("id") int id) {
         logger.info(ensambleService);
@@ -141,24 +141,42 @@ public class PlantaController {
         read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "FASE 3|VOLTAJE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
         result.L3N = read.tagvalue;
 
+        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "FASE 1|CORRIENTE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
+        result.L1N = read.tagvalue;
+        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "FASE 2|CORRIENTE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
+        result.L2N = read.tagvalue;
+        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "FASE 3|CORRIENTE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
+        result.L3N = read.tagvalue;
+
         read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "MOTOR|PRESION ACEITE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
         result.Presion = read.tagvalue;
         read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "MOTOR|TEMPERATURA%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
         result.Temp = read.tagvalue;
         read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "FRECUENCIA|FREQUENCY%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
         result.HZ = read.tagvalue;
+        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "GENERADOR|RPM%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
+        result.RMP = read.tagvalue;
+        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "GENERADOR|TIMER%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
+        result.Timer = read.tagvalue;
+        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "GENERADOR|TIMER%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
+        result.Timer = read.tagvalue;
 
         Lecturas lectura = new Lecturas();
         lectura.setPrueba(prueba);
         lectura.setHz(result.HZ);
+        lectura.setTemp((int) Math.round(result.Temp));
         lectura.setL1(result.L1N);
         lectura.setL2(result.L2N);
         lectura.setL3(result.L3N);
         lectura.setL1l2(result.L1L2);
         lectura.setL2l3(result.L2L3);
         lectura.setL3l1(result.L3L1);
-        lectura.setTimeStamp(new Date());
-        sessionFactory.getCurrentSession().save(lectura);
+        lectura.setI1(result.I1);
+        lectura.setI2(result.I2);
+        lectura.setI3(result.I3);
+        //lectura.setRmp((int)result.RMP);        
+        //lectura.setTimeStamp(new Date());
+        //sessionFactory.getCurrentSession().save(lectura);
         return result;
     }
 

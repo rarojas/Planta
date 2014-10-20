@@ -14,6 +14,7 @@
     <mapping resource="com/selmec/plantaselmec/Models/Cariles.hbm.xml"/>
     <mapping resource="com/selmec/plantaselmec/Models/Planta.hbm.xml"/>
     <mapping resource="com/selmec/plantaselmec/Models/Incidencias.hbm.xml"/>
+    <mapping resource="com/selmec/plantaselmec/Models/Pruebacontrol.hbm.xml"/>
     <mapping resource="com/selmec/plantaselmec/Models/Lecturas.hbm.xml"/>
     <mapping resource="com/selmec/plantaselmec/Models/Prueba.hbm.xml"/>
     <mapping resource="com/selmec/plantaselmec/Models/Ensamble.hbm.xml"/>

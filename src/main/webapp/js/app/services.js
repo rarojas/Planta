@@ -3,7 +3,7 @@ var services = ["PlantaServices",
             var urlApiBase = "/api/";
             var api = {};
             api.Plantas = $resource(urlApiBase + "Planta/:noSerie", {}, {
-                On: {method: 'POST', url: urlApiBase + "Planta/On/:id"},
+                On: {method: 'POST', url: urlApiBase + "Planta/On/:id", },
                 Off: {method: 'POST', url: urlApiBase + "Planta/Off/:id"}
             });
             api.Carriles = $resource(urlApiBase + "Carriles/:id", {}, {});

@@ -122,11 +122,19 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
     };
 
     $scope.ParoPlanta = function () {
-        PlantaServices.Plantas.Off({id: $scope.ensamble.id});
+        PlantaServices.Plantas.Off({}, {id: $scope.ensamble.id}, function () {
+            noty({text: "Encendido de planta exitoso¡¡¡", type: "success"});
+        }, function () {
+            noty({text: "Error al encender la planta¡¡¡", type: "error"});
+        });
     };
 
     $scope.ArranquePlanta = function () {
-        PlantaServices.Plantas.On({id: $scope.ensamble.id});
+        PlantaServices.Plantas.On({}, {id: $scope.ensamble.id}, function () {
+            noty({text: "Apagado de planta exitoso¡¡¡", type: "success"});
+        }, function () {
+            noty({text: "Error al apagar la planta la planta¡¡¡", type: "error"});
+        });
     };
 
     $scope.Start = function () {
@@ -362,10 +370,10 @@ app.controller("PruebaConCargaSubitaCtrl", [
             $scope.prueba.$save(function () {
                 noty({text: "Comenzando Prueba de Carga Subita"});
                 $scope.timer = $interval(function () {
-                    if ($scope.now.L1N >= $scope.valores.Min.L1L2 && $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].active) {                        
+                    if ($scope.now.L1N >= $scope.valores.Min.L1L2 && $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].active) {
                         var current = $scope.now;
                         current.index = $scope.Iteraciones.current;
-                         $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current;
+                        $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current;
                         $scope.Accumulate.push(current);
                         $scope.Iteraciones.current++;
                         if ($scope.Iteraciones.Iteracciones.length === $scope.Iteraciones.current) {

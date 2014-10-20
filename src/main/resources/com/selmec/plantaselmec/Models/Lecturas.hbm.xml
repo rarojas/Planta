@@ -1,14 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 9/10/2014 05:59:15 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 20, 2014 11:12:41 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.selmec.plantaselmec.Models.Lecturas" table="lecturas" catalog="test">
-        <id name="id" type="int">
+    <class name="com.selmec.plantaselmec.Models.Lecturas" table="lecturas" catalog="test" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
             <column name="ID" />
             <generator class="identity" />
         </id>
-        <timestamp name="timeStamp" column="TimeStamp" />
         <many-to-one name="prueba" class="com.selmec.plantaselmec.Models.Prueba" fetch="select">
             <column name="PruebaID" />
         </many-to-one>
@@ -35,6 +34,27 @@
         </property>
         <property name="l3" type="java.lang.Double">
             <column name="L3" precision="22" scale="0" />
+        </property>
+        <property name="dtStamp" type="timestamp">
+            <column name="dtStamp" length="19" />
+        </property>
+        <property name="rmp" type="java.lang.Integer">
+            <column name="RMP" />
+        </property>
+        <property name="i1" type="java.lang.Double">
+            <column name="I1" precision="22" scale="0" />
+        </property>
+        <property name="i2" type="java.lang.Double">
+            <column name="I2" precision="22" scale="0" />
+        </property>
+        <property name="i3" type="java.lang.Double">
+            <column name="I3" precision="22" scale="0" />
+        </property>
+        <property name="bateria" type="java.lang.Double">
+            <column name="bateria" precision="22" scale="0" />
+        </property>
+        <property name="segundo" type="java.lang.Integer">
+            <column name="segundo" />
         </property>
     </class>
 </hibernate-mapping>

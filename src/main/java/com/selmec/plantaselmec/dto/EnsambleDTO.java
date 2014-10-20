@@ -25,7 +25,9 @@ public class EnsambleDTO implements java.io.Serializable {
         this.guardas = ensamble.getGuardas();
         this.patin = ensamble.getPatin();
         this.rediador = ensamble.getRediador();
-        this.usuarioId = new UsuarioDTO(ensamble.getUsuarios());
+        if (ensamble.getUsuarios() != null) {
+            this.usuarioId = new UsuarioDTO(ensamble.getUsuarios());
+        }
         this.pruebas = new ArrayList<>();
         for (Object prueba : ensamble.getPruebas()) {
             this.pruebas.add(new PruebaDTO((Prueba) prueba));
@@ -44,7 +46,9 @@ public class EnsambleDTO implements java.io.Serializable {
         this.guardas = ensamble.getGuardas();
         this.patin = ensamble.getPatin();
         this.rediador = ensamble.getRediador();
-        this.usuarioId = new UsuarioDTO(ensamble.getUsuarios());
+        if (ensamble.getUsuarios() != null) {
+            this.usuarioId = new UsuarioDTO(ensamble.getUsuarios());
+        }
     }
 
     public int id;

@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 20, 2014 11:12:41 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.selmec.plantaselmec.Models.Pruebacontrol" table="pruebacontrol" catalog="test" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="termometro" type="int">
+            <column name="termometro" not-null="true" />
+        </property>
+        <property name="presion" type="java.lang.Integer">
+            <column name="presion" />
+        </property>
+        <property name="saquemarcha" type="java.lang.Integer">
+            <column name="saquemarcha" />
+        </property>
+        <property name="sobrevelocidad" type="string">
+            <column name="sobrevelocidad" length="45" />
+        </property>
+        <property name="ubt" type="string">
+            <column name="ubt" length="45" />
+        </property>
+        <property name="operacionubt" type="java.lang.Boolean">
+            <column name="operacionubt" />
+        </property>
+        <property name="cargaliena" type="java.lang.Boolean">
+            <column name="cargaliena" />
+        </property>
+        <property name="altatemperatura" type="java.lang.Boolean">
+            <column name="altatemperatura" />
+        </property>
+        <property name="bajapresion" type="java.lang.Boolean">
+            <column name="bajapresion" />
+        </property>
+        <property name="fallageneral" type="java.lang.Boolean">
+            <column name="fallageneral" />
+        </property>
+        <property name="arranquemanual" type="java.lang.Boolean">
+            <column name="arranquemanual" />
+        </property>
+        <property name="bajepresion" type="java.lang.Boolean">
+            <column name="bajepresion" />
+        </property>
+        <property name="temperatura" type="java.lang.Boolean">
+            <column name="temperatura" />
+        </property>
+        <property name="proteccionsobrevelocidad" type="java.lang.Boolean">
+            <column name="proteccionsobrevelocidad" />
+        </property>
+        <property name="intentosarranque" type="java.lang.Integer">
+            <column name="intentosarranque" />
+        </property>
+        <property name="duraciontotal" type="java.lang.Integer">
+            <column name="duraciontotal" />
+        </property>
+        <property name="pruebacontrolcol" type="string">
+            <column name="pruebacontrolcol" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

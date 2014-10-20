@@ -1,0 +1,81 @@
+<div class="row">
+    <div class="col-md-4">
+        <controlplanta controlplanta OptionsControl="OptionsControl" Estado="Estado" Start="Start()" Stop="Stop()" >            
+        </controlplanta>
+    </div>
+    <div class="col-md-4">
+        <h4>Video de Sitio</h4>
+        <div>
+            <img class="img-responsive" alt="" src="/img/Logo Selmec.png">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12">
+                <fieldset>
+                    <div class="row">                        
+                        <div class="col-md-6">
+                            <label>Fecha y Hora de Inicio</label>
+                        </div>                            
+                        <div class="col-md-6">
+                            <label class="label label-info">{{prueba.dtInicio| date : 'dd-MM-yyyy hh:mm:ss'}}</label>
+                        </div>
+                    </div>                                            
+                    <div class="row">                        
+                        <div class="col-md-6">
+                            <label>Fecha y Hora de Termino</label>
+                        </div>                            
+                        <div class="col-md-6">
+                            <label class="label label-info">{{prueba.dtFin| date : 'dd-MM-yyyy hh:mm:ss'}}</label>
+                        </div>
+                    </div>                                                                                                                                                
+                    <div class="row">                        
+                        <div class="col-md-6">
+                            <label>Folio</label>
+                        </div>                            
+                        <div class="col-md-6">
+                            <label class="label label-info">{{ensamble.folio}}</label>
+                        </div>
+                    </div>    
+                    <div class="row">                        
+                        <div class="col-md-6">
+                            <label>Tiempo Prueba</label>
+                        </div>                            
+                        <div class="col-md-6">
+                            <label  class="label label-primary">{{AccumulateTime| minutos}}</label> 
+                        </div>
+                    </div>     
+                </fieldset>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" incidenciasctrl>
+            </div>
+        </div>
+    </div>
+</div>      
+<div class="row">    
+    <div class="col-md-12">
+        <table-ctrl></table-ctrl>   
+    </div>                
+</div>
+<div class="row">
+    <div class="col-md-12">
+        Tablero de Mediciones
+        <div class="row">       
+            <div class="form-group">
+                <label class="control-label col-md-4">Tiempo de Actualización</label>                             
+                <div class="col-md-8">
+                    <select ng-model="RefreshTime" ng-options="time  for time in RefreshTimes" class="form-control" required=""></select>
+                </div>
+            </div>
+        </div>
+        <div class="row">                        
+            <div class="col-md-12">                              
+                <div style="width:1000px;height: 300px">
+                    <linechart data="lastMinute" options="options" mode=""></linechart>
+                </div>
+            </div>        
+        </div>
+    </div>
+</div>

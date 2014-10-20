@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/10/2014 10:35:52 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.selmec.plantaselmec.Models.Ensamble" table="ensamble" catalog="test" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cariles" class="com.selmec.plantaselmec.Models.Cariles" fetch="select">
+            <column name="CarrilID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="planta" class="com.selmec.plantaselmec.Models.Planta" fetch="select">
+            <column name="PlantaID" length="50" not-null="true" />
+        </many-to-one>
+        <property name="folio" type="string">
+            <column name="Folio" length="50" not-null="true" unique="true" />
+        </property>
+        <property name="usuarioId" type="int">
+            <column name="UsuarioID" not-null="true" />
+        </property>
+        <property name="dtCreacion" type="timestamp">
+            <column name="dtCreacion" length="19" not-null="true" />
+        </property>
+        <property name="altitud" type="int">
+            <column name="Altitud" not-null="true" />
+        </property>
+        <property name="rediador" type="string">
+            <column name="Rediador" length="50" not-null="true" />
+        </property>
+        <property name="patin" type="string">
+            <column name="Patin" length="50" not-null="true" />
+        </property>
+        <property name="guardas" type="string">
+            <column name="Guardas" length="50" not-null="true" />
+        </property>
+        <set name="pruebas" table="prueba" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="EnsambleID" not-null="true" />
+            </key>
+            <one-to-many class="com.selmec.plantaselmec.Models.Prueba" />
+        </set>
+    </class>
+</hibernate-mapping>

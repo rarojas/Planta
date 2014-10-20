@@ -1,0 +1,19 @@
+<div class="col-md-12">
+    <a href="#/Create" class="btn btn-primary">Agregar</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Descripción</th>
+            </tr>                                
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in incidencias">
+                <td><a href="#/Edit/{{row.id}}">{{row.id}}</a></td>
+                <td>{{row.descripcion}}</td>
+                <td>
+                    <button class="btn btn-danger">Borrar</button></td>                          
+            </tr>
+        </tbody>
+    </table>
+</div>

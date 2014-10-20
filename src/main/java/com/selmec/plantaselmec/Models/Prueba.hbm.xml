@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/10/2014 10:35:52 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.selmec.plantaselmec.Models.Prueba" table="prueba" catalog="test" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="ensamble" class="com.selmec.plantaselmec.Models.Ensamble" fetch="select">
+            <column name="EnsambleID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="incidencias" class="com.selmec.plantaselmec.Models.Incidencias" fetch="select">
+            <column name="IncidenciaID" length="45" />
+        </many-to-one>
+        <property name="tipo" type="int">
+            <column name="Tipo" not-null="true" />
+        </property>
+        <property name="estatus" type="int">
+            <column name="Estatus" not-null="true" />
+        </property>
+        <property name="dtInicio" type="timestamp">
+            <column name="dtInicio" length="19" not-null="true" />
+        </property>
+        <property name="dtFin" type="timestamp">
+            <column name="dtFin" length="19" not-null="true" />
+        </property>
+        <property name="comentario" type="string">
+            <column name="Comentario" length="250" />
+        </property>
+    </class>
+</hibernate-mapping>

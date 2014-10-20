@@ -1,0 +1,62 @@
+package com.selmec.plantaselmec.controllers;
+
+import com.selmec.plantaselmec.Models.Ensamble;
+import com.selmec.plantaselmec.dto.EnsambleDTO;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+@RequestMapping("api/Ensambles")
+public class EnsamblesController extends BaseController<Ensamble, EnsambleDTO> {
+    
+    @Autowired
+    SessionFactory session;
+    
+    @RequestMapping("/Pruebas")
+    public ModelAndView Pruebas() {
+        return new ModelAndView("/Pruebas/index");
+    }
+    
+    @RequestMapping(method = RequestMethod.GET)
+    @Transactional(readOnly = true)
+    public @ResponseBody
+    List<EnsambleDTO> Get() {
+        List<Ensamble> pruebas = session.getCurrentSession().createCriteria(Ensamble.class).list();
+        return DTO(pruebas, Ensamble.class, EnsambleDTO.class);
+        
+    }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @Transactional(readOnly = true)
+    public @ResponseBody
+    EnsambleDTO Get(@PathVariable("id") int id) {
+        return Get(id, Ensamble.class, EnsambleDTO.class);
+    }
+      
+    
+    @Transactional
+    @RequestMapping(method = RequestMethod.POST)
+    @ResponseBody
+    public EnsambleDTO Post(@RequestBody Ensamble Ensamble) {
+        DateFormat df = new SimpleDateFormat("yyMMddss");
+        Date today = Calendar.getInstance().getTime();
+        String reportDate = df.format(today);
+        Ensamble.setFolio(reportDate);
+        sessionFactory.getCurrentSession().save(Ensamble);
+        return DTO(Ensamble, Ensamble.class, EnsambleDTO.class);
+        
+    }
+}

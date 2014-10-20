@@ -1,0 +1,266 @@
+<div>
+    <table class="table table-condensed">
+        <caption>
+            <h4>
+                Valores Esperados
+            </h4>
+        </caption>
+        <thead>
+            <tr>
+                <th>
+                    Minutos
+                </th>
+                <th colspan="6" class="text-center">
+                    Volts
+                </th >
+                <th>
+                    HZ
+                </th>
+                <th>
+                    °C
+                </th>
+                <th>
+                    PSI
+                </th>
+                <th>
+                    Amp
+                </th>
+            </tr>            
+        </thead>
+        <tbody>
+            <tr>
+                <td>                                    
+                </td>
+                <td>  L1 - N  </td>
+                <td>
+                    L2 - N  
+                </td>
+                <td>
+                    L3 - N  
+                </td>
+                <td>
+                    L1 - L2  
+                </td>
+                <td>
+                    L2 - L3
+                </td>
+                <td>
+                    L3 - L1
+                </td>
+                <td>
+                    Frec
+                </td>
+                <td>
+                    Temp.
+                </td>
+                <td>
+                    P. Oil
+                </td>
+                <td>
+                    C. Alt
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    {{valores.Max.L1L2|number :2}}
+                </td>
+                <td>
+                    {{valores.Max.L1L2|number :2}}
+                </td>
+                <td>
+                    L3 - N  
+                </td>
+                <td>
+                    L1 - L2  
+                </td>
+                <td>
+                    L2 - L3
+                </td>
+                <td>
+                    L3 - L1
+                </td>
+                <td>
+                    {{valores.Max.HZ|number :2}}
+                </td>
+                <td>
+                    Temp.
+                </td>
+                <td>
+                    P. Oil
+                </td>
+                <td>
+                    C. Alt
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    {{valores.Min.L1L2|number :2}}
+                </td>
+                <td>  
+                    {{valores.Min.L1L2|number :2}}
+                </td>
+
+                <td>
+                    L3 - N  
+                </td>
+                <td>
+                    L1 - L2  
+                </td>
+                <td>
+                    L2 - L3
+                </td>
+                <td>
+                    L3 - L1
+                </td>
+                <td>
+                    {{valores.Min.HZ|number :2}}
+                </td>
+                <td>
+                    Temp.
+                </td>
+                <td>
+                    Presión Aceite
+                </td>
+                <td>
+                    Carga Alternador
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-condensed">
+        <caption>
+            <h4>
+                Valores de Prueba
+            </h4>
+        </caption>
+        <thead>
+            <tr >
+                <th>
+                    Minutos
+                </th>
+                <th colspan="6" class="text-center">
+                    Volts
+                </th >
+                <th>
+                    HZ
+                </th>
+                <th>
+                    °C
+                </th>
+                <th>
+                    PSI
+                </th>
+                <th>
+                    Amp
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    Tiempo  
+                </th>
+                <th>
+                    L1 - N
+                </th>
+                <th>
+                    L2 - N  
+                </th>
+                <th>
+                    L3 - N  
+                </th>
+                <th>
+                    L1 - L2  
+                </th>
+                <th>
+                    L2 - L3
+                </th>
+                <th>
+                    L3 - L1
+                </th>
+                <th>
+                    Frec
+                </th>
+                <th>
+                    Temp.
+                </th>
+                <th>
+                    Presión Aceite
+                </th>
+                <th>
+                    Carga Alternador
+                </th>
+            </tr>
+        </thead>
+        <tbody>                
+            <tr ng-repeat="row in Accumulate">
+                <td> 
+                    {{row.index}}  
+                </td>
+                <td>
+                    {{row.L1N| number: 2}}  
+                </td>
+                <td>
+                    {{row.L2N| number: 2}}  
+                </td>
+                <td>
+                    {{row.L3N| number: 2}}  
+                </td>
+                <td>
+                    {{row.L1L2| number: 2}}  
+                </td>
+                <td>
+                    {{row.L2L3| number: 2}}  
+                </td>
+                <td>
+                    {{row.L3L1| number: 2}}  
+                </td>
+                <td>
+                    {{row.HZ| number: 2}}  
+                </td>
+                <td>
+                    {{row.Temp| number: 2}}  
+                </td>
+                <td>
+                    {{row.Presion| number: 2}}  
+                </td>
+            </tr>
+            <tr>
+                <td > 
+                    {{now.time}}
+                </td>
+                <td ng-style="{'color': (now.L1N <= valores.Max.L1L2 && now.L1N > valores.Min.L1L2) ? 'green':'red'}">
+                    {{now.L1N| number: 2}}  
+                </td>
+                <td ng-style="{'color': (now.L2N <= valores.Max.L1L2 && now.L2N > valores.Min.L1L2) ? 'green':'red'}">
+                    {{now.L2N| number: 2}}  
+                </td>
+                <td ng-style="{'color': (now.L3N <= valores.Max.L1L2 && now.L3N > valores.Min.L1L2) ? 'green':'red'}">
+                    {{now.L3N| number: 2}}  
+                </td>
+                <td ng-style="{'color': (now.L1L2 <= valores.Max.L1L2 && now.L1L2 > valores.Min.L1L2) ? 'green':'red'}">
+                    {{now.L1L2| number: 2}}  
+                </td>
+                <td ng-style="{'color': (now.L2L3 <= valores.Max.L1L2 && now.L2L3 > valores.Min.L1L2) ? 'green':'red'}">
+                    {{now.L2L3| number: 2}}  
+                </td>
+                <td>
+                    {{now.L3L1| number: 2}}  
+                </td>
+                <td ng-style="{ 'color' : (now.HZ <= valores.Max.HZ && now.HZ >= valores.Min.HZ) ? 'green':'red'}">
+                    {{now.HZ| number: 2}}  
+                </td>
+                <td>
+                    {{now.Temp| number: 2}}  
+                </td>
+                <td>
+                    {{now.Presion| number: 2}}  
+                </td>
+            </tr>
+        </tbody>
+    </table>   
+</div>  

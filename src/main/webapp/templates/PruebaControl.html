@@ -8,7 +8,7 @@
                         Ajuste de Termómetro (°C)
                     </label>
                     <div class="col-md-4">
-                        <input type="number" class="form-control" required ng-model="prueba.termometro" >
+                        <input type="number" class="form-control" required ng-model="pruebacontrol.termometro" name="termometro" >
                     </div>
                 </div>
                 <div class="form-group">
@@ -16,7 +16,7 @@
                         Ajuste de Presión de Aceite (BAR)
                     </label>
                     <div class="col-md-4">
-                        <input type="number" class="form-control" required ng-model="prueba.aceite" >
+                        <input type="number" class="form-control" required ng-model="pruebacontrol.presion" name="presion" >
                     </div>
                 </div>
                 <div class="form-group">
@@ -24,7 +24,7 @@
                         Saque de marcha
                     </label>
                     <div class="col-md-4">
-                        <input type="number" class="form-control" required ng-model="prueba.marcha" >
+                        <input type="number" class="form-control" required ng-model="pruebacontrol.saquemarcha" name="saquemarcha">
                     </div>
                 </div>
                 <div class="form-group">
@@ -32,7 +32,7 @@
                         Ajuste de Sobrevelocidad (%)
                     </label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" required ng-model="prueba.sobrevelocidad" >
+                        <input type="text" class="form-control" required ng-model="pruebacontrol.sobrevelocidad" name="sobrevelocidad">
                     </div>
                 </div>
             </fieldset>
@@ -46,7 +46,7 @@
                                 <label>Fecha y Hora de Inicio</label>
                             </div>                            
                             <div class="col-md-6">
-                                <label class="label label-info">{{prueba.dtInicio| date : 'dd-MM-yyyy hh:mm:ss'}}</label>
+                                <label class="label label-info">{{pruebacontrol.dtInicio| date : 'dd-MM-yyyy hh:mm:ss'}}</label>
                             </div>
                         </div>                                            
                         <div class="row">                        
@@ -54,7 +54,7 @@
                                 <label>Fecha y Hora de Termino</label>
                             </div>                            
                             <div class="col-md-6">
-                                <label class="label label-info">{{prueba.dtFin| date : 'dd-MM-yyyy hh:mm:ss'}}</label>
+                                <label class="label label-info">{{pruebacontrol.dtFin| date : 'dd-MM-yyyy hh:mm:ss'}}</label>
                             </div>
                         </div>                                                                                                                                                
                         <div class="row">                        
@@ -67,9 +67,15 @@
                         </div>                      
                     </fieldset>
                 </div>
-            </div>
+            </div>   
             <div class="row">            
-                <div class="col-md-12"incidenciasctrl>
+                <div class="col-md-12"incidenciasctrl></div>
+            </div>
+            <div class="row">     
+                <div class="col-md-12">
+                    <button class="btn btn-success" ng-click="GuardarPrueba()" ng-disabled="formPrueba.$invalid" ng-show="prueba.estatus !== 2">
+                        Guardar Prueba Control
+                    </button>
                 </div>
             </div>
         </div>        
@@ -83,14 +89,14 @@
                         MARCA UBT:
                     </label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" required ng-model="prueba.ubt" >
+                        <input type="text" class="form-control" required ng-model="pruebacontrol.ubt"name="ubt" >
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-12">
                         <div class="checkbox">
                             <label>                           
-                                <input type="checkbox" ng-model="prueba.aplicatablero">
+                                <input type="checkbox" ng-model="pruebacontrol.aplicatablero" name="aplicatablero">
                                 ¿Aplica?
                             </label>
                         </div>      
@@ -100,7 +106,7 @@
                     <div class="col-md-12">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" ng-model="prueba.operacionubt">
+                                <input type="checkbox" ng-model="pruebacontrol.operacionubt"  ng-disabled="!pruebacontrol.aplicatablero" name="operacionubt">
                                 Operación normal de UBT
                             </label>
                         </div>                        
@@ -110,7 +116,7 @@
                     <div class="col-md-12">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" ng-model="prueba.cargalinea">
+                                <input type="checkbox" ng-model="pruebacontrol.cargaliena" ng-disabled="!pruebacontrol.aplicatablero" name="cargaliena">
                                 Transferencia de carga línea normal
                             </label>
                         </div>                        
@@ -124,7 +130,7 @@
                                 <div class="col-md-12">
                                     <div class="checkbox">
                                         <label>                           
-                                            <input type="checkbox" ng-model="prueba.aplicatablero">
+                                            <input type="checkbox" ng-model="pruebacontrol.aplicacontactos" name="aplicacontactos">
                                             ¿Aplica?
                                         </label>
                                     </div>      
@@ -134,7 +140,7 @@
                                 <div class="col-md-12">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" ng-model="prueba.operacionubt">
+                                            <input type="checkbox" ng-model="pruebacontrol.altatemperatura"  ng-disabled="!pruebacontrol.aplicacontactos"name="altatemperatura" >
                                             Señal de alta temperatura (contacto seco)
                                         </label>
                                     </div>                        
@@ -144,7 +150,7 @@
                                 <div class="col-md-12">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" ng-model="prueba.cargalinea">
+                                            <input type="checkbox" ng-model="pruebacontrol.bajapresion" ng-disabled="!pruebacontrol.aplicacontactos" name="bajapresion">
                                             Señal de baja Presión (contacto seco)
                                         </label>
                                     </div>                        
@@ -154,22 +160,22 @@
                                 <div class="col-md-12">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" ng-model="prueba.cargalinea">
+                                            <input type="checkbox" ng-model="pruebacontrol.fallageneral" ng-disabled="!pruebacontrol.aplicacontactos" name="fallageneral">
                                             Señal falla general (contacto seco)
                                         </label>
                                     </div>                        
                                 </div>               
                             </div>
-                            <div class="form-group">                
-                                <div class="col-md-12">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" ng-model="prueba.cargalinea">
-                                            Cargador de batería
-                                        </label>
-                                    </div>                        
-                                </div>               
-                            </div>                
+                            <!--                            <div class="form-group">                
+                                                            <div class="col-md-12">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" ng-model="pruebacontrol.cargalinea" ng-disabled="!pruebacontrol.aplicacontactos" name="">
+                                                                        Cargador de batería
+                                                                    </label>
+                                                                </div>                        
+                                                            </div>               
+                                                        </div>                -->
                         </fieldset>
                     </div>
                 </div>
@@ -182,7 +188,7 @@
                     <div class="col-md-12">
                         <div class="checkbox">
                             <label>                           
-                                <input type="checkbox" ng-model="prueba.aplicatablero">
+                                <input type="checkbox" ng-model="pruebacontrol.aplicaprotecciones" name="aplicaprotecciones ">
                                 ¿Aplica?
                             </label>
                         </div>      
@@ -192,7 +198,7 @@
                     <div class="col-md-12">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" ng-model="prueba.operacionubt">
+                                <input type="checkbox" ng-model="pruebacontrol.arranquemanual"  ng-disabled="!pruebacontrol.aplicaprotecciones" name="arranquemanual">
                                 Arranque manual
                             </label>
                         </div>                        
@@ -202,7 +208,7 @@
                     <div class="col-md-12">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" ng-model="prueba.cargalinea">
+                                <input type="checkbox" ng-model="pruebacontrol.bajepresion"  ng-disabled="!pruebacontrol.aplicaprotecciones" name="bajepresion" >
                                 Protección por baja presión de aceite
                             </label>
                         </div>                        
@@ -212,7 +218,7 @@
                     <div class="col-md-12">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" ng-model="prueba.cargalinea">
+                                <input type="checkbox" ng-model="pruebacontrol.temperatura"  ng-disabled="!pruebacontrol.aplicaprotecciones" name="temperatura">
                                 Protección por temperatura
                             </label>
                         </div>                        
@@ -222,7 +228,7 @@
                     <div class="col-md-12">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" ng-model="prueba.cargalinea">
+                                <input type="checkbox" ng-model="pruebacontrol.proteccionsobrevelocidad"  ng-disabled="!pruebacontrol.aplicaprotecciones" name="proteccionsobrevelocidad">
                                 Protección por sobre velocidad
                             </label>
                         </div>                        
@@ -232,7 +238,7 @@
                     <div class="col-md-12">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" ng-model="prueba.cargalinea">
+                                <input type="checkbox" ng-model="pruebacontrol.intentosarranque"  ng-disabled="!pruebacontrol.aplicaprotecciones" name="intentosarranque">
                                 Protección por intentos de arranque
                             </label>
                         </div>                        
@@ -244,7 +250,7 @@
                         Número de pulsos de arranque
                     </label>
                     <div class="col-md-4">
-                        <input type="number" class="form-control" ng-model="prueba.pulsos" required>
+                        <input type="number" class="form-control" ng-model="pruebacontrol.pulsos" required   ng-disabled="!pruebacontrol.aplicaprotecciones" name="pulsos">
                     </div>                                            
                 </div>   
                 <div class="form-group">                                    
@@ -252,7 +258,7 @@
                         Duración Total (s)
                     </label>
                     <div class="col-md-4">
-                        <input type="number" class="form-control" ng-model="prueba.duracion" required="">
+                        <input type="number" class="form-control" ng-model="pruebacontrol.duraciontotal" required   ng-disabled="!pruebacontrol.aplicaprotecciones" name="duraciontotal">
                     </div>                                            
                 </div>   
             </fieldset>

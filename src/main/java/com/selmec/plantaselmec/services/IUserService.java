@@ -6,6 +6,8 @@
 package com.selmec.plantaselmec.services;
 
 import com.selmec.plantaselmec.Models.Usuarios;
+import com.selmec.plantaselmec.dto.UsuarioDTO;
+import java.util.List;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
@@ -14,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  */
 public interface IUserService extends UserDetailsService {
 
-    
-    
     Usuarios findByName(String name);
+
 }

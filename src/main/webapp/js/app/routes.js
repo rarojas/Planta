@@ -26,7 +26,7 @@ var Routes = ['$routeProvider',
                     controller: 'PruebaConCargaController'
                 }).
                 when('/PruebaConCargaSubita/:EnsambleID', {
-                    templateUrl: '/templates/PruebaSinCarga.html',
+                    templateUrl: '/templates/PruebaConCargaSubita.html',
                     controller: 'PruebaConCargaSubitaCtrl'
                 }).
                 when('/Motores', {
@@ -43,19 +43,19 @@ var Routes = ['$routeProvider',
                 }).
                 when('/PruebaControl/:EnsambleID', {
                     templateUrl: '/templates/PruebaControl.html',
-                    controller: 'PruebaSinCargaController'
+                    controller: 'PruebaControlCtrl'
                 }).
                 when('/Usuarios', {
-                    templateUrl: '/templates/PruebaControl.html',
-                    controller: 'PruebaSinCargaController'
+                    templateUrl: '/templates/Usuarios/Index.html',
+                    controller: 'UsuariosCtrl'
                 }).
-                when('/Usuarios/Edit/:UsuarioID', {
-                    templateUrl: '/templates/PruebaControl.html',
-                    controller: 'PruebaSinCargaController'
+                when('/Usuarios/Edit/:id', {
+                    templateUrl: '/templates/Usuarios/Edit.html',
+                    controller: 'UsuariosSaveCtrl'
                 }).
                 when('/Usuarios/Create', {
-                    templateUrl: '/templates/PruebaControl.html',
-                    controller: 'PruebaSinCargaController'
+                    templateUrl: '/templates/Usuarios/Create.html',
+                    controller: 'UsuariosSaveCtrl'
                 }).
                 otherwise({
                     redirectTo: '/'

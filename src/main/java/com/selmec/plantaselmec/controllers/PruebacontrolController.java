@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author rrojase
  */
 @Controller
-@RequestMapping("api/PruebaControler")
+@RequestMapping("api/Pruebacontrol")
 public class PruebacontrolController {
 
     @Autowired

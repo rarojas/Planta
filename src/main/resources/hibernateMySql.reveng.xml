@@ -11,4 +11,6 @@
     <table-filter match-name="incidencias"/> 
     <table-filter match-name="usuarios"/> 
     <table-filter match-name="pruebacontrol"/> 
+    <table-filter match-name="cargasubita"/> 
+    <table-filter match-name="pruebacarga"/> 
 </hibernate-reverse-engineering>

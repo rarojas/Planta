@@ -2,7 +2,10 @@ package com.selmec.plantaselmec.services;
 
 import com.selmec.plantaselmec.Dao.IGenericDao;
 import com.selmec.plantaselmec.Models.Usuarios;
+import com.selmec.plantaselmec.dto.UsuarioDTO;
+import java.util.ArrayList;
 import java.util.List;
+import ma.glasnost.orika.MapperFacade;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.keygen.KeyGenerators;
@@ -69,4 +72,18 @@ public class UsuariosServices implements IUsuariosServices {
         usuarios.setPassword(password);
         this.dao.create(usuarios);
     }
+    public UsuarioDTO ToDTO(Usuarios usuario) {
+        return mapper.map(usuario, UsuarioDTO.class);
+    }
+
+    public List<UsuarioDTO> ToDTO(List<Usuarios> usuarios) {
+        List<UsuarioDTO> result = new ArrayList<>();
+        for (Usuarios usuario : usuarios) {
+            result.add(ToDTO(usuario));
+        }
+        return result;
+    }
+
+    @Autowired
+    private MapperFacade mapper;
 }

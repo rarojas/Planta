@@ -1,5 +1,5 @@
 package com.selmec.plantaselmec.Models;
-// Generated Oct 20, 2014 11:12:41 PM by Hibernate Tools 4.3.1
+// Generated Oct 21, 2014 4:26:41 PM by Hibernate Tools 4.3.1
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

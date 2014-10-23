@@ -20,7 +20,7 @@ app.controller("IncidenciasSaveCtrl",
                         $scope.Save = function () {
                             $scope.incidencia.$save(function () {
                                 if (!$routeParams.IncidenciaID)
-                                    $location.path("/Edit/" + $scope.incidencia.id);
+                                    $location.path("/Incidencias/Edit/" + $scope.incidencia.id);
                             }, function () {
 
                             });
@@ -32,7 +32,7 @@ app.controller("IncidenciasSaveCtrl",
                         };
                         $scope.Delete = function () {
                             $scope.incidencia.$delete(function () {
-                                $location.path("/");
+                                $location.path("/Incidencias");
                             }, function () {
 
                             });
@@ -74,6 +74,47 @@ app.controller("MotoresSaveCtrl",
                         $scope.Delete = function () {
                             $scope.motor.$delete(function () {
                                 $location.path("/Motores");
+                            }, function () {
+
+                            });
+                        };
+                    }
+        ]);
+app.controller("UsuariosCtrl",
+        ["$scope", "PlantaServices", "$routeParams"
+                    , function ($scope, PlantaServices) {
+                        $scope.usuarios = PlantaServices.Usuarios.query();
+                        $scope.Delete = function (usuario) {
+                            PlantaServices.Usuarios.delete({id: usuario.id}, function () {
+                                $scope.usuario.pop(usuario);
+                            }, function () {
+                            });
+                        };
+                    }
+        ]);
+
+app.controller("UsuariosSaveCtrl",
+        ["$scope", "PlantaServices", "$routeParams", "$location"
+                    , function ($scope, PlantaServices, $routeParams, $location) {
+                        $scope.usuario = new PlantaServices.Usuarios();
+                        if ($routeParams.id !== undefined)
+                            $scope.usuario.$get({id: $routeParams.id});
+                        $scope.Save = function () {
+                            $scope.usuario.$save(function () {
+                                if (!$routeParams.id)
+                                    $location.path("/Usuarios/Edit/" + $scope.usuario.id);
+                            }, function () {
+
+                            });
+                        };
+                        $scope.Update = function () {
+                            $scope.usuario.$update(function () {
+                            }, function () {
+                            });
+                        };
+                        $scope.Delete = function () {
+                            $scope.usuario.$delete(function () {
+                                $location.path("/Usuarios");
                             }, function () {
 
                             });

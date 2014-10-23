@@ -10,7 +10,7 @@
                 <th>
 
                 </th>
-                 <th colspan="3" class="text-center">
+                <th colspan="3" class="text-center">
                     Amps
                 </th >
                 <th colspan="3" class="text-center">
@@ -41,15 +41,15 @@
                 <td>
                     I3
                 </td>
-                <th>
-                    L1-L2  
-                </th>
-                <th>
-                   L2-L3
-                </th>
-                <th>
-                   L3-L1
-                </th>   
+                <td>
+                    L1 - N  
+                </td>
+                <td>
+                    L2 - N
+                </td>
+                <td>
+                    L3 - LN1
+                </td>
                 <td>
                     Frec
                 </td>
@@ -68,25 +68,25 @@
 
                 </td>
                 <td>
-                    {{valores.Max.I1|number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Max.I1 | number :2}}
                 </td>
                 <td>
-                    {{valores.Max.I2|number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Max.I2 | number :2}}
                 </td>
                 <td>
-                    {{valores.Max.I3|number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Max.I3 | number :2}}
                 </td>
                 <td>
-                    {{valores.Max.L1L2|number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Max.L1L2 | number :2}}
                 </td>
                 <td>
-                    {{valores.Max.L1L2|number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Max.L1L2 | number :2}}
                 </td>
                 <td>
-                    {{valores.Max.L1L2|number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Max.L1L2 | number :2}}
                 </td>
                 <td>
-                    {{valores.Max.HZ|number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Max.HZ | number :2}}
                 </td>
                 <td>
                     Temp.
@@ -103,26 +103,27 @@
 
                 </td>
                 <td>
-                    {{valores.Min.I1|number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Min.I1 | number :2}}
                 </td>
                 <td>  
-                    {{valores.Min.I2|number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Min.I2 | number :2}}
                 </td>
 
                 <td>
-                    {{valores.Min.I3|number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Min.I3 | number :2}}
                 </td>
                 <td>
-                    {{valores.Min.L1L2|number :2}}  
+                    {{PruebaCarga[PruebaCargaIndex()].Min.L1L2 | number :2}}  
                 </td>
                 <td>
-                    {{valores.Min.L1L2|number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Min.L1L2 | number :2}}
                 </td>
                 <td>
-                    {{valores.Min.L1L2|number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Min.L1L2 | number :2}}
                 </td>
                 <td>
-                    {{valores.Min.HZ|number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Min.HZ | number
+                        :2}}
                 </td>
                 <td>
                     Temp.
@@ -147,7 +148,7 @@
                 <th>
                     Minutos
                 </th>
-                 <th colspan="3" class="text-center">
+                <th colspan="3" class="text-center">
                     Amps
                 </th >
                 <th colspan="3" class="text-center">
@@ -180,13 +181,13 @@
                     I3
                 </th>
                 <th>
-                    L1-L2  
+                    L1 - N  
                 </th>
                 <th>
-                   L2-L3
+                    L2 - N
                 </th>
                 <th>
-                   L3-L1
+                    L3 - N
                 </th>
                 <th>
                     Frec
@@ -236,28 +237,28 @@
                 </td>
             </tr>
             <tr>
-                <td > 
+                <td> 
                     {{now.time}}
                 </td>
-                <td ng-style="{'color': (now.L1N <= valores.Max.L1L2 && now.L1N > valores.Min.L1L2) ? 'green':'red'}">
-                    {{now.I1| number: 2}}  
+                <td ng-style="{'color': (now.L1N <= PruebaCarga[PruebaCargaIndex()].Max.L1L2 && now.L1N > PruebaCarga[PruebaCargaIndex()].Min.L1L2) ? 'green':'red'}">
+                    {{now.I1 | number: 2}}  
                 </td>
-                <td ng-style="{'color': (now.L2N <= valores.Max.L1L2 && now.L2N > valores.Min.L1L2) ? 'green':'red'}">
+                <td ng-style="{'color': (now.L2N <= PruebaCarga[PruebaCargaIndex()].Max.L1L2 && now.L2N > PruebaCarga[PruebaCargaIndex()].Min.L1L2) ? 'green':'red'}">
                     {{now.I2| number: 2}}  
                 </td>
-                <td ng-style="{'color': (now.L3N <= valores.Max.L1L2 && now.L3N > valores.Min.L1L2) ? 'green':'red'}">
+                <td ng-style="{'color': (now.L3N <= PruebaCarga[PruebaCargaIndex()].Max.L1L2 && now.L3N > PruebaCarga[PruebaCargaIndex()].Min.L1L2) ? 'green':'red'}">
                     {{now.I3| number: 2}}  
                 </td>
-                <td ng-style="{'color': (now.L1L2 <= valores.Max.L1L2 && now.L1L2 > valores.Min.L1L2) ? 'green':'red'}">
+                <td ng-style="{'color': (now.L1L2 <= PruebaCarga[PruebaCargaIndex()].Max.L1L2 && now.L1L2 > PruebaCarga[PruebaCargaIndex()].Min.L1L2) ? 'green':'red'}">
                     {{now.L1L2| number: 2}}  
                 </td>
-                <td ng-style="{'color': (now.L2L3 <= valores.Max.L1L2 && now.L2L3 > valores.Min.L1L2) ? 'green':'red'}">
+                <td ng-style="{'color': (now.L2L3 <= PruebaCarga[PruebaCargaIndex()].Max.L1L2 && now.L2L3 > PruebaCarga[PruebaCargaIndex()].Min.L1L2) ? 'green':'red'}">
                     {{now.L2L3| number: 2}}  
                 </td>
                 <td>
                     {{now.L3L1| number: 2}}  
                 </td>
-                <td ng-style="{ 'color' : (now.HZ <= valores.Max.HZ && now.HZ >= valores.Min.HZ) ? 'green':'red'}">
+                <td ng-style="{ 'color' : (now.HZ <= PruebaCarga[PruebaCargaIndex()].Max.HZ && now.HZ >= PruebaCarga[PruebaCargaIndex()].Min.HZ) ? 'green':'red'}">
                     {{now.HZ| number: 2}}  
                 </td>
                 <td>
@@ -268,5 +269,6 @@
                 </td>
             </tr>
         </tbody>
-    </table>   
+    </table>  
+    {{now}}
 </div>  

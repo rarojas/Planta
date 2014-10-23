@@ -26,11 +26,8 @@
     <script src="<c:url value="/js/libs/angular-loading-bar/loading-bar.min.js"/>"></script>     
 
     <script src="<c:url value="/js/libs/jquery-noty/jquery.noty.packaged.min.js"/>"></script>     
-<!--    <script src="<c:url value="/js/libs/jquery-noty/jquery.noty.js"/>"></script>  
-    <script src="<c:url value="/js/libs/jquery-noty/themes/default.js"/>"></script>  
-    <script src="<c:url value="/js/libs/jquery-noty/layouts/bottomRight.js"/>"></script>  
-    <script src="<c:url value="/js/libs/jquery-noty/layouts/center.js"/>"></script>  
-    <script src="<c:url value="/js/libs/jquery-noty/layouts/topRight.js"/>"></script>  -->
+    <script src="<c:url value="/js/libs/underscore.js/underscore.js"/>"></script>  
+
     <jsp:invoke fragment="app"/>
     <style>
         body {

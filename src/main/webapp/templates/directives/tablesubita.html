@@ -32,15 +32,15 @@
         </thead>
         <tbody>
             <tr>
-                <td>                                    
-                </td>
-                <td> I1  </td>
-                <td>
+                <th>                                    
+                </th>
+                <th> I1  </th>
+                <th>
                     I2
-                </td>
-                <td>
+                </th>
+                <th>
                     I3
-                </td>
+                </th>
                 <th>
                     L1-L2  
                 </th>
@@ -50,18 +50,18 @@
                 <th>
                    L3-L1
                 </th>   
-                <td>
+                <th>
                     Frec
-                </td>
-                <td>
+                </th>
+                <th>
                     Temp.
-                </td>
-                <td>
+                </th>
+                <th>
                     P. Oil
-                </td>
-                <td>
+                </th>
+                <th>
                     C. Alt
-                </td>
+                </th>
             </tr>
             <tr>
                 <td>
@@ -217,7 +217,7 @@
                     {{row.I3| number: 2}}  
                 </td>
                 <td>
-                    {{row.L1L2| number: 2}}  
+                    {{row.L1L2| number: 2}} 
                 </td>
                 <td>
                     {{row.L2L3| number: 2}}  
@@ -226,7 +226,7 @@
                     {{row.L3L1| number: 2}}  
                 </td>
                 <td>
-                    {{row.HZ| number: 2}}  
+            Max {{row.hz.max | number: 2}}   {{row.HZ| number: 2}} Min  {{row.hz.min | number: 2}}  
                 </td>
                 <td>
                     {{row.Temp| number: 2}}  
@@ -234,7 +234,7 @@
                 <td>
                     {{row.Presion| number: 2}}  
                 </td>
-            </tr>
+            </tr>            
             <tr>
                 <td > 
                     {{now.time}}

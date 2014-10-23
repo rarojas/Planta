@@ -15,6 +15,9 @@ public class UsuarioDTO implements java.io.Serializable {
 
     public String email;
     public String nombres;
+    public String apellidos;
+    public String rol;
+    public int id;
 
     public UsuarioDTO() {
     }
@@ -22,6 +25,9 @@ public class UsuarioDTO implements java.io.Serializable {
     public UsuarioDTO(Usuarios usuarios) {
         this.nombres = usuarios.getNombres();
         this.email = usuarios.getEmail();
+        this.apellidos = usuarios.getApellidos();
+        this.rol = usuarios.getRol();
+        this.id = usuarios.getId();
     }
 
 }

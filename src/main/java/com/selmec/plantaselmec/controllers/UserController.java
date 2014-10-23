@@ -6,9 +6,11 @@
 package com.selmec.plantaselmec.controllers;
 
 import com.selmec.plantaselmec.Models.Usuarios;
+import com.selmec.plantaselmec.dto.UsuarioDTO;
 import com.selmec.plantaselmec.services.IUsuariosServices;
 import java.security.Principal;
 import java.util.List;
+import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
@@ -24,10 +26,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("api/Usuarios")
-public class UserController {
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
+public class UserController extends BaseController<Usuarios, UsuarioDTO> {
+   
 
     @Autowired
     private IUsuariosServices usuariosServices;
@@ -40,20 +40,21 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public List<Usuarios> Get() {
-        return usuariosServices.All();
+    public List<UsuarioDTO> Get() {
+        return usuariosServices.ToDTO(usuariosServices.All());
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Usuarios Get(@PathVariable("id") int id) {
-        return usuariosServices.GetUsuario(id);
+    public UsuarioDTO Get(@PathVariable("id") int id) {
+        return usuariosServices.ToDTO(usuariosServices.GetUsuario(id));
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public void Post(@RequestBody Usuarios usuario) {
+    public UsuarioDTO Post(@RequestBody Usuarios usuario) {
         usuariosServices.Save(usuario);
+        return usuariosServices.ToDTO(usuario);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
@@ -68,18 +69,4 @@ public class UserController {
 
     }
 
-// 
-//    @RequestMapping(value = "/login", method = RequestMethod.POST)
-//    public @ResponseBody LoginDetail login(@RequestBody User user) {
-// 
-//        Authentication authenticationToken =
-//                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
-//        try {
-//            Authentication authentication = authenticationManager.authenticate(authenticationToken);
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
-//            return new LoginDetail().success().principal(authentication.getName());
-//        } catch (AuthenticationException ex) {
-//            return new LoginDetail().failed();
-//        }
-//    }
 }

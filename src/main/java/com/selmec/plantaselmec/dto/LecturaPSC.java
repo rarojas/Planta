@@ -17,6 +17,9 @@ public class LecturaPSC {
     public Double I3;
     public Double RMP;
     public Double Timer;
+    public Double bateria;
+    public int segundo;
+    public int iteracion;
 
     public LecturaPSC() {
     }

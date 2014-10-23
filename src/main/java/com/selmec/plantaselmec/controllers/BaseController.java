@@ -22,6 +22,8 @@ public abstract class BaseController<T, E> {
 
     @Autowired
     SessionFactory sessionFactory;
+        
+    
 
     public List<E> Get(Class<T> type, Class<E> out_type) {
         List<T> result = sessionFactory.getCurrentSession().createCriteria(type).list();
@@ -29,6 +31,7 @@ public abstract class BaseController<T, E> {
     }
 
     public E Get(Serializable key, Class<T> type, Class<E> out_type) {
+        
         T result = (T) sessionFactory.getCurrentSession().get(type, key);
         return DTO(result, type, out_type);
     }

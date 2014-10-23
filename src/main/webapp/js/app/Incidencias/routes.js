@@ -1,20 +1,20 @@
 var Routes = ['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
-                when('/', {
+                when('/Incidencias', {
                     templateUrl: '/templates/Incidencias/Index.html',
                     controller: 'IncidenciasCtrl'
                 }).
-                when('/Edit/:IncidenciaID', {
+                when('/Incidencias/Edit/:IncidenciaID', {
                     templateUrl: '/templates/Incidencias/Edit.html',
                     controller: 'IncidenciasSaveCtrl'
                 }).
-                when('/Create', {
+                when('/Incidencias/Create', {
                     templateUrl: '/templates/Incidencias/Edit.html',
                     controller: 'IncidenciasSaveCtrl'
                 }).
                 otherwise({
-                    redirectTo: '/'
+                    redirectTo: '/Pruebas'
                 });
     }];
 app.config(Routes);

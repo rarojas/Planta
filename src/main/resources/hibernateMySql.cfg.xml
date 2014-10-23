@@ -9,13 +9,17 @@
     <!--    <property name="hibernate.connection.url">jdbc:mysql://192.168.1.85:3306/test?zeroDateTimeBehavior=convertToNull</property>-->
     <property name="hibernate.connection.username">ricardo</property>
     <property name="hibernate.connection.password">ricardo</property>
-    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.show_sql">false</property>
+    <property name="hibernate.connection.pool_size">5</property>
+    <property name="hibernate.cache.use_second_level_cache">false</property>
     <mapping resource="com/selmec/plantaselmec/Models/Usuarios.hbm.xml"/>
     <mapping resource="com/selmec/plantaselmec/Models/Cariles.hbm.xml"/>
     <mapping resource="com/selmec/plantaselmec/Models/Planta.hbm.xml"/>
     <mapping resource="com/selmec/plantaselmec/Models/Incidencias.hbm.xml"/>
     <mapping resource="com/selmec/plantaselmec/Models/Pruebacontrol.hbm.xml"/>
+    <mapping resource="com/selmec/plantaselmec/Models/Pruebacarga.hbm.xml"/>
     <mapping resource="com/selmec/plantaselmec/Models/Lecturas.hbm.xml"/>
+    <mapping resource="com/selmec/plantaselmec/Models/Cargasubita.hbm.xml"/>
     <mapping resource="com/selmec/plantaselmec/Models/Prueba.hbm.xml"/>
     <mapping resource="com/selmec/plantaselmec/Models/Ensamble.hbm.xml"/>
     <mapping resource="com/selmec/plantaselmec/Models/Motores.hbm.xml"/>

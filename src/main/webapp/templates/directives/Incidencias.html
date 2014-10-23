@@ -1,19 +1,34 @@
 <div>
-    Comentarios de la Prueba:
-    <div class="form-group">
-        <label class="control-label col-md-4">Tipo de Incidencia:</label>
-        <div class="col-md-8">
-            <select class="form-control" ng-options="(i.id + '-' +i.descripcion) for i in incidencias" ng-model="prueba.incidencias" ></select>
+    <fieldset>
+        <legend>Comentarios de la Prueba:</legend>
+        <div class="form-group">
+            <label class="control-label col-md-4">Tipo de Incidencia:</label>
+            <div class="col-md-8">
+                <select class="form-control" ng-options="(i.id + '-' +i.descripcion) for i in incidencias" ng-model="prueba.incidencias" ></select>
+            </div>
         </div>
-    </div>
-    <div class="form-group">                        
-        <div class="col-md-12">
-            <textarea class="form-control" ng-model="prueba.comentario" placeholder="Comentarios..."></textarea>
+        <div class="form-group">                        
+            <div class="col-md-12">
+                <textarea class="form-control" ng-model="prueba.comentario" placeholder="Comentarios..."></textarea>
+            </div>
         </div>
-    </div>
-    <div class="form-group">                        
-        <div class="col-md-12">
-            <button ng-click="Save()" class="btn btn-success" ng-disable="$parent.prueba.estatus !== 1 || $parent.prueba == null">Guardar</button>
+        <div class="form-group">                        
+            <div class="col-md-12">
+                <button ng-click="Save()" class="btn btn-success" ng-disable="$parent.prueba.estatus !== 1 || $parent.prueba == null">Guardar</button>
+            </div>
         </div>
-    </div>
+    </fieldset>
+    <fieldset ng-show="prueba.estatus === 2">
+        <legend>Resultados de la Prueba</legend>        
+        <div class="form-group">                        
+            <div class="col-md-12">
+                <button ng-click="Autoriza()" class="btn btn-success" >
+                    Autorizar
+                </button>
+                <button ng-click="Rechaza()" class="btn btn-danger" >
+                    Rechazar
+                </button>
+            </div>
+        </div>
+    </fieldset>
 </div>

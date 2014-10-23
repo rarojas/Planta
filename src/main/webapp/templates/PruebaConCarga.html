@@ -1,15 +1,22 @@
-<div class="row">
-    <div class="col-md-4">
-        <controlplanta controlplanta OptionsControl="OptionsControl" Estado="Estado" Start="Start()" Stop="Stop()" >            
-        </controlplanta>
-    </div>
-    <div class="col-md-4">
-        <h4>Video de Sitio</h4>
-        <div>
-            <img class="img-responsive" alt="" src="/img/Logo Selmec.png">
+<div class="row">    
+    <div class="col-md-3">
+        <div class="row">
+            <h4>Video de Sitio</h4>
+            <div class="col-md-12">
+                <img class="img-responsive" alt="" src="/img/Logo Selmec.png">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">  
+                <controlplanta controlplanta OptionsControl="OptionsControl" Estado="Estado" Start="Start()" Stop="Stop()" >            
+                </controlplanta> 
+            </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
+        <table-ctrl-carga></table-ctrl-carga> 
+    </div>
+    <div class="col-md-3">
         <div class="row">
             <div class="col-md-12">
                 <fieldset>
@@ -36,7 +43,7 @@
                         <div class="col-md-6">
                             <label class="label label-info">{{ensamble.folio}}</label>
                         </div>
-                    </div>    
+                    </div> 
                     <div class="row">                        
                         <div class="col-md-6">
                             <label>Tiempo Prueba</label>
@@ -44,38 +51,30 @@
                         <div class="col-md-6">
                             <label  class="label label-primary">{{AccumulateTime| minutos}}</label> 
                         </div>
-                    </div>     
+                    </div>                               
                 </fieldset>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12" incidenciasctrl>
+        <div class="row">            
+            <div class="col-md-12"incidenciasctrl>
             </div>
         </div>
-    </div>
-</div>      
-<div class="row">    
-    <div class="col-md-12">
-        <table-ctrl></table-ctrl>   
-    </div>                
+    </div>        
 </div>
 <div class="row">
     <div class="col-md-12">
-        Tablero de Mediciones
-        <div class="row">       
-            <div class="form-group">
-                <label class="control-label col-md-4">Tiempo de Actualización</label>                             
-                <div class="col-md-8">
-                    <select ng-model="RefreshTime" ng-options="time  for time in RefreshTimes" class="form-control" required=""></select>
-                </div>
-            </div>
-        </div>
+        Tablero de Mediciones     
         <div class="row">                        
-            <div class="col-md-12">                              
-                <div style="width:1000px;height: 300px">
+            <div class="col-md-6">                              
+                <div style="width:600px;height: 300px">
                     <linechart data="lastMinute" options="options" mode=""></linechart>
                 </div>
             </div>        
+            <div class="col-md-6">                              
+                <div style="width:600px;height: 300px">
+                    <linechart data="lastMinute" options="optionsTemp" mode=""></linechart>
+                </div>
+            </div>  
         </div>
     </div>
 </div>

@@ -3,7 +3,7 @@ var services = ["PlantaServices",
             var urlApiBase = "/api/";
             var api = {};
             api.Plantas = $resource(urlApiBase + "Planta/:noSerie", {}, {
-                On: {method: 'POST', url: urlApiBase + "Planta/On/:id", },
+                On: {method: 'POST', url: urlApiBase + "Planta/On/:id"},
                 Off: {method: 'POST', url: urlApiBase + "Planta/Off/:id"}
             });
             api.Carriles = $resource(urlApiBase + "Carriles/:id", {}, {});
@@ -13,12 +13,18 @@ var services = ["PlantaServices",
             });
             api.Ensambles = $resource(urlApiBase + "Ensambles/:id", {}, {});
             api.Pruebas = $resource(urlApiBase + "Pruebas/:id", {}, {
-                GetValues: {url: urlApiBase + 'Planta/GetValues/:id'},
+                GetValues: {url: urlApiBase + 'Planta/GetValues/:id/:seg/:ite'},
                 Valores: {url: urlApiBase + "Planta/Valores/:id"},
                 update: {method: 'PUT'},
-                Lecturas: {url: urlApiBase + "Pruebas/Lecturas/:id", isArray: true}
+                Lecturas: {url: urlApiBase + "Pruebas/Lecturas/:id", isArray: true},
+                Autoriza: {method: 'POST', url: urlApiBase + "Pruebas/Autoriza/:id"},
+                Rechaza: {method: 'POST', url: urlApiBase + "Pruebas/Rechaza/:id"},
+                Control: {method: 'POST', url: urlApiBase + "Pruebacontrol"}
             });
             api.Incidencias = $resource(urlApiBase + "Incidencias/:id", {}, {
+                update: {method: 'PUT'}
+            });
+            api.Usuarios = $resource(urlApiBase + "Usuarios/:id", {}, {
                 update: {method: 'PUT'}
             });
             return api;

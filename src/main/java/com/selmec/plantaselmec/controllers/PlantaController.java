@@ -9,6 +9,8 @@ import com.selmec.plantaselmec.dto.LecturaPSC;
 import com.selmec.plantaselmec.dto.TablaLecturaDTO;
 import com.selmec.plantaselmec.dto.ValoresEsperados;
 import com.selmec.plantaselmec.services.IEnsambleService;
+import com.selmec.plantaselmec.services.ILecturasService;
+import com.selmec.plantaselmec.services.IPlantaServices;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -38,17 +40,19 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class PlantaController {
 
     @Autowired
-    RandomGenerator randomGenerator;
-    @Autowired
     SessionFactory sessionFactory;
-    @Autowired
-    DataSource dataSource;
 
     @Autowired
     IEnsambleService ensambleService;
 
+    @Autowired
+    IPlantaServices PlantaServices;
+    @Autowired
+    ILecturasService LecturasService;
+
     private final Logger logger = Logger.getLogger(PlantaController.class);
-    private JdbcTemplate jdbcTemplateObject;
+    @Autowired
+    JdbcTemplate jdbctemplate;
 
     @RequestMapping(value = "Planta", method = RequestMethod.GET)
     public String Index() {
@@ -83,8 +87,14 @@ public class PlantaController {
     ValoresEsperados EsperadoSC(@PathVariable String id) {
         Planta Planta = (Planta) sessionFactory.getCurrentSession().get(Planta.class, id);
         ValoresEsperados valores = new ValoresEsperados();
-        valores.Max.L1L2 = Planta.getVoltaje() * 1.01;
-        valores.Min.L1L2 = Planta.getVoltaje() * 0.99;
+        Double corriente;
+        corriente = ((1000 * Planta.getMotores().getKw()) / Planta.getVoltaje()) * (100 - Planta.getMotores().getDerrateo()) * 0.01;
+        valores.Max.I3 = valores.Max.I2 = valores.Max.I1 = corriente * 1.01;
+        valores.Min.I3 = valores.Min.I2 = valores.Min.I1 = corriente * 0.99;
+        valores.Min.L3L1 = valores.Min.L2L3 = valores.Min.L1L2 = Planta.getVoltaje() * 0.99;
+        valores.Max.L3L1 = valores.Max.L2L3 = valores.Max.L1L2 = Planta.getVoltaje() * 1.01;
+        valores.Min.RMP = Planta.getMotores().getRpm() * 0.99;
+        valores.Max.RMP = Planta.getMotores().getRpm() * 1.01;
         valores.Min.HZ = Planta.getMotores().getFrecuenciaOperacion() * 0.975;
         valores.Max.HZ = Planta.getMotores().getFrecuenciaOperacion() * 1.025;
         return valores;
@@ -124,59 +134,16 @@ public class PlantaController {
         return "true";
     }
 
-    @Transactional
-    @RequestMapping(value = "/GetValues/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/GetValues/{id}/{seg}/{ite}", method = RequestMethod.GET)
     public @ResponseBody
-    LecturaPSC GetValues(@PathVariable("id") int id) {
-        Prueba prueba = (Prueba) sessionFactory.getCurrentSession().get(Prueba.class, id);
-        this.jdbcTemplateObject = new JdbcTemplate(dataSource);
-        LecturaPSC result = new LecturaPSC();
-        result.Time = new Date().toString();
-        String sql = "select * from tablalectura where tagname like '%" + prueba.getEnsamble().getCariles().getEquipo() + "|";
-
-        TablaLecturaDTO read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "FASE 1|VOLTAJE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.L1N = read.tagvalue;
-        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "FASE 2|VOLTAJE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.L2N = read.tagvalue;
-        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "FASE 3|VOLTAJE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.L3N = read.tagvalue;
-
-        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "FASE 1|CORRIENTE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.L1N = read.tagvalue;
-        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "FASE 2|CORRIENTE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.L2N = read.tagvalue;
-        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "FASE 3|CORRIENTE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.L3N = read.tagvalue;
-
-        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "MOTOR|PRESION ACEITE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.Presion = read.tagvalue;
-        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "MOTOR|TEMPERATURA%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.Temp = read.tagvalue;
-        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "FRECUENCIA|FREQUENCY%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.HZ = read.tagvalue;
-        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "GENERADOR|RPM%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.RMP = read.tagvalue;
-        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "GENERADOR|TIMER%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.Timer = read.tagvalue;
-        read = (TablaLecturaDTO) jdbcTemplateObject.queryForObject(sql + "GENERADOR|TIMER%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.Timer = read.tagvalue;
-
-        Lecturas lectura = new Lecturas();
-        lectura.setPrueba(prueba);
-        lectura.setHz(result.HZ);
-        lectura.setTemp((int) Math.round(result.Temp));
-        lectura.setL1(result.L1N);
-        lectura.setL2(result.L2N);
-        lectura.setL3(result.L3N);
-        lectura.setL1l2(result.L1L2);
-        lectura.setL2l3(result.L2L3);
-        lectura.setL3l1(result.L3L1);
-        lectura.setI1(result.I1);
-        lectura.setI2(result.I2);
-        lectura.setI3(result.I3);
-        //lectura.setRmp((int)result.RMP);        
-        //lectura.setTimeStamp(new Date());
-        //sessionFactory.getCurrentSession().save(lectura);
+    LecturaPSC GetValues(@PathVariable("id") int id, @PathVariable("seg") int seg, @PathVariable("ite") int ite) {
+        long start = System.currentTimeMillis();    
+        LecturaPSC result = PlantaServices.LecturaPlanta(id);
+        long elapsedTime = System.currentTimeMillis() - start;
+        logger.info(elapsedTime);
+        result.segundo = seg;
+        result.iteracion = ite;
+        LecturasService.Save(result, id);
         return result;
     }
 

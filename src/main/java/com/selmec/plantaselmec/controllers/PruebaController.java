@@ -7,12 +7,18 @@ package com.selmec.plantaselmec.controllers;
 
 import com.selmec.plantaselmec.Models.Lecturas;
 import com.selmec.plantaselmec.Models.Prueba;
+import com.selmec.plantaselmec.Models.Usuarios;
 import com.selmec.plantaselmec.dto.LecturaDTO;
 import com.selmec.plantaselmec.dto.PruebaDTO;
+import com.selmec.plantaselmec.services.IUsuariosServices;
+import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,14 +34,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("api/Pruebas")
 public class PruebaController extends BaseController<Prueba, PruebaDTO> {
-
+    
     @Transactional(readOnly = true)
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET)
     public List<PruebaDTO> Get() {
         return Get(Prueba.class, PruebaDTO.class);
     }
-
+    
     @Transactional(readOnly = true)
     @ResponseBody
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -43,7 +49,7 @@ public class PruebaController extends BaseController<Prueba, PruebaDTO> {
         
         return Get(id, Prueba.class, PruebaDTO.class);
     }
-
+    
     @Transactional
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
@@ -51,7 +57,7 @@ public class PruebaController extends BaseController<Prueba, PruebaDTO> {
         sessionFactory.getCurrentSession().save(prueba);
         return DTO(prueba, Prueba.class, PruebaDTO.class);
     }
-
+    
     @Transactional
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody
@@ -59,7 +65,7 @@ public class PruebaController extends BaseController<Prueba, PruebaDTO> {
         sessionFactory.getCurrentSession().update(prueba);
         return DTO(prueba, Prueba.class, PruebaDTO.class);
     }
-
+    
     @Transactional(readOnly = true)
     @RequestMapping(value = "Lecturas/{id}", method = RequestMethod.GET)
     @ResponseBody
@@ -73,7 +79,7 @@ public class PruebaController extends BaseController<Prueba, PruebaDTO> {
         }
         return r;
     }
-
+    
     @Transactional
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
@@ -81,5 +87,20 @@ public class PruebaController extends BaseController<Prueba, PruebaDTO> {
         Prueba prueba = (Prueba) sessionFactory.getCurrentSession().get(Prueba.class, id);
         sessionFactory.getCurrentSession().delete(prueba);
     }
-
+    
+    @Transactional(readOnly = true)
+    @ResponseBody
+    @RequestMapping(value = "Autorizar/{id}", method = RequestMethod.GET)
+    public PruebaDTO AutorizarPrueba(@PathVariable("id") int id, Principal principal) {
+        Prueba prueba = (Prueba) sessionFactory.getCurrentSession().get(Prueba.class, id);
+        Usuarios usuario = usuariosServices.GetByUsername(principal.getName());
+        prueba.setAprueba(usuario.getId());
+        Date today = Calendar.getInstance().getTime();
+        prueba.setDtAprueba(today);
+        sessionFactory.getCurrentSession().merge(prueba);
+        return Get(id, Prueba.class, PruebaDTO.class);
+    }
+    
+    @Autowired
+    private IUsuariosServices usuariosServices;
 }

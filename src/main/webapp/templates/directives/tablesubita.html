@@ -205,7 +205,7 @@
         <tbody>                
             <tr ng-repeat="row in Accumulate">
                 <td> 
-                    {{row.time}}  
+                    {{row.time| minutos}}  
                 </td>
                 <td>
                     {{row.I1| number: 2}}  
@@ -237,7 +237,7 @@
             </tr>            
             <tr>
                 <td > 
-                    {{now.time}}
+                    {{now.time| minutos}}
                 </td>
                 <td ng-style="{'color': (now.L1N <= valores.Max.L1L2 && now.L1N > valores.Min.L1L2) ? 'green':'red'}">
                     {{now.I1| number: 2}}  

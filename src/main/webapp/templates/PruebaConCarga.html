@@ -14,45 +14,12 @@
         </div>
     </div>
     <div class="col-md-6">
-        <table-ctrl-carga></table-ctrl-carga> 
+        <table-ctrl-carga></table-ctrl-carga>         
     </div>
     <div class="col-md-3">
         <div class="row">
             <div class="col-md-12">
-                <fieldset>
-                    <div class="row">                        
-                        <div class="col-md-6">
-                            <label>Fecha y Hora de Inicio</label>
-                        </div>                            
-                        <div class="col-md-6">
-                            <label class="label label-info">{{prueba.dtInicio| date : 'dd-MM-yyyy hh:mm:ss'}}</label>
-                        </div>
-                    </div>                                            
-                    <div class="row">                        
-                        <div class="col-md-6">
-                            <label>Fecha y Hora de Termino</label>
-                        </div>                            
-                        <div class="col-md-6">
-                            <label class="label label-info">{{prueba.dtFin| date : 'dd-MM-yyyy hh:mm:ss'}}</label>
-                        </div>
-                    </div>                                                                                                                                                
-                    <div class="row">                        
-                        <div class="col-md-6">
-                            <label>Folio</label>
-                        </div>                            
-                        <div class="col-md-6">
-                            <label class="label label-info">{{ensamble.folio}}</label>
-                        </div>
-                    </div> 
-                    <div class="row">                        
-                        <div class="col-md-6">
-                            <label>Tiempo Prueba</label>
-                        </div>                            
-                        <div class="col-md-6">
-                            <label  class="label label-primary">{{AccumulateTime| minutos}}</label> 
-                        </div>
-                    </div>                               
-                </fieldset>
+                <datosprueba></datosprueba>
             </div>
         </div>
         <div class="row">            

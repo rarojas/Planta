@@ -5,20 +5,15 @@
  */
 package com.selmec.plantaselmec.dto;
 
-import com.selmec.plantaselmec.Models.Prueba;
 
 /**
  *
  * @author rrojase
  */
-public class Pruebacontrol {
+public class PruebacontrolDTO {
 
-    public Pruebacontrol() {
-    }
-
-    public Pruebacontrol(Pruebacontrol prueba) {
-        
-    }
+    public PruebacontrolDTO() {
+    }  
 
     public int id;
     public int termometro;

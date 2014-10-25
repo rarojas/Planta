@@ -21,6 +21,10 @@ var Routes = ['$routeProvider',
                     templateUrl: '/templates/PruebaSinCargaView.html',
                     controller: 'PruebaSinCargaCtrl'
                 }).
+                when('/PruebaConCargaView/:EnsambleID/:PruebaID', {
+                    templateUrl: '/templates/PruebaConCargaView.html',
+                    controller: 'PruebaSinCargaCtrl'
+                }).
                 when('/PruebaConCarga/:EnsambleID', {
                     templateUrl: '/templates/PruebaConCarga.html',
                     controller: 'PruebaConCargaController'
@@ -44,6 +48,10 @@ var Routes = ['$routeProvider',
                 when('/PruebaControl/:EnsambleID', {
                     templateUrl: '/templates/PruebaControl.html',
                     controller: 'PruebaControlCtrl'
+                }).
+                when('/PruebaControlView/:EnsambleID/:PruebaID', {
+                    templateUrl: '/templates/PruebaControlView.html',
+                    controller: 'PruebaControlViewCtrl'
                 }).
                 when('/Usuarios', {
                     templateUrl: '/templates/Usuarios/Index.html',

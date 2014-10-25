@@ -1,41 +1,42 @@
 <div class="row">
     <div class="col-md-12">
-        <h3>Incio de Prueba</h3>
-        <div class="btn-group">
-            <button type="button" class="btn btn-success" ng-click="Enable()">
-                <span class='glyphicon glyphicon-ok'></span><br>
-                Inicio                           
-            </button>
-            <button type="button" class="btn btn-danger" ng-click="Disable()">
-                <span class='glyphicon glyphicon-off'></span><br>
-                Fin                           
-            </button>                            
-        </div>
+        <fieldset>
+            <legend>Prueba</legend>
+            <div class="btn-group">
+                <button type="button" class="btn btn-success" ng-click="Enable()" ng-show="prueba === undefined && OptionsControl.Locked">
+                    <span class='glyphicon glyphicon-ok'></span><br>
+                    Iniciar Prueba
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="SiguientePrueba()" ng-show="prueba === undefined">
+                    <span class='glyphicon glyphicon-new-window'></span><br>
+                    Siguiente Prueba                  
+                </button>
+                <a class="btn btn-danger" href="#/Pruebas/{{ensamble.id}}" ng-show="prueba !== undefined && Estado !== Estatus.Running">
+                    <span class='glyphicon glyphicon-stop'></span><br>
+                    Salir Prueba                        
+                </a>
+                <button type="button" class="btn btn-success" ng-click="Start()" ng-show="!OptionsControl.Locked && Estado !== Estatus.Running && prueba === undefined">
+                    <span class='glyphicon glyphicon-play'></span><br>
+                    START                           
+                </button>
+                <button type="button" class="btn btn-danger" ng-click="Stop()" ng-show="!OptionsControl.Locked && Estado === Estatus.Running">
+                    <span class='glyphicon glyphicon-stop'></span><br>
+                    STOP                                           
+                </button>
+            </div>
+        </fieldset>
     </div>
-    <div class="col-md-12" >
-        <h3>Controles de Planta</h3>
+</div>
+<div class="col-md-12" >
+    <fieldset>
+        <legend>Control Planta : <label ng-style="{color: Estado.color}" class="label">{{Estado.text}}</label>  </legend>    
         <div class="btn-group">
             <button type="button" class="btn " ng-click="ArranquePlanta()" >
                 <img src="../../img/Icons/Arranque.png" alt="" width="50"/>
             </button>
             <button type="button" class="btn" ng-click="ParoPlanta()"    >
-                 <img src="../../img/Icons/PARO.png" alt="" width="50"/>                          
-            </button>
-            <button type="button" class="btn btn-success" ng-click="Start()" ng-disabled="OptionsControl.Locked || Estado === Estatus.Running">
-                <span class='glyphicon glyphicon-play'></span><br>
-                START                           
-            </button>
-            <button type="button" class="btn btn-danger" ng-click="Stop()" ng-disabled="OptionsControl.Locked || Estado !== Estatus.Running">
-                <span class='glyphicon glyphicon-stop'></span><br>
-                STOP                           
-            </button>
-            <button type="button " class="btn btn-primary" ng-click="Test()"  ng-disabled="OptionsControl.Locked || Estado === Estatus.Running">
-
-                <span class='glyphicon glyphicon-check'></span><br>
-                TEST
-
-            </button>                                                
+                <img src="../../img/Icons/PARO.png" alt="" width="50"/>                          
+            </button>            
         </div>
-        <label ng-style="{color: Estado.color}" class="label">{{Estado.text}}</label>                    
-    </div>
+    </fieldset>                     
 </div>

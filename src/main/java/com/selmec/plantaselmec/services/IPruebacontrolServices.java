@@ -6,6 +6,7 @@
 package com.selmec.plantaselmec.services;
 
 import com.selmec.plantaselmec.Models.Pruebacontrol;
+import com.selmec.plantaselmec.dto.PruebacontrolDTO;
 
 /**
  *
@@ -16,4 +17,8 @@ public interface IPruebacontrolServices {
     void Save(Pruebacontrol prueba);
 
     void Update(Pruebacontrol prueba);
+
+    Pruebacontrol Get(Integer id);
+
+    PruebacontrolDTO DTO(Pruebacontrol prueba);
 }

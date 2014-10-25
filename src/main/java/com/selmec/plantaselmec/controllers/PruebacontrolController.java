@@ -6,9 +6,11 @@
 package com.selmec.plantaselmec.controllers;
 
 import com.selmec.plantaselmec.Models.Pruebacontrol;
+import com.selmec.plantaselmec.dto.PruebacontrolDTO;
 import com.selmec.plantaselmec.services.IPruebacontrolServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,15 +27,23 @@ public class PruebacontrolController {
     @Autowired
     IPruebacontrolServices pruebacontrolServices;
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public PruebacontrolDTO Get(@PathVariable("id") int id) {
+        return pruebacontrolServices.DTO(pruebacontrolServices.Get(id));
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public void Post(@RequestBody Pruebacontrol prueba) {
+    public Pruebacontrol Post(@RequestBody Pruebacontrol prueba) {
         pruebacontrolServices.Save(prueba);
+        return prueba;
     }
 
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody
-    public void Put(@RequestBody Pruebacontrol prueba) {
+    public Pruebacontrol Put(@RequestBody Pruebacontrol prueba) {
         pruebacontrolServices.Save(prueba);
+        return prueba;
     }
 }

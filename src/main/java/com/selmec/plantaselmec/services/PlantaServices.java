@@ -1,9 +1,14 @@
 package com.selmec.plantaselmec.services;
 
+import com.selmec.Utils.Description;
 import com.selmec.plantaselmec.Models.Prueba;
 import com.selmec.plantaselmec.dto.LecturaPSC;
 import com.selmec.plantaselmec.dto.TablaLecturaDTO;
+import java.lang.reflect.Field;
 import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -26,34 +31,38 @@ public class PlantaServices implements IPlantaServices {
         Prueba prueba = (Prueba) sessionFactory.getCurrentSession().get(Prueba.class, PruebaId);
         LecturaPSC result = new LecturaPSC();
         result.Time = new Date().toString();
-        String sql = "select limit 1 * from tablalectura where tagname like '%" + prueba.getEnsamble().getCariles().getEquipo() + "|";
+        String sql = "select tagvalue,tagname from tablalectura where tagname like '%" + prueba.getEnsamble().getCariles().getEquipo() + "|%';";
 
-        TablaLecturaDTO read = (TablaLecturaDTO) jdbctemplate.queryForObject(sql + "FASE 1|VOLTAJE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.L1N = read.tagvalue;
-        read = (TablaLecturaDTO) jdbctemplate.queryForObject(sql + "FASE 2|VOLTAJE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.L2N = read.tagvalue;
-        read = (TablaLecturaDTO) jdbctemplate.queryForObject(sql + "FASE 3|VOLTAJE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.L3N = read.tagvalue;
+        List<TablaLecturaDTO> results = jdbctemplate.query(sql, new BeanPropertyRowMapper(TablaLecturaDTO.class));
+        Field[] fields;
+        fields = LecturaPSC.class.getDeclaredFields();
+        for (Field field : fields) {
+            Description description = field.getAnnotation(Description.class);
+            if (description != null) {
+                for (TablaLecturaDTO r : results) {
+                    if (r.tagname.contains(description.value())) {
+                        if (description.value().contains("CORRIENTE")) {
+                            try {
+                                if (field.get(result) == null) {
+                                    field.set(result, r.tagvalue);
+                                } else {
+                                    field.set(result, field.getDouble(result) + r.tagvalue);
+                                }
+                            } catch (IllegalArgumentException | IllegalAccessException ex) {
+                                Logger.getLogger(PlantaServices.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            try {
+                                field.set(result, r.tagvalue);
+                            } catch (IllegalArgumentException | IllegalAccessException ex) {
+                                Logger.getLogger(PlantaServices.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-        read = (TablaLecturaDTO) jdbctemplate.queryForObject(sql + "FASE 1|CORRIENTE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.I1 = read.tagvalue;
-        read = (TablaLecturaDTO) jdbctemplate.queryForObject(sql + "FASE 2|CORRIENTE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.I2 = read.tagvalue;
-        read = (TablaLecturaDTO) jdbctemplate.queryForObject(sql + "FASE 3|CORRIENTE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.I3 = read.tagvalue;
-
-        read = (TablaLecturaDTO) jdbctemplate.queryForObject(sql + "MOTOR|PRESION ACEITE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.Presion = read.tagvalue;
-        read = (TablaLecturaDTO) jdbctemplate.queryForObject(sql + "MOTOR|TEMPERATURA%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.Temp = read.tagvalue;
-        read = (TablaLecturaDTO) jdbctemplate.queryForObject(sql + "FRECUENCIA|FREQUENCY%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.HZ = read.tagvalue;
-        read = (TablaLecturaDTO) jdbctemplate.queryForObject(sql + "GENERADOR|RPM%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.RMP = read.tagvalue;
-        read = (TablaLecturaDTO) jdbctemplate.queryForObject(sql + "GENERADOR|TIMER%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-        result.Timer = read.tagvalue;
-//        read = (TablaLecturaDTO) jdbctemplate.queryForObject(sql + "GENERADOR|VOLTAJE%'", new BeanPropertyRowMapper(TablaLecturaDTO.class));
-//        result.bateria = read.tagvalue;
         return result;
     }
 

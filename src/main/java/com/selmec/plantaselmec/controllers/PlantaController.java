@@ -1,31 +1,22 @@
 package com.selmec.plantaselmec.controllers;
 
-import com.selmec.Utils.RandomGenerator;
-import com.selmec.plantaselmec.Models.Lecturas;
 import com.selmec.plantaselmec.Models.Planta;
-import com.selmec.plantaselmec.Models.Prueba;
 import com.selmec.plantaselmec.dto.ErrorResource;
 import com.selmec.plantaselmec.dto.LecturaPSC;
-import com.selmec.plantaselmec.dto.TablaLecturaDTO;
 import com.selmec.plantaselmec.dto.ValoresEsperados;
 import com.selmec.plantaselmec.services.IEnsambleService;
 import com.selmec.plantaselmec.services.ILecturasService;
 import com.selmec.plantaselmec.services.IPlantaServices;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.sql.DataSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import javax.validation.Valid;
 import org.hibernate.SessionFactory;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -137,25 +128,14 @@ public class PlantaController {
     @RequestMapping(value = "/GetValues/{id}/{seg}/{ite}", method = RequestMethod.GET)
     public @ResponseBody
     LecturaPSC GetValues(@PathVariable("id") int id, @PathVariable("seg") int seg, @PathVariable("ite") int ite) {
-        long start = System.currentTimeMillis();    
         LecturaPSC result = PlantaServices.LecturaPlanta(id);
-        long elapsedTime = System.currentTimeMillis() - start;
-        logger.info(elapsedTime);
         result.segundo = seg;
         result.iteracion = ite;
+        long start = System.currentTimeMillis();
         LecturasService.Save(result, id);
+        long elapsedTime = System.currentTimeMillis() - start;
+        logger.info(elapsedTime);
         return result;
     }
-
-    @ExceptionHandler(SQLException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ResponseBody
-    public ErrorResource handleSQLException(HttpServletRequest request, Exception ex) {
-        logger.info("SQLException Occured:: URL=" + request.getRequestURL());
-        SQLException sqlException = (SQLException) ex;
-        ErrorResource error = new ErrorResource();
-        error.setCode(HttpStatus.INTERNAL_SERVER_ERROR.toString());
-        error.setMessage(sqlException.getMessage());
-        return error;
-    }
+    
 }

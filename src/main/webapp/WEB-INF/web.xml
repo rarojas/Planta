@@ -24,11 +24,7 @@
         <session-timeout>
             30
         </session-timeout>
-    </session-config>
-    <welcome-file-list>
-        <welcome-file></welcome-file>
-    </welcome-file-list>
-    
+    </session-config>       
     <filter>
         <filter-name>cors</filter-name>
         <filter-class>com.selmec.rest.SimpleCORSFilter</filter-class>

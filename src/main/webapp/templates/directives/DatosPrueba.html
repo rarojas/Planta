@@ -1,0 +1,35 @@
+<fieldset>
+    <legend>Datos Prueba</legend>
+    <div class="row">                        
+        <div class="col-md-6">
+            <label>Fecha y Hora de Inicio</label>
+        </div>                            
+        <div class="col-md-6">
+            <label class="label label-success">{{prueba.dtInicio| date : 'dd-MM-yyyy hh:mm:ss'}}</label>
+        </div>
+    </div>                                            
+    <div class="row">                        
+        <div class="col-md-6">
+            <label>Fecha y Hora de Termino</label>
+        </div>                            
+        <div class="col-md-6">
+            <label class="label label-success">{{prueba.dtFin| date : 'dd-MM-yyyy hh:mm:ss'}}</label>
+        </div>
+    </div>                                                                                                                                                
+    <div class="row">                        
+        <div class="col-md-6">
+            <label>Folio</label>
+        </div>                            
+        <div class="col-md-6">
+            <label class="label label-success">{{ensamble.folio}}</label>
+        </div>
+    </div> 
+    <div class="row" ng-show="AccumulateTime !== null">                        
+        <div class="col-md-6">
+            <label>Tiempo Prueba</label>
+        </div>                            
+        <div class="col-md-6">
+            <label  class="label label-primary">{{AccumulateTime| minutos}}</label> 
+        </div>
+    </div>                               
+</fieldset>

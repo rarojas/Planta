@@ -65,20 +65,19 @@
         <security:authentication-provider user-service-ref="userDao" >         
         </security:authentication-provider>
     </security:authentication-manager>
-    
-    <!--    <security:http 
-        realm="Protected API"        
-        auto-config="false"        
-        entry-point-ref="unauthorizedEntryPoint"        
-        authentication-manager-ref="authenticationManager">
-        <security:custom-filter ref="authenticationTokenProcessingFilter" position="FORM_LOGIN_FILTER" />        
-        <security:intercept-url pattern="/api/**" access="ROLE_ADMIN"  />
-    </security:http>-->
+      
     <security:http 
         realm="Protected API"        
-        auto-config="true"                
-        authentication-manager-ref="authenticationManager">        
-        <security:intercept-url pattern="/" access="ROLE_ADMIN"  />        
+        auto-config="true"                    
+        authentication-manager-ref="authenticationManager">   
+        <security:form-login
+            login-page="/login" 
+            default-target-url="/" 
+            authentication-failure-url="/login?error" 
+            username-parameter="username"
+            password-parameter="password"/>
+          <security:logout logout-success-url="/login?logout" />
+        <security:intercept-url pattern="/" access="ROLE_ADMIN"  />                
     </security:http>
    
     <bean id="authenticationTokenProcessingFilter" class="com.selmec.rest.AuthenticationTokenProcessingFilter" >

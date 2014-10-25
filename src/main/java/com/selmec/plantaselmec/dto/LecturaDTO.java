@@ -16,18 +16,23 @@ public class LecturaDTO {
 
     public Double L1L2;
 
-    public Date x;
-    public Double val_0;
-    public Double val_2;
-    public Double val_1;
+    public Integer x;
+    public Double L1N;
+    public Double L2N;
+    public Double L3N;
+    public Integer Temp;
+    public Double HZ;
 
     public LecturaDTO() {
     }
 
     public LecturaDTO(Lecturas lectura) {
-        this.val_1 = lectura.getL1l2();
-        this.val_2 = lectura.getL2l3();
-        this.val_0 = lectura.getL3l1();
+        this.L1N = lectura.getL1();
+        this.L2N = lectura.getL2();
+        this.L3N = lectura.getL3();
+        this.Temp = lectura.getTemp();
+        this.HZ = lectura.getHz();
+        this.x = lectura.getSegundo();
 
         //this.x = lectura.getTimeStamp();
     }

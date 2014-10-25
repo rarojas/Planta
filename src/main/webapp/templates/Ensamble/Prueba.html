@@ -188,7 +188,7 @@
                     </a>
                 </div>
                 <table class="table table-condensed table-bordered table-hover table-striped">
-                     <thead>
+                    <thead>
                         <tr>
                             <th>Folio</th>
                             <th>Fecha</th>
@@ -198,7 +198,7 @@
                     <tbody>
                         <tr ng-repeat="row in prueba.pruebas| filter : {tipo :2}"> 
                             <td>
-                                <a href="#/PruebaSinCargaView/{{prueba.id}}/{{row.id}}">{{row.id}}</a>
+                                <a href="#/PruebaConCargaView/{{prueba.id}}/{{row.id}}">{{row.id}}</a>
                             </td>
                             <td>
                                 {{row.dtInicio| date : 'dd/MM/yyyy hh:mm'}}
@@ -218,7 +218,7 @@
                     </a>
                 </div>
                 <table class="table table-condensed table-bordered table-hover table-striped">
-                     <thead>
+                    <thead>
                         <tr>
                             <th>Folio</th>
                             <th>Fecha</th>
@@ -228,7 +228,7 @@
                     <tbody>
                         <tr ng-repeat="row in prueba.pruebas| filter : {tipo :3}"> 
                             <td>
-                                <a href="#/PruebaSinCargaView/{{prueba.id}}/{{row.id}}">{{row.id}}</a>
+                                <a href="#/PruebaControlView/{{prueba.id}}/{{row.id}}">{{row.id}}</a>
                             </td>
                             <td>
                                 {{row.dtInicio| date : 'dd/MM/yyyy hh:mm'}}

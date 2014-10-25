@@ -21,8 +21,15 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
                 $scope.PruebaCarga = [$scope.valores, $scope.valores, $scope.valores, $scope.valores];
                 var i = 0;
                 for (i = 0; i < 2; i++) {
-                    $scope.PruebaCarga[i].Max.I2 = $scope.PruebaCarga[i].Max.I1 = $scope.PruebaCarga[i].Max.I3 = $scope.valores.Max.I1 * 0.25 * (i + 1);
-                    $scope.PruebaCarga[i].Min.I2 = $scope.PruebaCarga[i].Min.I1 = $scope.PruebaCarga[i].Min.I3 = $scope.valores.Min.I1 * 0.25 * (i + 1);
+                    var max = ($scope.valores.Max.I1 * 0.25 * (i + 1));
+                    var min = ($scope.valores.Min.I1 * 0.25 * (i + 1));
+                    console.log(max);
+                    $scope.PruebaCarga[i].Max.I2 = max;
+                    $scope.PruebaCarga[i].Max.I1 = max;
+                    $scope.PruebaCarga[i].Max.I3 = max;
+                    $scope.PruebaCarga[i].Min.I2 = min;
+                    $scope.PruebaCarga[i].Min.I1 = min;
+                    $scope.PruebaCarga[i].Min.I3 = min;
                 }
                 $scope.PruebaCargaIndex = function () {
                     return $scope.Iteraciones.current < 2 ? $scope.Iteraciones.current : 3;
@@ -40,7 +47,7 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
     $scope.Added = [];
     $scope.now = [];
     $scope.Poller = {};
-    $scope.RefreshTime = 5;
+    $scope.RefreshTime = 1;
     $scope.RefreshTimes = [1, 5, 30, 60];
     $scope.Estatus = {
         Waiting: {text: "En espera", value: 0, color: 'green'},
@@ -59,19 +66,19 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
     $scope.options = {
         series: [
             {
-                y: "val_0",
+                y: "L1N",
                 label: "L1-N",
                 color: "#ff0000",
                 type: "line",
                 thickness: "1px"
             }, {
-                y: "val_1",
+                y: "L2N",
                 label: "L2-N",
                 color: "#64c900",
                 type: "line",
                 thickness: "1px"
             }, {
-                y: "val_2",
+                y: "L3N",
                 label: "L3-N",
                 color: "#428bca",
                 type: "line",
@@ -101,9 +108,12 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
             }
         ],
         axes: {x: {type: "linear", key: "x"}, y: {type: "linear"}, y2: {type: "linear"}},
-        lineMode: "linear",
+        lineMode: "bundle",
         tension: 0.7,
-        tooltip: {mode: 'axes', interpolate: false}
+        tooltip: {mode: "scrubber"},
+        drawLegend: true,
+        drawDots: true,
+        columnsHGap: 5
     };
     $scope.optionsTemp = {};
     angular.copy($scope.options, $scope.optionsTemp);
@@ -134,44 +144,62 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
     };
 
     $scope.ParoPlanta = function () {
-        PlantaServices.Plantas.Off({}, {id: $scope.ensamble.id}, function () {
+        PlantaServices.Plantas.Off({id: $scope.ensamble.id}, {id: $scope.ensamble.id}, function () {
             noty({text: "Encendido de planta exitoso¡¡¡", type: "success"});
         }, function () {
-            noty({text: "Error al encender la planta¡¡¡", type: "error"});
+            noty({text: "Error al apagar la planta la planta¡¡¡", type: "error"});
+
         });
     };
     $scope.ArranquePlanta = function () {
-        PlantaServices.Plantas.On({}, {id: $scope.ensamble.id}, function () {
+        PlantaServices.Plantas.On({id: $scope.ensamble.id}, {id: $scope.ensamble.id}, function () {
             noty({text: "Apagado de planta exitoso¡¡¡", type: "success"});
         }, function () {
-            noty({text: "Error al apagar la planta la planta¡¡¡", type: "error"});
+            noty({text: "Error al encender la planta¡¡¡", type: "error"});
         });
     };
     $scope.Autoriza = function () {
         $scope.prueba.estatus = 4;
         $scope.prueba.ensamble = $scope.ensamble;
-        $scope.prueba.$update();
+        $scope.prueba.$update(function () {
+            $location.path("/Pruebas/" + $scope.ensamble.id);
+        }, function () {
+            noty({
+                text: "Ocurrio un error al realizar la operacion¡¡¡", type: "error"
+            });
+        });
+
     };
     $scope.Rechaza = function () {
         $scope.prueba.estatus = 3;
         $scope.prueba.ensamble = $scope.ensamble;
-        $scope.prueba.$update();
+        $scope.prueba.$update(function () {
+            $location.path("/Pruebas/" + $scope.ensamble.id);
+        }, function () {
+            noty({
+                text: "Ocurrio un error al realizar la operacion¡¡¡", type: "error"
+            });
+        });
     };
     $scope.NowToLastMinute = function () {
         return {
             x: $scope.AccumulateTime,
-            val_0: $scope.now.L1N,
-            val_1: $scope.now.L2N,
-            val_2: $scope.now.L3N,
+            L1N: $scope.now.L1N,
+            L2N: $scope.now.L2N,
+            L3N: $scope.now.L3N,
             I1: $scope.now.I1,
             I2: $scope.now.I2,
             I3: $scope.now.I3,
             HZ: $scope.now.HZ,
             Temp: $scope.now.Temp,
-            RPM: $scope.now.RPM
+            RPM: $scope.now.RPM,
+            MaxV: $scope.valores.Max.L1N,
+            MinV: $scope.valores.Min.L1N
                     //bateria: $scope.now.bateria
         };
     };
+
+
     $scope.Start = function () {
         noty({
             text: "¿Confirma el encendido de la planta?", modal: true,
@@ -206,7 +234,45 @@ app.controller("PruebaSinCargaCtrl", [
     function ($scope, $http, $interval, $routeParams, PlantaServices) {
         BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices);
         $scope.prueba = PlantaServices.Pruebas.get({id: $routeParams.PruebaID});
-        $scope.lastMinute = PlantaServices.Pruebas.Lecturas({id: $routeParams.PruebaID});
+        $scope.options = {
+            series: [
+                {
+                    y: "L1N",
+                    label: "L1-N",
+                    color: "#ff0000",
+                    type: "line",
+                    thickness: "1px"
+                }, {
+                    y: "L2N",
+                    label: "L2-N",
+                    color: "#64c900",
+                    type: "line",
+                    thickness: "1px"
+                }, {
+                    y: "L3N",
+                    label: "L3-N",
+                    color: "#428bca",
+                    type: "line",
+                    thickness: "1px"
+                }
+            ],
+            axes: {x: {type: "linear", key: "x"}, y: {type: "linear"}, y2: {type: "linear"}},
+            lineMode: "bundle",
+            tension: 0.7,
+            tooltip: {mode: "scrubber"},
+            drawLegend: true
+        };
+        $scope.data = PlantaServices.Pruebas.Lecturas({id: $routeParams.PruebaID});
+        $scope.minute = 1;
+        $scope.$watch("minute", function () {
+            var index = $scope.minute * 60;
+            var i = 0;
+            $scope.lastMinute = [];
+            if ($scope.data.length >= index + 60)
+                for (i = 0; i < 60; i++) {
+                    $scope.lastMinute.push($scope.data[i + index]);
+                }
+        });
     }]);
 app.controller("PruebaSinCargaController", [
     "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout",
@@ -265,7 +331,7 @@ app.controller("PruebaSinCargaController", [
                         if ($scope.lastMinute.length > (30 / $scope.RefreshTime)) {
                             $scope.lastMinute.shift();
                         }
-                        $scope.data.push({x: $scope.AccumulateTime, val_0: $scope.now.L1N, val_1: $scope.now.L2N, val_2: $scope.now.L3N});
+                        $scope.data.push({x: $scope.AccumulateTime, L1N: $scope.now.L1N, L2N: $scope.now.L2N, L3N: $scope.now.L3N});
                     }, function () {
 
                     });
@@ -340,7 +406,7 @@ app.controller("PruebaConCargaController", [
                         if ($scope.lastMinute.length > (30 / $scope.RefreshTime)) {
                             $scope.lastMinute.shift();
                         }
-                        $scope.data.push({x: $scope.AccumulateTime, val_0: $scope.now.L1N, val_1: $scope.now.L2N, val_2: $scope.now.L3N});
+                        $scope.data.push({x: $scope.AccumulateTime, L1N: $scope.now.L1N, L2N: $scope.now.L2N, L3N: $scope.now.L3N});
                     }, function () {
 
                     });
@@ -394,7 +460,7 @@ app.controller("PruebaConCargaSubitaCtrl", [
                             return $scope.Stop();
                         }
                         else {
-                             $scope.data = {voltaje: [], hz: []};
+                            $scope.data = {voltaje: [], hz: []};
                             $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current = 0;
                             noty({text: "Comenzando Iteracion " + $scope.Iteraciones.current + "¡¡¡", type: 'success'});
                         }
@@ -454,6 +520,40 @@ app.controller("PruebaControlCtrl", [
             });
 
         };
+    }]);
+app.controller("PruebaControlCtrl", [
+    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout",
+    function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout) {
+        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout);
+        $scope.prueba = new PlantaServices.Pruebas({
+            id: 0,
+            ensamble: $scope.ensamble,
+            tipo: 3,
+            estatus: 0,
+            dtInicio: new Date(),
+            dtFin: new Date()
+        });
+        $scope.GuardarPrueba = function () {
+            $scope.prueba.$save(function () {
+                $scope.pruebacontrol.prueba = $scope.prueba;
+                PlantaServices.Pruebas.Control($scope.pruebacontrol, function () {
+                    $scope.prueba.estatus = 2;
+                    $scope.prueba.ensamble = $scope.ensamble;
+                    $scope.prueba.$update();
+                }, function () {
+
+                });
+            }, function () {
+
+            });
+
+        };
+    }]);
+app.controller("PruebaControlViewCtrl", [
+    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout",
+    function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout) {
+        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout);
+        $scope.pruebacontrol = PlantaServices.Pruebascontrol.get({id: $routeParams.PruebaID});
     }]);
 app.controller("EnsambleController", ["$scope", "PlantaServices", "$filter", "$location",
     function ($scope, PlantaServices, $filter, $location) {

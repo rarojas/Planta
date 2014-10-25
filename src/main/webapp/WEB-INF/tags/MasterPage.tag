@@ -27,7 +27,11 @@
 
     <script src="<c:url value="/js/libs/jquery-noty/jquery.noty.packaged.min.js"/>"></script>     
     <script src="<c:url value="/js/libs/underscore.js/underscore.js"/>"></script>  
-
+    <script>
+        function formSubmit() {
+            document.getElementById("logoutForm").submit();
+        }
+    </script>
     <jsp:invoke fragment="app"/>
     <style>
         body {
@@ -35,7 +39,7 @@
         }
 
         .navbar-fixed-top .nav {
-            padding: 15px 0;
+            padding: 10px 0;
         }
 
         .navbar-fixed-top .navbar-brand {
@@ -44,7 +48,7 @@
 
         @media(min-width:768px) {
             body {
-                padding-top: 100px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+                padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
             }
 
             .navbar-fixed-top .navbar-brand {
@@ -54,7 +58,12 @@
     </style>
 </head> 
 <html ng-app="PlantaAPP">
-    <body>                       
+    <body>               
+        <form action="${logoutUrl}" method="post" id="logoutForm">
+            <input type="hidden" 
+                   name="${_csrf.parameterName}"
+                   value="${_csrf.token}" />
+        </form>
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -66,7 +75,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">
-                        <img src="<c:url value="/img/Logos/Logo ok fondos de color RGB-02.png"/>" class="img-responsive" width="100" alt=""/>
+                        <img src="<c:url value="/img/Logos/Logo ok fondos de color RGB-03.png"/>" class="img-responsive" width="100" alt=""/>
                     </a>
                 </div>
 
@@ -98,7 +107,12 @@
                                 <img src="<c:url value="/img/Logo Selmec.png"/>" class="img-responsive" width="150" alt=""/>
                             </a>
                         </li>                        
-                        <li><a href="#/Logout">Cerrar Sesión</a></li>
+                        <li>
+                            <security:authorize access="isAuthenticated()">
+
+                                <a href="javascript:formSubmit()"> Logout</a>
+                            </security:authorize>
+                        </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->

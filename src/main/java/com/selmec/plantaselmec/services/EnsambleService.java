@@ -7,8 +7,10 @@ package com.selmec.plantaselmec.services;
 
 import com.selmec.plantaselmec.Dao.IGenericDao;
 import com.selmec.plantaselmec.Models.Ensamble;
-import com.selmec.plantaselmec.Models.Prueba;
+import com.selmec.plantaselmec.Models.Usuarios;
+import java.util.List;
 import javax.sql.DataSource;
+import org.hibernate.criterion.Restrictions;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,9 +22,7 @@ import org.springframework.stereotype.Service;
  * @author rrojase
  */
 @Service
-public class EnsambleService implements IEnsambleService {
-
-    private IGenericDao<Ensamble, String> dao;
+public class EnsambleService extends BaseServices<Ensamble, String> implements IEnsambleService {
 
     private final Logger logger = Logger.getLogger(EnsambleService.class);
 
@@ -36,6 +36,11 @@ public class EnsambleService implements IEnsambleService {
     public void setDao(IGenericDao<Ensamble, String> daoToSet) {
         dao = daoToSet;
         dao.setClazz(Ensamble.class);
+    }
+
+    public List<Ensamble> GetByUser(Usuarios usuarios) {
+        return dao
+                .getCurrentSession().createCriteria(Ensamble.class).add(Restrictions.eq("usuarios.id", usuarios.getId())).list();
     }
 
     @Override
@@ -55,7 +60,7 @@ public class EnsambleService implements IEnsambleService {
         Ensamble prueba = (Ensamble) dao.getCurrentSession().get(Ensamble.class, estado);
         String equipo = prueba.getCariles().getPlanta();
         queryString = String.format(
-                "update  tablaescritura  set  tagvalue = 510 where  variable = 'CONTROL1' AND IDEQUIPO = '%s';"
+                "update  tablaescritura  set  tagvalue = 33423360 where  variable = 'CONTROL1' AND IDEQUIPO = '%s';"
                 + "update tablaescritura set tagvalue = 1 where variable = 'MODO CONTROL' AND IDEQUIPO = '%s';"
                 + "update  tablaescritura set  tagvalue = 0 where  variable = 'CONTROL2' AND IDEQUIPO = '%s';"
                 + "update  tablaescritura set  tagvalue = 1 where  variable = 'CONTROL3' AND IDEQUIPO = '%s';", equipo, equipo, equipo, equipo);
@@ -73,7 +78,7 @@ public class EnsambleService implements IEnsambleService {
         String equipo = prueba.getCariles().getPlanta();
         queryString = String.format(
                 "update tablaescritura set tagvalue = 1 where variable = 'MODO CONTROL' AND IDEQUIPO = '%s';"
-                + "update  tablaescritura set  tagvalue = 765 where  variable = 'CONTROL1' AND IDEQUIPO = '%s';"
+                + "update  tablaescritura set  tagvalue = 50135040 where  variable = 'CONTROL1' AND IDEQUIPO = '%s';"
                 + "update  tablaescritura set  tagvalue = 0 where  variable = 'CONTROL2' AND IDEQUIPO = '%s';"
                 + "update  tablaescritura set  tagvalue = 1 where  variable = 'CONTROL3' AND IDEQUIPO = '%s';", equipo, equipo, equipo, equipo);
         logger.info(estado);

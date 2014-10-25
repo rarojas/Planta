@@ -9,12 +9,14 @@ import com.selmec.plantaselmec.Dao.IGenericDao;
 import com.selmec.plantaselmec.Models.Pruebacarga;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author GEIDAR
  */
+@Service
 public class PruebacargaService implements IPruebacargaService {
 
     private IGenericDao<Pruebacarga, String> dao;//Como determinar de que tipo es el segunto parámetro, ya que en algunos veo que es de tipo String y en otros de tipo Integer
@@ -24,6 +26,7 @@ public class PruebacargaService implements IPruebacargaService {
         dao = daoToSet;
         dao.setClazz(Pruebacarga.class);
     }
+    
 
     @Transactional(readOnly = true)
     @Override

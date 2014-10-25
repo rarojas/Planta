@@ -34,7 +34,7 @@ public class PruebaControlDTO implements java.io.Serializable {//Changes: implem
 
     //Changes
     public String pruebacontrolcol;
-    public PruebaDTO prueba;
+    //public PruebaDTO prueba;
 
     public PruebaControlDTO() {
     }
@@ -57,9 +57,9 @@ public class PruebaControlDTO implements java.io.Serializable {//Changes: implem
         this.duraciontotal = pruebaControl.getDuraciontotal();
         this.pruebacontrolcol = pruebaControl.getPruebacontrolcol();
 
-        if (pruebaControl.getPrueba() != null) {
+        /*if (pruebaControl.getPrueba() != null) {
             this.prueba = new PruebaDTO(pruebaControl.getPrueba());
-        }
+        }*/
     }
     //
 }

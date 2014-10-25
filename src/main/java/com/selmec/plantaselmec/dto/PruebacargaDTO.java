@@ -11,10 +11,10 @@ import com.selmec.plantaselmec.Models.Pruebacarga;
  *
  * @author GEIDAR
  */
-public class PruebacargaDTO implements java.io.Serializable {
+public class PruebacargaDTO{
 
     public int id;
-    public PruebaDTO prueba;
+    //public PruebaDTO prueba;
     public Double vmax;
     public Double vmin;
     public Double hmax;
@@ -30,8 +30,8 @@ public class PruebacargaDTO implements java.io.Serializable {
         this.hmax = pruebaCarga.getHmax();
         this.hmin = pruebaCarga.getHmin();
 
-        if (pruebaCarga.getPrueba() != null) {
+        /*if (pruebaCarga.getPrueba() != null) {
             this.prueba = new PruebaDTO(pruebaCarga.getPrueba());
-        }
+        }*/
     }
 }

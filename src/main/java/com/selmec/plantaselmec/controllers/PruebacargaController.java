@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author GEIDAR
  */
 @Controller
-@RequestMapping("api/Pruebas")//determinar como se va a llamar la carpeta de Pruebascarga
+@RequestMapping("api/Pruebacarga")//determinar como se va a llamar la carpeta de Pruebascarga
 public class PruebacargaController extends BaseController<Pruebacarga,PruebacargaDTO>{
 
     @Autowired

@@ -5,14 +5,14 @@
  */
 package com.selmec.plantaselmec.controllers;
 
+import com.selmec.plantaselmec.Dao.IGenericDao;
 import com.selmec.plantaselmec.Models.Usuarios;
 import com.selmec.plantaselmec.dto.UsuarioDTO;
 import com.selmec.plantaselmec.services.IUsuariosServices;
 import java.security.Principal;
 import java.util.List;
-import ma.glasnost.orika.MapperFacade;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,10 +27,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("api/Usuarios")
 public class UserController extends BaseController<Usuarios, UsuarioDTO> {
-   
+
+    private IGenericDao<Usuarios, Integer> dao;
 
     @Autowired
     private IUsuariosServices usuariosServices;
+
+    @Autowired
+    public void setDao(IGenericDao< Usuarios, Integer> daoToSet) {
+        dao = daoToSet;
+        dao.setClazz(Usuarios.class);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public @ResponseBody
+    List<UsuarioDTO> Get() {
+        return DTO(usuariosServices.All(), Usuarios.class, UsuarioDTO.class);//
+    }
 
     @RequestMapping(value = "/Current", method = RequestMethod.GET)
     @ResponseBody
@@ -38,35 +51,30 @@ public class UserController extends BaseController<Usuarios, UsuarioDTO> {
         return principal.getName();
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    @ResponseBody
-    public List<UsuarioDTO> Get() {
-        return usuariosServices.ToDTO(usuariosServices.All());
-    }
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public UsuarioDTO Get(@PathVariable("id") int id) {
-        return usuariosServices.ToDTO(usuariosServices.GetUsuario(id));
+        return Get(id, Usuarios.class, UsuarioDTO.class);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    @ResponseBody
-    public UsuarioDTO Post(@RequestBody Usuarios usuario) {
-        usuariosServices.Save(usuario);
-        return usuariosServices.ToDTO(usuario);
+    public @ResponseBody
+    Usuarios Post(@Valid @RequestBody Usuarios usuarios) {//aquí no es como el get?, que retorna un tipo DTO
+        usuariosServices.Save(usuarios);
+        return usuarios;
     }
 
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody
-    public void Put(@RequestBody Usuarios usuario) {
-        usuariosServices.Save(usuario);
+    public void Put(@RequestBody Usuarios usuarios) {
+        usuariosServices.Save(usuarios);
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
     @ResponseBody
     public void Delete(@PathVariable("id") int id) {
-
+        usuariosServices.Delete(id);
     }
+    
 
 }

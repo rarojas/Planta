@@ -6,54 +6,53 @@
 package com.selmec.plantaselmec.services;
 
 import com.selmec.plantaselmec.Dao.IGenericDao;
-import com.selmec.plantaselmec.Models.Cariles;
+import com.selmec.plantaselmec.Models.Pruebacarga;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author rrojase
+ * @author GEIDAR
  */
-@Service
-public class CarrilesService implements ICarrilesService {
+public class PruebacargaService implements IPruebacargaService {
 
-    private IGenericDao<Cariles, Integer> dao;
+    private IGenericDao<Pruebacarga, String> dao;//Como determinar de que tipo es el segunto parámetro, ya que en algunos veo que es de tipo String y en otros de tipo Integer
 
     @Autowired
-    public void setDao(IGenericDao< Cariles, Integer> daoToSet) {
+    public void setDao(IGenericDao< Pruebacarga, String> daoToSet) {
         dao = daoToSet;
-        dao.setClazz(Cariles.class);
+        dao.setClazz(Pruebacarga.class);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<Cariles> GetAll() {
+    public List<Pruebacarga> GetAll() {
         return dao.findAll();
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Cariles GetById(int id) {
+    public Pruebacarga GetById(String id) {
         return dao.findOne(id);
     }
 
     @Transactional
     @Override
-    public void Save(Cariles cariles) {
-        dao.create(cariles);
+    public void Save(Pruebacarga pruebaCarga) {
+        dao.create(pruebaCarga);
     }
 
     @Transactional
     @Override
-    public void Update(Cariles cariles) {
-        dao.update(cariles);
+    public void Update(Pruebacarga pruebaCarga) {
+        dao.update(pruebaCarga);
     }
 
     @Transactional
     @Override
-    public void Delete(int id) {
+    public void Delete(String id) {
         dao.deleteById(id);
     }
+
 }

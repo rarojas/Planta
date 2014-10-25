@@ -12,6 +12,17 @@ import java.util.List;
  *
  * @author rrojase
  */
+
+//Changes ALL 
+
 public interface ICarrilesService {
     List<Cariles> GetAll();
+
+    Cariles GetById(int id);
+
+    void Save(Cariles pruebaCarga);
+
+    void Update(Cariles pruebaCarga);
+
+    void Delete(int id);
 }

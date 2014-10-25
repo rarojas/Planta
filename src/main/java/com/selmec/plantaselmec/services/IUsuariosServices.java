@@ -18,7 +18,8 @@ public interface IUsuariosServices {
 
     public Usuarios GetByUsername(String paramString);
 
-    List<UsuarioDTO> ToDTO(List<Usuarios> usuarios);
+    List<UsuarioDTO> ToDTO(List<Usuarios> usuarios);//supongo que se debe de eliminar este método
 
-    UsuarioDTO ToDTO(Usuarios usuario);
+    UsuarioDTO ToDTO(Usuarios usuario);//igual supongo que hay que quitar este método
+    
 }

@@ -45,8 +45,7 @@ public class PruebaController extends BaseController<Prueba, PruebaDTO> {
     @Transactional(readOnly = true)
     @ResponseBody
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public PruebaDTO Get(@PathVariable("id") int id) {
-        
+    public PruebaDTO Get(@PathVariable("id") int id) {        
         return Get(id, Prueba.class, PruebaDTO.class);
     }
     
@@ -100,7 +99,7 @@ public class PruebaController extends BaseController<Prueba, PruebaDTO> {
         sessionFactory.getCurrentSession().merge(prueba);
         return Get(id, Prueba.class, PruebaDTO.class);
     }
-    
+
     @Autowired
     private IUsuariosServices usuariosServices;
 }

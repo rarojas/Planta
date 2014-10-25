@@ -20,43 +20,48 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class PruebacontrolServices implements IPruebacontrolServices {
-
+    
     private IGenericDao<Pruebacontrol, Integer> dao;
-
+    
     @Autowired
     public void setDao(IGenericDao< Pruebacontrol, Integer> daoToSet) {//como determinar de qeu tipo es el segundo parametro
         dao = daoToSet;
         dao.setClazz(Pruebacontrol.class);
     }
-
+    
     @Transactional(readOnly = true)
     @Override
     public List<Pruebacontrol> GetAll() {
         return dao.findAll();
     }
-
+    
     @Transactional(readOnly = true)
     @Override
     public Pruebacontrol GetById(int id) {
         return dao.findOne(id);
     }
-
+    
     @Transactional
     @Override
     public void Save(Pruebacontrol prueba) {
         dao.create(prueba);
     }
-
+    
     @Transactional
     @Override
     public void Update(Pruebacontrol prueba) {
         dao.update(prueba);
     }
-
+    
     public PruebaControlDTO DTO(Pruebacontrol prueba) {
         return mapper.map(prueba, PruebaControlDTO.class);
     }
     
     @Autowired
     private MapperFacade mapper;
+    
+    @Override
+    public void Delete(int id) {
+        dao.deleteById(id);
+    }
 }

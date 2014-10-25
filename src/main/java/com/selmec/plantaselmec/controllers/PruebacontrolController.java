@@ -29,7 +29,7 @@ public class PruebacontrolController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public PruebacontrolDTO Get(@PathVariable("id") int id) {
+    public PruebaControlDTO Get(@PathVariable("id") int id) {
         return pruebacontrolServices.DTO(pruebacontrolServices.GetById(id));
     }
 

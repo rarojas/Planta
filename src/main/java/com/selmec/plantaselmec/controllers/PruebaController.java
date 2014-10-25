@@ -34,22 +34,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("api/Pruebas")
 public class PruebaController extends BaseController<Prueba, PruebaDTO> {
-    
+
+    @Autowired
+    IUsuariosServices usuariosService;
+
     @Transactional(readOnly = true)
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET)
-    public List<PruebaDTO> Get() {
+    public List<PruebaDTO> Get(Principal principal) {
+        Usuarios user = usuariosService.GetByUsername(principal.getName());
+        
         return Get(Prueba.class, PruebaDTO.class);
     }
-    
+
     @Transactional(readOnly = true)
     @ResponseBody
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public PruebaDTO Get(@PathVariable("id") int id) {
-        
+
         return Get(id, Prueba.class, PruebaDTO.class);
     }
-    
+
     @Transactional
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
@@ -57,7 +62,7 @@ public class PruebaController extends BaseController<Prueba, PruebaDTO> {
         sessionFactory.getCurrentSession().save(prueba);
         return DTO(prueba, Prueba.class, PruebaDTO.class);
     }
-    
+
     @Transactional
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody
@@ -65,7 +70,7 @@ public class PruebaController extends BaseController<Prueba, PruebaDTO> {
         sessionFactory.getCurrentSession().update(prueba);
         return DTO(prueba, Prueba.class, PruebaDTO.class);
     }
-    
+
     @Transactional(readOnly = true)
     @RequestMapping(value = "Lecturas/{id}", method = RequestMethod.GET)
     @ResponseBody
@@ -79,7 +84,7 @@ public class PruebaController extends BaseController<Prueba, PruebaDTO> {
         }
         return r;
     }
-    
+
     @Transactional
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
@@ -87,7 +92,7 @@ public class PruebaController extends BaseController<Prueba, PruebaDTO> {
         Prueba prueba = (Prueba) sessionFactory.getCurrentSession().get(Prueba.class, id);
         sessionFactory.getCurrentSession().delete(prueba);
     }
-    
+
     @Transactional(readOnly = true)
     @ResponseBody
     @RequestMapping(value = "Autorizar/{id}", method = RequestMethod.GET)
@@ -100,7 +105,7 @@ public class PruebaController extends BaseController<Prueba, PruebaDTO> {
         sessionFactory.getCurrentSession().merge(prueba);
         return Get(id, Prueba.class, PruebaDTO.class);
     }
-    
+
     @Autowired
     private IUsuariosServices usuariosServices;
 }

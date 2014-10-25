@@ -31,10 +31,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CargasubitaService implements ICargasubitaService {
 
-    private IGenericDao<Cargasubita, String> dao;//Como determinar de que tipo es el segunto parámetro, ya que en algunos veo que es de tipo String y en otros de tipo Integer
+    private IGenericDao<Cargasubita, Integer> dao;//Como determinar de que tipo es el segunto parámetro, ya que en algunos veo que es de tipo String y en otros de tipo Integer
 
     @Autowired
-    public void setDao(IGenericDao< Cargasubita, String> daoToSet) {
+    public void setDao(IGenericDao< Cargasubita, Integer> daoToSet) {
         dao = daoToSet;
         dao.setClazz(Cargasubita.class);
     }
@@ -47,7 +47,7 @@ public class CargasubitaService implements ICargasubitaService {
 
     @Transactional(readOnly = true)
     @Override
-    public Cargasubita GetById(String id) {
+    public Cargasubita GetById(Integer id) {
         return dao.findOne(id);
     }
 
@@ -65,7 +65,7 @@ public class CargasubitaService implements ICargasubitaService {
 
     @Transactional
     @Override
-    public void Delete(String id) {
+    public void Delete(Integer id) {
         dao.deleteById(id);
     }
 }

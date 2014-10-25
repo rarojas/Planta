@@ -20,5 +20,4 @@ import org.springframework.stereotype.Repository;
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class GenericDao< T extends Serializable, KEY extends Serializable>
         extends BaseDAO< T, KEY> implements IGenericDao< T, KEY> {
-
 }

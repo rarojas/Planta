@@ -97,7 +97,7 @@ public class CargasubitaController extends BaseController<Cargasubita, Cargasubi
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public @ResponseBody
-    void Delete(@PathVariable String id) {
+    void Delete(@PathVariable Integer id) {
         CargaSubitaService.Delete(id);
     }
 

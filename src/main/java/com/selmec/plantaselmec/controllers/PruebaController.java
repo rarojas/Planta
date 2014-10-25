@@ -5,6 +5,7 @@
  */
 package com.selmec.plantaselmec.controllers;
 
+import com.selmec.plantaselmec.Models.EstadoPrueba;
 import com.selmec.plantaselmec.Models.Lecturas;
 import com.selmec.plantaselmec.Models.Prueba;
 import com.selmec.plantaselmec.Models.Usuarios;
@@ -107,6 +108,7 @@ public class PruebaController extends BaseController<Prueba, PruebaDTO> {
         prueba.setAprueba(usuario.getId());
         Date today = Calendar.getInstance().getTime();
         prueba.setDtAprueba(today);
+        prueba.setEstatus(4);//EstadoPrueba.AutorizadoEjecutor //cambio estatusprueba/pruebaid,nombreusuario,estatus
         sessionFactory.getCurrentSession().merge(prueba);
         return Get(id, Prueba.class, PruebaDTO.class);
     }

@@ -20,11 +20,11 @@ import java.util.List;
 public interface ICargasubitaService {
      List<Cargasubita> GetAll();
 
-    Cargasubita GetById(String id);
+    Cargasubita GetById(Integer id);
 
     void Save(Cargasubita cargaSubita);
 
     void Update(Cargasubita cargaSubita);
 
-    void Delete(String id);
+    void Delete(Integer id);
 }

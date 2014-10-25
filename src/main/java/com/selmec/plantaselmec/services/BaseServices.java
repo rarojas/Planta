@@ -5,37 +5,49 @@
  */
 package com.selmec.plantaselmec.services;
 
+import com.selmec.plantaselmec.Dao.IGenericDao;
+import java.io.Serializable;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author rrojase
+ * @param <T>
+ * @param <K>
  */
-public class BaseServices  implements IBaseServices{
+public class BaseServices<T extends Serializable, K extends Serializable> implements IBaseServices<T, K> {
 
+    public IGenericDao<T, K> dao;
+
+    @Transactional
     @Override
-    public List Get() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<T> Get() {
+        return dao.findAll();
     }
 
+    @Transactional
     @Override
-    public Object Get(Object id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public T Get(K id) {
+        return dao.findOne(id);
     }
 
+    @Transactional
     @Override
-    public void Save(Object entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void Save(T entity) {
+        dao.create(entity);
     }
 
+    @Transactional
     @Override
-    public void Update(Object entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void Update(T entity) {
+        dao.update(entity);
     }
 
+    @Transactional
     @Override
-    public void Delete(Object id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void Delete(K id) {
+        dao.deleteById(id);
     }
-    
+
 }

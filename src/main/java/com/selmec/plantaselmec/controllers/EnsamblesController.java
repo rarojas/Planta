@@ -3,6 +3,7 @@ package com.selmec.plantaselmec.controllers;
 import com.selmec.plantaselmec.Models.Ensamble;
 import com.selmec.plantaselmec.Models.Usuarios;
 import com.selmec.plantaselmec.dto.EnsambleDTO;
+import com.selmec.plantaselmec.services.IEnsambleService;
 import com.selmec.plantaselmec.services.IUsuariosServices;
 import java.security.Principal;
 import java.text.DateFormat;
@@ -33,6 +34,9 @@ public class EnsamblesController extends BaseController<Ensamble, EnsambleDTO> {
     @Autowired
     private IUsuariosServices usuariosServices;
 
+    @Autowired
+    IEnsambleService ensambleServices;
+
     @RequestMapping("/Pruebas")
     public ModelAndView Pruebas() {
         return new ModelAndView("/Pruebas/index");
@@ -41,8 +45,9 @@ public class EnsamblesController extends BaseController<Ensamble, EnsambleDTO> {
     @RequestMapping(method = RequestMethod.GET)
     @Transactional(readOnly = true)
     public @ResponseBody
-    List<EnsambleDTO> Get() {
-        List<Ensamble> pruebas = session.getCurrentSession().createCriteria(Ensamble.class).list();
+    List<EnsambleDTO> Get(Principal principal) {
+        Usuarios usuarios = usuariosServices.GetByUsername(principal.getName());
+        List<Ensamble> pruebas = ensambleServices.GetByUser(usuarios);
         return DTO(pruebas, Ensamble.class, EnsambleDTO.class);
 
     }

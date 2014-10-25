@@ -10,6 +10,7 @@ import com.selmec.plantaselmec.Models.Prueba;
 import com.selmec.plantaselmec.Models.Usuarios;
 import com.selmec.plantaselmec.dto.LecturaDTO;
 import com.selmec.plantaselmec.dto.PruebaDTO;
+import com.selmec.plantaselmec.services.IPruebaServices;
 import com.selmec.plantaselmec.services.IUsuariosServices;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -37,14 +38,17 @@ public class PruebaController extends BaseController<Prueba, PruebaDTO> {
 
     @Autowired
     IUsuariosServices usuariosService;
+    @Autowired
+    IPruebaServices pruebaServices;
 
     @Transactional(readOnly = true)
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET)
+
     public List<PruebaDTO> Get(Principal principal) {
-        Usuarios user = usuariosService.GetByUsername(principal.getName());
-        
-        return Get(Prueba.class, PruebaDTO.class);
+        Usuarios usuarios = usuariosServices.GetByUsername(principal.getName());
+        List<Prueba> pruebas = pruebaServices.GetByUser(usuarios);
+        return this.DTO(pruebas, Prueba.class, PruebaDTO.class);
     }
 
     @Transactional(readOnly = true)

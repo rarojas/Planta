@@ -7,8 +7,10 @@ package com.selmec.plantaselmec.services;
 
 import com.selmec.plantaselmec.Dao.IGenericDao;
 import com.selmec.plantaselmec.Models.Ensamble;
-import com.selmec.plantaselmec.Models.Prueba;
+import com.selmec.plantaselmec.Models.Usuarios;
+import java.util.List;
 import javax.sql.DataSource;
+import org.hibernate.criterion.Restrictions;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,9 +22,7 @@ import org.springframework.stereotype.Service;
  * @author rrojase
  */
 @Service
-public class EnsambleService implements IEnsambleService {
-
-    private IGenericDao<Ensamble, String> dao;
+public class EnsambleService extends BaseServices<Ensamble, String> implements IEnsambleService {
 
     private final Logger logger = Logger.getLogger(EnsambleService.class);
 
@@ -36,6 +36,11 @@ public class EnsambleService implements IEnsambleService {
     public void setDao(IGenericDao<Ensamble, String> daoToSet) {
         dao = daoToSet;
         dao.setClazz(Ensamble.class);
+    }
+
+    public List<Ensamble> GetByUser(Usuarios usuarios) {
+        return dao
+                .getCurrentSession().createCriteria(Ensamble.class).add(Restrictions.eq("usuarios.id", usuarios.getId())).list();
     }
 
     @Override

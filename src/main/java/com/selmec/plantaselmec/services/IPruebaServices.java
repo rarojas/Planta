@@ -5,7 +5,7 @@
  */
 package com.selmec.plantaselmec.services;
 
-import com.selmec.plantaselmec.Models.Ensamble;
+import com.selmec.plantaselmec.Models.Prueba;
 import com.selmec.plantaselmec.Models.Usuarios;
 import java.util.List;
 
@@ -13,13 +13,8 @@ import java.util.List;
  *
  * @author rrojase
  */
-public interface IEnsambleService extends IBaseServices<Ensamble, String> {
+public interface IPruebaServices extends
+        IBaseServices<Prueba, Integer> {
 
-    void TurnOnCarril(int estado);
-
-    void TurnOffCarril(int estado);
-
-    void ExcuteSPControl(int estado);
-
-    List<Ensamble> GetByUser(Usuarios usuarios);
+    List<Prueba> GetByUser(Usuarios usuarios);
 }

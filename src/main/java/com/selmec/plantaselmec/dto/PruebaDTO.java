@@ -7,7 +7,6 @@ package com.selmec.plantaselmec.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.deser.std.DateDeserializers.DateDeserializer;
-import com.selmec.plantaselmec.Models.Incidencias;
 import com.selmec.plantaselmec.Models.Prueba;
 import java.util.Date;
 
@@ -24,6 +23,15 @@ public class PruebaDTO {
 
     public String comentario;
     public IncidenciasDTO incidencias;
+    
+    
+  
+    //Changes
+     public Integer aprueba;
+     public Date dtAprueba;
+     public Integer apruebaSupervisor;
+     public Date dtApruebaSupervisor;    
+     public PruebaControlDTO pruebacontrol;
 
     public PruebaDTO() {
     }
@@ -35,8 +43,17 @@ public class PruebaDTO {
         this.estatus = prueba.getEstatus();
         this.tipo = prueba.getTipo();
         this.comentario = prueba.getComentario();
+        //Changes
+        this.aprueba=prueba.getAprueba();
+        this.dtAprueba=prueba.getDtAprueba();
+        this.apruebaSupervisor=prueba.getApruebaSupervisor();
+        this.dtApruebaSupervisor=prueba.getDtApruebaSupervisor();
+        if(prueba.getPruebacontrol()!=null){
+          this.pruebacontrol=new PruebaControlDTO(prueba.getPruebacontrol());
+        }
+        //
         if (prueba.getIncidencias() != null) {
             this.incidencias = new IncidenciasDTO(prueba.getIncidencias());
-        }
+        }       
     }
-}
+   }

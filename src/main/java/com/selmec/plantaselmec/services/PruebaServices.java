@@ -9,6 +9,8 @@ import com.selmec.plantaselmec.Dao.IGenericDao;
 import com.selmec.plantaselmec.Models.Cariles;
 import com.selmec.plantaselmec.Models.Prueba;
 import com.selmec.plantaselmec.Models.Usuarios;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author rrojase
+ * @author GEID@R
  */
 @Service
-public class PruebaServices extends BaseServices<Prueba, Integer> implements IPruebaServices {
+public class PruebaServices implements IPruebaServices {
+
+    private IGenericDao<Prueba, Integer> dao;
+
+    @Autowired
+    IUsuariosServices usuariosServices;
 
     @Autowired
     public void setDao(IGenericDao< Prueba, Integer> daoToSet) {

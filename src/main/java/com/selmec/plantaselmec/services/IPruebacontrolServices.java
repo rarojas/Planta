@@ -6,19 +6,25 @@
 package com.selmec.plantaselmec.services;
 
 import com.selmec.plantaselmec.Models.Pruebacontrol;
-import com.selmec.plantaselmec.dto.PruebacontrolDTO;
+import com.selmec.plantaselmec.dto.PruebaControlDTO;
+import java.util.List;
 
 /**
  *
  * @author rrojase
  */
+//Changes
 public interface IPruebacontrolServices {
+
+    List<Pruebacontrol> GetAll();
+
+    Pruebacontrol GetById(int id);
 
     void Save(Pruebacontrol prueba);
 
     void Update(Pruebacontrol prueba);
 
-    Pruebacontrol Get(Integer id);
+    void Delete(int id);
 
-    PruebacontrolDTO DTO(Pruebacontrol prueba);
+     public PruebaControlDTO DTO(Pruebacontrol prueba);
 }

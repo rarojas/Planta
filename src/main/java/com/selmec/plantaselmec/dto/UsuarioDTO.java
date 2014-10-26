@@ -18,6 +18,9 @@ public class UsuarioDTO implements java.io.Serializable {
     public String apellidos;
     public String rol;
     public int id;
+    
+    /*private String password;
+     private Set ensambles = new HashSet(0);*/
 
     public UsuarioDTO() {
     }

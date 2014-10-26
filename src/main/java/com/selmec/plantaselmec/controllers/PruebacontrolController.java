@@ -6,7 +6,7 @@
 package com.selmec.plantaselmec.controllers;
 
 import com.selmec.plantaselmec.Models.Pruebacontrol;
-import com.selmec.plantaselmec.dto.PruebacontrolDTO;
+import com.selmec.plantaselmec.dto.PruebaControlDTO;
 import com.selmec.plantaselmec.services.IPruebacontrolServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,8 +29,8 @@ public class PruebacontrolController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public PruebacontrolDTO Get(@PathVariable("id") int id) {
-        return pruebacontrolServices.DTO(pruebacontrolServices.Get(id));
+    public PruebaControlDTO Get(@PathVariable("id") int id) {
+        return pruebacontrolServices.DTO(pruebacontrolServices.GetById(id));
     }
 
     @RequestMapping(method = RequestMethod.POST)

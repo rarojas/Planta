@@ -20,9 +20,9 @@ public interface ICarrilesService {
 
     Cariles GetById(int id);
 
-    void Save(Cariles pruebaCarga);
+    void Save(Cariles caril);
 
-    void Update(Cariles pruebaCarga);
+    void Update(Cariles caril);
 
     void Delete(int id);
 }

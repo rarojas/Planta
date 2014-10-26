@@ -15,11 +15,9 @@ import com.selmec.plantaselmec.services.IPruebaServices;
 import com.selmec.plantaselmec.services.IUsuariosServices;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
+import javax.validation.Valid;
 import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,49 +29,49 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
- * @author rrojase
+ * @author GEID@R
  */
+
 @Controller
 @RequestMapping("api/Pruebas")
 public class PruebaController extends BaseController<Prueba, PruebaDTO> {
 
     @Autowired
-    IUsuariosServices usuariosService;
+    IUsuariosServices usuariosServices;
     @Autowired
     IPruebaServices pruebaServices;
 
-    @Transactional(readOnly = true)
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET)
-
     public List<PruebaDTO> Get(Principal principal) {
         Usuarios usuarios = usuariosServices.GetByUsername(principal.getName());
         List<Prueba> pruebas = pruebaServices.GetByUser(usuarios);
         return this.DTO(pruebas, Prueba.class, PruebaDTO.class);
     }
 
-    @Transactional(readOnly = true)
+    @RequestMapping(method = RequestMethod.GET)
+    public @ResponseBody
+    List<PruebaDTO> Get() {
+        return DTO(pruebaServices.GetAll(), Prueba.class, PruebaDTO.class);
+    }
+
     @ResponseBody
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-  
     public PruebaDTO Get(@PathVariable("id") int id) {
-
         return Get(id, Prueba.class, PruebaDTO.class);
     }
 
-    @Transactional
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public PruebaDTO Post(@RequestBody Prueba prueba) {
-        sessionFactory.getCurrentSession().save(prueba);
+        pruebaServices.Save(prueba);
         return DTO(prueba, Prueba.class, PruebaDTO.class);
     }
 
-    @Transactional
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody
-    public PruebaDTO Put(@RequestBody Prueba prueba) {
-        sessionFactory.getCurrentSession().update(prueba);
+    public PruebaDTO Put(@Valid @RequestBody Prueba prueba) {
+        pruebaServices.Update(prueba);
         return DTO(prueba, Prueba.class, PruebaDTO.class);
     }
 
@@ -91,28 +89,38 @@ public class PruebaController extends BaseController<Prueba, PruebaDTO> {
         return r;
     }
 
-    @Transactional
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public void Delete(@PathVariable("id") int id) {
-        Prueba prueba = (Prueba) sessionFactory.getCurrentSession().get(Prueba.class, id);
-        sessionFactory.getCurrentSession().delete(prueba);
+    public void Delete(@PathVariable Integer id) {
+        pruebaServices.Delete(id);
     }
 
-    @Transactional(readOnly = true)
-    @ResponseBody
+    //debe llevar transactional read only
     @RequestMapping(value = "Autorizar/{id}", method = RequestMethod.GET)
-    public PruebaDTO AutorizarPrueba(@PathVariable("id") int id, Principal principal) {
-        Prueba prueba = (Prueba) sessionFactory.getCurrentSession().get(Prueba.class, id);
-        Usuarios usuario = usuariosServices.GetByUsername(principal.getName());
-        prueba.setAprueba(usuario.getId());
-        Date today = Calendar.getInstance().getTime();
-        prueba.setDtAprueba(today);
-        prueba.setEstatus(4);//EstadoPrueba.AutorizadoEjecutor //cambio estatusprueba/pruebaid,nombreusuario,estatus
-        sessionFactory.getCurrentSession().merge(prueba);
+    @ResponseBody
+    public PruebaDTO AutorizarPruebaEjecutor(@PathVariable("id") int id, Principal principal) {
+        pruebaServices.cambioEstatusPrueba(id, principal.getName(), EstadoPrueba.AutorizadoEjecutor);
         return Get(id, Prueba.class, PruebaDTO.class);
     }
 
-    @Autowired
-    private IUsuariosServices usuariosServices;
+    @RequestMapping(value = "Autorizar/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public PruebaDTO RechazarPruebaEjecutor(@PathVariable("id") int id, Principal principal) {
+        pruebaServices.cambioEstatusPrueba(id, principal.getName(), EstadoPrueba.RechazadaEjecutor);
+        return Get(id, Prueba.class, PruebaDTO.class);
+    }
+
+    @RequestMapping(value = "Autorizar/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public PruebaDTO AutorizarPruebasupervisor(@PathVariable("id") int id, Principal principal) {
+        pruebaServices.cambioEstatusPrueba(id, principal.getName(), EstadoPrueba.AutorizadaSupervisor);
+        return Get(id, Prueba.class, PruebaDTO.class);
+    }
+
+    @RequestMapping(value = "Autorizar/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public PruebaDTO RechazarPruebasupervisor(@PathVariable("id") int id, Principal principal) {
+        pruebaServices.cambioEstatusPrueba(id, principal.getName(), EstadoPrueba.RechazadaSupervisor);
+        return Get(id, Prueba.class, PruebaDTO.class);
+    }
 }

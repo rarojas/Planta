@@ -17,4 +17,6 @@ public interface IPruebaServices extends
         IBaseServices<Prueba, Integer> {
 
     List<Prueba> GetByUser(Usuarios usuarios);
+
+    String CarrilByPrueba(int id);
 }

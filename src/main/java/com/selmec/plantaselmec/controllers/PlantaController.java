@@ -1,30 +1,27 @@
 package com.selmec.plantaselmec.controllers;
 
+import com.selmec.plantaselmec.Models.Cariles;
 import com.selmec.plantaselmec.Models.Planta;
-import com.selmec.plantaselmec.dto.ErrorResource;
+import com.selmec.plantaselmec.Models.Prueba;
 import com.selmec.plantaselmec.dto.LecturaPSC;
 import com.selmec.plantaselmec.dto.ValoresEsperados;
 import com.selmec.plantaselmec.services.IEnsambleService;
 import com.selmec.plantaselmec.services.ILecturasService;
 import com.selmec.plantaselmec.services.IPlantaServices;
-import java.sql.SQLException;
+import com.selmec.plantaselmec.services.IPruebaServices;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.hibernate.SessionFactory;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 @RequestMapping("/api/Planta")
@@ -88,6 +85,8 @@ public class PlantaController {
         valores.Max.RMP = Planta.getMotores().getRpm() * 1.01;
         valores.Min.HZ = Planta.getMotores().getFrecuenciaOperacion() * 0.975;
         valores.Max.HZ = Planta.getMotores().getFrecuenciaOperacion() * 1.025;
+        valores.Max.Presion = 29d;
+        valores.Max.Temp = 98d;
         return valores;
     }
 
@@ -125,10 +124,10 @@ public class PlantaController {
         return "true";
     }
 
-    @RequestMapping(value = "/GetValues/{id}/{seg}/{ite}", method = RequestMethod.GET)
+    @RequestMapping(value = "/GetValues/{id}/{seg}/{ite}/{equ}", method = RequestMethod.GET)
     public @ResponseBody
-    LecturaPSC GetValues(@PathVariable("id") int id, @PathVariable("seg") int seg, @PathVariable("ite") int ite) {
-        LecturaPSC result = PlantaServices.LecturaPlanta(id);
+    LecturaPSC GetValues(@PathVariable("id") int id, @PathVariable("seg") int seg, @PathVariable("ite") int ite, @PathVariable("equ") String equipo) {
+        LecturaPSC result = PlantaServices.LecturaPlanta(equipo);
         result.segundo = seg;
         result.iteracion = ite;
         long start = System.currentTimeMillis();
@@ -137,5 +136,7 @@ public class PlantaController {
         logger.info(elapsedTime);
         return result;
     }
-    
+
+    @Autowired
+    IPruebaServices pruebaServics;
 }

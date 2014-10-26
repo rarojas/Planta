@@ -22,4 +22,5 @@ public interface IEnsambleService extends IBaseServices<Ensamble, String> {
     void ExcuteSPControl(int estado);
 
     List<Ensamble> GetByUser(Usuarios usuarios);
+    
 }

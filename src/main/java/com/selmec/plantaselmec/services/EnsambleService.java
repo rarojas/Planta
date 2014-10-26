@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -38,9 +39,10 @@ public class EnsambleService extends BaseServices<Ensamble, String> implements I
         dao.setClazz(Ensamble.class);
     }
 
+    @Transactional
+    @Override
     public List<Ensamble> GetByUser(Usuarios usuarios) {
-        return dao
-                .getCurrentSession().createCriteria(Ensamble.class).add(Restrictions.eq("usuarios.id", usuarios.getId())).list();
+        return dao.getCurrentSession().createCriteria(Ensamble.class).add(Restrictions.eq("usuarios.id", usuarios.getId())).list();
     }
 
     @Override
@@ -60,7 +62,7 @@ public class EnsambleService extends BaseServices<Ensamble, String> implements I
         Ensamble prueba = (Ensamble) dao.getCurrentSession().get(Ensamble.class, estado);
         String equipo = prueba.getCariles().getPlanta();
         queryString = String.format(
-                "update  tablaescritura  set  tagvalue = 33423360 where  variable = 'CONTROL1' AND IDEQUIPO = '%s';"
+                "update  tablaescritura  set  tagvalue = 510 where  variable = 'CONTROL1' AND IDEQUIPO = '%s';"
                 + "update tablaescritura set tagvalue = 1 where variable = 'MODO CONTROL' AND IDEQUIPO = '%s';"
                 + "update  tablaescritura set  tagvalue = 0 where  variable = 'CONTROL2' AND IDEQUIPO = '%s';"
                 + "update  tablaescritura set  tagvalue = 1 where  variable = 'CONTROL3' AND IDEQUIPO = '%s';", equipo, equipo, equipo, equipo);
@@ -78,7 +80,7 @@ public class EnsambleService extends BaseServices<Ensamble, String> implements I
         String equipo = prueba.getCariles().getPlanta();
         queryString = String.format(
                 "update tablaescritura set tagvalue = 1 where variable = 'MODO CONTROL' AND IDEQUIPO = '%s';"
-                + "update  tablaescritura set  tagvalue = 50135040 where  variable = 'CONTROL1' AND IDEQUIPO = '%s';"
+                + "update  tablaescritura set  tagvalue = 765 where  variable = 'CONTROL1' AND IDEQUIPO = '%s';"
                 + "update  tablaescritura set  tagvalue = 0 where  variable = 'CONTROL2' AND IDEQUIPO = '%s';"
                 + "update  tablaescritura set  tagvalue = 1 where  variable = 'CONTROL3' AND IDEQUIPO = '%s';", equipo, equipo, equipo, equipo);
         logger.info(estado);

@@ -91,13 +91,13 @@
                     {{PruebaCarga[PruebaCargaIndex()].Max.HZ | number :2}}
                 </td>
                 <td>
-                    Temp.
+                    {{PruebaCarga[PruebaCargaIndex()].Max.Temp | number :2}}
                 </td>
                 <td>
-                    P. Oil
+                    {{PruebaCarga[PruebaCargaIndex()].Max.Presion | number :2}}
                 </td>
                 <td>
-                    C. Alt
+                    N/A
                 </td>
             </tr>
             <tr>
@@ -107,15 +107,17 @@
                     </button>
                 </td>
                 <td>
-                    {{PruebaCarga[PruebaCargaIndex()].Min.I1 | number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Min.I1 | number
+                        :2}}
                 </td>
                 <td>  
-                    {{PruebaCarga[PruebaCargaIndex()].Min.I2 | number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Min.I2 | number
+                                :2}}
                 </td>
 
                 <td>
                     {{PruebaCarga[PruebaCargaIndex()].Min.I3 | number
-                        :2}}
+                                :2}}
                 </td>
                 <td>
                     {{PruebaCarga[PruebaCargaIndex()].Min.L1L2 | number
@@ -134,13 +136,15 @@
                                 :2}}
                 </td>
                 <td>
-                    Temp.
+                    {{PruebaCarga[PruebaCargaIndex()].Min.Temp | number
+                                :2}}
                 </td>
                 <td>
-                    Presión Aceite
+                    {{PruebaCarga[PruebaCargaIndex()].Min.Presion | number
+                        :2}}
                 </td>
                 <td>
-                    Carga Alternador
+                    N/A
                 </td>
             </tr>
         </tbody>

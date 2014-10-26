@@ -15,6 +15,7 @@ public class CarrilDTO {
 
     public Integer id;
     public int noCarril;
+    public String equipo;
 
     public CarrilDTO() {
     }
@@ -22,5 +23,6 @@ public class CarrilDTO {
     public CarrilDTO(Cariles carril) {
         this.id = carril.getId();
         this.noCarril = carril.getNoCarril();
+        this.equipo = carril.getEquipo();
     }
 }

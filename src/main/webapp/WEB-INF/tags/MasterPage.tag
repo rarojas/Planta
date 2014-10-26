@@ -4,61 +4,66 @@
 <%@attribute name="header" fragment="true" %> 
 <%@attribute name="titlePage" fragment="true" %> 
 <%@attribute name="app" fragment="true" %> 
-<head>
-    <meta charset="UTF-8">       
-    <title><jsp:invoke fragment="titlePage"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link href="<c:url value="/js/libs/twitter-bootstrap/css/bootstrap-theme.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="/js/libs/twitter-bootstrap/css/bootstrap.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="/js/libs/angular-loading-bar/loading-bar.min.css"/>" rel="stylesheet" type="text/css"/>   
-    <script src="<c:url value="/js/libs/jquery/jquery.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/js/libs/d3/d3.v3.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/js/libs/nvd3/nv.d3.js"/>" type="text/javascript"></script>         
-    <script src="<c:url value="/js/libs/angular.js/angular.js"/>"></script>    
-    <script src="<c:url value="/js/libs/angular-directives-d3/angularjs-nvd3-directives.min.js"/>"></script>    
-    <script src="<c:url value="/js/libs/n3-linecharts/line-chart.min.js"/>"></script>    
-    <script src="<c:url value="/js/libs/angular.js/angular-resource.js"/>"></script>    
-    <script src="<c:url value="/js/libs/angular.js/angular-route.min.js"/>"></script>    
-    <script src="<c:url value="/js/app/app.js"/>"></script>            
-    <script src="<c:url value="/js/app/services.js"/>"></script>  
-    <script src="<c:url value="/js/app/routes.js"/>"></script>  
-    <script src="<c:url value="/js/app/directives.js"/>"></script>     
-    <script src="<c:url value="/js/libs/angular-loading-bar/loading-bar.min.js"/>"></script>     
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">       
+        <meta http-equiv="X-UA-Compatible" content="IE=9" />
+        <meta http-equiv="X-UA-Compatible" content="IE=10" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <title><jsp:invoke fragment="titlePage"/></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link href="<c:url value="/js/libs/twitter-bootstrap/css/bootstrap-theme.css"/>" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="/js/libs/twitter-bootstrap/css/bootstrap.css"/>" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="/js/libs/angular-loading-bar/loading-bar.min.css"/>" rel="stylesheet" type="text/css"/>   
+        <script src="<c:url value="/js/libs/jquery/jquery.js"/>" type="text/javascript"></script>
+        <script src="<c:url value="/js/libs/d3/d3.v3.js"/>" type="text/javascript"></script>
+        <script src="<c:url value="/js/libs/nvd3/nv.d3.js"/>" type="text/javascript"></script>         
+        <script src="<c:url value="/js/libs/angular.js/angular.js"/>"></script>    
+        <script src="<c:url value="/js/libs/angular-directives-d3/angularjs-nvd3-directives.min.js"/>"></script>    
+        <script src="<c:url value="/js/libs/n3-linecharts/line-chart.min.js"/>"></script>    
+        <script src="<c:url value="/js/libs/angular.js/angular-resource.js"/>"></script>    
+        <script src="<c:url value="/js/libs/angular.js/angular-route.min.js"/>"></script>    
+        <script src="<c:url value="/js/app/app.js"/>"></script>            
+        <script src="<c:url value="/js/app/services.js"/>"></script>  
+        <script src="<c:url value="/js/app/routes.js"/>"></script>  
+        <script src="<c:url value="/js/app/directives.js"/>"></script>     
+        <script src="<c:url value="/js/libs/angular-loading-bar/loading-bar.min.js"/>"></script>     
 
-    <script src="<c:url value="/js/libs/jquery-noty/jquery.noty.packaged.min.js"/>"></script>     
-    <script src="<c:url value="/js/libs/underscore.js/underscore.js"/>"></script>  
-    <script>
-        function formSubmit() {
-            document.getElementById("logoutForm").submit();
-        }
-    </script>
-    <jsp:invoke fragment="app"/>
-    <style>
-        body {
-            padding-top: 30px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
-        }
-
-        .navbar-fixed-top .nav {
-            padding: 10px 0;
-        }
-
-        .navbar-fixed-top .navbar-brand {
-            padding: 0 15px;
-        }
-
-        @media(min-width:768px) {
+        <script src="<c:url value="/js/libs/jquery-noty/jquery.noty.packaged.min.js"/>"></script>     
+        <script src="<c:url value="/js/libs/underscore.js/underscore.js"/>"></script>  
+        <script>
+            function formSubmit() {
+                document.getElementById("logoutForm").submit();
+            }
+        </script>
+        <jsp:invoke fragment="app"/>
+        <style>
             body {
-                padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+                padding-top: 30px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+            }
+
+            .navbar-fixed-top .nav {
+                padding: 10px 0;
             }
 
             .navbar-fixed-top .navbar-brand {
-                padding: 8px 0;
+                padding: 0 15px;
             }
-        }
-    </style>
-</head> 
-<html ng-app="PlantaAPP">
-    <body>               
+
+            @media(min-width:768px) {
+                body {
+                    padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+                }
+
+                .navbar-fixed-top .navbar-brand {
+                    padding: 8px 0;
+                }
+            }
+        </style>
+    </head> 
+
+    <body ng-app="PlantaAPP">               
         <form action="${logoutUrl}" method="post" id="logoutForm">
             <input type="hidden" 
                    name="${_csrf.parameterName}"

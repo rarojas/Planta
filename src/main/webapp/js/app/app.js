@@ -323,7 +323,7 @@ app.controller("PruebaSinCargaController", [
                     $scope.AccumulateTime++;
                 }, 1000);
                 $scope.Poller = $interval(function () {
-                    PlantaServices.Pruebas.GetValues({id: $scope.prueba.id, seg: $scope.AccumulateTime, ite: $scope.Iteraciones.current}
+                    PlantaServices.Pruebas.GetValues({id: $scope.prueba.id, seg: $scope.AccumulateTime, ite: $scope.Iteraciones.current, equipo: $scope.ensamble.carriles.equipo}
                     , function (response) {
                         $scope.now = response;
                         $scope.now.time = $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current;
@@ -398,7 +398,7 @@ app.controller("PruebaConCargaController", [
                     $scope.AccumulateTime++;
                 }, 1000);
                 $scope.Poller = $interval(function () {
-                    PlantaServices.Pruebas.GetValues({id: $scope.prueba.id, seg: $scope.AccumulateTime, ite: $scope.Iteraciones.current}
+                    PlantaServices.Pruebas.GetValues({id: $scope.prueba.id, seg: $scope.AccumulateTime, ite: $scope.Iteraciones.current, equipo: $scope.ensamble.carriles.equipo}
                     , function (response) {
                         $scope.now = response;
                         $scope.now.time = $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current;
@@ -476,7 +476,7 @@ app.controller("PruebaConCargaSubitaCtrl", [
                     $scope.AccumulateTime++;
                 }, 1000);
                 $scope.Poller = $interval(function () {
-                    PlantaServices.Pruebas.GetValues({id: $scope.prueba.id, seg: $scope.AccumulateTime, ite: $scope.Iteraciones.current}
+                    PlantaServices.Pruebas.GetValues({id: $scope.prueba.id, seg: $scope.AccumulateTime, ite: $scope.Iteraciones.current, equipo: $scope.ensamble.carriles.equipo}
                     , function (response) {
                         $scope.now = response;
                         $scope.now.time = $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current;
@@ -580,7 +580,7 @@ app.controller("EnsambleController", ["$scope", "PlantaServices", "$filter", "$l
                             folio: "14PR000001",
                             dtCreacion: new Date(),
                             planta: planta,
-                            cariles: $scope.ensamble.cariles,
+                            carriles: $scope.ensamble.carriles,
                             altitud: $scope.ensamble.altitud,
                             patin: $scope.ensamble.patin,
                             guardas: $scope.ensamble.guardas,

@@ -80,25 +80,26 @@
                     </fieldset>
                 </form>
             </div>
-        </jsp:body>
-    </t:LoginTag>
-    <%--<%@page contentType="text/html" pageEncoding="UTF-8"%>
-    <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-    <t:MasterPage>
-        <jsp:attribute name="titlePage">
-            <h1>Motores</h1>
-        </jsp:attribute>    
-        <jsp:body>      
-            <div class="link">Click on <a href="" id="show">Login</a></div> 
-            <div id="dialog" title="Login">
-                <form id="login">
-                    <label>User</label>
-                    <input type="text" name="userName">
-                    <label>Password</label>
-                    <input type="password" name="password">
-                    <button type="submit">Login</button>
-                </form>
-            </div>
+        </div>
+    </jsp:body>
+</t:LoginTag>
+<%--<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<t:MasterPage>
+    <jsp:attribute name="titlePage">
+        <h1>Motores</h1>
+    </jsp:attribute>    
+    <jsp:body>      
+        <div class="link">Click on <a href="" id="show">Login</a></div> 
+        <div id="dialog" title="Login">
+            <form id="login">
+                <label>User</label>
+                <input type="text" name="userName">
+                <label>Password</label>
+                <input type="password" name="password">
+                <button type="submit">Login</button>
+            </form>
+        </div>
 
         <script>
             $(function () {

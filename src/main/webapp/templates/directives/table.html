@@ -64,7 +64,9 @@
             </tr>
             <tr>
                 <td>
-                    Max
+                    <button class="btn btn-danger" type="button">
+                        <span class="glyphicon glyphicon-chevron-up"></span> Max
+                    </button>
                 </td>
                 <td>
                     {{valores.Max.I1|number :2}}
@@ -88,17 +90,18 @@
                     {{valores.Max.HZ|number :2}}
                 </td>
                 <td>
-                    Temp.
+                    {{valores.Max.Temp|number :2}}
                 </td>
                 <td>
-                    P. Oil
+                    {{valores.Max.Presion|number :2}}
                 </td>
-                <td>
-                    C. Alt
+                <td>                    
                 </td>
             </tr>
             <tr>
-                <td>Min
+                <td>  <button class="btn btn-danger" type="button">
+                        <span class="glyphicon glyphicon-chevron-down"></span> Min
+                    </button>
                 </td>
                 <td>
                     {{valores.Min.I1|number :2}}
@@ -123,13 +126,13 @@
                     {{valores.Min.HZ|number :2}}
                 </td>
                 <td>
-                    Temp.
+
                 </td>
                 <td>
-                    Presión Aceite
+
                 </td>
                 <td>
-                    Carga Alternador
+
                 </td>
             </tr>
         </tbody>
@@ -232,6 +235,9 @@
                 <td>
                     {{row.Presion| number: 2}}  
                 </td>
+                 <td>
+                    {{row.bateria| number: 2}}  
+                </td>
             </tr>
             <tr>
                 <td > 
@@ -263,6 +269,9 @@
                 </td>
                 <td>
                     {{now.Presion| number: 2}}  
+                </td>
+                <td>
+                    {{now.bateria| number: 2}}  
                 </td>
             </tr>
         </tbody>

@@ -1,7 +1,7 @@
 package com.selmec.plantaselmec.services;
 
 import com.selmec.Utils.Description;
-import com.selmec.plantaselmec.Models.Prueba;
+import com.selmec.plantaselmec.Models.Cariles;
 import com.selmec.plantaselmec.dto.LecturaPSC;
 import com.selmec.plantaselmec.dto.TablaLecturaDTO;
 import java.lang.reflect.Field;
@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -23,15 +25,16 @@ public class PlantaServices implements IPlantaServices {
     private JdbcTemplate jdbctemplate;
     @Autowired
     SessionFactory sessionFactory;
+    
+   
 
-    @Transactional(readOnly = true)
+    @Transactional(value = "transactionManagerInformix", readOnly = true, isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED)
     @Override
-    public LecturaPSC LecturaPlanta(int PruebaId) {
-
-        Prueba prueba = (Prueba) sessionFactory.getCurrentSession().get(Prueba.class, PruebaId);
+    public LecturaPSC LecturaPlanta(String  Equipo) {
+        
         LecturaPSC result = new LecturaPSC();
         result.Time = new Date().toString();
-        String sql = "select tagvalue,tagname from tablalectura where tagname like '%" + prueba.getEnsamble().getCariles().getEquipo() + "|%';";
+        String sql = "select tagvalue,tagname from tablalectura where tagname like '%" + Equipo+ "|%';";
 
         List<TablaLecturaDTO> results = jdbctemplate.query(sql, new BeanPropertyRowMapper(TablaLecturaDTO.class));
         Field[] fields;

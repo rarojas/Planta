@@ -4,40 +4,44 @@
 <%@attribute name="header" fragment="true" %> 
 <%@attribute name="titlePage" fragment="true" %> 
 <%@attribute name="app" fragment="true" %> 
-<head>
-    <meta charset="UTF-8">       
-    <title><jsp:invoke fragment="titlePage"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link href="<c:url value="/js/libs/twitter-bootstrap/css/bootstrap-theme.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="/js/libs/twitter-bootstrap/css/bootstrap.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="/js/libs/angular-loading-bar/loading-bar.min.css"/>" rel="stylesheet" type="text/css"/>   
-    <script src="<c:url value="/js/libs/jquery/jquery.js"/>" type="text/javascript"></script>      
-    <jsp:invoke fragment="app"/>
-    <style>
-        body {
-            padding-top: 30px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
-        }
-
-        .navbar-fixed-top .nav {
-            padding: 15px 0;
-        }
-
-        .navbar-fixed-top .navbar-brand {
-            padding: 0 15px;
-        }
-
-        @media(min-width:768px) {
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">       
+        <meta http-equiv="X-UA-Compatible" content="IE=9" />
+        <meta http-equiv="X-UA-Compatible" content="IE=10" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <title><jsp:invoke fragment="titlePage"/></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link href="<c:url value="/js/libs/twitter-bootstrap/css/bootstrap-theme.css"/>" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="/js/libs/twitter-bootstrap/css/bootstrap.css"/>" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="/js/libs/angular-loading-bar/loading-bar.min.css"/>" rel="stylesheet" type="text/css"/>   
+        <script src="<c:url value="/js/libs/jquery/jquery.js"/>" type="text/javascript"></script>      
+        <jsp:invoke fragment="app"/>
+        <style>
             body {
-                padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+                padding-top: 30px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+            }
+
+            .navbar-fixed-top .nav {
+                padding: 15px 0;
             }
 
             .navbar-fixed-top .navbar-brand {
-                padding: 8px 0;
+                padding: 0 15px;
             }
-        }
-    </style>
-</head> 
-<html>
+
+            @media(min-width:768px) {
+                body {
+                    padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+                }
+
+                .navbar-fixed-top .navbar-brand {
+                    padding: 8px 0;
+                }
+            }
+        </style>
+    </head> 
     <body>                       
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container-fluid">

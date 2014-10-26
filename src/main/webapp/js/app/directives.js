@@ -61,3 +61,53 @@ app.directive('check', function () {
         template: '<div><span class="glyphicon glyphicon-ok success" ng-show="value === true"></span><span class="glyphicon glyphicon-remove bg-danger" ng-show="value === false"></span></div>'
     };
 });
+app.directive('estatusPrueba', function () {
+    return {
+        replace: true,
+        restrict: 'EA',
+        scope: {
+            value: "=value"
+        },
+        controller: ["$scope", function ($scope) {
+                $scope.msg = "Desconocido";
+                switch ($scope.value) {
+                    case 0:
+                        $scope.msg = "Creada";
+                        break;
+                    case 1:
+                        $scope.msg = "En curso";
+                        break;
+                    case 2:
+                        $scope.msg = "Finalizada";
+                        break;
+                    case 3:
+                        $scope.msg = "Rechazada Ejecutor";
+                        break;
+                    case 4:
+                        $scope.msg = "Autorizada Ejecutor";
+                        break;
+                    case 5:
+                        $scope.msg = "Rechazada Supervisor";
+                        break;
+                    case 6:
+                        $scope.msg = "Autorizada Supervisor";
+                        break;
+                }
+            }],
+        template: '<div><label >{{msg}}</label></div>'
+    };
+});
+app.directive('listPruebas', function () {
+    return {
+        replace: true,
+        restrict: 'EA',
+        scope: {
+            prueba: "=prueba",
+            url: "@url",
+            urlview: "@urlview",
+            tipo: "@tipo"
+        },
+        templateUrl: '/templates/directives/listPruebas.html'
+                //template: '<div><span class="glyphicon glyphicon-ok success" ng-show="value === true"></span><span class="glyphicon glyphicon-remove bg-danger" ng-show="value === false"></span></div>'
+    };
+});

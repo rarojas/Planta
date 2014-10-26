@@ -14,7 +14,7 @@ var services = ["PlantaServices",
             api.Ensambles = $resource(urlApiBase + "Ensambles/:id", {}, {});
             api.Pruebascontrol = $resource(urlApiBase + "Pruebacontrol/:id", {}, {});
             api.Pruebas = $resource(urlApiBase + "Pruebas/:id", {}, {
-                GetValues: {url: urlApiBase + 'Planta/GetValues/:id/:seg/:ite'},
+                GetValues: {url: urlApiBase + 'Planta/GetValues/:id/:seg/:ite/:equipo'},
                 Valores: {url: urlApiBase + "Planta/Valores/:id"},
                 update: {method: 'PUT'},
                 Lecturas: {url: urlApiBase + "Pruebas/Lecturas/:id", isArray: true},

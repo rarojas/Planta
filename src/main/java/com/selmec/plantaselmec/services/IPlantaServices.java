@@ -13,6 +13,6 @@ import com.selmec.plantaselmec.dto.LecturaPSC;
  */
 public interface IPlantaServices {
 
-    LecturaPSC LecturaPlanta(int PruebaId);
+    LecturaPSC LecturaPlanta(String Equipo);
 
 }

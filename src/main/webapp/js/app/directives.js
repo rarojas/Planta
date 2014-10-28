@@ -111,3 +111,13 @@ app.directive('listPruebas', function () {
                 //template: '<div><span class="glyphicon glyphicon-ok success" ng-show="value === true"></span><span class="glyphicon glyphicon-remove bg-danger" ng-show="value === false"></span></div>'
     };
 });
+app.directive('circle', function () {
+    return {
+        replace: true,
+        restrict: 'EA',
+        scope: {
+            color: "=color"
+        },
+        template: "<div class='full-circle' ng-style='{\"background-color\": color}'><div>"
+    };
+});

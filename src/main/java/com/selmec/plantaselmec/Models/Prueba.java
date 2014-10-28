@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
@@ -36,7 +37,7 @@ public class Prueba implements java.io.Serializable {
     private Ensamble ensamble;
     private Incidencias incidencias;
     private int tipo;
-    private int estatus;
+    private EstadoPrueba estatus;
     private Date dtInicio;
     private Date dtFin;
     private String comentario;
@@ -52,7 +53,7 @@ public class Prueba implements java.io.Serializable {
     public Prueba() {
     }
 
-    public Prueba(Ensamble ensamble, int tipo, int estatus, Date dtInicio, Date dtFin) {
+    public Prueba(Ensamble ensamble, int tipo, EstadoPrueba estatus, Date dtInicio, Date dtFin) {
         this.ensamble = ensamble;
         this.tipo = tipo;
         this.estatus = estatus;
@@ -60,7 +61,7 @@ public class Prueba implements java.io.Serializable {
         this.dtFin = dtFin;
     }
 
-    public Prueba(Ensamble ensamble, Incidencias incidencias, int tipo, int estatus, Date dtInicio, Date dtFin, String comentario, Integer aprueba, Date dtAprueba, Integer apruebaSupervisor, Date dtApruebaSupervisor, Cargasubita cargasubita, Pruebacontrol pruebacontrol, Set lecturases, Pruebacarga pruebacarga) {
+    public Prueba(Ensamble ensamble, Incidencias incidencias, int tipo, EstadoPrueba estatus, Date dtInicio, Date dtFin, String comentario, Integer aprueba, Date dtAprueba, Integer apruebaSupervisor, Date dtApruebaSupervisor, Cargasubita cargasubita, Pruebacontrol pruebacontrol, Set lecturases, Pruebacarga pruebacarga) {
         this.ensamble = ensamble;
         this.incidencias = incidencias;
         this.tipo = tipo;
@@ -120,11 +121,11 @@ public class Prueba implements java.io.Serializable {
     }
 
     @Column(name = "Estatus", nullable = false)
-    public int getEstatus() {
+    public EstadoPrueba getEstatus() {
         return this.estatus;
     }
 
-    public void setEstatus(int estatus) {
+    public void setEstatus(EstadoPrueba estatus) {
         this.estatus = estatus;
     }
 

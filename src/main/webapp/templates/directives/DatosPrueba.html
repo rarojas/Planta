@@ -31,5 +31,31 @@
         <div class="col-md-6">
             <label  class="label label-primary">{{AccumulateTime| minutos}}</label> 
         </div>
-    </div>                               
+    </div>   
+    <fieldset ng-show="prueba.estatus === 2">
+        <legend>Resultados de la Prueba Ejecutor</legend>        
+        <div class="form-group">                        
+            <div class="col-md-12">
+                <button ng-click="Autoriza()" class="btn btn-success" >
+                    Autorizar
+                </button>
+                <button ng-click="Rechaza()" class="btn btn-danger" >
+                    Rechazar
+                </button>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset ng-show="prueba.estatus === 4">
+        <legend>Resultados de la Prueba Supervisor</legend>        
+        <div class="form-group">                        
+            <div class="col-md-12">
+                <button ng-click="AutorizaS()" class="btn btn-success" >
+                    Autorizar
+                </button>
+                <button ng-click="RechazaS()" class="btn btn-danger" >
+                    Rechazar
+                </button>
+            </div>
+        </div>
+    </fieldset>
 </fieldset>

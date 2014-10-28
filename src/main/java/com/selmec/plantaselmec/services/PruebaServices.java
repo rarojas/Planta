@@ -7,7 +7,6 @@ package com.selmec.plantaselmec.services;
 
 import com.selmec.plantaselmec.Dao.IGenericDao;
 import com.selmec.plantaselmec.Models.EstadoPrueba;
-import com.selmec.plantaselmec.Models.Cariles;
 import com.selmec.plantaselmec.Models.Prueba;
 import com.selmec.plantaselmec.Models.Usuarios;
 import java.util.Calendar;
@@ -23,9 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author GEID@R
  */
 @Service
-public class PruebaServices implements IPruebaServices {
-
-    private IGenericDao<Prueba, Integer> dao;
+public class PruebaServices extends BaseServices<Prueba, Integer> implements IPruebaServices {
 
     @Autowired
     IUsuariosServices usuariosServices;
@@ -47,37 +44,14 @@ public class PruebaServices implements IPruebaServices {
     public String CarrilByPrueba(int id) {
         return dao.findOne(id).getEnsamble().getCariles().getEquipo();
     }
-    @Transactional(readOnly = true)
-    @Override
-    public List<Prueba> GetAll() {
-        return dao.findAll();
-    }
 
-    @Transactional(readOnly = true)
-    @Override
-    public Prueba GetById(Integer id) {
-        return dao.findOne(id);
-    }
+//    @Transactional
+//    @Override
+//    public void Save(Prueba prueba) {
+//        dao.getCurrentSession().saveOrUpdate(prueba);
+//    }
 
     @Transactional
-    @Override
-    public void Save(Prueba prueba) {
-        dao.create(prueba);
-    }
-
-    @Transactional
-    @Override
-    public void Update(Prueba prueba) {
-        dao.update(prueba);
-    }
-
-    @Transactional
-    @Override
-    public void Delete(Integer id) {
-        dao.deleteById(id);
-    }
-
-    @Transactional(readOnly = true)
     @Override
     public void cambioEstatusPrueba(int id, String nombreUsuario, EstadoPrueba estatus) {
 

@@ -14,21 +14,11 @@ import java.util.List;
  *
  * @author rrojase
  */
-public interface IPruebaServices {//extends IBaseServices<Prueba, Integer> {
+public interface IPruebaServices extends IBaseServices<Prueba, Integer> {
 
     List<Prueba> GetByUser(Usuarios usuarios);
 
-    String CarrilByPrueba(int id);
-    
-    List<Prueba> GetAll();
-
-    Prueba GetById(Integer id);//Este método me párace que no se usa en ningún mommento
-
-    void Save(Prueba prueba);
-
-    void Update(Prueba prueba);
-
-    void Delete(Integer id);
+    String CarrilByPrueba(int id);           
     
     void cambioEstatusPrueba(int id, String nombreUsuario, EstadoPrueba estatus);
 }

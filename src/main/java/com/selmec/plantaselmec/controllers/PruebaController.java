@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.hibernate.Query;
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,11 +32,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
  *
  * @author GEID@R
  */
-
 @Controller
 @RequestMapping("api/Pruebas")
 public class PruebaController extends BaseController<Prueba, PruebaDTO> {
 
+    private final Logger logger = Logger.getLogger(PruebaController.class);
     @Autowired
     IUsuariosServices usuariosServices;
     @Autowired
@@ -49,21 +50,19 @@ public class PruebaController extends BaseController<Prueba, PruebaDTO> {
         return this.DTO(pruebas, Prueba.class, PruebaDTO.class);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody
-    List<PruebaDTO> Get() {
-        return DTO(pruebaServices.GetAll(), Prueba.class, PruebaDTO.class);
-    }
-
     @ResponseBody
+    @Transactional
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public PruebaDTO Get(@PathVariable("id") int id) {
         return Get(id, Prueba.class, PruebaDTO.class);
     }
 
+    @Transactional
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public PruebaDTO Post(@RequestBody Prueba prueba) {
+    public PruebaDTO Post(@Valid @RequestBody Prueba prueba) {
+        logger.info(prueba.getId());
+        logger.info(prueba.getEnsamble());
         pruebaServices.Save(prueba);
         return DTO(prueba, Prueba.class, PruebaDTO.class);
     }
@@ -95,32 +94,29 @@ public class PruebaController extends BaseController<Prueba, PruebaDTO> {
         pruebaServices.Delete(id);
     }
 
-    //debe llevar transactional read only
-    @RequestMapping(value = "Autorizar/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "AutorizarE/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public PruebaDTO AutorizarPruebaEjecutor(@PathVariable("id") int id, Principal principal) {
+    public void AutorizarPruebaEjecutor(@PathVariable("id") int id, Principal principal) {
         pruebaServices.cambioEstatusPrueba(id, principal.getName(), EstadoPrueba.AutorizadoEjecutor);
-        return Get(id, Prueba.class, PruebaDTO.class);
     }
 
-    @RequestMapping(value = "Autorizar/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "RechazarE/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public PruebaDTO RechazarPruebaEjecutor(@PathVariable("id") int id, Principal principal) {
+    public void RechazarPruebaEjecutor(@PathVariable("id") int id, Principal principal) {
         pruebaServices.cambioEstatusPrueba(id, principal.getName(), EstadoPrueba.RechazadaEjecutor);
-        return Get(id, Prueba.class, PruebaDTO.class);
+
     }
 
-    @RequestMapping(value = "Autorizar/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "AutorizarS/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public PruebaDTO AutorizarPruebasupervisor(@PathVariable("id") int id, Principal principal) {
+    public void AutorizarPruebasupervisor(@PathVariable("id") int id, Principal principal) {
         pruebaServices.cambioEstatusPrueba(id, principal.getName(), EstadoPrueba.AutorizadaSupervisor);
-        return Get(id, Prueba.class, PruebaDTO.class);
+
     }
 
-    @RequestMapping(value = "Autorizar/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "RechazarS/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public PruebaDTO RechazarPruebasupervisor(@PathVariable("id") int id, Principal principal) {
+    public void RechazarPruebasupervisor(@PathVariable("id") int id, Principal principal) {
         pruebaServices.cambioEstatusPrueba(id, principal.getName(), EstadoPrueba.RechazadaSupervisor);
-        return Get(id, Prueba.class, PruebaDTO.class);
     }
 }

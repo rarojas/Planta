@@ -18,6 +18,7 @@ import com.selmec.plantaselmec.Models.Cargasubita;
 public class CargasubitaDTO implements java.io.Serializable {
 
     public int id;
+    //
     public PruebaDTO prueba;
     public Integer seg;
     public Double vinicio;
@@ -37,8 +38,8 @@ public class CargasubitaDTO implements java.io.Serializable {
         this.hfinal = cargaSubita.getHfinal();
         this.hinicio = cargaSubita.getHinicio();
         this.icarga = cargaSubita.getIcarga();
-        if (cargaSubita.getPrueba() != null) {
-            this.prueba = new PruebaDTO(cargaSubita.getPrueba());
-        }
+//        if (cargaSubita.getPrueba() != null) {
+//            this.prueba = new PruebaDTO(cargaSubita.getPrueba());
+//        }
     }
 }

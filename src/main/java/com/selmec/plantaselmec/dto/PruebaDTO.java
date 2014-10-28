@@ -48,9 +48,9 @@ public class PruebaDTO {
         this.dtAprueba=prueba.getDtAprueba();
         this.apruebaSupervisor=prueba.getApruebaSupervisor();
         this.dtApruebaSupervisor=prueba.getDtApruebaSupervisor();
-        if(prueba.getPruebacontrol()!=null){
-          this.pruebacontrol=new PruebaControlDTO(prueba.getPruebacontrol());
-        }
+//        if(prueba.getPruebacontrol()!=null){
+//          this.pruebacontrol=new PruebaControlDTO(prueba.getPruebacontrol());
+//        }
         //
         if (prueba.getIncidencias() != null) {
             this.incidencias = new IncidenciasDTO(prueba.getIncidencias());

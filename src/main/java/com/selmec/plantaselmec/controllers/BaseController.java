@@ -29,7 +29,7 @@ public abstract class BaseController<T, E> {
         List<T> result = sessionFactory.getCurrentSession().createCriteria(type).list();
         return DTO(result, type, out_type);
     }
-
+        
     public E Get(Serializable key, Class<T> type, Class<E> out_type) {
         
         T result = (T) sessionFactory.getCurrentSession().get(type, key);

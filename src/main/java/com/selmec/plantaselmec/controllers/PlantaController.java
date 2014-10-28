@@ -85,8 +85,9 @@ public class PlantaController {
         valores.Max.RMP = Planta.getMotores().getRpm() * 1.01;
         valores.Min.HZ = Planta.getMotores().getFrecuenciaOperacion() * 0.975;
         valores.Max.HZ = Planta.getMotores().getFrecuenciaOperacion() * 1.025;
-        valores.Max.Presion = 29d;
+        valores.Max.Presion = 50d;
         valores.Max.Temp = 98d;
+        valores.Min.Presion = 1.5 * 14.5038;
         return valores;
     }
 

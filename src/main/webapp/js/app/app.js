@@ -10,7 +10,7 @@ app.controller("PruebaCtrl", ["$scope", "PlantaServices", "$routeParams",
         else
             $scope.prueba = PlantaServices.Ensambles.get({id: $routeParams.PruebaID});
     }]);
-var BaseController = function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout) {
+var BaseController = function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location) {
     $scope.OptionsControl = {
         Locked: true
     };
@@ -88,21 +88,21 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
                 y: "I1",
                 label: "I1",
                 axis: "y2",
-                color: "#ff0000",
+                color: "#4C2D73",
                 type: "line",
                 thickness: "1px"
             }, {
                 y: "I2",
                 label: "I2",
                 axis: "y2",
-                color: "#64c900",
+                color: "#FF7C00",
                 type: "line",
                 thickness: "1px"
             }, {
                 y: "I3",
                 label: "I3",
                 axis: "y2",
-                color: "#428bca",
+                color: "#FFFF00",
                 type: "line",
                 thickness: "1px"
             }
@@ -159,11 +159,14 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
         });
     };
     $scope.Autoriza = function () {
-        $scope.prueba.estatus = 4;
-        $scope.prueba.ensamble = $scope.ensamble;
-        $scope.prueba.$update(function () {
-            $location.path("/Pruebas/" + $scope.ensamble.id);
-        }, function () {
+        PlantaServices.Pruebas.AutorizaE({id: $scope.prueba.id}, {},
+                function () {
+                    $scope.prueba.estatus = 4;
+                    noty({
+                        text: "Aprobación con exito¡¡¡¡¡¡", type: "success"
+                    });
+                    $location.path("/Pruebas/" + $scope.ensamble.id);
+                }, function () {
             noty({
                 text: "Ocurrio un error al realizar la operacion¡¡¡", type: "error"
             });
@@ -171,11 +174,43 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
 
     };
     $scope.Rechaza = function () {
-        $scope.prueba.estatus = 3;
-        $scope.prueba.ensamble = $scope.ensamble;
-        $scope.prueba.$update(function () {
-            $location.path("/Pruebas/" + $scope.ensamble.id);
-        }, function () {
+        PlantaServices.Pruebas.RechazaE({id: $scope.prueba.id}, {},
+                function () {
+                    $scope.prueba.estatus = 3;
+                    noty({
+                        text: "Rechazo con exito¡¡¡¡¡¡", type: "success"
+                    });
+                    $location.path("/Pruebas/" + $scope.ensamble.id);
+                }, function () {
+            noty({
+                text: "Ocurrio un error al realizar la operacion¡¡¡", type: "error"
+            });
+        });
+    };
+    $scope.AutorizaS = function () {
+        PlantaServices.Pruebas.AutorizaS({id: $scope.prueba.id}, {},
+                function () {
+                    $scope.prueba.estatus = 6;
+                    noty({
+                        text: "Aprobación con exito¡¡¡¡¡¡", type: "success"
+                    });
+                    $location.path("/Pruebas/" + $scope.ensamble.id);
+                }, function () {
+            noty({
+                text: "Ocurrio un error al realizar la operacion¡¡¡", type: "error"
+            });
+        });
+
+    };
+    $scope.RechazaS = function () {
+        PlantaServices.Pruebas.RechazaS({id: $scope.prueba.id}, {},
+                function () {
+                    $scope.prueba.estatus = 5;
+                    noty({
+                        text: "Rechazo con exito¡¡¡¡¡¡", type: "success"
+                    });
+                    $location.path("/Pruebas/" + $scope.ensamble.id);
+                }, function () {
             noty({
                 text: "Ocurrio un error al realizar la operacion¡¡¡", type: "error"
             });
@@ -194,8 +229,8 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
             Temp: $scope.now.Temp,
             RPM: $scope.now.RPM,
             MaxV: $scope.valores.Max.L1N,
-            MinV: $scope.valores.Min.L1N
-                    //bateria: $scope.now.bateria
+            MinV: $scope.valores.Min.L1N,
+            //bateria: $scope.now.bateria
         };
     };
 
@@ -230,9 +265,9 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
     };
 };
 app.controller("PruebaSinCargaCtrl", [
-    "$scope", "$http", "$interval", "$routeParams", "PlantaServices",
-    function ($scope, $http, $interval, $routeParams, PlantaServices) {
-        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices);
+    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$location",
+    function ($scope, $http, $interval, $routeParams, PlantaServices, $location) {
+        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $location);
         $scope.prueba = PlantaServices.Pruebas.get({id: $routeParams.PruebaID});
         $scope.options = {
             series: [
@@ -275,9 +310,9 @@ app.controller("PruebaSinCargaCtrl", [
         });
     }]);
 app.controller("PruebaSinCargaController", [
-    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout",
-    function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout) {
-        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout);
+    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout", "$location",
+    function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location) {
+        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location);
         $scope.Iteraciones = {current: 0,
             Iteracciones: [{No: 1, Time: 10 * 60, current: 0}]};
         $scope.Process = function () {
@@ -286,7 +321,6 @@ app.controller("PruebaSinCargaController", [
             $scope.Iteraciones.current = 0;
             $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current = 0;
             $scope.prueba = new PlantaServices.Pruebas({
-                id: 0,
                 ensamble: $scope.ensamble,
                 tipo: 0,
                 estatus: 0,
@@ -342,9 +376,9 @@ app.controller("PruebaSinCargaController", [
         };
     }]);
 app.controller("PruebaConCargaController", [
-    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout", "$filter",
-    function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout, $filter) {
-        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout);
+    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout", "$location",
+    function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location) {
+        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location);
         $scope.Accumulate = [];
         $scope.Iteraciones = {current: 0,
             Iteracciones: [
@@ -364,7 +398,6 @@ app.controller("PruebaConCargaController", [
             $scope.Iteraciones.current = 0;
             $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current = 0;
             $scope.prueba = new PlantaServices.Pruebas({
-                id: 0,
                 ensamble: $scope.ensamble,
                 tipo: 1,
                 estatus: 0,
@@ -417,9 +450,9 @@ app.controller("PruebaConCargaController", [
         };
     }]);
 app.controller("PruebaConCargaSubitaCtrl", [
-    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout",
-    function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout) {
-        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout);
+    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout", "$location",
+    function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location) {
+        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location);
         $scope.Iteraciones = {current: 0,
             Iteracciones: [
                 {No: 1, Time: 1 * 60, current: 0},
@@ -433,9 +466,8 @@ app.controller("PruebaConCargaSubitaCtrl", [
             $scope.Iteraciones.current = 0;
             $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current = 0;
             $scope.prueba = new PlantaServices.Pruebas({
-                id: 0,
                 ensamble: $scope.ensamble,
-                tipo: 3,
+                tipo: 2,
                 estatus: 0,
                 dtInicio: new Date(),
                 dtFin: new Date()
@@ -493,12 +525,12 @@ app.controller("PruebaConCargaSubitaCtrl", [
             });
         };
     }]);
+
 app.controller("PruebaControlCtrl", [
-    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout",
-    function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout) {
-        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout);
-        $scope.prueba = new PlantaServices.Pruebas({
-            id: 0,
+    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout", "$location",
+    function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location) {
+        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location);
+        $scope.prueba = new PlantaServices.Pruebascontrol({
             ensamble: $scope.ensamble,
             tipo: 3,
             estatus: 0,
@@ -506,53 +538,22 @@ app.controller("PruebaControlCtrl", [
             dtFin: new Date()
         });
         $scope.GuardarPrueba = function () {
-            $scope.prueba.$save(function () {
-                $scope.pruebacontrol.prueba = $scope.prueba;
-                PlantaServices.Pruebas.Control($scope.pruebacontrol, function () {
-                    $scope.prueba.estatus = 2;
-                    $scope.prueba.ensamble = $scope.ensamble;
-                    $scope.prueba.$update();
+            $scope.prueba.estatus = 2;
+            if ($scope.prueba.id)
+                $scope.prueba.$update(function () {
                 }, function () {
-
                 });
-            }, function () {
-
-            });
-
-        };
-    }]);
-app.controller("PruebaControlCtrl", [
-    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout",
-    function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout) {
-        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout);
-        $scope.prueba = new PlantaServices.Pruebas({
-            id: 0,
-            ensamble: $scope.ensamble,
-            tipo: 3,
-            estatus: 0,
-            dtInicio: new Date(),
-            dtFin: new Date()
-        });
-        $scope.GuardarPrueba = function () {
-            $scope.prueba.$save(function () {
-                $scope.pruebacontrol.prueba = $scope.prueba;
-                PlantaServices.Pruebas.Control($scope.pruebacontrol, function () {
-                    $scope.prueba.estatus = 2;
-                    $scope.prueba.ensamble = $scope.ensamble;
-                    $scope.prueba.$update();
+            else
+                $scope.prueba.$save(function () {
                 }, function () {
-
                 });
-            }, function () {
-
-            });
 
         };
     }]);
 app.controller("PruebaControlViewCtrl", [
-    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout",
-    function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout) {
-        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout);
+    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout", "$location",
+    function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location) {
+        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location);
         $scope.pruebacontrol = PlantaServices.Pruebascontrol.get({id: $routeParams.PruebaID});
     }]);
 app.controller("EnsambleController", ["$scope", "PlantaServices", "$filter", "$location",
@@ -580,7 +581,7 @@ app.controller("EnsambleController", ["$scope", "PlantaServices", "$filter", "$l
                             folio: "14PR000001",
                             dtCreacion: new Date(),
                             planta: planta,
-                            carriles: $scope.ensamble.carriles,
+                            cariles: $scope.ensamble.cariles,
                             altitud: $scope.ensamble.altitud,
                             patin: $scope.ensamble.patin,
                             guardas: $scope.ensamble.guardas,
@@ -603,5 +604,6 @@ app.controller("EnsambleController", ["$scope", "PlantaServices", "$filter", "$l
                     });
         };
     }]);
+
 
 

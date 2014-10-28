@@ -18,8 +18,10 @@ var services = ["PlantaServices",
                 Valores: {url: urlApiBase + "Planta/Valores/:id"},
                 update: {method: 'PUT'},
                 Lecturas: {url: urlApiBase + "Pruebas/Lecturas/:id", isArray: true},
-                Autoriza: {method: 'POST', url: urlApiBase + "Pruebas/Autoriza/:id"},
-                Rechaza: {method: 'POST', url: urlApiBase + "Pruebas/Rechaza/:id"},
+                AutorizaE: {method: 'POST', url: urlApiBase + "Pruebas/AutorizarE/:id"},
+                RechazaE: {method: 'POST', url: urlApiBase + "Pruebas/RechazarE/:id"},
+                AutorizaS: {method: 'POST', url: urlApiBase + "Pruebas/AutorizarS/:id"},
+                RechazaS: {method: 'POST', url: urlApiBase + "Pruebas/RechazarS/:id"},
                 Control: {method: 'POST', url: urlApiBase + "Pruebacontrol"}
             });
             api.Incidencias = $resource(urlApiBase + "Incidencias/:id", {}, {

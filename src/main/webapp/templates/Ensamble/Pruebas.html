@@ -1,4 +1,5 @@
 <div class="row">
+    <h2>Inventarios de Pruebas</h2>
     <div class="col-md-12">
         <table class="table table-bordered table-bordered table-hover table-striped">
             <thead>
@@ -6,10 +7,11 @@
                     <th>Folio</th>
                     <th>No Serie</th>
                     <th>Modelo</th>
-                    <th>Generador </th>
-                    <th>KW</th>
-                    <th>Fases</th>
-                    <th>Voltaje</th>
+                    <th>Carril</th>
+                    <th>Marca Generador</th>
+                    <th>Capacidad (KW)</th>
+                    <th>Voltaje De Pruebba</th>
+                    <th>No Fases</th>
                     <th>Guardas</th>
                     <th>Radiador</th>
                     <th>Creación</th>
@@ -27,13 +29,16 @@
                     {{prueba.planta.motores.modelo}}
                 </td>
                 <td>
-                    {{prueba.planta.motores.generadorMarca}}
+                    {{prueba.carriles.noCarril}}
                 </td>
                 <td>
-                    {{prueba.planta.motores.kw}}
+                    {{prueba.planta.motores.generadorMarca}} 
                 </td>
                 <td>
-                    {{prueba.planta.motores.kw}}
+                    {{prueba.planta.motores.kw}} kW
+                </td>
+                <td>
+                    {{prueba.planta.voltaje}} v
                 </td>
                 <td>
                     {{prueba.planta.motores.noFases}}

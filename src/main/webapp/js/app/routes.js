@@ -33,6 +33,10 @@ var Routes = ['$routeProvider',
                     templateUrl: '/templates/PruebaConCargaSubita.html',
                     controller: 'PruebaConCargaSubitaCtrl'
                 }).
+                when('/PruebaConCargaSubitaView/:EnsambleID/:PruebaID', {
+                    templateUrl: '/templates/PruebaSinCargaView.html',
+                    controller: 'PruebaSinCargaCtrl'
+                }).
                 when('/Motores', {
                     templateUrl: '/templates/Motores/Index.html',
                     controller: 'MotoresCtrl'

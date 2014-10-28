@@ -25,16 +25,14 @@ public class PlantaServices implements IPlantaServices {
     private JdbcTemplate jdbctemplate;
     @Autowired
     SessionFactory sessionFactory;
-    
-   
 
     @Transactional(value = "transactionManagerInformix", readOnly = true, isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED)
     @Override
-    public LecturaPSC LecturaPlanta(String  Equipo) {
-        
+    public LecturaPSC LecturaPlanta(String Equipo) {
+
         LecturaPSC result = new LecturaPSC();
         result.Time = new Date().toString();
-        String sql = "select tagvalue,tagname from tablalectura where tagname like '%" + Equipo+ "|%';";
+        String sql = "select tagvalue,tagname from tablalectura where tagname like '%" + Equipo + "|%';";
 
         List<TablaLecturaDTO> results = jdbctemplate.query(sql, new BeanPropertyRowMapper(TablaLecturaDTO.class));
         Field[] fields;
@@ -65,6 +63,7 @@ public class PlantaServices implements IPlantaServices {
                 }
             }
         }
+        result.Presion *= 14.5038;
 
         return result;
     }

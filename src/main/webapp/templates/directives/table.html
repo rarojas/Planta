@@ -1,4 +1,12 @@
 <div>
+    <style>
+        .full-circle {           
+            height: 10px;
+            -moz-border-radius:5px;
+            -webkit-border-radius: 5px;
+            width: 10px;
+        }
+    </style>
     <table class="table table-condensed">
         <caption>
             <h4>
@@ -235,43 +243,52 @@
                 <td>
                     {{row.Presion| number: 2}}  
                 </td>
-                 <td>
+                <td>
                     {{row.bateria| number: 2}}  
                 </td>
             </tr>
-            <tr>
+            <tr class="text-center">
                 <td > 
                     {{now.time| minutos}}
                 </td>
-                <td ng-style="{'color': (now.L1N <= valores.Max.L1L2 && now.L1N > valores.Min.L1L2) ? 'green':'red'}">
-                    {{now.I1| number: 2}}  
+                <td >
+                    {{now.I1| number: 2}}
+                    <div class="full-circle" ng-style="{'background-color': (now.L1N <= valores.Max.I1 && now.I1 > valores.Min.I1) ? 'green':'red'}"></div>
                 </td>
-                <td ng-style="{'color': (now.L2N <= valores.Max.L1L2 && now.L2N > valores.Min.L1L2) ? 'green':'red'}">
+                <td >
                     {{now.I2| number: 2}}  
+                    <div class="full-circle" ng-style="{'background-color': (now.I2 <= valores.Max.I2 && now.I2 > valores.Min.I2) ? 'green':'red'}"></div>
                 </td>
-                <td ng-style="{'color': (now.L3N <= valores.Max.L1L2 && now.L3N > valores.Min.L1L2) ? 'green':'red'}">
+                <td >
                     {{now.I3| number: 2}}  
+                    <div class="full-circle" ng-style="{'background-color': (now.I3 <= valores.Max.I3 && now.I3 > valores.Min.I3) ? 'green':'red'}"></div>
                 </td>
-                <td ng-style="{'color': (now.L1L2 <= valores.Max.L1L2 && now.L1L2 > valores.Min.L1L2) ? 'green':'red'}">
-                    {{now.L1L2| number: 2}}  
+                <td>                    
+                    {{now.L1L2| number: 2}} 
+                    <div class="full-circle" ng-style="{'background-color': (now.L1L2 <= valores.Max.L1L2 && now.L1L2 > valores.Min.L1L2) ? 'green':'red'}"></div>
                 </td>
-                <td ng-style="{'color': (now.L2L3 <= valores.Max.L1L2 && now.L2L3 > valores.Min.L1L2) ? 'green':'red'}">
+                <td >
                     {{now.L2L3| number: 2}}  
+                    <div class="full-circle" ng-style="{'background-color': (now.L2L3 <= valores.Max.L2L3 && now.L1L2 > valores.Min.L2L3) ? 'green':'red'}"></div>
                 </td>
                 <td>
                     {{now.L3L1| number: 2}}  
+                    <div class="full-circle" ng-style="{'background-color': (now.L3L1 <= valores.Max.L3L1 && now.L3L1 > valores.Min.L3L1) ? 'green':'red'}"></div>
                 </td>
-                <td ng-style="{ 'color' : (now.HZ <= valores.Max.HZ && now.HZ >= valores.Min.HZ) ? 'green':'red'}">
+                <td>
                     {{now.HZ| number: 2}}  
+                    <div class="full-circle" ng-style="{'background-color': (now.HZ <= valores.Max.HZ && now.HZ > valores.Min.HZ) ? 'green':'red'}"></div>
                 </td>
                 <td>
                     {{now.Temp| number: 2}}  
+                    <div class="full-circle" ng-style="{'background-color': (now.Presion <= valores.Max.Temp && now.Presion > valores.Min.Temp) ? 'green':'red'}"></div>
                 </td>
                 <td>
                     {{now.Presion| number: 2}}  
+                    <div class="full-circle" ng-style="{'background-color': (now.Presion <= valores.Max.Presion && now.Presion > valores.Min.Presion) ? 'green':'red'}"></div>
                 </td>
                 <td>
-                    {{now.bateria| number: 2}}  
+                    {{now.bateria| number: 2}}                      
                 </td>
             </tr>
         </tbody>

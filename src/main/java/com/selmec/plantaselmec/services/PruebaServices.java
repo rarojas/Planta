@@ -60,7 +60,7 @@ public class PruebaServices extends BaseServices<Prueba, Integer> implements IPr
         prueba.setAprueba(usuario.getId());
         Date today = Calendar.getInstance().getTime();
         prueba.setDtAprueba(today);
-        prueba.setEstatus((Integer) estatus.ordinal());
+        prueba.setEstatus(estatus);
         dao.getCurrentSession().merge(prueba);
     }
 

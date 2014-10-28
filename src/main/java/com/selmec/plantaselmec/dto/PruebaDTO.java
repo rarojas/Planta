@@ -7,6 +7,7 @@ package com.selmec.plantaselmec.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.deser.std.DateDeserializers.DateDeserializer;
+import com.selmec.plantaselmec.Models.EstadoPrueba;
 import com.selmec.plantaselmec.Models.Prueba;
 import java.util.Date;
 
@@ -15,7 +16,7 @@ public class PruebaDTO {
     public int id;
     public EnsambleDTO ensamble;
     public int tipo;
-    public int estatus;
+    public EstadoPrueba estatus;
     @JsonDeserialize(using = DateDeserializer.class)
     public Date dtInicio;
     @JsonDeserialize(using = DateDeserializer.class)

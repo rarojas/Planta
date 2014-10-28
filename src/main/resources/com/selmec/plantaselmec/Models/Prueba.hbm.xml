@@ -17,8 +17,11 @@
         <property name="tipo" type="int">
             <column name="Tipo" not-null="true" />
         </property>
-        <property name="estatus" type="int">
+        <property name="estatus">
             <column name="Estatus" not-null="true" />
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.selmec.plantaselmec.Models.EstadoPrueba</param>
+            </type>
         </property>
         <property name="dtInicio" type="timestamp">
             <column name="dtInicio" length="19" not-null="true" />

@@ -14,6 +14,20 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
     $scope.OptionsControl = {
         Locked: true
     };
+    $scope.GetColor = function (max, min, read) {
+
+
+        var esperado = d3.mean([min, max]);
+        var result = Math.abs(esperado - read);
+        result /= (esperado - min);
+        result > 1 ? 1 : result;
+        var color = d3.scale.linear().domain([0, 0.5, 1]).range(["green", "yellow", "red"]);
+        return color(result);
+
+
+    };
+ 
+
     $scope.Init = function () {
         $scope.incidencias = PlantaServices.Incidencias.query();
         $scope.ensamble = PlantaServices.Ensambles.get({id: $routeParams.EnsambleID}, function () {

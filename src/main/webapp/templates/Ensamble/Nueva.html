@@ -2,9 +2,9 @@
     <div class="col-md-12">
         <form class="form-horizontal" role="form" name="formPlanta" ng-submit="submit()">   
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12" style="background-color: #EDEFEE">
                     <fieldset>
-                        <legend class="h3">
+                        <legend >
                             Datos Generales de la Planta de Emergencia                                                        
                         </legend>
                         <div class="row">
@@ -98,9 +98,9 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">                        
+                <div class="col-md-12" style="background-color: #EDEFEE">                        
                     <fieldset>
-                        <legend class="h3">
+                        <legend >
                             Datos Especificos de la Planta De Emergencia
                         </legend>
                         <div class="row">
@@ -152,9 +152,9 @@
                                         Carril                                  
                                     </label>
                                     <div class="col-md-8">
-                                        <select class="form-control" ng-options="c.id for c in carriles" ng-model="ensamble.cariles" name="carril"></select>  
+                                        <select class="form-control" ng-options="(c.id + ' - ' + c.maxCap + 'KW a ' + c.minCap + 'KW')  for c in carriles" ng-model="ensamble.cariles" name="carril"></select>  
                                     </div>
-                                </div>   
+                                </div>                                   
                                 <div class="form-group">
                                     <label class="control-label col-md-4">
                                         Patin                                  

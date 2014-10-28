@@ -17,6 +17,12 @@
         <property name="planta" type="string">
             <column name="planta" length="45" not-null="true" unique="true" />
         </property>
+        <property name="minCap" type="java.lang.Integer">
+            <column name="minCap" />
+        </property>
+        <property name="maxCap" type="java.lang.Integer">
+            <column name="maxCap" />
+        </property>
         <set name="ensambles" table="ensamble" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="CarrilID" not-null="true" />

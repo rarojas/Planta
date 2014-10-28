@@ -6,8 +6,6 @@
 package com.selmec.plantaselmec.dto;
 
 import com.selmec.plantaselmec.Models.Cariles;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  *
@@ -20,8 +18,10 @@ public class CarrilDTO implements java.io.Serializable {
     public int noCarril;
     public String equipo;
     public String planta;
-    //public Set ensambles = new HashSet(0);
+    private Integer maxCap;
+    private Integer minCap;
 
+    //public Set ensambles = new HashSet(0);
     public CarrilDTO() {
     }
 
@@ -30,6 +30,8 @@ public class CarrilDTO implements java.io.Serializable {
         this.noCarril = carril.getNoCarril();
         this.equipo = carril.getEquipo();
         this.planta = carril.getPlanta();
+        this.maxCap = carril.getMaxCap();
+        this.minCap = carril.getMinCap();
         //this.ensambles=carril.getEnsambles();//Porque sea hace un DTO de Carriles,esque por lo que veo es que no habría problema de utilizar la entidad de carriles, sin embargo supongo que es por el patrón utilizado
     }
 

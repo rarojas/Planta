@@ -77,6 +77,9 @@
         realm="Protected API"        
         auto-config="true"                    
         authentication-manager-ref="authenticationManager">   
+        <security:session-management>
+            <security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true"  />
+        </security:session-management>
         <security:form-login
             login-page="/login" 
             default-target-url="/" 

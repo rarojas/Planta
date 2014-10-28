@@ -1,7 +1,6 @@
 package com.selmec.plantaselmec.Models;
 // Generated Oct 21, 2014 4:26:41 PM by Hibernate Tools 4.3.1
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,89 +19,114 @@ import javax.persistence.UniqueConstraint;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
-@Table(name="cariles"
-    ,catalog="test"
-    , uniqueConstraints = {@UniqueConstraint(columnNames="equipo"), @UniqueConstraint(columnNames="NoCarril"), @UniqueConstraint(columnNames="planta")} 
+@Table(name = "cariles", catalog = "test", uniqueConstraints = {
+    @UniqueConstraint(columnNames = "equipo"),
+    @UniqueConstraint(columnNames = "NoCarril"),
+    @UniqueConstraint(columnNames = "planta")}
 )
-public class Cariles  implements java.io.Serializable {
+public class Cariles implements java.io.Serializable {
 
-
-     private Integer id;
-     private int noCarril;
-     private String equipo;
-     private String planta;
-     private Set ensambles = new HashSet(0);
+    private Integer id;
+    private int noCarril;
+    private String equipo;
+    private String planta;
+    private Integer minCap;
+    private Integer maxCap;
+    private Set ensambles = new HashSet(0);
 
     public Cariles() {
     }
 
-	
     public Cariles(int noCarril, String equipo, String planta) {
         this.noCarril = noCarril;
         this.equipo = equipo;
         this.planta = planta;
-    }
-    public Cariles(int noCarril, String equipo, String planta, Set ensambles) {
-       this.noCarril = noCarril;
-       this.equipo = equipo;
-       this.planta = planta;
-       this.ensambles = ensambles;
-    }
-   
-     @Id @GeneratedValue(strategy=IDENTITY)
 
-    
-    @Column(name="ID", unique=true, nullable=false)
+    }
+
+    public Cariles(int noCarril, String equipo, String planta, Set ensambles) {
+        this.noCarril = noCarril;
+        this.equipo = equipo;
+        this.planta = planta;
+        this.ensambles = ensambles;
+    }
+
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+
+    @Column(name = "ID", unique = true, nullable = false)
     public Integer getId() {
         return this.id;
     }
-    
+
     public void setId(Integer id) {
         this.id = id;
     }
 
-    
-    @Column(name="NoCarril", unique=true, nullable=false)
+    @Column(name = "equipo", unique = true, nullable = false, length = 45)
     public int getNoCarril() {
         return this.noCarril;
     }
-    
+
     public void setNoCarril(int noCarril) {
         this.noCarril = noCarril;
     }
 
-    
-    @Column(name="equipo", unique=true, nullable=false, length=45)
+    @Column(name = "equipo", unique = true, nullable = false, length = 45)
     public String getEquipo() {
         return this.equipo;
     }
-    
+
     public void setEquipo(String equipo) {
         this.equipo = equipo;
     }
 
-    
-    @Column(name="planta", unique=true, nullable=false, length=45)
+    @Column(name = "planta", unique = true, nullable = false, length = 45)
     public String getPlanta() {
         return this.planta;
     }
-    
+
     public void setPlanta(String planta) {
         this.planta = planta;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="cariles")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cariles")
     public Set getEnsambles() {
         return this.ensambles;
     }
-    
+
     public void setEnsambles(Set ensambles) {
         this.ensambles = ensambles;
     }
 
+    /**
+     * @return the minCap
+     */
+    @Column(name = "minCap")
+    public Integer getMinCap() {
+        return minCap;
+    }
 
+    /**
+     * @param minCap the minCap to set
+     */
+    public void setMinCap(Integer minCap) {
+        this.minCap = minCap;
+    }
 
+    /**
+     * @return the maxCap
+     */
+    @Column(name = "maxCap")
+    public Integer getMaxCap() {
+        return maxCap;
+    }
+
+    /**
+     * @param maxCap the maxCap to set
+     */
+    public void setMaxCap(Integer maxCap) {
+        this.maxCap = maxCap;
+    }
 
 }
-
-

@@ -133,7 +133,12 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
             thickness: "1px"
         }
     ];
+
+    $scope.CanAprove = true;
+    
     $scope.Stop = function () {
+        $scope.ParoPlanta();
+        $scope.CanAprove = false;
         $scope.Estado = $scope.Estatus.Waiting;
         $interval.cancel($scope.Poller);
         $interval.cancel($scope.timer);
@@ -142,10 +147,9 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
         $scope.prueba.ensamble = $scope.ensamble;
         $scope.prueba.$update();
     };
-
     $scope.ParoPlanta = function () {
         PlantaServices.Plantas.Off({id: $scope.ensamble.id}, {id: $scope.ensamble.id}, function () {
-            noty({text: "Encendido de planta exitoso¡¡¡", type: "success"});
+            noty({text: "Apagado de planta exitoso¡¡¡", type: "success"});
         }, function () {
             noty({text: "Error al apagar la planta la planta¡¡¡", type: "error"});
 
@@ -153,7 +157,7 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
     };
     $scope.ArranquePlanta = function () {
         PlantaServices.Plantas.On({id: $scope.ensamble.id}, {id: $scope.ensamble.id}, function () {
-            noty({text: "Apagado de planta exitoso¡¡¡", type: "success"});
+            noty({text: "Encendido de planta exitoso¡¡¡", type: "success"});
         }, function () {
             noty({text: "Error al encender la planta¡¡¡", type: "error"});
         });

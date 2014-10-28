@@ -111,3 +111,28 @@ app.directive('listPruebas', function () {
                 //template: '<div><span class="glyphicon glyphicon-ok success" ng-show="value === true"></span><span class="glyphicon glyphicon-remove bg-danger" ng-show="value === false"></span></div>'
     };
 });
+
+app.factory("EstatusPlanta", ["$rootScope", "PlantaServices",
+    function ($rootScope, PlantaServices) {
+        var planta = {};
+        planta.ensamble = null;
+        planta.on = null;
+        planta.lastRead = {};       
+        planta.Paro = function () {
+            PlantaServices.Plantas.Off({id: $scope.ensamble.id}, {id: $scope.ensamble.id}, function () {
+                noty({text: "Apagado de planta exitoso¡¡¡", type: "success"});
+            }, function () {
+                noty({text: "Error al apagar la planta la planta¡¡¡", type: "error"});
+            });
+        };
+        planta.Arranque = function () {
+            PlantaServices.Plantas.On({id: $scope.ensamble.id}, {id: $scope.ensamble.id}, function () {
+                noty({text: "Encendido de planta exitoso¡¡¡", type: "success"});
+            }, function () {
+                noty({text: "Error al encender la planta¡¡¡", type: "error"});
+            });
+        };
+        
+
+        return planta;
+    }]);

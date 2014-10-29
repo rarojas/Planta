@@ -32,6 +32,16 @@
             <label  class="label label-primary">{{AccumulateTime| minutos}}</label> 
         </div>
     </div>   
+
+    <div class="row">                        
+        <div class="col-md-6">
+            <label>Valores fuera de rango</label>
+        </div>                            
+        <div class="col-md-6">
+            <label  class="label label-primary">{{log.length}}</label> 
+        </div>
+    </div> 
+
     <fieldset ng-show="prueba.estatus === 2">
         <legend>Resultados de la Prueba Ejecutor</legend>        
         <div class="form-group">                        

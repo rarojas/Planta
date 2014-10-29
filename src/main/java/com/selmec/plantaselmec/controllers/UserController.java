@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("api/Usuarios")
-public class UserController extends BaseController<Usuarios, UsuarioDTO> {
+public class UserController extends BaseControllers<Usuarios, UsuarioDTO> {
 
     private IGenericDao<Usuarios, Integer> dao;
 
@@ -61,7 +61,7 @@ public class UserController extends BaseController<Usuarios, UsuarioDTO> {
 
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
-    Usuarios Post(@Valid @RequestBody Usuarios usuarios) {//aquí no es como el get?, que retorna un tipo DTO
+    Usuarios Post(@Valid @RequestBody Usuarios usuarios) {
         usuariosServices.Save(usuarios);
         return usuarios;
     }

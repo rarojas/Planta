@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("api/Pruebas")
-public class PruebaController extends BaseController<Prueba, PruebaDTO> {
+public class PruebaController extends BaseControllers<Prueba, PruebaDTO> {
 
     private final Logger logger = Logger.getLogger(PruebaController.class);
     @Autowired

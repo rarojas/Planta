@@ -17,18 +17,5 @@
                 <button ng-click="Save()" class="btn btn-success" ng-disable="$parent.prueba.estatus !== 1 || $parent.prueba == null">Guardar</button>
             </div>
         </div>
-    </fieldset>
-    <fieldset ng-show="prueba.estatus === 2">
-        <legend>Resultados de la Prueba</legend>        
-        <div class="form-group">                        
-            <div class="col-md-12">
-                <button ng-click="Autoriza()" class="btn btn-success" >
-                    Autorizar
-                </button>
-                <button ng-click="Rechaza()" class="btn btn-danger" >
-                    Rechazar
-                </button>
-            </div>
-        </div>
-    </fieldset>
+    </fieldset>    
 </div>

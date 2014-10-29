@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/api/Carriles")
-public class CarrilController extends BaseController<Cariles, CarrilDTO> {
+public class CarrilController extends BaseControllers<Cariles, CarrilDTO> {
 
     @Autowired
     ICarrilesService CarrilesService;

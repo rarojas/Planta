@@ -1,12 +1,4 @@
-<div>
-    <style>
-        .full-circle {           
-            height: 10px;
-            -moz-border-radius:5px;
-            -webkit-border-radius: 5px;
-            width: 10px;
-        }
-    </style>
+<div>  
     <table class="table table-condensed">
         <caption>
             <h4>
@@ -253,39 +245,41 @@
                 </td>
                 <td >
                     {{now.I1| number: 2}}
-                    <div class="full-circle" ng-style="{'background-color': (now.L1N <= valores.Max.I1 && now.I1 > valores.Min.I1) ? 'green':'red'}"></div>
+                    <circle color="GetColor(valores.Max.I1,valores.Min.I1,now.I1)"></circle>
                 </td>
                 <td >
                     {{now.I2| number: 2}}  
-                    <div class="full-circle" ng-style="{'background-color': (now.I2 <= valores.Max.I2 && now.I2 > valores.Min.I2) ? 'green':'red'}"></div>
+                    <circle color="GetColor(valores.Max.I2,valores.Min.I2,now.I2)"></circle>
                 </td>
                 <td >
                     {{now.I3| number: 2}}  
-                    <div class="full-circle" ng-style="{'background-color': (now.I3 <= valores.Max.I3 && now.I3 > valores.Min.I3) ? 'green':'red'}"></div>
+                    <circle color="GetColor(valores.Max.I3,valores.Min.I3,now.I3)"></circle>
                 </td>
                 <td>                    
                     {{now.L1L2| number: 2}} 
-                    <div class="full-circle" ng-style="{'background-color': (now.L1L2 <= valores.Max.L1L2 && now.L1L2 > valores.Min.L1L2) ? 'green':'red'}"></div>
+                    <circle color="GetColor(valores.Max.L1L2,valores.Min.L1L2,now.L1L2)"></circle> 
                 </td>
                 <td >
                     {{now.L2L3| number: 2}}  
-                    <div class="full-circle" ng-style="{'background-color': (now.L2L3 <= valores.Max.L2L3 && now.L1L2 > valores.Min.L2L3) ? 'green':'red'}"></div>
+                    <circle color="GetColor(valores.Max.L2L3,valores.Min.L2L3,now.L2L3)"></circle> 
                 </td>
                 <td>
                     {{now.L3L1| number: 2}}  
-                    <div class="full-circle" ng-style="{'background-color': (now.L3L1 <= valores.Max.L3L1 && now.L3L1 > valores.Min.L3L1) ? 'green':'red'}"></div>
+                    <circle color="GetColor(valores.Max.L3L1,valores.Min.L3L1,now.L3L1)"></circle>                    
                 </td>
                 <td>
                     {{now.HZ| number: 2}}  
-                    <div class="full-circle" ng-style="{'background-color': (now.HZ <= valores.Max.HZ && now.HZ > valores.Min.HZ) ? 'green':'red'}"></div>
+                    <circle color="GetColor(valores.Max.HZ,valores.Min.HZ,now.HZ)"></circle>
+
                 </td>
                 <td>
                     {{now.Temp| number: 2}}  
-                    <div class="full-circle" ng-style="{'background-color': (now.Presion <= valores.Max.Temp && now.Presion > valores.Min.Temp) ? 'green':'red'}"></div>
+                    <circle color="GetColor(valores.Max.Temp,valores.Min.Temp,now.Temp)"></circle>
+
                 </td>
                 <td>
-                    {{now.Presion| number: 2}}  
-                    <div class="full-circle" ng-style="{'background-color': (now.Presion <= valores.Max.Presion && now.Presion > valores.Min.Presion) ? 'green':'red'}"></div>
+                    {{now.Presion| number: 2}}
+                    <circle color="GetColor(valores.Max.Presion,valores.Min.Presion,now.Presion)"></circle>                    
                 </td>
                 <td>
                     {{now.bateria| number: 2}}                      

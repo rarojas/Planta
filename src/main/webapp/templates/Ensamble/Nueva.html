@@ -152,7 +152,10 @@
                                         Carril                                  
                                     </label>
                                     <div class="col-md-8">
-                                        <select class="form-control" ng-options="(c.id + ' - ' + c.maxCap + 'KW a ' + c.minCap + 'KW')  for c in carriles" ng-model="ensamble.cariles" name="carril"></select>  
+                                        <select class="form-control" ng-options="(c.id + ' - ' + c.minCap + 'KW a ' + c.maxCap + 'KW')  for c in carriles" ng-model="ensamble.cariles" name="carril"></select>  
+                                        <span class="error">
+                                            <span ng-show="ensamble.cariles.maxCap < planta.motores.kw" >El carril no soporta la capacida de prueba de la planta</span>
+                                        </span>
                                     </div>
                                 </div>                                   
                                 <div class="form-group">

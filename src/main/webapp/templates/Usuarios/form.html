@@ -27,6 +27,6 @@
         Rol
     </label>
     <div class="col-md-8">
-        <input class="form-control" ng-model="usuario.rol" name="rol" required placeholder="Rol...." >
+        <select ng-model="usuario.rol" required ng-options="r.value as r.text for r in roles" class="form-control" ></select>
     </div>
 </div>

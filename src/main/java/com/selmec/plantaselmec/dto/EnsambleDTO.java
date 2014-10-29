@@ -3,6 +3,7 @@ package com.selmec.plantaselmec.dto;
 import com.selmec.plantaselmec.Models.Ensamble;
 import com.selmec.plantaselmec.Models.Prueba;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,6 +21,7 @@ public class EnsambleDTO implements java.io.Serializable {
         if (ensamble.getPlanta() != null) {
             this.planta = new PlantaDTO(ensamble.getPlanta());
         }
+        this.dtCreacion = ensamble.getDtCreacion();
         this.altitud = ensamble.getAltitud();
         this.carriles = new CarrilDTO(ensamble.getCariles());
         this.guardas = ensamble.getGuardas();
@@ -41,6 +43,7 @@ public class EnsambleDTO implements java.io.Serializable {
         if (ensamble.getPlanta() != null) {
             this.planta = new PlantaDTO(ensamble.getPlanta());
         }
+        this.dtCreacion = ensamble.getDtCreacion();
         this.altitud = ensamble.getAltitud();
         this.carriles = new CarrilDTO(ensamble.getCariles());
         this.guardas = ensamble.getGuardas();
@@ -55,7 +58,7 @@ public class EnsambleDTO implements java.io.Serializable {
     public PlantaDTO planta;
     public String folio;
     public UsuarioDTO usuarioId;
-    public int dtCreacion;
+    public Date dtCreacion;
     public CarrilDTO carriles;
     public int altitud;
     public String rediador;

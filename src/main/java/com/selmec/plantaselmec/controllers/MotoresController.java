@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/api/Motores")
-public class MotoresController extends BaseController<Motores, MotorDTO> {
+public class MotoresController extends BaseControllers<Motores, MotorDTO> {
 
     private static final Logger logger = Logger.getLogger(MotoresController.class);
 

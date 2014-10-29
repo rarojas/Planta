@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("api/Pruebacarga")//determinar como se va a llamar la carpeta de Pruebascarga
-public class PruebacargaController extends BaseController<Pruebacarga,PruebacargaDTO>{
+public class PruebacargaController extends BaseControllers<Pruebacarga,PruebacargaDTO>{
 
     @Autowired
     IPruebacargaService PruebacargaService;

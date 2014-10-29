@@ -32,6 +32,7 @@ public class Cariles implements java.io.Serializable {
     private String planta;
     private Integer minCap;
     private Integer maxCap;
+    private String descripcion;
     private Set ensambles = new HashSet(0);
 
     public Cariles() {
@@ -127,6 +128,21 @@ public class Cariles implements java.io.Serializable {
      */
     public void setMaxCap(Integer maxCap) {
         this.maxCap = maxCap;
+    }
+
+    /**
+     * @return the descripcion
+     */
+     @Column(name = "descripcion",  length = 100)
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
 }

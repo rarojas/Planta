@@ -98,7 +98,10 @@
                         </li>
                         <li>
                             <a href="#/Usuarios" class="dropdown-toggle">Usuarios</a>                                        
-                        </li>                                    
+                        </li> 
+                        <li>
+                            <a href="#/Carriles" class="dropdown-toggle">Carriles</a>                                        
+                        </li> 
                     </ul>                                
                     <ul class="nav navbar-nav navbar-right">
                         <li>

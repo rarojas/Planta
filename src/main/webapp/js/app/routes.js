@@ -69,6 +69,18 @@ var Routes = ['$routeProvider',
                     templateUrl: '/templates/Usuarios/Create.html',
                     controller: 'UsuariosSaveCtrl'
                 }).
+                when('/Carriles', {
+                    templateUrl: '/templates/Carriles/Index.html',
+                    controller: 'CarrilesCtrl'
+                }).
+                when('/Carriles/Edit/:id', {
+                    templateUrl: '/templates/Carriles/Edit.html',
+                    controller: 'CarrilesSaveCtrl'
+                }).
+                when('/Carriles/Create', {
+                    templateUrl: '/templates/Carriles/Create.html',
+                    controller: 'CarrilesSaveCtrl'
+                }).
                 otherwise({
                     redirectTo: '/'
                 });

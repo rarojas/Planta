@@ -25,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("api/Ensambles")
-public class EnsamblesController extends BaseController<Ensamble, EnsambleDTO> {
+public class EnsamblesController extends BaseControllers<Ensamble, EnsambleDTO> {
 
     private Logger logger = Logger.getLogger(EnsamblesController.class);
 

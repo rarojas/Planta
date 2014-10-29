@@ -1,62 +1,71 @@
 <div class="row">
-    <h2>Inventarios de Pruebas</h2>
-    <div class="col-md-12">
-        <table class="table table-bordered table-bordered table-hover table-striped">
-            <thead>
-                <tr>
-                    <th>Folio</th>
-                    <th>No Serie</th>
-                    <th>Modelo</th>
-                    <th>Carril</th>
-                    <th>Marca Generador</th>
-                    <th>Capacidad (KW)</th>
-                    <th>Voltaje De Pruebba</th>
-                    <th>No Fases</th>
-                    <th>Guardas</th>
-                    <th>Radiador</th>
-                    <th>Creación</th>
-                    <th>Ejecutor</th>
+    <fieldset>
+        <legend>Inventarios de Pruebas</legend>
+        <div class="row">
+            <div class="col-md-12">
+                <form class="">
+                    
+                </form>
+            </div> 
+        </div>        
+        <div class="col-md-12">
+            <table class="table table-bordered table-bordered table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Folio</th>
+                        <th>No Serie</th>
+                        <th>Modelo</th>
+                        <th>Carril</th>
+                        <th>Marca Generador</th>
+                        <th>Capacidad (KW)</th>
+                        <th>Voltaje De Pruebba</th>
+                        <th>No Fases</th>
+                        <th>Guardas</th>
+                        <th>Radiador</th>
+                        <th>Creación</th>
+                        <th>Ejecutor</th>
+                    </tr>
+                </thead>
+                <tr  ng-repeat="prueba in pruebas">
+                    <td>  
+                        <a href="#/Pruebas/{{prueba.id}}" title="{{prueba.folio}}">{{prueba.folio}}</a>                    
+                    </td>
+                    <td>
+                        {{prueba.planta.noSerie}}
+                    </td>
+                    <td>
+                        {{prueba.planta.motores.modelo}}
+                    </td>
+                    <td>
+                        {{prueba.carriles.noCarril}}
+                    </td>
+                    <td>
+                        {{prueba.planta.motores.generadorMarca}} 
+                    </td>
+                    <td>
+                        {{prueba.planta.motores.kw}} kW
+                    </td>
+                    <td>
+                        {{prueba.planta.voltaje}} v
+                    </td>
+                    <td>
+                        {{prueba.planta.motores.noFases}}
+                    </td>
+                    <td>
+                        {{prueba.guardas}}
+                    </td>
+                    <td>
+                        {{prueba.rediador}}
+                    </td>
+                    <td>
+                        {{prueba.dtCreacion| date : 'dd-MM-yyyy hh:ss'}}
+                    </td>
+                    <td>
+                        {{prueba.usuarioId.nombres}}
+                    </td>
                 </tr>
-            </thead>
-            <tr  ng-repeat="prueba in pruebas">
-                <td>  
-                    <a href="#/Pruebas/{{prueba.id}}" title="{{prueba.folio}}">{{prueba.folio}}</a>                    
-                </td>
-                <td>
-                    {{prueba.planta.noSerie}}
-                </td>
-                <td>
-                    {{prueba.planta.motores.modelo}}
-                </td>
-                <td>
-                    {{prueba.carriles.noCarril}}
-                </td>
-                <td>
-                    {{prueba.planta.motores.generadorMarca}} 
-                </td>
-                <td>
-                    {{prueba.planta.motores.kw}} kW
-                </td>
-                <td>
-                    {{prueba.planta.voltaje}} v
-                </td>
-                <td>
-                    {{prueba.planta.motores.noFases}}
-                </td>
-                <td>
-                    {{prueba.guardas}}
-                </td>
-                <td>
-                    {{prueba.rediador}}
-                </td>
-                <td>
-                    {{prueba.dtCreacion}}
-                </td>
-                <td>
-                    {{prueba.usuarioId.nombres}}
-                </td>
-            </tr>
-        </table>
-    </div>
+            </table>
+        </div>
+    </fieldset>
 </div>
 

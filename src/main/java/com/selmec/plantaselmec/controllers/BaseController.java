@@ -5,52 +5,74 @@
  */
 package com.selmec.plantaselmec.controllers;
 
-import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
+import com.selmec.utils.services.IBaseServices;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.hibernate.SessionFactory;
+import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
  * @author rrojase
+ * @param <E>
+ * @param <K>
+ * @param <DTO>
  */
-public abstract class BaseController<T, E> {
+public abstract class BaseController<E, K, DTO> {
 
     @Autowired
-    SessionFactory sessionFactory;
-        
-    
+    MapperFacade mapper;
 
-    public List<E> Get(Class<T> type, Class<E> out_type) {
-        List<T> result = sessionFactory.getCurrentSession().createCriteria(type).list();
-        return DTO(result, type, out_type);
-    }
-        
-    public E Get(Serializable key, Class<T> type, Class<E> out_type) {
-        
-        T result = (T) sessionFactory.getCurrentSession().get(type, key);
-        return DTO(result, type, out_type);
+    public IBaseServices<E, K> baseService;
+
+    Class<DTO> DTO;
+
+    public void setDTO(Class<DTO> DTO) {
+        this.DTO = DTO;
     }
 
-    protected E DTO(T source, Class<T> type, Class<E> out_type) {
-        try {
-            return out_type.getConstructor(type).newInstance(source);
-        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
-            Logger.getLogger(BaseController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+    @RequestMapping(method = RequestMethod.GET)
+    public @ResponseBody
+    List<DTO> Get() {
+        return DTO(baseService.Get());
     }
 
-    protected List<E> DTO(List<T> source, Class<T> type, Class<E> type_out) {
-
-        List<E> result = new ArrayList<>();
-        for (T item : source) {
-            result.add(DTO(item, type, type_out));
-        }
-        return result;
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public @ResponseBody
+    DTO Get(@PathVariable("id") K id) {
+        return DTO(baseService.Get(id));
     }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public @ResponseBody
+    E Post(@RequestBody E entity) {
+        baseService.Save(entity);
+        return entity;
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public @ResponseBody
+    E Put(@RequestBody E entity) {
+        baseService.Update(entity);
+        return entity;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public @ResponseBody
+    void Delete(@PathVariable("id") K id) {
+        baseService.Delete(id);
+    }
+
+    public DTO DTO(E entity) {
+        return mapper.map(entity, DTO);
+    }
+
+    public List<DTO> DTO(List<E> entities) {
+        return mapper.mapAsList(entities, DTO);
+    }
+
 }

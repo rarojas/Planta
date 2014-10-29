@@ -22,6 +22,9 @@
         </property>
         <property name="maxCap" type="java.lang.Integer">
             <column name="maxCap" />
+        </property>        
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="100"  />
         </property>
         <set name="ensambles" table="ensamble" inverse="true" lazy="true" fetch="select">
             <key>

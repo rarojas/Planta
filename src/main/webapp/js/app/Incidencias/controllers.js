@@ -81,9 +81,14 @@ app.controller("MotoresSaveCtrl",
                     }
         ]);
 app.controller("UsuariosCtrl",
-        ["$scope", "PlantaServices", "$routeParams"
-                    , function ($scope, PlantaServices) {
+        ["$scope", "PlantaServices", "$routeParams", "$filter"
+                    , function ($scope, PlantaServices, $filter) {
                         $scope.usuarios = PlantaServices.Usuarios.query();
+                        $scope.roles = [{text: "Administrador", value: "ROLE_ADMIN"}, {text: "Supervisor", value: "SUPERVISOR"}, {text: "Ejecutor", value: "EJECUTOR"}];
+                        $scope.Rol = function (rol) {
+                            var result = $filter("filter")(roles, {value: rol})[0];
+                            return result.text;
+                        };
                         $scope.Delete = function (usuario) {
                             PlantaServices.Usuarios.delete({id: usuario.id}, function () {
                                 $scope.usuario.pop(usuario);
@@ -99,6 +104,7 @@ app.controller("UsuariosSaveCtrl",
                         $scope.usuario = new PlantaServices.Usuarios();
                         if ($routeParams.id !== undefined)
                             $scope.usuario.$get({id: $routeParams.id});
+                        $scope.roles = [{text: "Administrador", value: "ROLE_ADMIN"}, {text: "Supervisor", value: "SUPERVISOR"}, {text: "Ejecutor", value: "EJECUTOR"}];
                         $scope.Save = function () {
                             $scope.usuario.$save(function () {
                                 if (!$routeParams.id)
@@ -121,3 +127,45 @@ app.controller("UsuariosSaveCtrl",
                         };
                     }
         ]);
+app.controller("CarrilesCtrl",
+        ["$scope", "PlantaServices", "$routeParams"
+                    , function ($scope, PlantaServices) {
+                        $scope.carriles = PlantaServices.Carriles.query();
+                        $scope.Delete = function (carril) {
+                            PlantaServices.Carriles.delete({id: carril.id}, function () {
+                                $scope.carriles.pop(carril);
+                            }, function () {
+                            });
+                        };
+                    }
+        ]);
+
+app.controller("CarrilesSaveCtrl",
+        ["$scope", "PlantaServices", "$routeParams", "$location"
+                    , function ($scope, PlantaServices, $routeParams, $location) {
+                        $scope.carril = new PlantaServices.Carriles();
+                        if ($routeParams.id !== undefined)
+                            $scope.carril.$get({id: $routeParams.id});
+                        $scope.Save = function () {
+                            $scope.carril.$save(function () {
+                                if (!$routeParams.id)
+                                    $location.path("/Carriles/Edit/" + $scope.carril.id);
+                            }, function () {
+
+                            });
+                        };
+                        $scope.Update = function () {
+                            $scope.carril.$update(function () {
+                            }, function () {
+                            });
+                        };
+                        $scope.Delete = function () {
+                            $scope.carril.$delete(function () {
+                                $location.path("/Carriles");
+                            }, function () {
+
+                            });
+                        };
+                    }
+        ]);
+        

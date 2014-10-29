@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author rrojase
  */
 @Controller
-public class IncidenciasController extends BaseController<Incidencias, IncidenciaDTO> {
+public class IncidenciasController extends BaseControllers<Incidencias, IncidenciaDTO> {
 
     static final String BasePath = "api/Incidencias";
     static final String BasePathID = BasePath + "/{id}";

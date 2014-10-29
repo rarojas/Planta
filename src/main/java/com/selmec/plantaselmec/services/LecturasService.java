@@ -5,15 +5,13 @@
  */
 package com.selmec.plantaselmec.services;
 
-import com.selmec.plantaselmec.Dao.IGenericDao;
 import com.selmec.plantaselmec.Models.Lecturas;
 import com.selmec.plantaselmec.Models.Prueba;
 import com.selmec.plantaselmec.dto.LecturaPSC;
-import java.util.concurrent.Future;
+import com.selmec.utils.dao.IGenericDao;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,8 +1,8 @@
 package com.selmec.plantaselmec.services;
 
-import com.selmec.plantaselmec.Dao.IGenericDao;
 import com.selmec.plantaselmec.Models.Usuarios;
 import com.selmec.plantaselmec.dto.UsuarioDTO;
+import com.selmec.utils.dao.IGenericDao;
 import java.util.ArrayList;
 import java.util.List;
 import ma.glasnost.orika.MapperFacade;

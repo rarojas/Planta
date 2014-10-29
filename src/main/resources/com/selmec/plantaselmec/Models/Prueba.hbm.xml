@@ -73,6 +73,9 @@
             <property name="icarga" type="java.lang.Double">
                 <column name="icarga" precision="22" scale="0" />
             </property>
+<!--            <joined-subclass name="CargasubitaSub" table="CargasubitaSub" >
+                <key column="ID" />     
+            </joined-subclass>-->
         </joined-subclass>
         <joined-subclass name="Pruebacontrol" table="pruebacontrol"  >
             <key column="ID" />   

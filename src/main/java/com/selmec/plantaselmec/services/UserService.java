@@ -5,12 +5,9 @@
  */
 package com.selmec.plantaselmec.services;
 
-import com.selmec.plantaselmec.Dao.IGenericDao;
 import com.selmec.plantaselmec.Models.Usuarios;
-import com.selmec.plantaselmec.dto.UsuarioDTO;
-import java.util.ArrayList;
+import com.selmec.utils.dao.IGenericDao;
 import java.util.List;
-import ma.glasnost.orika.MapperFacade;
 import org.hibernate.Query;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

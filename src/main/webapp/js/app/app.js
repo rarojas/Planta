@@ -1,7 +1,45 @@
 var app = angular.module("PlantaAPP", ['nvd3ChartDirectives', 'n3-line-chart', "ngResource", "ngRoute", 'angular-loading-bar']);
-app.controller("PruebasCtrl", ["$scope", "PlantaServices",
-    function ($scope, PlantaServices) {
-        $scope.pruebas = PlantaServices.Ensambles.query();
+var BaseTableController = function ($scope, $filter) {
+    $scope.current = 0;
+    $scope.total = 0;
+    $scope.rowsPage = 10;
+    $scope.totalRows = 0;
+    $scope.pages = [];
+    $scope.next = function () {
+        if ($scope.current !== 0)
+            $scope.current--;
+    };
+    $scope.previous = function () {
+        if (($scope.total - 1) !== 0)
+            $scope.current++;
+    };
+    $scope.setPage = function (page) {
+        $scope.current = page;
+    };
+    $scope.$watch("search", function () {
+        $scope.current = 0;
+        $scope.filtered = $filter("filter")($scope.items, $scope.search);
+        $scope.total = Math.ceil($scope.filtered.length / $scope.rowsPage);
+        $scope.totalRows = $scope.filtered.length;
+        $scope.pages = [];
+        for (var page = 0; page < $scope.total; page++)
+            $scope.pages.push(page);
+    }, true);
+    $scope.result = function () {
+        return $scope.filtered.slice($scope.current * $scope.rowsPage, ($scope.current + 1) * $scope.rowsPage);
+    };
+    $scope.Init = function () {
+        $scope.total = Math.ceil($scope.items.length / $scope.rowsPage);
+        $scope.totalRows = $scope.items.length;
+        $scope.filtered = $scope.items;
+        for (var page = 0; page < $scope.total; page++)
+            $scope.pages.push(page);
+    };
+};
+app.controller("PruebasCtrl", ["$scope", "PlantaServices", "$filter",
+    function ($scope, PlantaServices, $filter) {
+        BaseTableController.call(this, $scope, $filter);
+        $scope.items = PlantaServices.Ensambles.query($scope.Init);
     }]);
 app.controller("PruebaCtrl", ["$scope", "PlantaServices", "$routeParams",
     function ($scope, PlantaServices, $routeParams) {
@@ -14,23 +52,16 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
     $scope.OptionsControl = {
         Locked: true
     };
-
-
-    $scope.log = [];
-
     $scope.GetColor = function (max, min, read) {
 
-        if (read === undefined || read === null)
-            return "white";
-        console.log(read);
 
         var esperado = d3.mean([min, max]);
         var result = Math.abs(esperado - read);
         result /= (esperado - min);
-
         result > 1 ? 1 : result;
         var color = d3.scale.linear().domain([0, 0.5, 1]).range(["green", "yellow", "red"]);
         return color(result);
+
 
     };
 
@@ -242,38 +273,6 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
         });
     };
     $scope.NowToLastMinute = function () {
-
-        if ($scope.valores.Max.L1N > $scope.now.L1N && $scope.valores.Min.L1N < $scope.now.L1N) {
-            $scope.log.push($scope.now.L1N);
-        }
-
-        if ($scope.valores.Max.L1N > $scope.now.L2N && $scope.valores.Min.L1N < $scope.now.L2N) {
-            $scope.log.push($scope.now.L2N);
-        }
-        if ($scope.valores.Max.L1N > $scope.now.L3N && $scope.valores.Min.L1N < $scope.now.L3N) {
-            $scope.log.push($scope.now.L3N);
-        }
-        if ($scope.valores.Max.I1 > $scope.now.I1 && $scope.valores.Min.I1 < $scope.now.I1) {
-            $scope.log.push($scope.now.I1);
-        }
-        if ($scope.valores.Max.I1 > $scope.now.I && $scope.valores.Min.I1 < $scope.now.I2) {
-            $scope.log.push($scope.now.I2);
-        }
-        if ($scope.valores.Max.I1 > $scope.now.I3 && $scope.valores.Min.I1 < $scope.now.I3) {
-            $scope.log.push($scope.now.I3);
-        }
-
-        if ($scope.valores.Max.HZ > $scope.now.HZ && $scope.valores.Min.HZ < $scope.now.HZ) {
-            $scope.log.push($scope.now.HZ);
-        }
-
-        if ($scope.valores.Max.Temp > $scope.now.HZ && $scope.valores.Min.Temp < $scope.now.HZ) {
-            $scope.log.push($scope.now.Temp);
-        }
-
-        if ($scope.valores.Max.Temp > $scope.now.HZ && $scope.valores.Min.Temp < $scope.now.HZ) {
-            $scope.log.push($scope.now.Temp);
-        }
         return {
             x: $scope.AccumulateTime,
             L1N: $scope.now.L1N,
@@ -321,13 +320,273 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
         });
     };
 };
+app.controller("PruebaSinCargaCtrl", [
+    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$location",
+    function ($scope, $http, $interval, $routeParams, PlantaServices, $location) {
+        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $location);
+        $scope.prueba = PlantaServices.Pruebas.get({id: $routeParams.PruebaID});
+        $scope.options = {
+            series: [
+                {
+                    y: "L1N",
+                    label: "L1-N",
+                    color: "#ff0000",
+                    type: "line",
+                    thickness: "1px"
+                }, {
+                    y: "L2N",
+                    label: "L2-N",
+                    color: "#64c900",
+                    type: "line",
+                    thickness: "1px"
+                }, {
+                    y: "L3N",
+                    label: "L3-N",
+                    color: "#428bca",
+                    type: "line",
+                    thickness: "1px"
+                }
+            ],
+            axes: {x: {type: "linear", key: "x"}, y: {type: "linear"}, y2: {type: "linear"}},
+            lineMode: "bundle",
+            tension: 0.7,
+            tooltip: {mode: "scrubber"},
+            drawLegend: true
+        };
+        $scope.data = PlantaServices.Pruebas.Lecturas({id: $routeParams.PruebaID});
+        $scope.minute = 1;
+        $scope.$watch("minute", function () {
+            var index = $scope.minute * 60;
+            var i = 0;
+            $scope.lastMinute = [];
+            if ($scope.data.length >= index + 60)
+                for (i = 0; i < 60; i++) {
+                    $scope.lastMinute.push($scope.data[i + index]);
+                }
+        });
+    }]);
+app.controller("PruebaSinCargaController", [
+    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout", "$location",
+    function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location) {
+        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location);
+        $scope.Iteraciones = {current: 0,
+            Iteracciones: [{No: 1, Time: 10 * 60, current: 0}]};
+        $scope.Process = function () {
+            $scope.Estado = $scope.Estatus.Running;
+            $scope.data = [];
+            $scope.Iteraciones.current = 0;
+            $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current = 0;
+            $scope.prueba = new PlantaServices.Pruebas({
+                ensamble: $scope.ensamble,
+                tipo: 0,
+                estatus: 0,
+                dtInicio: new Date(),
+                dtFin: new Date(),
+                comentario: null,
+                incidencias: null
+            });
+            $scope.prueba.$save(function () {
+                noty({text: "Comenzando Prueba de carga "});
+                $scope.timer = $interval(function () {
+                    $scope.prueba.dtFin = new Date();
+                    if ($scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current >= $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].Time) {
+                        $scope.Iteraciones.current++;
+                        var current = $scope.now;
+                        current.index = $scope.Iteraciones.current;
+                        $scope.Accumulate.push(current);
+                        if ($scope.Iteraciones.Iteracciones.length === $scope.Iteraciones.current) {
+                            noty({text: "Terminando prueba¡¡¡", type: 'success'});
+                            return $scope.Stop();
+                        }
+                        else {
+                            $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current = 0;
+                            noty({text: "Comenzando Iteracion " + $scope.Iteraciones.current + "¡¡¡", type: 'success'});
+                        }
+                    }
+                    if ($scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].alert)
+                        if ($scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].alert.time
+                                === $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current) {
+                            noty({text: $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].alert.msg,
+                                type: "error"});
+                        }
+                    $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current++;
+                    $scope.AccumulateTime++;
+                }, 1000);
+                $scope.Poller = $interval(function () {
+                    PlantaServices.Pruebas.GetValues({id: $scope.prueba.id, seg: $scope.AccumulateTime, ite: $scope.Iteraciones.current, equipo: $scope.ensamble.carriles.equipo}
+                    , function (response) {
+                        $scope.now = response;
+                        $scope.now.time = $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current;
+                        $scope.lastMinute.push($scope.NowToLastMinute());
+                        if ($scope.lastMinute.length > (30 / $scope.RefreshTime)) {
+                            $scope.lastMinute.shift();
+                        }
+                        $scope.data.push({x: $scope.AccumulateTime, L1N: $scope.now.L1N, L2N: $scope.now.L2N, L3N: $scope.now.L3N});
+                    }, function () {
 
+                    });
+                }, $scope.RefreshTime * 1000);
+            }, function () {
+                $scope.Estado = $scope.Estatus.Waiting;
+            });
+        };
+    }]);
+app.controller("PruebaConCargaController", [
+    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout", "$location",
+    function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location) {
+        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location);
+        $scope.Accumulate = [];
+        $scope.Iteraciones = {current: 0,
+            Iteracciones: [
+                {No: 1, Time: 5 * 60, current: 0, alert: {msg: 'Aumentar la carga a 50%¡¡¡', time: 30}},
+                {No: 2, Time: 5 * 60, current: 0, alert: {msg: 'Aumentar la carga a 75%¡¡¡', time: 30}},
+                {No: 3, Time: 5 * 60, current: 0, alert: {msg: 'Aumentar la carga a 100%¡¡¡', time: 30}},
+                {No: 4, Time: 10 * 60, current: 0},
+                {No: 5, Time: 10 * 60, current: 0},
+                {No: 6, Time: 10 * 60, current: 0},
+                {No: 7, Time: 10 * 60, current: 0},
+                {No: 8, Time: 10 * 60, current: 0},
+                {No: 9, Time: 10 * 60, current: 0}
+            ]};
+        $scope.Process = function () {
+            $scope.Estado = $scope.Estatus.Running;
+            $scope.data = [];
+            $scope.Iteraciones.current = 0;
+            $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current = 0;
+            $scope.prueba = new PlantaServices.Pruebas({
+                ensamble: $scope.ensamble,
+                tipo: 1,
+                estatus: 0,
+                dtInicio: new Date(),
+                dtFin: new Date()
+            });
+            $scope.prueba.$save(function () {
+                noty({text: "Comenzando Prueba de carga "});
+                $scope.timer = $interval(function () {
+                    if ($scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current >= $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].Time) {
+                        $scope.Iteraciones.current++;
+                        var current = $scope.now;
+                        current.index = $scope.Iteraciones.current;
+                        $scope.Accumulate.push(current);
+                        if ($scope.Iteraciones.Iteracciones.length === $scope.Iteraciones.current) {
+                            noty({text: "Terminando prueba¡¡¡", type: 'success'});
+                            return $scope.Stop();
+                        }
+                        else {
+                            $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current = 0;
+                            noty({text: "Comenzando Iteracion " + $scope.Iteraciones.current + "¡¡¡", type: 'success'});
+                        }
+                    }
+                    if ($scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].alert)
+                        if ($scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].alert.time
+                                === $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current) {
+                            noty({text: $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].alert.msg,
+                                type: "error"});
+                        }
+                    $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current++;
+                    $scope.AccumulateTime++;
+                }, 1000);
+                $scope.Poller = $interval(function () {
+                    PlantaServices.Pruebas.GetValues({id: $scope.prueba.id, seg: $scope.AccumulateTime, ite: $scope.Iteraciones.current, equipo: $scope.ensamble.carriles.equipo}
+                    , function (response) {
+                        $scope.now = response;
+                        $scope.now.time = $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current;
+                        $scope.lastMinute.push($scope.NowToLastMinute());
+                        if ($scope.lastMinute.length > (30 / $scope.RefreshTime)) {
+                            $scope.lastMinute.shift();
+                        }
+                        $scope.data.push({x: $scope.AccumulateTime, L1N: $scope.now.L1N, L2N: $scope.now.L2N, L3N: $scope.now.L3N});
+                    }, function () {
+
+                    });
+                }, $scope.RefreshTime * 1000);
+            }, function () {
+                $scope.Estado = $scope.Estatus.Waiting;
+            });
+        };
+    }]);
+app.controller("PruebaConCargaSubitaCtrl", [
+    "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout", "$location",
+    function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location) {
+        BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location);
+        $scope.Iteraciones = {current: 0,
+            Iteracciones: [
+                {No: 1, Time: 1 * 60, current: 0},
+                {No: 2, Time: 1 * 60, current: 0},
+                {No: 3, Time: 1 * 60, current: 0}
+            ]};
+        $scope.data = {voltaje: [], hz: []};
+        $scope.Process = function () {
+            $scope.Estado = $scope.Estatus.Running;
+            $scope.data = {voltaje: [], hz: []};
+            $scope.Iteraciones.current = 0;
+            $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current = 0;
+            $scope.prueba = new PlantaServices.Pruebas({
+                ensamble: $scope.ensamble,
+                tipo: 2,
+                estatus: 0,
+                dtInicio: new Date(),
+                dtFin: new Date()
+            });
+            $scope.prueba.$save(function () {
+                noty({text: "Comenzando Prueba de Carga Subita"});
+                $scope.timer = $interval(function () {
+                    if ($scope.now.L1N >= $scope.valores.Min.L1L2 && $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].active) {
+                        var current = $scope.now;
+                        current.index = $scope.Iteraciones.current;
+                        $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current;
+                        current.voltaje = {max: 0, min: 0};
+                        current.hz = {max: 0, min: 0};
+                        current.voltaje.max = _.max($scope.data.voltaje);
+                        current.voltaje.min = _.min($scope.data.voltaje);
+                        current.hz.max = _.max($scope.data.hz);
+                        current.hz.min = _.min($scope.data.hz);
+                        $scope.Accumulate.push(current);
+                        $scope.Iteraciones.current++;
+                        if ($scope.Iteraciones.Iteracciones.length === $scope.Iteraciones.current) {
+                            noty({text: "Terminando prueba¡¡¡", type: 'success'});
+                            return $scope.Stop();
+                        }
+                        else {
+                            $scope.data = {voltaje: [], hz: []};
+                            $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current = 0;
+                            noty({text: "Comenzando Iteracion " + $scope.Iteraciones.current + "¡¡¡", type: 'success'});
+                        }
+                    }
+                    if (!$scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].active)
+                        if ($scope.now.L1N < $scope.valores.Min.L1L2)
+                            $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].active = true;
+                    if ($scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].active) {
+                        $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current++;
+                        $scope.data.voltaje.push($scope.now.L1N);
+                        $scope.data.hz.push($scope.now.HZ);
+                    }
+                    $scope.AccumulateTime++;
+                }, 1000);
+                $scope.Poller = $interval(function () {
+                    PlantaServices.Pruebas.GetValues({id: $scope.prueba.id, seg: $scope.AccumulateTime, ite: $scope.Iteraciones.current, equipo: $scope.ensamble.carriles.equipo}
+                    , function (response) {
+                        $scope.now = response;
+                        $scope.now.time = $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current;
+                        $scope.lastMinute.push($scope.NowToLastMinute());
+                        if ($scope.lastMinute.length > (30 / $scope.RefreshTime)) {
+                            $scope.lastMinute.shift();
+                        }
+
+                    }, function () {
+                    });
+                }, 1000);
+            }, function () {
+                $scope.Estado = $scope.Estatus.Waiting;
+            });
+        };
+    }]);
 
 app.controller("PruebaControlCtrl", [
     "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout", "$location",
     function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location) {
         BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location);
-        $scope.prueba = new PlantaServices.Instalacion({
+        $scope.prueba = new PlantaServices.Pruebascontrol({
             ensamble: $scope.ensamble,
             tipo: 3,
             estatus: 0,

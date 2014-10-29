@@ -1,8 +1,7 @@
 package com.selmec.plantaselmec.services;
 
-import com.selmec.plantaselmec.Dao.IGenericDao;
 import com.selmec.plantaselmec.Models.Incidencias;
-import java.util.List;
+import com.selmec.utils.dao.IGenericDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

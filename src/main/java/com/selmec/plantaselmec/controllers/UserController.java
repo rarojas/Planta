@@ -5,10 +5,10 @@
  */
 package com.selmec.plantaselmec.controllers;
 
-import com.selmec.plantaselmec.Dao.IGenericDao;
 import com.selmec.plantaselmec.Models.Usuarios;
 import com.selmec.plantaselmec.dto.UsuarioDTO;
 import com.selmec.plantaselmec.services.IUsuariosServices;
+import com.selmec.utils.dao.IGenericDao;
 import java.security.Principal;
 import java.util.List;
 import javax.validation.Valid;

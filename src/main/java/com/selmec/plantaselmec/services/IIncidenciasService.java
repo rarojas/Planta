@@ -5,8 +5,8 @@
  */
 package com.selmec.plantaselmec.services;
 
-import com.selmec.plantaselmec.Dao.IGenericDao;
 import com.selmec.plantaselmec.Models.Incidencias;
+import com.selmec.utils.dao.IGenericDao;
 
 
 /**

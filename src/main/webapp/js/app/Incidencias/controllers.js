@@ -1,7 +1,8 @@
 app.controller("IncidenciasCtrl",
-        ["$scope", "PlantaServices", "$routeParams"
-                    , function ($scope, PlantaServices) {
-                        $scope.incidencias = PlantaServices.Incidencias.query();
+        ["$scope", "PlantaServices", "$routeParams", "$filter"
+                    , function ($scope, PlantaServices, $filter) {
+                        BaseTableController.call(this, $scope, $filter);
+                        $scope.items = PlantaServices.Incidencias.query($scope.Init);
                         $scope.Delete = function (incidencia) {
                             PlantaServices.Incidencias.delete({id: incidencia.id}, function () {
                                 $scope.incidencias.pop(incidencia);
@@ -83,7 +84,8 @@ app.controller("MotoresSaveCtrl",
 app.controller("UsuariosCtrl",
         ["$scope", "PlantaServices", "$routeParams", "$filter"
                     , function ($scope, PlantaServices, $filter) {
-                        $scope.usuarios = PlantaServices.Usuarios.query();
+                        BaseTableController.call(this, $scope, $filter);
+                        $scope.items = PlantaServices.Usuarios.query($scope.Init);
                         $scope.roles = [{text: "Administrador", value: "ROLE_ADMIN"}, {text: "Supervisor", value: "SUPERVISOR"}, {text: "Ejecutor", value: "EJECUTOR"}];
                         $scope.Rol = function (rol) {
                             var result = $filter("filter")(roles, {value: rol})[0];

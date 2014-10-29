@@ -5,7 +5,7 @@
  */
 package com.selmec.plantaselmec.services;
 
-import com.selmec.plantaselmec.Dao.IGenericDao;
+import com.selmec.utils.dao.IGenericDao;
 import java.io.Serializable;
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;

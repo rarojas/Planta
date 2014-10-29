@@ -5,10 +5,10 @@
  */
 package com.selmec.plantaselmec.services;
 
-import com.selmec.plantaselmec.Dao.IGenericDao;
 import com.selmec.plantaselmec.Models.EstadoPrueba;
 import com.selmec.plantaselmec.Models.Prueba;
 import com.selmec.plantaselmec.Models.Usuarios;
+import com.selmec.utils.dao.IGenericDao;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

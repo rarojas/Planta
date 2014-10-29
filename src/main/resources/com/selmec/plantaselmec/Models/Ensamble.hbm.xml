@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Oct 21, 2014 4:26:41 PM by Hibernate Tools 4.3.1 -->
-<hibernate-mapping>
+<hibernate-mapping package="com.selmec.plantaselmec.Models">
     <class name="com.selmec.plantaselmec.Models.Ensamble" table="ensamble" catalog="test" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="ID" />

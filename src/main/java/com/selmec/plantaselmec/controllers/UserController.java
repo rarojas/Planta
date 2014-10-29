@@ -6,6 +6,7 @@
 package com.selmec.plantaselmec.controllers;
 
 import com.selmec.plantaselmec.Models.Usuarios;
+import com.selmec.plantaselmec.dto.UsuarioActualDTO;
 import com.selmec.plantaselmec.dto.UsuarioDTO;
 import com.selmec.plantaselmec.services.IUsuariosServices;
 import com.selmec.utils.dao.IGenericDao;
@@ -77,6 +78,11 @@ public class UserController extends BaseControllers<Usuarios, UsuarioDTO> {
     public void Delete(@PathVariable("id") int id) {
         usuariosServices.Delete(id);
     }
-    
+
+    @RequestMapping(value = "getDataUser/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public UsuarioActualDTO getDataUser(Principal principal) {
+        return usuariosServices.getDataUser(principal.getName());
+    }
 
 }

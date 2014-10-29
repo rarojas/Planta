@@ -1,8 +1,10 @@
 package com.selmec.plantaselmec.services;
 
 import com.selmec.plantaselmec.Models.Usuarios;
+import com.selmec.plantaselmec.dto.UsuarioActualDTO;
 import com.selmec.plantaselmec.dto.UsuarioDTO;
 import com.selmec.utils.dao.IGenericDao;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import ma.glasnost.orika.MapperFacade;
@@ -16,6 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class UsuariosServices implements IUsuariosServices {
 
     private IGenericDao<Usuarios, Integer> dao;
+    @Autowired
+    IUsuariosServices usuariosServices;
+    @Autowired
+    private MapperFacade mapper;
 
     @Autowired
     public void setDao(IGenericDao<Usuarios, Integer> daoToSet) {
@@ -72,6 +78,7 @@ public class UsuariosServices implements IUsuariosServices {
         usuarios.setPassword(password);
         this.dao.create(usuarios);
     }
+
     public UsuarioDTO ToDTO(Usuarios usuario) {
         return mapper.map(usuario, UsuarioDTO.class);
     }
@@ -84,6 +91,13 @@ public class UsuariosServices implements IUsuariosServices {
         return result;
     }
 
-    @Autowired
-    private MapperFacade mapper;
+    @Override
+    public UsuarioActualDTO getDataUser(String userName) {
+        if (userName == null) {
+            return null;
+        }
+        Usuarios usuario = usuariosServices.GetByUsername(userName);
+        return new UsuarioActualDTO(usuario);
+    }
+
 }

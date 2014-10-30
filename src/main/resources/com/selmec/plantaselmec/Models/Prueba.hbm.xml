@@ -19,6 +19,9 @@
         </property>
         <property name="estatus" type="int">
             <column name="Estatus" not-null="true" />
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.selmec.plantaselmec.Models.EstadoPrueba</param>
+            </type>
         </property>
         <property name="aprueba" type="java.lang.Integer">
             <column name="Aprueba" />

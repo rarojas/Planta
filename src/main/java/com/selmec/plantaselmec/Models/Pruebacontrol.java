@@ -68,15 +68,6 @@ public class Pruebacontrol extends Prueba implements java.io.Serializable {
         this.pruebacontrolcol = pruebacontrolcol;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
-    public Prueba getPrueba() {
-        return this.prueba;
-    }
-
-    public void setPrueba(Prueba prueba) {
-        this.prueba = prueba;
-    }
 
     @Column(name = "termometro", nullable = false)
     public int getTermometro() {

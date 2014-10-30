@@ -10,8 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -70,16 +68,15 @@ public class Prueba extends Pruebabase implements java.io.Serializable {
         this.ensamble = ensamble;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
-    public Pruebabase getPruebabase() {
-        return this.pruebabase;
-    }
-
-    public void setPruebabase(Pruebabase pruebabase) {
-        this.pruebabase = pruebabase;
-    }
-
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @PrimaryKeyJoinColumn
+//    public Pruebabase getPruebabase() {
+//        return this.pruebabase;
+//    }
+//
+//    public void setPruebabase(Pruebabase pruebabase) {
+//        this.pruebabase = pruebabase;
+//    }
     @Column(name = "Tipo", nullable = false)
     public int getTipo() {
         return this.tipo;
@@ -145,22 +142,21 @@ public class Prueba extends Pruebabase implements java.io.Serializable {
         this.cargasubitas = cargasubitas;
     }
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "prueba")
-    public Pruebacontrol getPruebacontrol() {
-        return this.pruebacontrol;
-    }
-
-    public void setPruebacontrol(Pruebacontrol pruebacontrol) {
-        this.pruebacontrol = pruebacontrol;
-    }
-
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "prueba")
-    public Pruebacarga getPruebacarga() {
-        return this.pruebacarga;
-    }
-
-    public void setPruebacarga(Pruebacarga pruebacarga) {
-        this.pruebacarga = pruebacarga;
-    }
-
+//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "prueba")
+//    public Pruebacontrol getPruebacontrol() {
+//        return this.pruebacontrol;
+//    }
+//
+//    public void setPruebacontrol(Pruebacontrol pruebacontrol) {
+//        this.pruebacontrol = pruebacontrol;
+//    }
+//
+//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "prueba")
+//    public Pruebacarga getPruebacarga() {
+//        return this.pruebacarga;
+//    }
+//
+//    public void setPruebacarga(Pruebacarga pruebacarga) {
+//        this.pruebacarga = pruebacarga;
+//    }
 }

@@ -3,9 +3,6 @@ package com.selmec.plantaselmec.Models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -43,15 +40,15 @@ public class Vacio extends Pruebaarranque implements java.io.Serializable {
         this.fases = fases;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
-    public Pruebaarranque getPruebaarranque() {
-        return this.pruebaarranque;
-    }
-
-    public void setPruebaarranque(Pruebaarranque pruebaarranque) {
-        this.pruebaarranque = pruebaarranque;
-    }
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @PrimaryKeyJoinColumn
+//    public Pruebaarranque getPruebaarranque() {
+//        return this.pruebaarranque;
+//    }
+//
+//    public void setPruebaarranque(Pruebaarranque pruebaarranque) {
+//        this.pruebaarranque = pruebaarranque;
+//    }
 
     @Column(name = "proteccion", nullable = false)
     public boolean isProteccion() {

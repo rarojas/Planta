@@ -49,15 +49,15 @@ public class Instalacion extends Pruebaarranque implements java.io.Serializable 
         this.ubt = ubt;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
-    public Pruebaarranque getPruebaarranque() {
-        return this.pruebaarranque;
-    }
-
-    public void setPruebaarranque(Pruebaarranque pruebaarranque) {
-        this.pruebaarranque = pruebaarranque;
-    }
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @PrimaryKeyJoinColumn
+//    public Pruebaarranque getPruebaarranque() {
+//        return this.pruebaarranque;
+//    }
+//
+//    public void setPruebaarranque(Pruebaarranque pruebaarranque) {
+//        this.pruebaarranque = pruebaarranque;
+//    }
 
     @Column(name = "ventilacion", nullable = false)
     public boolean isVentilacion() {

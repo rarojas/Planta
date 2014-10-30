@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 30, 2014 5:43:43 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 29, 2014 10:52:16 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping package="com.selmec.plantaselmec.Models">
     <class name="Ensamblebase" table="ensamblebase" catalog="casetapruebas" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="ID" />
             <generator class="identity" />
-        </id>                        
+        </id>
         <many-to-one name="cariles" class="com.selmec.plantaselmec.Models.Cariles" fetch="select">
             <column name="CarrilID" not-null="true" />
         </many-to-one>
@@ -23,9 +23,8 @@
         <property name="dtCreacion" type="timestamp">
             <column name="dtCreacion" length="19" not-null="true" />
         </property>
-        
-        <joined-subclass name="Ensamblearranque" table="ensamblearranque">
-            <key column="ID"></key>
+        <joined-subclass name="Ensamblearranque" table="ensamblearranque" >
+            <key column="ID" />
             <many-to-one name="ubicaciones" class="com.selmec.plantaselmec.Models.Ubicaciones" fetch="select">
                 <column name="UbicacionId" not-null="true" />
             </many-to-one>
@@ -42,8 +41,23 @@
                 <one-to-many class="com.selmec.plantaselmec.Models.Pruebaarranque" />
             </set>
         </joined-subclass>
-        <joined-subclass name="Ensamble" table="ensamble">
-            <key column="ID"></key>
+        <joined-subclass name="Ensamble" table="ensamble" >
+            <key column="ID" />
+            <many-to-one name="cariles" class="com.selmec.plantaselmec.Models.Cariles" fetch="select">
+                <column name="CarrilID" not-null="true" />
+            </many-to-one>
+            <many-to-one name="planta" class="com.selmec.plantaselmec.Models.Planta" fetch="select">
+                <column name="PlantaID" length="50" not-null="true" />
+            </many-to-one>
+            <many-to-one name="usuarios" class="com.selmec.plantaselmec.Models.Usuarios" fetch="select">
+                <column name="UsuarioID" not-null="true" />
+            </many-to-one>
+            <property name="folio" type="string">
+                <column name="Folio" length="50" not-null="true" unique="true" />
+            </property>
+            <property name="dtCreacion" type="timestamp">
+                <column name="dtCreacion" length="19" not-null="true" />
+            </property>
             <property name="altitud" type="int">
                 <column name="Altitud" not-null="true" />
             </property>
@@ -62,6 +76,8 @@
                 </key>
                 <one-to-many class="com.selmec.plantaselmec.Models.Prueba" />
             </set>
-        </joined-subclass>     
+        </joined-subclass>
+        <!--        <one-to-one name="ensamblearranque" class="com.selmec.plantaselmec.Models.Ensamblearranque"></one-to-one>
+        <one-to-one name="ensamble" class="com.selmec.plantaselmec.Models.Ensamble"></one-to-one>-->
     </class>
 </hibernate-mapping>

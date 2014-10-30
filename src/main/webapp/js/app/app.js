@@ -52,6 +52,7 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
     $scope.OptionsControl = {
         Locked: true
     };
+    $scope.log = [];
     $scope.GetColor = function (max, min, read) {
 
 
@@ -273,6 +274,35 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
         });
     };
     $scope.NowToLastMinute = function () {
+       
+        if ($scope.valores.Max.L1N > $scope.now.L1N && $scope.valores.Min.L1N < $scope.now.L1N) {
+            $scope.log.push($scope.now.L1N);
+        }
+
+        if ($scope.valores.Max.L1N > $scope.now.L2N && $scope.valores.Min.L1N < $scope.now.L2N) {
+            $scope.log.push($scope.now.L2N);
+        }
+        if ($scope.valores.Max.L1N > $scope.now.L3N && $scope.valores.Min.L1N < $scope.now.L3N) {
+            $scope.log.push($scope.now.L3N);
+        }
+        if ($scope.valores.Max.I1 > $scope.now.I1 && $scope.valores.Min.I1 < $scope.now.I1) {
+            $scope.log.push($scope.now.I1);
+        }
+        if ($scope.valores.Max.I1 > $scope.now.I && $scope.valores.Min.I1 < $scope.now.I2) {
+            $scope.log.push($scope.now.I2);
+        }
+        if ($scope.valores.Max.I1 > $scope.now.I3 && $scope.valores.Min.I1 < $scope.now.I3) {
+            $scope.log.push($scope.now.I3);
+        }
+
+        if ($scope.valores.Max.HZ > $scope.now.HZ && $scope.valores.Min.HZ < $scope.now.HZ) {
+            $scope.log.push($scope.now.HZ);
+        }
+
+        if ($scope.valores.Max.Temp > $scope.now.Temp && $scope.valores.Min.Temp < $scope.now.Temp) {
+            $scope.log.push($scope.now.Temp);
+        }
+
         return {
             x: $scope.AccumulateTime,
             L1N: $scope.now.L1N,

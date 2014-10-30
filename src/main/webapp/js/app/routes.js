@@ -81,7 +81,31 @@ var Routes = ['$routeProvider',
                     templateUrl: '/templates/Carriles/Create.html',
                     controller: 'CarrilesSaveCtrl'
                 }).
-                otherwise({
+                when('/Ubicaciones', {
+                    templateUrl: '/templates/Ubicaciones/Index.html',
+                    controller: 'UbicacionesCtrl'
+                }).
+                when('/Ubicaciones/Edit/:id', {
+                    templateUrl: 'templates/Ubicaciones/Edit.html',
+                    controller: 'UbicacionesSaveCtrl'
+                }).
+                when('/Ubicaciones/Create', {
+                    templateUrl: '/templates/Ubicaciones/Create.html',
+                    controller: 'UbicacionesSaveCtrl'
+                }).
+                when('/Clientes', {
+                    templateUrl: '/templates/Clientes/Index.html',
+                    controller: 'ClientesCtrl'
+                }).
+                when('/Clientes/Edit/:id', {
+                    templateUrl: 'templates/Clientes/Edit.html',
+                    controller: 'ClientesSaveCtrl'
+                }).
+                when('/Clientes/Create', {
+                    templateUrl: '/templates/Clientes/Create.html',
+                    controller: 'ClientesSaveCtrl'
+                })
+                .otherwise({
                     redirectTo: '/'
                 });
     }];

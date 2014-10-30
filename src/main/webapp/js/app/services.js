@@ -7,7 +7,7 @@ var services = ["PlantaServices",
                 Off: {method: 'get', url: urlApiBase + "Planta/Off/:id"}
             });
             api.Carriles = $resource(urlApiBase + "Carriles/:id", {}, {
-                  update: {method: 'PUT'}
+                update: {method: 'PUT'}
             });
             api.Motores = $resource(urlApiBase + "Motores/:modelo", {}, {
                 update: {method: 'PUT'},
@@ -30,6 +30,12 @@ var services = ["PlantaServices",
                 update: {method: 'PUT'}
             });
             api.Usuarios = $resource(urlApiBase + "Usuarios/:id", {}, {
+                update: {method: 'PUT'}
+            });
+            api.Clientes = $resource(urlApiBase + "Clientes/:id", {}, {
+                update: {method: 'PUT'}
+            });
+            api.Ubicaciones = $resource(urlApiBase + "Ubicaciones/:id", {}, {
                 update: {method: 'PUT'}
             });
             return api;

@@ -30,6 +30,14 @@
         <script src="<c:url value="/js/app/directives.js"/>"></script>     
         <script src="<c:url value="/js/libs/angular-loading-bar/loading-bar.min.js"/>"></script>     
 
+        <script src="<c:url value="/js/libs/angular-strap/angular-strap.min.js"/>"></script>     
+        <script src="<c:url value="/js/libs/angular-strap/angular-strap.tpl.min.js"/>"></script>     
+        <script src="<c:url value="/js/libs/angular-ui-bootstrap/angular-ui-bootstrap.min.js"/>"></script>     
+        <script src="<c:url value="/js/libs/angular-ui-bootstrap/angular-ui-bootstrap-tpls.min.js"/>"></script>     
+
+
+
+
         <script src="<c:url value="/js/libs/jquery-noty/jquery.noty.packaged.min.js"/>"></script>     
         <script src="<c:url value="/js/libs/underscore.js/underscore.js"/>"></script>  
         <script>
@@ -88,8 +96,20 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="#/NuevaPrueba">Nueva</a></li>
-                        <li><a href="#/Pruebas">Pruebas</a></li>
+                            <a href="#/NuevaPrueba">Nueva</a>
+                        </li>
+                        <li>
+                            <a href="#/Pruebas">Pruebas</a>
+                        </li>
+                        <li>
+                            <a href="#/NuevaPruebaArranques">Nuevo Arranque</a>
+                        </li>
+                        <li>
+                            <a href="#/PruebasArranque">Pruebas Arranque</a>
+                        </li>
+                        <li>
+                            <a href="#/Clientes">Clientes</a>
+                        </li>
                         <li>
                             <a href="#/Motores" class="dropdown-toggle">Motores</a>                                        
                         </li>
@@ -98,6 +118,9 @@
                         </li>
                         <li>
                             <a href="#/Usuarios" class="dropdown-toggle">Usuarios</a>                                        
+                        </li> 
+                        <li>
+                            <a href="#/Ubicaciones" class="dropdown-toggle">Ubicaciones</a>                                        
                         </li> 
                         <li>
                             <a href="#/Carriles" class="dropdown-toggle">Carriles</a>                                        

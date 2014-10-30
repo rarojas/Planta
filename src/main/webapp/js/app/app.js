@@ -196,7 +196,7 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
         $interval.cancel($scope.timer);
         $scope.prueba.dtFin = new Date();
         $scope.prueba.estatus = 2;
-        $scope.prueba.ensamble = $scope.ensamble;
+        $scope.prueba.ensamble = {id: $scope.ensamble.id},
         $scope.prueba.$update();
     };
     $scope.ParoPlanta = function () {
@@ -377,7 +377,7 @@ app.controller("PruebaSinCargaController", [
             $scope.Iteraciones.current = 0;
             $scope.Iteraciones.Iteracciones[$scope.Iteraciones.current].current = 0;
             $scope.prueba = new PlantaServices.Pruebas({
-                ensamble: $scope.ensamble,
+                ensamble: {id: $scope.ensamble.id},
                 tipo: 0,
                 estatus: 0,
                 dtInicio: new Date(),

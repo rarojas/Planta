@@ -170,4 +170,90 @@ app.controller("CarrilesSaveCtrl",
                         };
                     }
         ]);
-        
+
+app.controller("UbicacionesCtrl",
+        ["$scope", "PlantaServices", "$filter"
+                    , function ($scope, PlantaServices, $filter) {
+                        BaseTableController.call(this, $scope, $filter);
+                        $scope.items = PlantaServices.Ubicaciones.query($scope.Init);
+                        $scope.Delete = function (ubicacion) {
+                            PlantaServices.Ubicaciones.delete({id: ubicacion.id}, function () {
+                                $scope.ubicacion.pop(ubicacion);
+                            }, function () {
+                            });
+                        };
+                    }
+        ]);
+
+app.controller("UbicacionesSaveCtrl",
+        ["$scope", "PlantaServices", "$routeParams", "$location"
+                    , function ($scope, PlantaServices, $routeParams, $location) {
+                        $scope.ubicacion = new PlantaServices.Ubicaciones();
+                        if ($routeParams.id !== undefined)
+                            $scope.ubicacion.$get({id: $routeParams.id});
+                        $scope.Save = function () {
+                            $scope.ubicacion.$save(function () {
+                                if (!$routeParams.id)
+                                    $location.path("/Ubicaciones/Edit/" + $scope.ubicacion.id);
+                            }, function () {
+
+                            });
+                        };
+                        $scope.Update = function () {
+                            $scope.ubicacion.$update(function () {
+                            }, function () {
+                            });
+                        };
+                        $scope.Delete = function () {
+                            $scope.ubicacion.$delete(function () {
+                                $location.path("/Ubicaciones");
+                            }, function () {
+
+                            });
+                        };
+                    }
+        ]);
+
+
+app.controller("ClientesCtrl",
+        ["$scope", "PlantaServices", "$filter"
+                    , function ($scope, PlantaServices, $filter) {
+                        BaseTableController.call(this, $scope, $filter);
+                        $scope.items = PlantaServices.Clientes.query($scope.Init);
+                        $scope.Delete = function (cliente) {
+                            PlantaServices.Clientes.delete({id: cliente.id}, function () {
+                                $scope.cliente.pop(cliente);
+                            }, function () {
+                            });
+                        };
+                    }
+        ]);
+
+app.controller("ClientesSaveCtrl",
+        ["$scope", "PlantaServices", "$routeParams", "$location"
+                    , function ($scope, PlantaServices, $routeParams, $location) {
+                        $scope.cliente = new PlantaServices.Clientes();
+                        if ($routeParams.id !== undefined)
+                            $scope.cliente.$get({id: $routeParams.id});
+                        $scope.Save = function () {
+                            $scope.cliente.$save(function () {
+                                if (!$routeParams.id)
+                                    $location.path("/Clientes/Edit/" + $scope.cliente.id);
+                            }, function () {
+
+                            });
+                        };
+                        $scope.Update = function () {
+                            $scope.cliente.$update(function () {
+                            }, function () {
+                            });
+                        };
+                        $scope.Delete = function () {
+                            $scope.cliente.$delete(function () {
+                                $location.path("/Clientes");
+                            }, function () {
+
+                            });
+                        };
+                    }
+        ]);

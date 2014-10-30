@@ -42,22 +42,7 @@
             </set>
         </joined-subclass>
         <joined-subclass name="Ensamble" table="ensamble" >
-            <key column="ID" />
-            <many-to-one name="cariles" class="com.selmec.plantaselmec.Models.Cariles" fetch="select">
-                <column name="CarrilID" not-null="true" />
-            </many-to-one>
-            <many-to-one name="planta" class="com.selmec.plantaselmec.Models.Planta" fetch="select">
-                <column name="PlantaID" length="50" not-null="true" />
-            </many-to-one>
-            <many-to-one name="usuarios" class="com.selmec.plantaselmec.Models.Usuarios" fetch="select">
-                <column name="UsuarioID" not-null="true" />
-            </many-to-one>
-            <property name="folio" type="string">
-                <column name="Folio" length="50" not-null="true" unique="true" />
-            </property>
-            <property name="dtCreacion" type="timestamp">
-                <column name="dtCreacion" length="19" not-null="true" />
-            </property>
+            <key column="ID" />                                   
             <property name="altitud" type="int">
                 <column name="Altitud" not-null="true" />
             </property>

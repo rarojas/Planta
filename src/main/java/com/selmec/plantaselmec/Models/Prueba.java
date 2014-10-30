@@ -22,42 +22,20 @@ import javax.persistence.TemporalType;
 )
 public class Prueba extends Pruebabase implements java.io.Serializable {
 
-    private Ensamble ensamble;
-    private Pruebabase pruebabase;
+    private Ensamble ensamble; 
     private int tipo;
     private EstadoPrueba estatus;
     private Integer aprueba;
     private Date dtAprueba;
     private Integer apruebaSupervisor;
     private Date dtApruebaSupervisor;
-    private Set cargasubitas = new HashSet(0);
-    private Pruebacontrol pruebacontrol;
-    private Pruebacarga pruebacarga;
+    private Set cargasubitas = new HashSet(0); 
 
     public Prueba() {
     }
 
-    public Prueba(Ensamble ensamble, Pruebabase pruebabase, int tipo, EstadoPrueba estatus) {
-        this.ensamble = ensamble;
-        this.pruebabase = pruebabase;
-        this.tipo = tipo;
-        this.estatus = estatus;
-    }
-
-    public Prueba(Ensamble ensamble, Pruebabase pruebabase, int tipo, EstadoPrueba estatus, Integer aprueba, Date dtAprueba, Integer apruebaSupervisor, Date dtApruebaSupervisor, Set cargasubitas, Pruebacontrol pruebacontrol, Pruebacarga pruebacarga) {
-        this.ensamble = ensamble;
-        this.pruebabase = pruebabase;
-        this.tipo = tipo;
-        this.estatus = estatus;
-        this.aprueba = aprueba;
-        this.dtAprueba = dtAprueba;
-        this.apruebaSupervisor = apruebaSupervisor;
-        this.dtApruebaSupervisor = dtApruebaSupervisor;
-        this.cargasubitas = cargasubitas;
-        this.pruebacontrol = pruebacontrol;
-        this.pruebacarga = pruebacarga;
-    }
-
+   
+   
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EnsambleID", nullable = false)
     public Ensamble getEnsamble() {

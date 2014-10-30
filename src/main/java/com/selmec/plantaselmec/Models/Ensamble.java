@@ -26,7 +26,7 @@ import org.hibernate.annotations.Parameter;
 public class Ensamble extends Ensamblebase  implements java.io.Serializable {
 
      
-     private Ensamblebase ensamblebase;
+//     private Ensamblebase ensamblebase;
      private int altitud;
      private String rediador;
      private String patin;
@@ -36,22 +36,7 @@ public class Ensamble extends Ensamblebase  implements java.io.Serializable {
     public Ensamble() {
     }
 
-	
-    public Ensamble(Ensamblebase ensamblebase, int altitud, String rediador, String patin, String guardas) {
-        this.ensamblebase = ensamblebase;
-        this.altitud = altitud;
-        this.rediador = rediador;
-        this.patin = patin;
-        this.guardas = guardas;
-    }
-    public Ensamble(Ensamblebase ensamblebase, int altitud, String rediador, String patin, String guardas, Set pruebas) {
-       this.ensamblebase = ensamblebase;
-       this.altitud = altitud;
-       this.rediador = rediador;
-       this.patin = patin;
-       this.guardas = guardas;
-       this.pruebas = pruebas;
-    }
+	    
    
 //     @GenericGenerator(name="generator", strategy="foreign", parameters=@Parameter(name="property", value="ensamblebase"))@Id @GeneratedValue(generator="generator")
 //
@@ -65,14 +50,14 @@ public class Ensamble extends Ensamblebase  implements java.io.Serializable {
 //        this.id = id;
 //    }
 
-@OneToOne(fetch=FetchType.LAZY)@PrimaryKeyJoinColumn
-    public Ensamblebase getEnsamblebase() {
-        return this.ensamblebase;
-    }
-    
-    public void setEnsamblebase(Ensamblebase ensamblebase) {
-        this.ensamblebase = ensamblebase;
-    }
+//@OneToOne(fetch=FetchType.LAZY)@PrimaryKeyJoinColumn
+//    public Ensamblebase getEnsamblebase() {
+//        return this.ensamblebase;
+//    }
+//    
+//    public void setEnsamblebase(Ensamblebase ensamblebase) {
+//        this.ensamblebase = ensamblebase;
+//    }
 
     
     @Column(name="Altitud", nullable=false)

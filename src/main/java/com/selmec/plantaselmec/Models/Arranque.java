@@ -12,8 +12,7 @@ import javax.persistence.Table;
 @Table(name = "arranque", catalog = "casetapruebas"
 )
 public class Arranque extends Pruebaarranque implements java.io.Serializable {
-
-    private Pruebaarranque pruebaarranque;
+    
     private boolean instrumentos;
     private boolean regulador;
     private boolean maestro;
@@ -26,31 +25,9 @@ public class Arranque extends Pruebaarranque implements java.io.Serializable {
 
     public Arranque() {
     }
+   
 
-    public Arranque(Pruebaarranque pruebaarranque, boolean instrumentos, boolean regulador, boolean maestro, boolean multimetro, boolean amperimetro, boolean frecuencimetro, boolean horometro, boolean selector) {
-        this.pruebaarranque = pruebaarranque;
-        this.instrumentos = instrumentos;
-        this.regulador = regulador;
-        this.maestro = maestro;
-        this.multimetro = multimetro;
-        this.amperimetro = amperimetro;
-        this.frecuencimetro = frecuencimetro;
-        this.horometro = horometro;
-        this.selector = selector;
-    }
-
-    public Arranque(Pruebaarranque pruebaarranque, boolean instrumentos, boolean regulador, boolean maestro, boolean multimetro, boolean amperimetro, boolean frecuencimetro, boolean horometro, boolean selector, Boolean fusibles) {
-        this.pruebaarranque = pruebaarranque;
-        this.instrumentos = instrumentos;
-        this.regulador = regulador;
-        this.maestro = maestro;
-        this.multimetro = multimetro;
-        this.amperimetro = amperimetro;
-        this.frecuencimetro = frecuencimetro;
-        this.horometro = horometro;
-        this.selector = selector;
-        this.fusibles = fusibles;
-    }
+   
 
 //    @OneToOne(fetch = FetchType.LAZY)
 //    @PrimaryKeyJoinColumn
@@ -61,7 +38,6 @@ public class Arranque extends Pruebaarranque implements java.io.Serializable {
 //    public void setPruebaarranque(Pruebaarranque pruebaarranque) {
 //        this.pruebaarranque = pruebaarranque;
 //    }
-
     @Column(name = "instrumentos", nullable = false)
     public boolean isInstrumentos() {
         return this.instrumentos;

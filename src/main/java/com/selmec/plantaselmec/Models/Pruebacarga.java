@@ -13,7 +13,7 @@ import javax.persistence.Table;
 )
 public class Pruebacarga extends Prueba implements java.io.Serializable {
 
-    private Prueba prueba;
+//    private Prueba prueba;
     private Double vmax;
     private Double vmin;
     private Double hmax;
@@ -22,18 +22,19 @@ public class Pruebacarga extends Prueba implements java.io.Serializable {
     public Pruebacarga() {
     }
 
-    public Pruebacarga(Prueba prueba) {
-        this.prueba = prueba;
-    }
+//    public Pruebacarga(Prueba prueba) {
+//        this.prueba = prueba;
+//    }
+//
+//    public Pruebacarga(Prueba prueba, Double vmax, Double vmin, Double hmax, Double hmin) {
+//        this.prueba = prueba;
+//        this.vmax = vmax;
+//        this.vmin = vmin;
+//        this.hmax = hmax;
+//        this.hmin = hmin;
+//    }
 
-    public Pruebacarga(Prueba prueba, Double vmax, Double vmin, Double hmax, Double hmin) {
-        this.prueba = prueba;
-        this.vmax = vmax;
-        this.vmin = vmin;
-        this.hmax = hmax;
-        this.hmin = hmin;
-    }
-
+   
 //    @OneToOne(fetch = FetchType.LAZY)
 //    @PrimaryKeyJoinColumn
 //    public Prueba getPrueba() {

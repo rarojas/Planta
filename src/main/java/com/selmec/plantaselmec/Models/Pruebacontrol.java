@@ -20,7 +20,7 @@ import org.hibernate.annotations.Parameter;
 )
 public class Pruebacontrol extends Prueba implements java.io.Serializable {
 
-    private Prueba prueba;
+//    private Prueba prueba;
     private int termometro;
     private Integer presion;
     private Integer saquemarcha;
@@ -42,32 +42,39 @@ public class Pruebacontrol extends Prueba implements java.io.Serializable {
     public Pruebacontrol() {
     }
 
-    public Pruebacontrol(Prueba prueba, int termometro) {
-        this.prueba = prueba;
-        this.termometro = termometro;
-    }
+//    public Pruebacontrol(Prueba prueba, int termometro) {
+//        this.prueba = prueba;
+//        this.termometro = termometro;
+//    }
+//
+//    public Pruebacontrol(Prueba prueba, int termometro, Integer presion, Integer saquemarcha, String sobrevelocidad, String ubt, Boolean operacionubt, Boolean cargaliena, Boolean altatemperatura, Boolean bajapresion, Boolean fallageneral, Boolean arranquemanual, Boolean bajepresion, Boolean temperatura, Boolean proteccionsobrevelocidad, Integer intentosarranque, Integer duraciontotal, String pruebacontrolcol) {
+//        this.prueba = prueba;
+//        this.termometro = termometro;
+//        this.presion = presion;
+//        this.saquemarcha = saquemarcha;
+//        this.sobrevelocidad = sobrevelocidad;
+//        this.ubt = ubt;
+//        this.operacionubt = operacionubt;
+//        this.cargaliena = cargaliena;
+//        this.altatemperatura = altatemperatura;
+//        this.bajapresion = bajapresion;
+//        this.fallageneral = fallageneral;
+//        this.arranquemanual = arranquemanual;
+//        this.bajepresion = bajepresion;
+//        this.temperatura = temperatura;
+//        this.proteccionsobrevelocidad = proteccionsobrevelocidad;
+//        this.intentosarranque = intentosarranque;
+//        this.duraciontotal = duraciontotal;
+//        this.pruebacontrolcol = pruebacontrolcol;
+//    }
 
-    public Pruebacontrol(Prueba prueba, int termometro, Integer presion, Integer saquemarcha, String sobrevelocidad, String ubt, Boolean operacionubt, Boolean cargaliena, Boolean altatemperatura, Boolean bajapresion, Boolean fallageneral, Boolean arranquemanual, Boolean bajepresion, Boolean temperatura, Boolean proteccionsobrevelocidad, Integer intentosarranque, Integer duraciontotal, String pruebacontrolcol) {
-        this.prueba = prueba;
-        this.termometro = termometro;
-        this.presion = presion;
-        this.saquemarcha = saquemarcha;
-        this.sobrevelocidad = sobrevelocidad;
-        this.ubt = ubt;
-        this.operacionubt = operacionubt;
-        this.cargaliena = cargaliena;
-        this.altatemperatura = altatemperatura;
-        this.bajapresion = bajapresion;
-        this.fallageneral = fallageneral;
-        this.arranquemanual = arranquemanual;
-        this.bajepresion = bajepresion;
-        this.temperatura = temperatura;
-        this.proteccionsobrevelocidad = proteccionsobrevelocidad;
-        this.intentosarranque = intentosarranque;
-        this.duraciontotal = duraciontotal;
-        this.pruebacontrolcol = pruebacontrolcol;
-    }
-
+//    public Integer getId() {
+//        return this.id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     @Column(name = "termometro", nullable = false)
     public int getTermometro() {

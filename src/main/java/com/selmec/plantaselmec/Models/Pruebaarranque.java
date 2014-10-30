@@ -22,36 +22,15 @@ import javax.persistence.TemporalType;
 public class Pruebaarranque extends Pruebabase implements java.io.Serializable {
 
     private Ensamblearranque ensamblearranque;
-    private Pruebabase pruebabase;
     private int tipo;
     private int estatus;
     private Integer aprueba;
     private Date dtAprueba;
-    private Vacio vacio;
-    private Instalacion instalacion;
-    private Arranque arranque;
 
     public Pruebaarranque() {
     }
 
-    public Pruebaarranque(Ensamblearranque ensamblearranque, Pruebabase pruebabase, int tipo, int estatus) {
-        this.ensamblearranque = ensamblearranque;
-        this.pruebabase = pruebabase;
-        this.tipo = tipo;
-        this.estatus = estatus;
-    }
-
-    public Pruebaarranque(Ensamblearranque ensamblearranque, Pruebabase pruebabase, int tipo, int estatus, Integer aprueba, Date dtAprueba, Vacio vacio, Instalacion instalacion, Arranque arranque) {
-        this.ensamblearranque = ensamblearranque;
-        this.pruebabase = pruebabase;
-        this.tipo = tipo;
-        this.estatus = estatus;
-        this.aprueba = aprueba;
-        this.dtAprueba = dtAprueba;
-        this.vacio = vacio;
-        this.instalacion = instalacion;
-        this.arranque = arranque;
-    }
+  
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EnsambleID", nullable = false)
@@ -72,7 +51,6 @@ public class Pruebaarranque extends Pruebabase implements java.io.Serializable {
 //    public void setPruebabase(Pruebabase pruebabase) {
 //        this.pruebabase = pruebabase;
 //    }
-
     @Column(name = "Tipo", nullable = false)
     public int getTipo() {
         return this.tipo;
@@ -109,32 +87,32 @@ public class Pruebaarranque extends Pruebabase implements java.io.Serializable {
     public void setDtAprueba(Date dtAprueba) {
         this.dtAprueba = dtAprueba;
     }
-
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "pruebaarranque")
-    public Vacio getVacio() {
-        return this.vacio;
-    }
-
-    public void setVacio(Vacio vacio) {
-        this.vacio = vacio;
-    }
-
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "pruebaarranque")
-    public Instalacion getInstalacion() {
-        return this.instalacion;
-    }
-
-    public void setInstalacion(Instalacion instalacion) {
-        this.instalacion = instalacion;
-    }
-
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "pruebaarranque")
-    public Arranque getArranque() {
-        return this.arranque;
-    }
-
-    public void setArranque(Arranque arranque) {
-        this.arranque = arranque;
-    }
+//
+//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "pruebaarranque")
+//    public Vacio getVacio() {
+//        return this.vacio;
+//    }
+//
+//    public void setVacio(Vacio vacio) {
+//        this.vacio = vacio;
+//    }
+//
+//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "pruebaarranque")
+//    public Instalacion getInstalacion() {
+//        return this.instalacion;
+//    }
+//
+//    public void setInstalacion(Instalacion instalacion) {
+//        this.instalacion = instalacion;
+//    }
+//
+//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "pruebaarranque")
+//    public Arranque getArranque() {
+//        return this.arranque;
+//    }
+//
+//    public void setArranque(Arranque arranque) {
+//        this.arranque = arranque;
+//    }
 
 }

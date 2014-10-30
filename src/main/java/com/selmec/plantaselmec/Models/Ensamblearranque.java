@@ -25,7 +25,6 @@ import org.hibernate.annotations.Parameter;
 )
 public class Ensamblearranque extends Ensamblebase implements java.io.Serializable {
 
-    private Ensamblebase ensamblebase;
     private Ubicaciones ubicaciones;
     private String recibio;
     private String tecnico;
@@ -34,31 +33,16 @@ public class Ensamblearranque extends Ensamblebase implements java.io.Serializab
     public Ensamblearranque() {
     }
 
-    public Ensamblearranque(Ensamblebase ensamblebase, Ubicaciones ubicaciones, String recibio, String tecnico) {
-        this.ensamblebase = ensamblebase;
-        this.ubicaciones = ubicaciones;
-        this.recibio = recibio;
-        this.tecnico = tecnico;
-    }
 
-    public Ensamblearranque(Ensamblebase ensamblebase, Ubicaciones ubicaciones, String recibio, String tecnico, Set pruebaarranques) {
-        this.ensamblebase = ensamblebase;
-        this.ubicaciones = ubicaciones;
-        this.recibio = recibio;
-        this.tecnico = tecnico;
-        this.pruebaarranques = pruebaarranques;
-    }
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
-    public Ensamblebase getEnsamblebase() {
-        return this.ensamblebase;
-    }
-
-    public void setEnsamblebase(Ensamblebase ensamblebase) {
-        this.ensamblebase = ensamblebase;
-    }
-
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @PrimaryKeyJoinColumn
+//    public Ensamblebase getEnsamblebase() {
+//        return this.ensamblebase;
+//    }
+//
+//    public void setEnsamblebase(Ensamblebase ensamblebase) {
+//        this.ensamblebase = ensamblebase;
+//    }
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "UbicacionId", nullable = false)
     public Ubicaciones getUbicaciones() {

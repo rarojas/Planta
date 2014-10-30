@@ -4,7 +4,7 @@
 <!-- Generated Oct 29, 2014 10:52:16 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping package="com.selmec.plantaselmec.Models">
     <class name="Pruebabase" table="pruebabase" catalog="casetapruebas" optimistic-lock="version">
-        <id name="id" type="java.lang.Integer">
+        <id name="id" type="int">
             <column name="ID" />
             <generator class="identity" />
         </id>
@@ -32,10 +32,7 @@
             <key column="ID"/>
             <many-to-one name="ensamble" class="Ensamble" fetch="select">
                 <column name="EnsambleID" not-null="true" />
-            </many-to-one>
-            <!--            <many-to-one name="incidencias" class="Incidencias" fetch="select">
-                <column name="IncidenciaID" length="45" />
-            </many-to-one>-->
+            </many-to-one>           
             <property name="tipo" type="int">
                 <column name="Tipo" not-null="true" />
             </property>
@@ -44,16 +41,7 @@
                 <type name="org.hibernate.type.EnumType">
                     <param name="enumClass">com.selmec.plantaselmec.Models.EstadoPrueba</param>
                 </type>
-            </property>
-            <!--            <property name="dtInicio" type="timestamp">
-                <column name="dtInicio" length="19" not-null="true" />
-            </property>
-            <property name="dtFin" type="timestamp">
-                <column name="dtFin" length="19" not-null="true" />
-            </property>
-            <property name="comentario" type="string">
-                <column name="Comentario" length="250" />
-            </property>-->
+            </property>          
             <property name="aprueba" type="java.lang.Integer">
                 <column name="Aprueba" />
             </property>
@@ -65,17 +53,8 @@
             </property>
             <property name="dtApruebaSupervisor" type="timestamp">
                 <column name="dtApruebaSupervisor" length="19" />
-            </property>
-            <!--        <one-to-one name="cargasubita" class="Cargasubita"  ></one-to-one>
-            <one-to-one name="pruebacontrol" class="Pruebacontrol"></one-to-one>
-            <one-to-one name="pruebacarga" class="Pruebacarga"></one-to-one>-->
-            <!--            <set name="lecturases" table="lecturas" inverse="true" lazy="true" fetch="select">
-                <key>
-                    <column name="PruebaID" />
-                </key>
-                <one-to-many class="Lecturas" />
-            </set>  -->
-            <joined-subclass name="Cargasubita" table="cargasubita" >
+            </property>          
+<!--            <joined-subclass name="Cargasubita" table="cargasubita" >
                 <key column="ID" />      
                 <property name="seg" type="java.lang.Integer">
                     <column name="seg" />
@@ -94,11 +73,8 @@
                 </property>
                 <property name="icarga" type="java.lang.Double">
                     <column name="icarga" precision="22" scale="0" />
-                </property>
-                <!--            <joined-subclass name="CargasubitaSub" table="CargasubitaSub" >
-                    <key column="ID" />     
-                </joined-subclass>-->
-            </joined-subclass>
+                </property>              
+            </joined-subclass>-->
             <joined-subclass name="Pruebacontrol" table="pruebacontrol"  >
                 <key column="ID" />   
                 <property name="termometro" type="int">
@@ -175,7 +151,6 @@
             <many-to-one name="ensamblearranque" class="Ensamblearranque" fetch="select">
                 <column name="EnsambleID" not-null="true" />
             </many-to-one>
-
             <property name="tipo" type="int">
                 <column name="Tipo" not-null="true" />
             </property>
@@ -283,8 +258,6 @@
             </joined-subclass>
         </joined-subclass>
         
-        
-        <!--        <one-to-one name="prueba" class="com.selmec.plantaselmec.Models.Prueba"></one-to-one>
-        <one-to-one name="pruebaarranque" class="com.selmec.plantaselmec.Models.Pruebaarranque"></one-to-one>-->
+             
     </class>
 </hibernate-mapping>

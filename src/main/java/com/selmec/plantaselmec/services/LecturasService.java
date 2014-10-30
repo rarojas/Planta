@@ -7,6 +7,7 @@ package com.selmec.plantaselmec.services;
 
 import com.selmec.plantaselmec.Models.Lecturas;
 import com.selmec.plantaselmec.Models.Prueba;
+import com.selmec.plantaselmec.Models.Pruebabase;
 import com.selmec.plantaselmec.dto.LecturaPSC;
 import com.selmec.utils.dao.IGenericDao;
 import ma.glasnost.orika.MapperFacade;
@@ -34,9 +35,9 @@ public class LecturasService implements ILecturasService {
     @Transactional
     @Override
     public void Save(LecturaPSC result, int PruebaId) {
-        Prueba prueba = (Prueba) dao.getCurrentSession().get(Prueba.class, PruebaId);
+        Pruebabase prueba = (Pruebabase) dao.getCurrentSession().get(Pruebabase.class, PruebaId);
         Lecturas lectura = mapper.map(result, Lecturas.class);        
-        lectura.setPrueba(prueba);
+        lectura.setPruebabase(prueba);
         lectura.setHz(result.HZ);
         lectura.setL1(result.L1N);
         lectura.setL2(result.L2N);

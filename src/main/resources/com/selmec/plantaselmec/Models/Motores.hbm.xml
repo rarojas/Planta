@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 21, 2014 4:26:41 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 30, 2014 5:43:43 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.selmec.plantaselmec.Models.Motores" table="motores" catalog="test" optimistic-lock="version">
+    <class name="com.selmec.plantaselmec.Models.Motores" table="motores" catalog="casetapruebas" optimistic-lock="version">
         <id name="modelo" type="string">
             <column name="Modelo" length="50" />
             <generator class="assigned" />

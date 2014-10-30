@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 21, 2014 4:26:41 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 30, 2014 5:43:43 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.selmec.plantaselmec.Models.Planta" table="planta" catalog="test" optimistic-lock="version">
+    <class name="com.selmec.plantaselmec.Models.Planta" table="planta" catalog="casetapruebas" optimistic-lock="version">
         <id name="noSerie" type="string">
             <column name="NoSerie" length="50" />
             <generator class="assigned" />
@@ -32,11 +32,11 @@
         <property name="capInt" type="java.lang.Integer">
             <column name="CapInt" />
         </property>
-        <set name="ensambles" table="ensamble" inverse="true" lazy="true" fetch="select">
+        <set name="ensamblebases" table="ensamblebase" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="PlantaID" length="50" not-null="true" />
             </key>
-            <one-to-many class="com.selmec.plantaselmec.Models.Ensamble" />
+            <one-to-many class="com.selmec.plantaselmec.Models.Ensamblebase" />
         </set>
     </class>
 </hibernate-mapping>

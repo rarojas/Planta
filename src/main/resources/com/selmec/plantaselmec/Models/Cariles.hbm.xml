@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 21, 2014 4:26:41 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 30, 2014 5:43:43 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.selmec.plantaselmec.Models.Cariles" table="cariles" catalog="test" optimistic-lock="version">
+    <class name="com.selmec.plantaselmec.Models.Cariles" table="cariles" catalog="casetapruebas" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="ID" />
             <generator class="identity" />
@@ -22,15 +22,15 @@
         </property>
         <property name="maxCap" type="java.lang.Integer">
             <column name="maxCap" />
-        </property>        
-        <property name="descripcion" type="string">
-            <column name="descripcion" length="100"  />
         </property>
-        <set name="ensambles" table="ensamble" inverse="true" lazy="true" fetch="select">
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="100" />
+        </property>
+        <set name="ensamblebases" table="ensamblebase" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="CarrilID" not-null="true" />
             </key>
-            <one-to-many class="com.selmec.plantaselmec.Models.Ensamble" />
+            <one-to-many class="com.selmec.plantaselmec.Models.Ensamblebase" />
         </set>
     </class>
 </hibernate-mapping>

@@ -1,9 +1,8 @@
 package com.selmec.plantaselmec.controllers;
 
-import com.selmec.plantaselmec.Models.Cariles;
 import com.selmec.plantaselmec.Models.Planta;
-import com.selmec.plantaselmec.Models.Prueba;
 import com.selmec.plantaselmec.dto.LecturaPSC;
+import com.selmec.plantaselmec.dto.PlantaDTO;
 import com.selmec.plantaselmec.dto.ValoresEsperados;
 import com.selmec.plantaselmec.services.IEnsambleService;
 import com.selmec.plantaselmec.services.ILecturasService;
@@ -15,17 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.hibernate.SessionFactory;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/api/Planta")
-public class PlantaController {
+public class PlantaController extends BaseController<Planta, String, PlantaDTO> {
 
     @Autowired
     SessionFactory sessionFactory;
@@ -33,42 +29,45 @@ public class PlantaController {
     @Autowired
     IEnsambleService ensambleService;
 
-    @Autowired
     IPlantaServices PlantaServices;
+
     @Autowired
     ILecturasService LecturasService;
 
     private final Logger logger = Logger.getLogger(PlantaController.class);
-    @Autowired
-    JdbcTemplate jdbctemplate;
 
     @RequestMapping(value = "Planta", method = RequestMethod.GET)
     public String Index() {
         return "Plantas/index";
     }
-
-    @Transactional
-    @RequestMapping(method = RequestMethod.POST)
-    @ResponseBody
-    public Planta Post(@RequestBody Planta planta) {
-        sessionFactory.getCurrentSession().persist(planta);
-        return planta;
-    }
-
-    @Transactional
+   
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
-    List<Planta> Get() {
-        return sessionFactory.getCurrentSession().createCriteria(Planta.class).list();
+    @Override
+    List<PlantaDTO> Get() {
+        return PlantaServices.GetPlantas();
     }
 
-    @Transactional
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public @ResponseBody
-    Planta Get(@RequestParam String id) {
-        return (Planta) sessionFactory.getCurrentSession().get(Planta.class, id);
-    }
-
+//    @Transactional
+//    @RequestMapping(method = RequestMethod.POST)
+//    @ResponseBody
+//    public Planta Post(@RequestBody Planta planta) {
+//        sessionFactory.getCurrentSession().persist(planta);
+//        return planta;
+//    }
+//    @Transactional
+//    @RequestMapping(method = RequestMethod.GET)
+//    public @ResponseBody
+//    List<Planta> Get() {
+//        return sessionFactory.getCurrentSession().createCriteria(Planta.class).list();
+//    }
+//
+//    @Transactional
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+//    public @ResponseBody
+//    Planta Get(@RequestParam String id) {
+//        return (Planta) sessionFactory.getCurrentSession().get(Planta.class, id);
+//    }
     @Transactional(readOnly = true)
     @RequestMapping(value = "/Valores/{id}", method = RequestMethod.GET)
     public @ResponseBody
@@ -91,14 +90,13 @@ public class PlantaController {
         return valores;
     }
 
-    @Transactional
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public void Delete(@PathVariable("id") int id) {
-        Planta Planta = (Planta) sessionFactory.getCurrentSession().get(Planta.class, id);
-        sessionFactory.getCurrentSession().delete(Planta);
-    }
-
+//    @Transactional
+//    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+//    @ResponseBody
+//    public void Delete(@PathVariable("id") int id) {
+//        Planta Planta = (Planta) sessionFactory.getCurrentSession().get(Planta.class, id);
+//        sessionFactory.getCurrentSession().delete(Planta);
+//    }
     @Transactional
     @RequestMapping(value = "On/{id}", method = RequestMethod.GET)
     @ResponseBody
@@ -120,7 +118,6 @@ public class PlantaController {
     @RequestMapping(value = "Off/{id}", method = RequestMethod.GET)
     @ResponseBody
     public String Off(@PathVariable("id") int id) {
-        logger.info(ensambleService);
         ensambleService.TurnOffCarril(id);
         return "true";
     }
@@ -140,4 +137,13 @@ public class PlantaController {
 
     @Autowired
     IPruebaServices pruebaServics;
+
+    /**
+     * @param PlantaServices the PlantaServices to set
+     */
+    @Autowired
+    public void setPlantaServices(IPlantaServices PlantaServices) {
+        this.PlantaServices = PlantaServices;
+        this.baseService = PlantaServices;
+    }
 }

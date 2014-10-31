@@ -9,6 +9,7 @@ import com.selmec.plantaselmec.Models.EstadoPrueba;
 import com.selmec.plantaselmec.Models.Prueba;
 import com.selmec.plantaselmec.Models.Usuarios;
 import com.selmec.utils.dao.IGenericDao;
+import com.selmec.utils.services.BaseServices;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

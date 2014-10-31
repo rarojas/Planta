@@ -104,7 +104,13 @@ var Routes = ['$routeProvider',
                 when('/Clientes/Create', {
                     templateUrl: '/templates/Clientes/Create.html',
                     controller: 'ClientesSaveCtrl'
+                }).
+                when('/NuevoArranque', {
+                    templateUrl: '/templates/EnsambleArranque/Nueva.html',
+                    controller: 'NuevoArranqueCtrl'
                 })
+
+
                 .otherwise({
                     redirectTo: '/'
                 });

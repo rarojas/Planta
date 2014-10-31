@@ -68,20 +68,7 @@ public class PruebaController extends BaseControllers<Prueba, PruebaDTO> {
         return DTO(prueba, Prueba.class, PruebaDTO.class);
     }
 
-    @RequestMapping(value = "test", method = RequestMethod.POST)
-    @ResponseBody
-    public PruebaDTO Post() {
-        Prueba prueba = new Prueba();
-        prueba.setEstatus(EstadoPrueba.Creada);
-        Ensamble ensamble =  new Ensamble();
-        ensamble.setId(3);                        
-        prueba.setEnsamble(ensamble);
-        prueba.setDtInicio(new Date());
-        prueba.setDtFin(new Date());
-        
-        pruebaServices.Save(prueba);
-        return DTO(prueba, Prueba.class, PruebaDTO.class);
-    }
+   
 
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody

@@ -7,6 +7,7 @@ package com.selmec.plantaselmec.services;
 
 import com.selmec.plantaselmec.Models.Ensamble;
 import com.selmec.plantaselmec.Models.Usuarios;
+import com.selmec.utils.services.IBaseServices;
 import java.util.List;
 
 /**

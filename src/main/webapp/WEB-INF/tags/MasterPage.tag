@@ -102,7 +102,7 @@
                             <a href="#/Pruebas">Pruebas</a>
                         </li>
                         <li>
-                            <a href="#/NuevaPruebaArranques">Nuevo Arranque</a>
+                            <a href="#/NuevoArranque">Nuevo Arranque</a>
                         </li>
                         <li>
                             <a href="#/PruebasArranque">Pruebas Arranque</a>
@@ -124,6 +124,9 @@
                         </li> 
                         <li>
                             <a href="#/Carriles" class="dropdown-toggle">Carriles</a>                                        
+                        </li> 
+                        <li>
+                            <a href="#/Kits" class="dropdown-toggle">Kits</a>                                        
                         </li> 
                     </ul>                                
                     <ul class="nav navbar-nav navbar-right">

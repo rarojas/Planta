@@ -5,22 +5,16 @@
  */
 package com.selmec.plantaselmec.services;
 
+import com.selmec.plantaselmec.Models.Kit;
+import com.selmec.plantaselmec.dto.KitDTO;
+import com.selmec.utils.services.IBaseServices;
 import java.util.List;
 
 /**
  *
  * @author rrojase
  */
-public interface IBaseServices<T,K> {
-     
-    List<T> Get();
-   
-    T Get(K id);
+public interface IKitsServices extends IBaseServices<Kit, Integer> {
     
-    void Save(T entity);
-        
-    void Update(T entity);
-        
-    void Delete(K id);    
-    
+    public List<KitDTO> GetKist();
 }

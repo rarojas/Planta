@@ -1,16 +1,20 @@
 package com.selmec.plantaselmec.services;
 
 import com.selmec.Utils.Description;
-import com.selmec.plantaselmec.Models.Cariles;
+import com.selmec.plantaselmec.Models.Planta;
 import com.selmec.plantaselmec.dto.LecturaPSC;
+import com.selmec.plantaselmec.dto.PlantaDTO;
 import com.selmec.plantaselmec.dto.TablaLecturaDTO;
+import com.selmec.utils.dao.IGenericDao;
+import com.selmec.utils.services.BaseServices;
 import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.hibernate.SessionFactory;
+import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -19,12 +23,17 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class PlantaServices implements IPlantaServices {
+@Configurable
+public class PlantaServices extends BaseServices<Planta, String> implements IPlantaServices {
+
+    @Autowired
+    public void setDao(IGenericDao<Planta, String> daoToSet) {
+        this.dao = daoToSet;
+        this.dao.setClazz(Planta.class);
+    }
 
     @Autowired
     private JdbcTemplate jdbctemplate;
-    @Autowired
-    SessionFactory sessionFactory;
 
     @Transactional(value = "transactionManagerInformix", readOnly = true, isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED)
     @Override
@@ -63,9 +72,19 @@ public class PlantaServices implements IPlantaServices {
                 }
             }
         }
-        result.Presion *= 14.5038;
-
+        if (result.Presion != null) {
+            result.Presion *= 14.5038;/// Conversión de bar PSI
+        }
         return result;
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<PlantaDTO> GetPlantas() {
+        return mapper.mapAsList(dao.findAll(), PlantaDTO.class);
+    }
+
+    @Autowired
+    MapperFacade mapper;
 
 }

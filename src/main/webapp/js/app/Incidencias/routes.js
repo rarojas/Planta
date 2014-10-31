@@ -13,6 +13,18 @@ var Routes = ['$routeProvider',
                     templateUrl: '/templates/Incidencias/Edit.html',
                     controller: 'IncidenciasSaveCtrl'
                 }).
+                when('/Kits', {
+                    templateUrl: '/templates/Kits/Index.html',
+                    controller: 'KitsCtrl'
+                }).
+                when('/Kits/Edit/:id', {
+                    templateUrl: '/templates/Kits/Edit.html',
+                    controller: 'KitsSaveCtrl'
+                }).
+                when('/Kits/Create', {
+                    templateUrl: '/templates/Kits/Create.html',
+                    controller: 'KitsSaveCtrl'
+                }).
                 otherwise({
                     redirectTo: '/Pruebas'
                 });

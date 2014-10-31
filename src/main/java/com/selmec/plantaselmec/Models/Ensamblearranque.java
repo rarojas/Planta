@@ -29,11 +29,20 @@ public class Ensamblearranque extends Ensamblebase implements java.io.Serializab
     private String recibio;
     private String tecnico;
     private Set pruebaarranques = new HashSet(0);
+    public Kit kit;
 
     public Ensamblearranque() {
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CarrilID", nullable = false)
+    public Kit getKit() {
+        return this.kit;
+    }
 
+    public void setKit(Kit kit) {
+        this.kit = kit;
+    }
 //    @OneToOne(fetch = FetchType.LAZY)
 //    @PrimaryKeyJoinColumn
 //    public Ensamblebase getEnsamblebase() {
@@ -43,6 +52,7 @@ public class Ensamblearranque extends Ensamblebase implements java.io.Serializab
 //    public void setEnsamblebase(Ensamblebase ensamblebase) {
 //        this.ensamblebase = ensamblebase;
 //    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "UbicacionId", nullable = false)
     public Ubicaciones getUbicaciones() {

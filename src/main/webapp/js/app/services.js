@@ -9,6 +9,9 @@ var services = ["PlantaServices",
             api.Carriles = $resource(urlApiBase + "Carriles/:id", {}, {
                 update: {method: 'PUT'}
             });
+            api.Kits = $resource(urlApiBase + "Kits/:id", {}, {
+                update: {method: 'PUT'}
+            });
             api.Motores = $resource(urlApiBase + "Motores/:modelo", {}, {
                 update: {method: 'PUT'},
                 get: {method: 'GET', url: urlApiBase + "Motores/Get"}

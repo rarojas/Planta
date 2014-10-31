@@ -41,9 +41,10 @@ app.controller("IncidenciasSaveCtrl",
                     }
         ]);
 app.controller("MotoresCtrl",
-        ["$scope", "PlantaServices", "$routeParams"
-                    , function ($scope, PlantaServices) {
-                        $scope.motores = PlantaServices.Motores.query();
+        ["$scope", "PlantaServices", "$filter"
+                    , function ($scope, PlantaServices, $filter) {
+                        BaseTableController.call(this, $scope, $filter);
+                        $scope.items = PlantaServices.Motores.query($scope.Init);
                         $scope.Delete = function (motor) {
                             PlantaServices.Motores.delete({modelo: motor.modelo}, function () {
                                 $scope.incidencias.pop(motor);
@@ -251,6 +252,49 @@ app.controller("ClientesSaveCtrl",
                         $scope.Delete = function () {
                             $scope.cliente.$delete(function () {
                                 $location.path("/Clientes");
+                            }, function () {
+
+                            });
+                        };
+                    }
+        ]);
+
+app.controller("KitsCtrl",
+        ["$scope", "PlantaServices", "$filter"
+                    , function ($scope, PlantaServices, $filter) {
+                        BaseTableController.call(this, $scope, $filter);
+                        $scope.items = PlantaServices.Kits.query($scope.Init);
+                        $scope.Delete = function (kit) {
+                            PlantaServices.Kits.delete({id: kit.id}, function () {
+                                $scope.kites.pop(kit);
+                            }, function () {
+                            });
+                        };
+                    }
+        ]);
+
+app.controller("KitsSaveCtrl",
+        ["$scope", "PlantaServices", "$routeParams", "$location"
+                    , function ($scope, PlantaServices, $routeParams, $location) {
+                        $scope.kit = new PlantaServices.Kits();
+                        if ($routeParams.id !== undefined)
+                            $scope.kit.$get({id: $routeParams.id});
+                        $scope.Save = function () {
+                            $scope.kit.$save(function () {
+                                if (!$routeParams.id)
+                                    $location.path("/Kits/Edit/" + $scope.kit.id);
+                            }, function () {
+
+                            });
+                        };
+                        $scope.Update = function () {
+                            $scope.kit.$update(function () {
+                            }, function () {
+                            });
+                        };
+                        $scope.Delete = function () {
+                            $scope.kit.$delete(function () {
+                                $location.path("/Kits");
                             }, function () {
 
                             });

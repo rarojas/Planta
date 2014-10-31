@@ -8,6 +8,7 @@ package com.selmec.plantaselmec.services;
 import com.selmec.plantaselmec.Models.Ensamble;
 import com.selmec.plantaselmec.Models.Usuarios;
 import com.selmec.utils.dao.IGenericDao;
+import com.selmec.utils.services.BaseServices;
 import java.util.List;
 import javax.sql.DataSource;
 import org.hibernate.criterion.Restrictions;

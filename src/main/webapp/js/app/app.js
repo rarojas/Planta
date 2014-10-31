@@ -259,7 +259,7 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
         });
     };
     $scope.NowToLastMinute = function () {
-       
+
         if ($scope.valores.Max.L1N > $scope.now.L1N && $scope.valores.Min.L1N < $scope.now.L1N) {
             $scope.log.push($scope.now.L1N);
         }
@@ -673,6 +673,11 @@ app.controller("NuevoArranqueCtrl",
         ["$scope", "PlantaServices", "$filter", "$location",
             function ($scope, PlantaServices, $filter, $location) {
                 $scope.motores = PlantaServices.Plantas.query();
+                $scope.ubicaciones = PlantaServices.Ubicaciones.query();
+
+                $scope.$watch("prueba.noOP", function () {
+
+                });
                 $scope.submit = function () {
                     var prueba = new PlantaServices.EnsambleArranque({
                         folio: "14PR000001",
@@ -698,4 +703,4 @@ app.controller("NuevoArranqueCtrl",
 
                 };
             }]);
-     
+

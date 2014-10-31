@@ -8,61 +8,76 @@
                             Datos Generales de la Planta de Emergencia                                                        
                         </legend>
                         <div class="row">
-                            <div class="col-md-4">
-                                <h3>Planta de Emergencia</h3>
+                            <div class="col-md-4">                                
                                 <div class="form-group">
                                     <label class="control-label col-md-4">
-                                        Modelo:                                       
+                                        No Cliente
                                     </label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control" required ng-model="planta.motores.modelo" name="modelo" placeholder="Modelo">
+                                        <input type="text" class="form-control" required ng-model="prueba.noCliente" name="modelo" placeholder="Modelo">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4">
-                                        No. Serie:                                       
+                                        Cliente                               
                                     </label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control" required ng-model="planta.noSerie" name="serie">
+                                        <input type="text" class="form-control" required ng-model="prueba.Cliente" name="serie">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4">
-                                        No. Op                                       
+                                        No. OP                                       
                                     </label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control" required ng-model="planta.noOp" name="produccion">
+                                        <input type="text" class="form-control" required ng-model="prueba.noOp" name="noOP">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">
+                                        No. OV                                   
+                                    </label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" required ng-model="prueba.noOV" name="noOV">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <h3>Motor</h3>
+                            <div class="col-md-4">                               
                                 <div class="form-group">
                                     <label class="control-label col-md-4">
-                                        Motores:
+                                        Instalacion en :
                                     </label>
                                     <div class="col-md-8">
-                                        <select name="motor" ng-options="m.modelo group by m.marca for m in motores" ng-model="planta.motores" required class="form-control" ></select>
+                                        <select name="ubbicacion" ng-options="m.poblacion for m in ubicaciones" ng-model="prueba.ubicacion" required class="form-control" >
+                                            <option value="">Nueva Ubicación</option>
+                                        </select>
                                     </div>
+                                </div>                               
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">
+                                        Poblacion                                     
+                                    </label>                                        
+                                    <div class="col-md-8">
+                                        <label ng-show="prueba.ubicacion.id">{{prueba.ubicacion.poblacion}}</label>
+                                        <input ng-show="!prueba.ubicacion.id" type="text" class="form-control" required ng-model="prueba.ubicacion.poblacion" name="poblacion">
+                                    </div>                                     
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-4 control-label">
-                                        Marca:                                        
+                                        Entidad                                        
                                     </label>                                        
-                                    <label class="control-label col-md-8">{{ planta.motores.marca}}</label>                                        
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">
-                                        Modelo:                                        
-                                    </label>                                        
-                                    <label class="control-label col-md-8">{{ planta.motores.modelo}}</label>                                        
+                                    <div class="col-md-8">
+                                        <label ng-show="prueba.ubicacion.id">{{prueba.ubicacion.estado}}</label>
+                                        <input ng-show="!prueba.ubicacion.id" type="text" class="form-control " required ng-model="prueba.ubicacion.estado" name="estado">
+                                    </div>                                      
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4">
-                                        No. Serie                                        
+                                        Teléfono
                                     </label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control" required ng-model="planta.motorSerie" name="serieMotor">
+                                        <label ng-show="prueba.ubicacion.id">{{prueba.ubicacion.telefono}}</label>
+                                        <input ng-show="!prueba.ubicacion.id" type="text" class="form-control" required ng-model="prueba.ubicacion.telefono" name="telefono">
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +87,7 @@
                                     <label class="control-label col-md-4">
                                         Marca:                                        
                                     </label>
-                                    <div class="col-md-8">
+                                    <div class="col-md-8">                                        
                                         <input type="text" class="form-control" ng-model="planta.motores.generadorMarca" required name="generador_marca">
                                     </div>
                                 </div>

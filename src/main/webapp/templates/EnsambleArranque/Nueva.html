@@ -106,116 +106,111 @@
             <div class="row">
                 <div class="col-md-12" style="background-color: #EDEFEE">                        
                     <fieldset>
-                        <legend >
+                        <legend>
                             Datos de Placa
                         </legend>
                         <div class="row">
-                            <div class="col-md-4">                                    
-                                <div class="form-group">
-                                    <label  class="control-label col-md-4">
-                                        Marca                              
-                                    </label>
-                                    <label class="col-md-8">{{prueba.planta.marca}}</label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-4">
-                                        Modelo
-                                    </label>
-                                    <label class="col-md-8">{{prueba.planta.modelo}}</label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-4">
-                                        No. Serie
-                                    </label>
-                                    <label class="col-md-8">{{prueba.planta.noSerie}}</label>
-                                </div>                               
+                            <div class="col-md-4">  
+                                <fieldset>
+                                    <legend>Planta</legend>
+
+                                    <div class="form-group">
+                                        <label  class="control-label col-md-4">
+                                            Marca                            
+                                        </label>
+                                        <label class="col-md-8">{{prueba.planta.marca}}</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">
+                                            Modelo
+                                        </label>
+                                        <label class="col-md-8">{{prueba.planta.modelo}}</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">
+                                            No. Serie
+                                        </label>
+                                        <label class="col-md-8">{{prueba.planta.noSerie}}</label>
+                                    </div>   
+                                </fieldset>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label col-md-4">
-                                        Tipo Control                                        
-                                    </label>
-                                    <div class="col-md-8">
-                                        <select class="form-control" ng-options="c.id as c.text for c in tipoControl" ng-model="planta.controlId" name="tipoControl"></select>  
+                            <div class="col-md-5">
+                                <fieldset>
+                                    <legend><br></legend>
+                                    <div class="col-md-12" style="background-color: #EDEFEE">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">
+                                                    Tipo de Control                                        
+                                                </label>
+                                                <label class="col-md-8">{{prueba.planta.tipoControl}}</label>
+                                            </div> 
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">
+                                                    Tipo de Combustible                                        
+                                                </label>
+                                                <label class="col-md-8">{{prueba.planta.combustible}}</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">
+                                                    Capacidad Interruptor(A)                                        
+                                                </label>
+                                                <label class="col-md-8">{{prueba.planta.capacidadInterruptor}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">
+                                                    KW:                                         
+                                                </label>
+                                                <label class="col-md-8">{{prueba.planta.kw}}</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">
+                                                    KVA                                         
+                                                </label>
+                                                <label class="col-md-8">{{prueba.planta.kva}}</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">
+                                                    HZ                                         
+                                                </label>
+                                                <label class="col-md-8">{{prueba.planta.frecuenciaOperacion}}</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">
+                                                    No.Fases                                         
+                                                </label>
+                                                <label class="col-md-8">{{prueba.planta.noFases}}</label>
+                                            </div>
+
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-4">
-                                        Carril                                  
-                                    </label>
-                                    <div class="col-md-8">
-                                        <select class="form-control" ng-options="(c.id + ' - ' + c.minCap + 'KW a ' + c.maxCap + 'KW')  for c in carriles" ng-model="ensamble.cariles" name="carril"></select>  
-                                        <span class="error">
-                                            <span ng-show="ensamble.cariles.maxCap < planta.motores.kw" >El carril no soporta la capacida de prueba de la planta</span>
-                                        </span>
-                                    </div>
-                                </div>                                   
-                                <div class="form-group">
-                                    <label class="control-label col-md-4">
-                                        Patin                                  
-                                    </label>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control" required ng-model="ensamble.patin" name="patin"> 
-                                    </div>
-                                </div> 
-                                <div class="form-group">
-                                    <label class="control-label col-md-4">
-                                        Radiador                                  
-                                    </label>
-                                    <div class="col-md-8">
-                                        <input type="text"  class="form-control" required ng-model="ensamble.rediador" name="rediador"> 
-                                    </div>
-                                </div> 
-                                <div class="form-group">
-                                    <label class="control-label col-md-4">
-                                        Guardas                                  
-                                    </label>
-                                    <div class="col-md-8">
-                                        <input type="text"  class="form-control" required ng-model="ensamble.guardas" name="guardas"> 
-                                    </div>
-                                </div> 
-                                <div class="form-group">
-                                    <label class="control-label col-md-4">
-                                        Altitud                                  
-                                    </label>
-                                    <div class="col-md-8">
-                                        <input type="text"  class="form-control" required ng-model="ensamble.altitud" name="altitud"> 
-                                    </div>
-                                </div> 
+                                </fieldset>
                             </div>
-                            <div class="col-md-4">                                    
-                                <div class="form-group">
-                                    <label class="control-label col-md-4">
-                                        Cap. Interruptor                                        
-                                    </label>
-                                    <div class="col-md-8">
-                                        <input type="number"  min="0" class="form-control" required ng-model="planta.capInt" name="capInt">
+                            <div class="col-md-3">                                 
+                                <fieldset>
+                                    <legend>Generador</legend>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">
+                                            Marca                                         
+                                        </label>
+                                        <label class="col-md-8">{{prueba.planta.generadorMarca}}</label>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-4">
-                                        Fases:                                        
-                                    </label>
-                                    <div class="col-md-8">
-                                        {{planta.motores.noFases}}
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">
+                                            Modelo                                         
+                                        </label>
+                                        <label class="col-md-8">{{prueba.planta.generadorModelo}}</label>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-4">
-                                        Voltaje:                                        
-                                    </label>
-                                    <div class="col-md-8">
-                                        <input type="number"  min="0" class="form-control" required ng-model="planta.voltaje" name="voltaje">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">
+                                            No. Serie                                         
+                                        </label>
+                                        <label class="col-md-8">{{prueba.planta.noSerieModelo}}</label>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-4">
-                                        Frecuencia:                                       
-                                    </label>
-                                    <div class="col-md-8">
-                                        {{planta.motores.frecuenciaOperacion}}
-                                    </div>
-                                </div>
+                                </fieldset>
                             </div>
                         </div>
                     </fieldset>

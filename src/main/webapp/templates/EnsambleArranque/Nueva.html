@@ -81,32 +81,23 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <h3>Generador</h3>
+                            <div class="col-md-4">                               
                                 <div class="form-group">
                                     <label class="control-label col-md-4">
-                                        Marca:                                        
+                                        Person que atendió al Técnico                                    
                                     </label>
                                     <div class="col-md-8">                                        
-                                        <input type="text" class="form-control" ng-model="planta.motores.generadorMarca" required name="generador_marca">
+                                        <input type="text" class="form-control" ng-model="prueba.atendio" required name="atendio">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4">
-                                        Modelo:                                        
+                                        Nombre del Técnico                                      
                                     </label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control" ng-model="planta.motores.generadorModelo" required name="generador_modelo">
+                                        <input type="text" class="form-control" ng-model="prueba.tecnico" required name="tecnico">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-4">
-                                        No. Serie                                        
-                                    </label>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control" ng-model="planta.generadorSerie" required name="generador_serie">
-                                    </div>
-                                </div>
+                                </div>                                
                             </div>
                         </div>
                     </fieldset>                    
@@ -116,42 +107,28 @@
                 <div class="col-md-12" style="background-color: #EDEFEE">                        
                     <fieldset>
                         <legend >
-                            Datos Especificos de la Planta De Emergencia
+                            Datos de Placa
                         </legend>
                         <div class="row">
                             <div class="col-md-4">                                    
                                 <div class="form-group">
-                                    <label class="control-label col-md-4">
-                                        Tipo de Servicio                                
+                                    <label  class="control-label col-md-4">
+                                        Marca                              
                                     </label>
-                                    <div class="col-md-8">
-                                        <select class="form-control" ng-options="c.id as c.text for c in tipoServicio" ng-model="planta.tipoOperacion" name="tipoOperacion"></select>
-                                    </div>
+                                    <label class="col-md-8">{{prueba.planta.marca}}</label>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4">
-                                        KW
+                                        Modelo
                                     </label>
-                                    <div class="col-md-8">
-                                        {{planta.motores.kw}}
-                                    </div>
+                                    <label class="col-md-8">{{prueba.planta.modelo}}</label>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4">
-                                        KVA
+                                        No. Serie
                                     </label>
-                                    <div class="col-md-8">
-                                        {{planta.motores.kva}}
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-4">
-                                        Corriente de operación
-                                    </label>
-                                    <div class="col-md-8">
-                                        {{planta.motores.amp}}
-                                    </div>
-                                </div>
+                                    <label class="col-md-8">{{prueba.planta.noSerie}}</label>
+                                </div>                               
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">

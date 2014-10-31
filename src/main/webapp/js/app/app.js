@@ -674,10 +674,13 @@ app.controller("NuevoArranqueCtrl",
             function ($scope, PlantaServices, $filter, $location) {
                 $scope.motores = PlantaServices.Plantas.query();
                 $scope.ubicaciones = PlantaServices.Ubicaciones.query();
-
-                $scope.$watch("prueba.noOP", function () {
-
-                });
+                $scope.searchPlanta = function (term) {
+                    $scope.plantas = PlantaServices.Plantas.ByOP({noOP: term});
+                };
+                $scope.prueba = {};
+                $scope.selectPlanta = function (planta) {                    
+                    $scope.prueba.planta = planta;
+                };
                 $scope.submit = function () {
                     var prueba = new PlantaServices.EnsambleArranque({
                         folio: "14PR000001",

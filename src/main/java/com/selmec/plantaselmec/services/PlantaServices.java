@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ma.glasnost.orika.MapperFacade;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -86,5 +87,12 @@ public class PlantaServices extends BaseServices<Planta, String> implements IPla
 
     @Autowired
     MapperFacade mapper;
+
+    @Transactional
+    @Override
+    public List<PlantaDTO> GetPlantaByOP(String noOP) {
+        return mapper.mapAsList(dao.getCurrentSession().createCriteria(Planta.class)
+                .add(Restrictions.like("noOp", "%" + noOP + "%")).list(), PlantaDTO.class);
+    }
 
 }

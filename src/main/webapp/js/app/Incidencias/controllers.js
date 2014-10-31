@@ -233,7 +233,7 @@ app.controller("ClientesCtrl",
 app.controller("ClientesSaveCtrl",
         ["$scope", "PlantaServices", "$routeParams", "$location"
                     , function ($scope, PlantaServices, $routeParams, $location) {
-                        $scope.cliente = new PlantaServices.Clientes();
+                        $scope.cliente = new PlantaServices.Clientes();                       
                         if ($routeParams.id !== undefined)
                             $scope.cliente.$get({id: $routeParams.id});
                         $scope.Save = function () {

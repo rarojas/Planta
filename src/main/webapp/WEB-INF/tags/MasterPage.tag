@@ -134,6 +134,7 @@
                             <a href="#/MisDatos" >
                                 <security:authorize access="isAuthenticated()">
                                     Bienvenid@: <security:authentication property="principal.username" /> 
+                                    {{user}}
                                 </security:authorize>
                             </a>
                         </li>                        <li>

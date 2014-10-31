@@ -79,7 +79,7 @@ public class UserController extends BaseControllers<Usuarios, UsuarioDTO> {
         usuariosServices.Delete(id);
     }
 
-    @RequestMapping(value = "getDataUser/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "getDataUser", method = RequestMethod.GET)
     @ResponseBody
     public UsuarioActualDTO getDataUser(Principal principal) {
         return usuariosServices.getDataUser(principal.getName());

@@ -89,6 +89,7 @@ public class UsuariosServices implements IUsuariosServices {
         return result;
     }
 
+    @Transactional
     @Override
     public UsuarioActualDTO getDataUser(String userName) {
         if (userName == null) {

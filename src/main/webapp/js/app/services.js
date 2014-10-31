@@ -34,7 +34,8 @@ var services = ["PlantaServices",
                 update: {method: 'PUT'}
             });
             api.Usuarios = $resource(urlApiBase + "Usuarios/:id", {}, {
-                update: {method: 'PUT'}
+                update: {method: 'PUT'},
+                current: {method: 'get', url: urlApiBase + "Usuarios/getDataUser"}
             });
             api.Clientes = $resource(urlApiBase + "Clientes/:id", {}, {
                 update: {method: 'PUT'}

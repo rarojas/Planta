@@ -678,7 +678,7 @@ app.controller("NuevoArranqueCtrl",
                     $scope.plantas = PlantaServices.Plantas.ByOP({noOP: term});
                 };
                 $scope.prueba = {};
-                $scope.selectPlanta = function (planta) {                    
+                $scope.selectPlanta = function (planta) {
                     $scope.prueba.planta = planta;
                 };
                 $scope.submit = function () {
@@ -707,3 +707,7 @@ app.controller("NuevoArranqueCtrl",
                 };
             }]);
 
+app.run(["$rootScope", "PlantaServices",
+    function ($rootScope, PlantaServices) {
+        $rootScope.user = PlantaServices.Usuarios.current();
+    }]);

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -40,12 +41,18 @@ public class PlantaController extends BaseController<Planta, String, PlantaDTO> 
     public String Index() {
         return "Plantas/index";
     }
-   
+
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
     @Override
     List<PlantaDTO> Get() {
         return PlantaServices.GetPlantas();
+    }
+
+    @RequestMapping(value = "ByOp", method = RequestMethod.GET)
+    public @ResponseBody
+    List<PlantaDTO> GetByOp(@RequestParam("noOP") String noOP) {
+        return PlantaServices.GetPlantaByOP(noOP);
     }
 
 //    @Transactional

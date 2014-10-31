@@ -4,7 +4,8 @@ var services = ["PlantaServices",
             var api = {};
             api.Plantas = $resource(urlApiBase + "Planta/:noSerie", {}, {
                 On: {method: 'get', url: urlApiBase + "Planta/On/:id"},
-                Off: {method: 'get', url: urlApiBase + "Planta/Off/:id"}
+                Off: {method: 'get', url: urlApiBase + "Planta/Off/:id"},
+                ByOP: {method: 'GET', url: urlApiBase + "Planta/ByOp", isArray: true}
             });
             api.Carriles = $resource(urlApiBase + "Carriles/:id", {}, {
                 update: {method: 'PUT'}

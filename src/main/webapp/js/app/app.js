@@ -41,12 +41,26 @@ app.controller("PruebasCtrl", ["$scope", "PlantaServices", "$filter",
         BaseTableController.call(this, $scope, $filter);
         $scope.items = PlantaServices.Ensambles.query($scope.Init);
     }]);
-app.controller("PruebaCtrl", ["$scope", "PlantaServices", "$routeParams",
-    function ($scope, PlantaServices, $routeParams) {
+app.controller("PruebaCtrl", ["$scope", "PlantaServices", "$routeParams", "$filter",
+    function ($scope, PlantaServices, $routeParams, $filter) {
         if (!$routeParams.PruebaID) {
         }
         else
             $scope.prueba = PlantaServices.Ensambles.get({id: $routeParams.PruebaID});
+        $scope.canClose = function () {
+            var total = $filter("filter")($scope.prueba.pruebas, {estatus: "AutorizadaSupervisor"});
+            return  total.length === 4;
+        };
+        $scope.Aprobar = function () {
+            PlantaServices.Pruebas.Aprobar(function () {
+            }, function () {
+            });
+        };
+        $scope.Rechazar = function () {
+            PlantaServices.Pruebas.Rechazar(function () {
+            }, function () {
+            });
+        };
     }]);
 var BaseController = function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location) {
     $scope.OptionsControl = {
@@ -72,7 +86,6 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
                 for (i = 0; i < 2; i++) {
                     var max = ($scope.valores.Max.I1 * 0.25 * (i + 1));
                     var min = ($scope.valores.Min.I1 * 0.25 * (i + 1));
-                    console.log(max);
                     $scope.PruebaCarga[i].Max.I2 = max;
                     $scope.PruebaCarga[i].Max.I1 = max;
                     $scope.PruebaCarga[i].Max.I3 = max;
@@ -674,34 +687,23 @@ app.controller("NuevoArranqueCtrl",
             function ($scope, PlantaServices, $filter, $location) {
                 $scope.motores = PlantaServices.Plantas.query();
                 $scope.ubicaciones = PlantaServices.Ubicaciones.query();
+                $scope.kits = PlantaServices.Kits.query();
+                $scope.clientes = PlantaServices.Clientes.query();
                 $scope.searchPlanta = function (term) {
                     $scope.plantas = PlantaServices.Plantas.ByOP({noOP: term});
                 };
-                $scope.prueba = {};
+                $scope.prueba = new PlantaServices.EnsambleArranque({
+                    folio: "14PR000001", dtCreacion: new Date()
+                });
                 $scope.selectPlanta = function (planta) {
                     $scope.prueba.planta = planta;
                 };
                 $scope.submit = function () {
-                    var prueba = new PlantaServices.EnsambleArranque({
-                        folio: "14PR000001",
-                        dtCreacion: new Date(),
-                        planta: $scope.planta,
-                        cariles: $scope.ensamble.cariles,
-                        altitud: $scope.ensamble.altitud,
-                        patin: $scope.ensamble.patin,
-                        guardas: $scope.ensamble.guardas,
-                        rediador: $scope.ensamble.rediador
-                    });
-                    prueba.$save(function () {
-                        noty({text: "Planta registrada con el folio : " + prueba.folio + "¡¡¡"
-                            , type: "success", modal: true});
+                    $scope.prueba.$save(function () {
+                        noty({text: "Prueba de arranque registrada con el folio : " + prueba.folio + "¡¡¡", type: "success", modal: true});
                         $location.path("/Pruebas/" + prueba.id);
                     }, function () {
-                        planta.$delete(function () {
-                        }, function () {
-                            alert("Ocurrio un error");
-                        });
-                        alert("Ocurrio un error");
+                        noty({text: "Ocurrio un error", type: "error"});
                     });
 
                 };
@@ -710,4 +712,16 @@ app.controller("NuevoArranqueCtrl",
 app.run(["$rootScope", "PlantaServices",
     function ($rootScope, PlantaServices) {
         $rootScope.user = PlantaServices.Usuarios.current();
+        $rootScope.hasRole = function (role) {
+
+            if ($rootScope.user === undefined) {
+                return false;
+            }
+
+            if ($rootScope.user.rol === undefined) {
+                return false;
+            }
+
+            return $rootScope.user.rol === role
+        };
     }]);

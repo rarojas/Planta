@@ -147,7 +147,7 @@
         </div>
         <div class="row">
             <div class="col-md-3">             
-                <div class="btn-group" ng-show="(prueba.pruebas | filter : {tipo : 0,estatus: 4}).length === 0">
+                <div class="btn-group" ng-show="(prueba.pruebas | filter : {tipo : 0,estatus: 'AutorizadoEjecutor' }).length === 0">
                     <a class="btn btn-primary" href="#/PruebaSinCarga/{{prueba.id}}">
                         Entrar
                     </a>
@@ -155,7 +155,7 @@
                 <list-pruebas prueba="prueba" urlview="PruebaSinCargaView" url="" tipo="0"></list-pruebas>               
             </div>        
             <div class="col-md-3">                             
-                <div class="btn-group"ng-show="(prueba.pruebas | filter : {tipo : 0,estatus: 4}).length !== 0">
+                <div class="btn-group"ng-show="(prueba.pruebas | filter : {tipo : 0,estatus: 'AutorizadoEjecutor'}).length !== 0">
                     <a class="btn btn-primary" href="#/PruebaConCarga/{{prueba.id}}">
                         Entrar
                     </a>
@@ -163,7 +163,7 @@
                 <list-pruebas prueba="prueba" urlview="PruebaConCargaView" url="" tipo="1"></list-pruebas>
             </div>
             <div class="col-md-3">             
-                <div class="btn-group"ng-show="(prueba.pruebas | filter : {tipo : 1,estatus: 4}).length !== 0">
+                <div class="btn-group"ng-show="(prueba.pruebas | filter : {tipo : 1,estatus: 'AutorizadoEjecutor'}).length !== 0">
                     <a class="btn btn-primary" href="#/PruebaConCargaSubita/{{prueba.id}}">
                         Entrar
                     </a>
@@ -171,7 +171,7 @@
                 <list-pruebas prueba="prueba" urlview="PruebaConCargaSubitaView" url="" tipo="2"></list-pruebas>
             </div>
             <div class="col-md-3">              
-                <div class="btn-group" ng-show="(prueba.pruebas | filter : {tipo : 2,estatus: 4}).length !== 0">
+                <div class="btn-group" ng-show="(prueba.pruebas | filter : {tipo : 2,estatus: 'AutorizadoEjecutor'}).length !== 0">
                     <a class="btn btn-primary" href="#/PruebaControl/{{prueba.id}}">
                         Entrar
                     </a>
@@ -179,6 +179,23 @@
                 <list-pruebas prueba="prueba" urlview="PruebaControlView" url="" tipo="3"></list-pruebas>
             </div>
 
+        </div>
+        <div class='row' ng-cloak>
+            <div class='col-md-6' ng-hide="!canClose()">
+                <fieldset>
+                    <legend>Autorizar Pruebas</legend>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-success" type="button" ng-click="Aprobar()">
+                                Autorizar Pruebas 
+                            </button>
+                            <button class="btn btn-danger"  type="button" ng-click="Rechazar()">
+                                Rechazar Pruebas 
+                            </button>
+                        </div>
+                    </div>  
+                </fieldset>
+            </div>
         </div>
     </div>
 </div>

@@ -18,6 +18,8 @@ var services = ["PlantaServices",
                 get: {method: 'GET', url: urlApiBase + "Motores/Get"}
             });
             api.Ensambles = $resource(urlApiBase + "Ensambles/:id", {}, {});
+            api.EnsambleArranque = $resource(urlApiBase + "EnsambleArranque/:id", {}, {});
+            api.Pruebasarranque = $resource(urlApiBase + "Pruebasarranque/:id", {}, {});
             api.Pruebascontrol = $resource(urlApiBase + "Pruebacontrol/:id", {}, {});
             api.Pruebas = $resource(urlApiBase + "Pruebas/:id", {}, {
                 GetValues: {url: urlApiBase + 'Planta/GetValues/:id/:seg/:ite/:equipo'},
@@ -28,7 +30,9 @@ var services = ["PlantaServices",
                 RechazaE: {method: 'POST', url: urlApiBase + "Pruebas/RechazarE/:id"},
                 AutorizaS: {method: 'POST', url: urlApiBase + "Pruebas/AutorizarS/:id"},
                 RechazaS: {method: 'POST', url: urlApiBase + "Pruebas/RechazarS/:id"},
-                Control: {method: 'POST', url: urlApiBase + "Pruebacontrol"}
+                Control: {method: 'POST', url: urlApiBase + "Pruebacontrol"},
+                Aprueba: {method: 'POST', url: urlApiBase + "Pruebas/Aprobar/:id"},
+                Rechazar: {method: 'POST', url: urlApiBase + "Pruebas/Rechazar/:id"}
             });
             api.Incidencias = $resource(urlApiBase + "Incidencias/:id", {}, {
                 update: {method: 'PUT'}

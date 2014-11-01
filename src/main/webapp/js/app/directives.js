@@ -71,25 +71,25 @@ app.directive('estatusPrueba', function () {
         controller: ["$scope", function ($scope) {
                 $scope.msg = "Desconocido";
                 switch ($scope.value) {
-                    case 0:
+                    case "Creada":
                         $scope.msg = "Creada";
                         break;
-                    case 1:
+                    case "Ejecutando":
                         $scope.msg = "En curso";
                         break;
-                    case 2:
+                    case "Finalizada":
                         $scope.msg = "Finalizada";
                         break;
-                    case 3:
+                    case "RechazadaEjecutor":
                         $scope.msg = "Rechazada Ejecutor";
                         break;
-                    case 4:
+                    case "AutorizadoEjecutor":
                         $scope.msg = "Autorizada Ejecutor";
                         break;
-                    case 5:
+                    case "RechazadaSupervisor":
                         $scope.msg = "Rechazada Supervisor";
                         break;
-                    case 6:
+                    case "AutorizadaSupervisor":
                         $scope.msg = "Autorizada Supervisor";
                         break;
                 }
@@ -189,7 +189,8 @@ app.directive('autocomplete', ["$timeout", function ($timeout) {
                     this.select = function (item) {
                         $scope.hide = true;
                         $scope.focused = true;
-                        $scope.select({item: item});
+                        $scope.term =  item.noOp;
+                        $scope.select({item: item});                        
                     };
 
                     $scope.isVisible = function () {

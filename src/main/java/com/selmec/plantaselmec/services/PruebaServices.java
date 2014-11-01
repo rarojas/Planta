@@ -5,6 +5,7 @@
  */
 package com.selmec.plantaselmec.services;
 
+import com.selmec.plantaselmec.Models.Ensamble;
 import com.selmec.plantaselmec.Models.EstadoPrueba;
 import com.selmec.plantaselmec.Models.Prueba;
 import com.selmec.plantaselmec.Models.Usuarios;
@@ -51,7 +52,6 @@ public class PruebaServices extends BaseServices<Prueba, Integer> implements IPr
 //    public void Save(Prueba prueba) {
 //        dao.getCurrentSession().saveOrUpdate(prueba);
 //    }
-
     @Transactional
     @Override
     public void cambioEstatusPrueba(int id, String nombreUsuario, EstadoPrueba estatus) {
@@ -64,5 +64,18 @@ public class PruebaServices extends BaseServices<Prueba, Integer> implements IPr
         prueba.setEstatus(estatus);
         dao.getCurrentSession().merge(prueba);
     }
+
+//    @Transactional
+//    @Override
+//    public void CambioEstatusEnsamble(int id, String nombreUsuario, EstadoPrueba estatus) {
+//
+//        Ensamble ensamble = (Ensamble) dao.getCurrentSession().get(Ensamble.class, id);
+//        Usuarios usuario = usuariosServices.GetByUsername(nombreUsuario);
+//        ensamble.setAprueba(usuario.getId());
+//        Date today = Calendar.getInstance().getTime();
+//        ensamble.setDtAprueba(today);
+//        ensamble.setEstatus(estatus);
+//        dao.getCurrentSession().merge(prueba);
+//    }
 
 }

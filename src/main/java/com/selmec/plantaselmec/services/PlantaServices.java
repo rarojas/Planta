@@ -8,6 +8,7 @@ import com.selmec.plantaselmec.dto.TablaLecturaDTO;
 import com.selmec.utils.dao.IGenericDao;
 import com.selmec.utils.services.BaseServices;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,7 +25,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Configurable
 public class PlantaServices extends BaseServices<Planta, String> implements IPlantaServices {
 
     @Autowired
@@ -91,8 +91,13 @@ public class PlantaServices extends BaseServices<Planta, String> implements IPla
     @Transactional
     @Override
     public List<PlantaDTO> GetPlantaByOP(String noOP) {
-        return mapper.mapAsList(dao.getCurrentSession().createCriteria(Planta.class)
-                .add(Restrictions.like("noOp", "%" + noOP + "%")).list(), PlantaDTO.class);
+        List<Planta> Plantas = dao.getCurrentSession().createCriteria(Planta.class).add(Restrictions.like("noOp", "%" + noOP + "%")).list();
+          List<PlantaDTO> result = new ArrayList<>();
+          for(Planta planta: Plantas )
+          {
+              result.add(new PlantaDTO(planta));
+          }
+          return result;
     }
 
 }

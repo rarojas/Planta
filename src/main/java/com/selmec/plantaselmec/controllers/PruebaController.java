@@ -5,7 +5,6 @@
  */
 package com.selmec.plantaselmec.controllers;
 
-import com.selmec.plantaselmec.Models.Ensamble;
 import com.selmec.plantaselmec.Models.EstadoPrueba;
 import com.selmec.plantaselmec.Models.Lecturas;
 import com.selmec.plantaselmec.Models.Prueba;
@@ -16,7 +15,6 @@ import com.selmec.plantaselmec.services.IPruebaServices;
 import com.selmec.plantaselmec.services.IUsuariosServices;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.validation.Valid;
 import org.hibernate.Query;
@@ -67,8 +65,6 @@ public class PruebaController extends BaseControllers<Prueba, PruebaDTO> {
         pruebaServices.Save(prueba);
         return DTO(prueba, Prueba.class, PruebaDTO.class);
     }
-
-   
 
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody
@@ -121,5 +117,18 @@ public class PruebaController extends BaseControllers<Prueba, PruebaDTO> {
     @ResponseBody
     public void RechazarPruebasupervisor(@PathVariable("id") int id, Principal principal) {
         pruebaServices.cambioEstatusPrueba(id, principal.getName(), EstadoPrueba.RechazadaSupervisor);
+    }
+
+    @RequestMapping(value = "Aprobar/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public void Aprobar(@PathVariable("id") int id, Principal principal) {
+//        pruebaServices.cambioEstatusPrueba(id, principal.getName(), EstadoPrueba.AutorizadaSupervisor);
+
+    }
+
+    @RequestMapping(value = "Rechazar/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public void Rechazar(@PathVariable("id") int id, Principal principal) {
+//        pruebaServices.cambioEstatusPrueba(id, principal.getName(), EstadoPrueba.RechazadaSupervisor);
     }
 }

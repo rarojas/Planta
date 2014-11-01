@@ -176,6 +176,7 @@ app.controller("UbicacionesCtrl",
         ["$scope", "PlantaServices", "$filter"
                     , function ($scope, PlantaServices, $filter) {
                         BaseTableController.call(this, $scope, $filter);
+                        $scope.clientes = PlantaServices.Clientes.query();
                         $scope.items = PlantaServices.Ubicaciones.query($scope.Init);
                         $scope.Delete = function (ubicacion) {
                             PlantaServices.Ubicaciones.delete({id: ubicacion.id}, function () {
@@ -189,6 +190,7 @@ app.controller("UbicacionesCtrl",
 app.controller("UbicacionesSaveCtrl",
         ["$scope", "PlantaServices", "$routeParams", "$location"
                     , function ($scope, PlantaServices, $routeParams, $location) {
+                          $scope.clientes = PlantaServices.Clientes.query();
                         $scope.ubicacion = new PlantaServices.Ubicaciones();
                         if ($routeParams.id !== undefined)
                             $scope.ubicacion.$get({id: $routeParams.id});
@@ -233,7 +235,7 @@ app.controller("ClientesCtrl",
 app.controller("ClientesSaveCtrl",
         ["$scope", "PlantaServices", "$routeParams", "$location"
                     , function ($scope, PlantaServices, $routeParams, $location) {
-                        $scope.cliente = new PlantaServices.Clientes();                       
+                        $scope.cliente = new PlantaServices.Clientes();
                         if ($routeParams.id !== undefined)
                             $scope.cliente.$get({id: $routeParams.id});
                         $scope.Save = function () {

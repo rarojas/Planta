@@ -86,7 +86,7 @@ var Routes = ['$routeProvider',
                     controller: 'UbicacionesCtrl'
                 }).
                 when('/Ubicaciones/Edit/:id', {
-                    templateUrl: 'templates/Ubicaciones/Edit.html',
+                    templateUrl: '/templates/Ubicaciones/Edit.html',
                     controller: 'UbicacionesSaveCtrl'
                 }).
                 when('/Ubicaciones/Create', {

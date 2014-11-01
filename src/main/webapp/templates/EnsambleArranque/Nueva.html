@@ -8,102 +8,36 @@
                             Datos Generales de la Planta de Emergencia                                                        
                         </legend>
                         <div class="row">
-                            <div class="col-md-4">                                
+                            <div class="col-md-4"> 
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">
+                                        Cliente
+                                    </label>
+                                    <div class="col-md-8">
+                                        <select class="form-control" name="cliente" ng-options="c.razonSocial for c in clientes" required="" ng-model="prueba.cliente" >
+                                            <option value="">Nuevo Cliente</option>
+                                        </select>
+
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4">
                                         No Cliente
                                     </label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control" required ng-model="prueba.noCliente" name="modelo" placeholder="Modelo">
+                                        <label  ng-show="prueba.cliente.id">{{prueba.cliente.noCliente}}</label>
+                                        <input ng-show="!prueba.cliente.id" type="text" class="form-control" required ng-model="prueba.cliente.noCliente" name="noCliente" placeholder="No Cliente">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4">
-                                        Cliente                               
+                                        Razón Social                            
                                     </label>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control" required ng-model="prueba.Cliente" name="serie">
+                                    <div class="col-md-8">    
+                                        <label  ng-show="prueba.cliente.id">{{prueba.cliente.razonSocial}}</label>
+                                        <input ng-show="!prueba.cliente.id"type="text" class="form-control" required ng-model="prueba.cliente.razonSocial" name="Cliente" placeholder="Razón Social">
                                     </div>
-                                </div><style>
-                                    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-                                        display: none;
-                                    }
-
-                                    .album-search {
-                                        z-index: 100;
-                                    }
-
-                                    /*                                    .album-search input[type=text] {
-                                                                            font-size: 32px;
-                                                                            line-height: 36px;
-                                                                            height: 40px;
-                                                                            width: 500px;
-                                                                        }*/
-
-                                    .album-search .menu {
-                                        background-color: #344251;                                       
-                                    }
-
-                                    /*                                    .album-search h3 {
-                                                                            width: 125px;
-                                                                            margin-top: 0px;
-                                                                            font-size: 20px;
-                                                                            font-weight: 300;
-                                                                            color: rgb(187, 187, 187);
-                                                                            float: left;
-                                                                        }*/
-
-                                    .album-search ul {
-                                        background-color: #344251;
-                                        margin: 0;                                        
-                                        padding: 0;
-                                        color: #FFF;
-                                        list-style: none;
-                                    }
-
-                                    .album-search .results {
-                                        width: 375px;
-                                        margin: auto;
-                                        text-align: left;
-                                        min-height:20px;
-                                        padding: 5px;
-                                    }
-
-                                    .album-search .results.active {
-                                        background-color: #67B331;
-                                    }
-
-                                    .album-search .results.active .name {
-                                        color: #ffffff;
-                                    }
-
-                                    .album-search .results.active {
-                                        background-color: #67B331;
-                                    }
-
-                                    .album-search .results .name {
-                                        font-size: 14px;
-                                        line-height: 20px;
-                                    }
-
-                                    .album-search .results p {
-                                        margin-bottom: 5px;
-                                        margin-left: 20px;
-                                    }
-
-                                    .album-search .results .artist {
-                                        font-size: 16px;
-                                        line-height: 20px;
-                                        color: #fff;
-                                        margin-left: 20px;
-                                    }
-
-                                    .album-search .results img {
-                                        width: 64px;
-                                        height: 64px;
-                                        float: left;
-                                    }
-                                </style>
+                                </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4">
                                         No. OP                                       
@@ -125,7 +59,7 @@
                                         No. OV                                   
                                     </label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control" required ng-model="prueba.noOV" name="noOV">
+                                        <input type="text" class="form-control" required ng-model="prueba.noOV" name="noOV" placeholder="No OV">
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +80,7 @@
                                     </label>                                        
                                     <div class="col-md-8">
                                         <label ng-show="prueba.ubicacion.id">{{prueba.ubicacion.poblacion}}</label>
-                                        <input ng-show="!prueba.ubicacion.id" type="text" class="form-control" required ng-model="prueba.ubicacion.poblacion" name="poblacion">
+                                        <input ng-show="!prueba.ubicacion.id" type="text" class="form-control" required ng-model="prueba.ubicacion.poblacion" name="poblacion" placeholder="Población">
                                     </div>                                     
                                 </div>
                                 <div class="form-group">
@@ -155,7 +89,7 @@
                                     </label>                                        
                                     <div class="col-md-8">
                                         <label ng-show="prueba.ubicacion.id">{{prueba.ubicacion.estado}}</label>
-                                        <input ng-show="!prueba.ubicacion.id" type="text" class="form-control " required ng-model="prueba.ubicacion.estado" name="estado">
+                                        <input ng-show="!prueba.ubicacion.id" type="text" class="form-control " required ng-model="prueba.ubicacion.estado" name="estado" placeholder="Entidad">
                                     </div>                                      
                                 </div>
                                 <div class="form-group">
@@ -164,17 +98,17 @@
                                     </label>
                                     <div class="col-md-8">
                                         <label ng-show="prueba.ubicacion.id">{{prueba.ubicacion.telefono}}</label>
-                                        <input ng-show="!prueba.ubicacion.id" type="text" class="form-control" required ng-model="prueba.ubicacion.telefono" name="telefono">
+                                        <input ng-show="!prueba.ubicacion.id" type="text" class="form-control" required ng-model="prueba.ubicacion.telefono" name="telefono" placeholder="Teléfono">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">                               
                                 <div class="form-group">
                                     <label class="control-label col-md-4">
-                                        Person que atendió al Técnico                                    
+                                        Persona que atendió al Técnico                                    
                                     </label>
                                     <div class="col-md-8">                                        
-                                        <input type="text" class="form-control" ng-model="prueba.atendio" required name="atendio">
+                                        <input type="text" class="form-control" ng-model="prueba.recibio" required name="atendio" placeholder="Persona que Atendió">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -182,9 +116,17 @@
                                         Nombre del Técnico                                      
                                     </label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control" ng-model="prueba.tecnico" required name="tecnico">
+                                        <input type="text" class="form-control" ng-model="prueba.tecnico" required name="tecnico" placeholder="Técnico">
                                     </div>
-                                </div>                                
+                                </div>  
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">
+                                        Kit de Prueba
+                                    </label>
+                                    <div class="col-md-8">                                        
+                                        <select class="form-control" ng-model="prueba.kit" ng-options="k.descripcion for k in kits" name="kit"></select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </fieldset>                    
@@ -205,13 +147,13 @@
                                         <label  class="control-label col-md-4">
                                             Marca                            
                                         </label>
-                                        <label class="col-md-8">{{prueba.planta.marca}}</label>
+                                        <label class="col-md-8">{{prueba.planta.motores.marca}}</label>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-4">
                                             Modelo
                                         </label>
-                                        <label class="col-md-8">{{prueba.planta.modelo}}</label>
+                                        <label class="col-md-8">{{prueba.planta.motores.modelo}}</label>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-4">
@@ -230,20 +172,20 @@
                                                 <label class="control-label col-md-4">
                                                     Tipo de Control                                        
                                                 </label>
-                                                <label class="col-md-8">{{prueba.planta.tipoControl}}</label>
+                                                <label class="col-md-8">{{prueba.planta.motores.tipoControl}}</label>
                                             </div> 
 
                                             <div class="form-group">
                                                 <label class="control-label col-md-4">
                                                     Tipo de Combustible                                        
                                                 </label>
-                                                <label class="col-md-8">{{prueba.planta.combustible}}</label>
+                                                <label class="col-md-8">{{prueba.planta.motores.combustible}}</label>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-4">
                                                     Capacidad Interruptor(A)                                        
                                                 </label>
-                                                <label class="col-md-8">{{prueba.planta.capacidadInterruptor}}</label>
+                                                <label class="col-md-8">{{prueba.planta.capInt}}</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -251,25 +193,25 @@
                                                 <label class="control-label col-md-4">
                                                     KW:                                         
                                                 </label>
-                                                <label class="col-md-8">{{prueba.planta.kw}}</label>
+                                                <label class="col-md-8">{{prueba.planta.motores.kw}}</label>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-4">
                                                     KVA                                         
                                                 </label>
-                                                <label class="col-md-8">{{prueba.planta.kva}}</label>
+                                                <label class="col-md-8">{{prueba.planta.motores.kva}}</label>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-4">
                                                     HZ                                         
                                                 </label>
-                                                <label class="col-md-8">{{prueba.planta.frecuenciaOperacion}}</label>
+                                                <label class="col-md-8">{{prueba.planta.motores.frecuenciaOperacion}}</label>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-4">
                                                     No.Fases                                         
                                                 </label>
-                                                <label class="col-md-8">{{prueba.planta.noFases}}</label>
+                                                <label class="col-md-8">{{prueba.planta.motores.noFases}}</label>
                                             </div>
 
                                         </div>
@@ -283,19 +225,19 @@
                                         <label class="control-label col-md-4">
                                             Marca                                         
                                         </label>
-                                        <label class="col-md-8">{{prueba.planta.generadorMarca}}</label>
+                                        <label class="col-md-8">{{prueba.planta.motores.generadorMarca}}</label>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-4">
                                             Modelo                                         
                                         </label>
-                                        <label class="col-md-8">{{prueba.planta.generadorModelo}}</label>
+                                        <label class="col-md-8">{{prueba.planta.motores.generadorModelo}}</label>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-4">
                                             No. Serie                                         
                                         </label>
-                                        <label class="col-md-8">{{prueba.planta.noSerieModelo}}</label>
+                                        <label class="col-md-8">{{prueba.planta.generadorSerie}}</label>
                                     </div>
                                 </fieldset>
                             </div>

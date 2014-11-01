@@ -20,7 +20,6 @@ public class UbicacionDTO implements java.io.Serializable {
     public String poblacion;
     public String estado;
     public String telefono;
-    //public Set ensambles = new HashSet(0); //se hace referencia circular?, supongo que sí
 
     public UbicacionDTO() {
     }

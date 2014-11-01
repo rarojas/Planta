@@ -24,7 +24,7 @@
             }
 
             .navbar-fixed-top .nav {
-                padding: 15px 0;
+                padding: 25px 0;
             }
 
             .navbar-fixed-top .navbar-brand {
@@ -54,7 +54,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">
-                        <img src="<c:url value="/img/Logos/Logo ok fondos de color RGB-03.png"/>" class="img-responsive" width="100" alt=""/>
+                        <img src="<c:url value="/img/Logos/Logo ok fondos de color RGB-03.png"/>" class="img-responsive" width="150" alt=""/>
                     </a>
                 </div>
 
@@ -64,7 +64,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <a href="#" style="padding:0px">
-                                <img style="width:80px" src="<c:url value="/img/Selmec.png"/>" class="img-responsive" width="150" alt=""/>
+                                <img style="width:150px" src="<c:url value="/img/Selmec.png"/>" class="img-responsive" width="150" alt=""/>
                             </a>
                         </li>                        
 

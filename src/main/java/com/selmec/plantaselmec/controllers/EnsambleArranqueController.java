@@ -7,9 +7,24 @@ package com.selmec.plantaselmec.controllers;
 
 import com.selmec.plantaselmec.Models.Ensamble;
 import com.selmec.plantaselmec.Models.Ensamblearranque;
+import com.selmec.plantaselmec.Models.Usuarios;
+import com.selmec.plantaselmec.dto.EnsambleDTO;
+import com.selmec.plantaselmec.dto.EnsamblearranqueDTO;
 import com.selmec.plantaselmec.services.IEnsamblearranqueServices;
+import com.selmec.plantaselmec.services.IUsuariosServices;
+import java.security.Principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -17,12 +32,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("api/EnsambleArranque")
-public class EnsambleArranqueController extends BaseController<Ensamblearranque, Integer, Ensamble> {
+public class EnsambleArranqueController {
 
     IEnsamblearranqueServices ensambleService;
 
+    @Autowired
+    IUsuariosServices usuariosServices;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public @ResponseBody
+    List<EnsambleDTO> Get(Principal principal) {
+        Usuarios usuarios = usuariosServices.GetByUsername(principal.getName());
+        List<Ensamble> pruebas = ensambleServices.GetByUser(usuarios);
+        return DTO(pruebas, Ensamble.class, EnsambleDTO.class);
+
+    }
+
+    @Autowired
     public void ensambleService(IEnsamblearranqueServices ensambleService) {
-        this.baseService = ensambleService;
         this.ensambleService = ensambleService;
+    }
+
+    @RequestMapping(value = "/Create", method = RequestMethod.POST)
+    @ResponseBody
+    public Ensamblearranque Post(@RequestBody Ensamblearranque Ensamble, Principal principal) {
+        DateFormat df = new SimpleDateFormat("yyMMddss");
+        Date today = Calendar.getInstance().getTime();
+        String reportDate = df.format(today);
+        Usuarios usuario = usuariosServices.GetByUsername(principal.getName());
+        Ensamble.setUsuarios(usuario);
+        Ensamble.setFolio(reportDate);
+        ensambleService.Save(Ensamble);
+        return Ensamble;
     }
 }

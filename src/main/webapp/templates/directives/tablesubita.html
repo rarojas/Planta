@@ -97,7 +97,7 @@
                     {{valores.Max.Presion|number :2}}
                 </td>
                 <td>
-                   
+
                 </td>
             </tr>
             <tr>
@@ -126,16 +126,16 @@
                     {{valores.Min.L1L2|number :2}}
                 </td>
                 <td>
-                      {{valores.Min.HZ|number :2}}
+                    {{valores.Min.HZ|number :2}}
                 </td>
                 <td>
-                   
+
                 </td>
                 <td>
-                   
+
                 </td>
                 <td>
-                    
+
                 </td>
             </tr>
         </tbody>
@@ -238,30 +238,63 @@
                 <td>
                     {{row.Presion| number: 2}}  
                 </td>
-            </tr>            
+            </tr>   
+            <tr class="text-center">
+                <td> 
+                </td>
+                <td>
+                    <circle color="GetColor(valores.Max.I1,valores.Min.I1,now.I1)"></circle>
+                </td>
+                <td >
+                    <circle color="GetColor(valores.Max.I2,valores.Min.I2,now.I2)"></circle>
+                </td>
+                <td >
+                    <circle color="GetColor(valores.Max.I3,valores.Min.I3,now.I3)"></circle>
+                </td>
+                <td>                    
+                    <circle color="GetColor(valores.Max.L1L2,valores.Min.L1L2,now.L1L2)"></circle> 
+                </td>
+                <td >
+                    <circle color="GetColor(valores.Max.L2L3,valores.Min.L2L3,now.L2L3)"></circle> 
+                </td>
+                <td>
+                    <circle color="GetColor(valores.Max.L3L1,valores.Min.L3L1,now.L3L1)"></circle>                    
+                </td>
+                <td>
+                    <circle color="GetColor(valores.Max.HZ,valores.Min.HZ,now.HZ)"></circle>
+                </td>
+                <td>
+                    <circle color="GetColor(valores.Max.Temp,valores.Min.Temp,now.Temp)"></circle>
+                </td>
+                <td>
+                    <circle color="GetColor(valores.Max.Presion,valores.Min.Presion,now.Presion)"></circle>                    
+                </td>
+                <td>                    
+                </td>               
+            </tr>
             <tr>
                 <td > 
                     {{now.time| minutos}}
                 </td>
-                <td ng-style="{'color': (now.L1N <= valores.Max.L1L2 && now.L1N > valores.Min.L1L2) ? 'green':'red'}">
+                <td >
                     {{now.I1| number: 2}}  
                 </td>
-                <td ng-style="{'color': (now.L2N <= valores.Max.L1L2 && now.L2N > valores.Min.L1L2) ? 'green':'red'}">
+                <td >
                     {{now.I2| number: 2}}  
                 </td>
-                <td ng-style="{'color': (now.L3N <= valores.Max.L1L2 && now.L3N > valores.Min.L1L2) ? 'green':'red'}">
+                <td >
                     {{now.I3| number: 2}}  
                 </td>
-                <td ng-style="{'color': (now.L1L2 <= valores.Max.L1L2 && now.L1L2 > valores.Min.L1L2) ? 'green':'red'}">
+                <td >
                     {{now.L1L2| number: 2}}  
                 </td>
-                <td ng-style="{'color': (now.L2L3 <= valores.Max.L1L2 && now.L2L3 > valores.Min.L1L2) ? 'green':'red'}">
+                <td >
                     {{now.L2L3| number: 2}}  
                 </td>
                 <td>
                     {{now.L3L1| number: 2}}  
                 </td>
-                <td ng-style="{ 'color' : (now.HZ <= valores.Max.HZ && now.HZ >= valores.Min.HZ) ? 'green':'red'}">
+                <td >
                     {{now.HZ| number: 2}}  
                 </td>
                 <td>

@@ -18,7 +18,11 @@ var services = ["PlantaServices",
                 get: {method: 'GET', url: urlApiBase + "Motores/Get"}
             });
             api.Ensambles = $resource(urlApiBase + "Ensambles/:id", {}, {});
-            api.EnsambleArranque = $resource(urlApiBase + "EnsambleArranque/:id", {}, {});
+            api.Iteraciones = $resource(urlApiBase + "Iteraciones/:id", {}, {});
+            api.EnsambleArranque = $resource(
+                    urlApiBase + "EnsambleArranque/:id", {}, {
+                save: {method: "post", url: urlApiBase + "EnsambleArranque/Create"}
+            });
             api.Pruebasarranque = $resource(urlApiBase + "Pruebasarranque/:id", {}, {});
             api.Pruebascontrol = $resource(urlApiBase + "Pruebacontrol/:id", {}, {});
             api.Pruebas = $resource(urlApiBase + "Pruebas/:id", {}, {

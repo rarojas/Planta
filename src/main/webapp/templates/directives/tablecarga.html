@@ -82,19 +82,24 @@
                     {{PruebaCarga[PruebaCargaIndex()].Max.L1L2 | number :2}}
                 </td>
                 <td>
-                    {{PruebaCarga[PruebaCargaIndex()].Max.L1L2 | number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Max.L1L2 | number
+                        :2}}
                 </td>
                 <td>
-                    {{PruebaCarga[PruebaCargaIndex()].Max.L1L2 | number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Max.L1L2 | number
+                                :2}}
                 </td>
                 <td>
-                    {{PruebaCarga[PruebaCargaIndex()].Max.HZ | number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Max.HZ | number
+                                :2}}
                 </td>
                 <td>
-                    {{PruebaCarga[PruebaCargaIndex()].Max.Temp | number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Max.Temp | number
+                                :2}}
                 </td>
                 <td>
-                    {{PruebaCarga[PruebaCargaIndex()].Max.Presion | number :2}}
+                    {{PruebaCarga[PruebaCargaIndex()].Max.Presion | number
+                                :2}}
                 </td>
                 <td>
                     N/A
@@ -108,7 +113,7 @@
                 </td>
                 <td>
                     {{PruebaCarga[PruebaCargaIndex()].Min.I1 | number
-                        :2}}
+                                :2}}
                 </td>
                 <td>  
                     {{PruebaCarga[PruebaCargaIndex()].Min.I2 | number
@@ -141,7 +146,7 @@
                 </td>
                 <td>
                     {{PruebaCarga[PruebaCargaIndex()].Min.Presion | number
-                        :2}}
+                                :2}}
                 </td>
                 <td>
                     N/A
@@ -248,29 +253,62 @@
                     {{row.Presion| number: 2}}  
                 </td>
             </tr>
+            <tr class="text-center">
+                <td > 
+                </td>
+                <td >
+                    <circle color="GetColor(PruebaCarga[PruebaCargaIndex()].Max.I1,PruebaCarga[PruebaCargaIndex()].Min.I1,now.I1)"></circle>
+                </td>
+                <td >
+                    <circle color="GetColor(PruebaCarga[PruebaCargaIndex()].Max.I2,PruebaCarga[PruebaCargaIndex()].Min.I2,now.I2)"></circle>
+                </td>
+                <td >
+                    <circle color="GetColor(PruebaCarga[PruebaCargaIndex()].Max.I3,PruebaCarga[PruebaCargaIndex()].Min.I3,now.I3)"></circle>
+                </td>
+                <td>                    
+                    <circle color="GetColor(PruebaCarga[PruebaCargaIndex()].Max.L1L2,PruebaCarga[PruebaCargaIndex()].Min.L1L2,now.L1L2)"></circle> 
+                </td>
+                <td >
+                    <circle color="GetColor(PruebaCarga[PruebaCargaIndex()].Max.L2L3,PruebaCarga[PruebaCargaIndex()].Min.L2L3,now.L2L3)"></circle> 
+                </td>
+                <td>
+                    <circle color="GetColor(PruebaCarga[PruebaCargaIndex()].Max.L3L1,PruebaCarga[PruebaCargaIndex()].Min.L3L1,now.L3L1)"></circle>                    
+                </td>
+                <td>
+                    <circle color="GetColor(PruebaCarga[PruebaCargaIndex()].Max.HZ,PruebaCarga[PruebaCargaIndex()].Min.HZ,now.HZ)"></circle>
+                </td>
+                <td>
+                    <circle color="GetColor(PruebaCarga[PruebaCargaIndex()].Max.Temp,PruebaCarga[PruebaCargaIndex()].Min.Temp,now.Temp)"></circle>
+                </td>
+                <td>
+                    <circle color="GetColor(PruebaCarga[PruebaCargaIndex()].Max.Presion,PruebaCarga[PruebaCargaIndex()].Min.Presion,now.Presion)"></circle>                    
+                </td>
+                <td>                    
+                </td>
+            </tr>
             <tr>
                 <td> 
                     {{now.time| minutos}}
                 </td>
-                <td ng-style="{'color': (now.L1N <= PruebaCarga[PruebaCargaIndex()].Max.L1L2 && now.L1N > PruebaCarga[PruebaCargaIndex()].Min.L1L2) ? 'green':'red'}">
+                <td >
                     {{now.I1| number: 2}}  
                 </td>
-                <td ng-style="{'color': (now.L2N <= PruebaCarga[PruebaCargaIndex()].Max.L1L2 && now.L2N > PruebaCarga[PruebaCargaIndex()].Min.L1L2) ? 'green':'red'}">
+                <td >
                     {{now.I2| number: 2}}  
                 </td>
-                <td ng-style="{'color': (now.L3N <= PruebaCarga[PruebaCargaIndex()].Max.L1L2 && now.L3N > PruebaCarga[PruebaCargaIndex()].Min.L1L2) ? 'green':'red'}">
+                <td >
                     {{now.I3| number: 2}}  
                 </td>
-                <td ng-style="{'color': (now.L1L2 <= PruebaCarga[PruebaCargaIndex()].Max.L1L2 && now.L1L2 > PruebaCarga[PruebaCargaIndex()].Min.L1L2) ? 'green':'red'}">
+                <td >
                     {{now.L1L2| number: 2}}  
                 </td>
-                <td ng-style="{'color': (now.L2L3 <= PruebaCarga[PruebaCargaIndex()].Max.L1L2 && now.L2L3 > PruebaCarga[PruebaCargaIndex()].Min.L1L2) ? 'green':'red'}">
+                <td>
                     {{now.L2L3| number: 2}}  
                 </td>
                 <td>
                     {{now.L3L1| number: 2}}  
                 </td>
-                <td ng-style="{ 'color' : (now.HZ <= PruebaCarga[PruebaCargaIndex()].Max.HZ && now.HZ >= PruebaCarga[PruebaCargaIndex()].Min.HZ) ? 'green':'red'}">
+                <td >
                     {{now.HZ| number: 2}}  
                 </td>
                 <td>
@@ -281,6 +319,5 @@
                 </td>
             </tr>
         </tbody>
-    </table>  
-    {{now}}
+    </table>        
 </div>  

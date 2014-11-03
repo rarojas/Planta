@@ -69,7 +69,7 @@
                                         Instalacion en :
                                     </label>
                                     <div class="col-md-8">
-                                        <select name="ubbicacion" ng-options="m.poblacion for m in ubicaciones" ng-model="prueba.ubicacion" required class="form-control" >
+                                        <select name="ubbicacion" ng-options="m.poblacion for m in ubicaciones" ng-model="prueba.ubicaciones" required class="form-control" >
                                             <option value="">Nueva Ubicación</option>
                                         </select>
                                     </div>
@@ -79,8 +79,8 @@
                                         Poblacion                                     
                                     </label>                                        
                                     <div class="col-md-8">
-                                        <label ng-show="prueba.ubicacion.id">{{prueba.ubicacion.poblacion}}</label>
-                                        <input ng-show="!prueba.ubicacion.id" type="text" class="form-control" required ng-model="prueba.ubicacion.poblacion" name="poblacion" placeholder="Población">
+                                        <label ng-show="prueba.ubicaciones.id">{{prueba.ubicaciones.poblacion}}</label>
+                                        <input ng-show="!prueba.ubicaciones.id" type="text" class="form-control" required ng-model="prueba.ubicaciones.poblacion" name="poblacion" placeholder="Población">
                                     </div>                                     
                                 </div>
                                 <div class="form-group">
@@ -88,8 +88,8 @@
                                         Entidad                                        
                                     </label>                                        
                                     <div class="col-md-8">
-                                        <label ng-show="prueba.ubicacion.id">{{prueba.ubicacion.estado}}</label>
-                                        <input ng-show="!prueba.ubicacion.id" type="text" class="form-control " required ng-model="prueba.ubicacion.estado" name="estado" placeholder="Entidad">
+                                        <label ng-show="prueba.ubicacion.id">{{prueba.ubicaciones.estado}}</label>
+                                        <input ng-show="!prueba.ubicaciones.id" type="text" class="form-control " required ng-model="prueba.ubicaciones.estado" name="estado" placeholder="Entidad">
                                     </div>                                      
                                 </div>
                                 <div class="form-group">
@@ -97,8 +97,8 @@
                                         Teléfono
                                     </label>
                                     <div class="col-md-8">
-                                        <label ng-show="prueba.ubicacion.id">{{prueba.ubicacion.telefono}}</label>
-                                        <input ng-show="!prueba.ubicacion.id" type="text" class="form-control" required ng-model="prueba.ubicacion.telefono" name="telefono" placeholder="Teléfono">
+                                        <label ng-show="prueba.ubicaciones.id">{{prueba.ubicaciones.telefono}}</label>
+                                        <input ng-show="!prueba.ubicaciones.id" type="text" class="form-control" required ng-model="prueba.ubicaciones.telefono" name="telefono" placeholder="Teléfono">
                                     </div>
                                 </div>
                             </div>

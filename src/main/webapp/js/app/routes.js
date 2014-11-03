@@ -108,9 +108,15 @@ var Routes = ['$routeProvider',
                 when('/NuevoArranque', {
                     templateUrl: '/templates/EnsambleArranque/Nueva.html',
                     controller: 'NuevoArranqueCtrl'
+                }).
+                when('/PruebasArranque', {
+                    templateUrl: '/templates/EnsambleArranque/Pruebas.html',
+                    controller: 'PruebasArranqueCtrl'
+                }).
+                when('/PruebasArranque/:PruebaID', {
+                    templateUrl: '/templates/EnsambleArranque/Prueba.html',
+                    controller: 'PruebaArranqueCtrl'
                 })
-
-
                 .otherwise({
                     redirectTo: '/'
                 });

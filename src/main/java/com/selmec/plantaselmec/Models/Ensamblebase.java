@@ -22,8 +22,7 @@ import javax.persistence.TemporalType;
 )
 public class Ensamblebase implements java.io.Serializable {
 
-    private Integer id;
-    private Cariles cariles;
+    private Integer id;    
     private Planta planta;
     private Usuarios usuarios;
     private String folio;

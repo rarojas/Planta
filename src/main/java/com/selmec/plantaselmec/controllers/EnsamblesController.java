@@ -65,8 +65,7 @@ public class EnsamblesController extends BaseControllers<Ensamble, EnsambleDTO> 
     public EnsambleDTO Post(@RequestBody Ensamble Ensamble, Principal principal) {
         DateFormat df = new SimpleDateFormat("yyMMddss");
         Date today = Calendar.getInstance().getTime();
-        String reportDate = df.format(today);
-        logger.info(principal.getName());
+        String reportDate = df.format(today);        
         Usuarios usuario = usuariosServices.GetByUsername(principal.getName());
         Ensamble.setUsuarios(usuario);
         Ensamble.setFolio(reportDate);

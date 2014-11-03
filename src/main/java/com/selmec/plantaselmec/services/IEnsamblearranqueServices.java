@@ -6,13 +6,16 @@
 package com.selmec.plantaselmec.services;
 
 import com.selmec.plantaselmec.Models.Ensamblearranque;
+import com.selmec.plantaselmec.Models.Usuarios;
+import com.selmec.plantaselmec.dto.EnsamblearranqueDTO;
 import com.selmec.utils.services.IBaseServices;
+import java.util.List;
 
 /**
  *
  * @author rrojase
  */
 public interface IEnsamblearranqueServices extends IBaseServices<Ensamblearranque, Integer> {
-    
 
+    List<EnsamblearranqueDTO> GetByUser(Usuarios usuario);
 }

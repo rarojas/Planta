@@ -7,10 +7,7 @@
         <id name="id" type="java.lang.Integer">
             <column name="ID" />
             <generator class="identity" />
-        </id>
-        <many-to-one name="cariles" class="com.selmec.plantaselmec.Models.Cariles" fetch="select">
-            <column name="CarrilID" not-null="true" />
-        </many-to-one>
+        </id>      
         <many-to-one name="planta" class="com.selmec.plantaselmec.Models.Planta" fetch="select">
             <column name="PlantaID" length="50" not-null="true" />
         </many-to-one>
@@ -34,6 +31,9 @@
             <property name="tecnico" type="string">
                 <column name="Tecnico" length="100" not-null="true" />
             </property>
+            <many-to-one name="kit" class="com.selmec.plantaselmec.Models.Kit" fetch="select">
+                <column name="CarrilID" not-null="true" />
+            </many-to-one>
             <set name="pruebaarranques" table="pruebaarranque" inverse="true" lazy="true" fetch="select">
                 <key>
                     <column name="EnsambleID" not-null="true" />
@@ -42,7 +42,10 @@
             </set>
         </joined-subclass>
         <joined-subclass name="Ensamble" table="ensamble" >
-            <key column="ID" />                                   
+            <key column="ID" />         
+            <many-to-one name="cariles" class="com.selmec.plantaselmec.Models.Cariles" fetch="select">
+                <column name="CarrilID" not-null="true" />
+            </many-to-one>                          
             <property name="altitud" type="int">
                 <column name="Altitud" not-null="true" />
             </property>

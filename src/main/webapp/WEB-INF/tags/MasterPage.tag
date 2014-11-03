@@ -47,6 +47,70 @@
         </script>
         <jsp:invoke fragment="app"/>
         <style>
+            [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+                display: none;
+            }
+
+            .album-search {
+                z-index: 100;
+            }
+
+        
+            .album-search .menu {
+                background-color: #344251;                                       
+            }
+
+            .album-search ul {
+                background-color: #344251;
+                margin: 0;                                        
+                padding: 0;
+                color: #FFF;
+                list-style: none;
+            }
+
+            .album-search .results {
+                width: 375px;
+                margin: auto;
+                text-align: left;
+                min-height:20px;
+                padding: 5px;
+            }
+
+            .album-search .results.active {
+                background-color: #67B331;
+            }
+
+            .album-search .results.active .name {
+                color: #ffffff;
+            }
+
+            .album-search .results.active {
+                background-color: #67B331;
+            }
+
+            .album-search .results .name {
+                font-size: 14px;
+                line-height: 20px;
+            }
+
+            .album-search .results p {
+                margin-bottom: 5px;
+                margin-left: 20px;
+            }
+
+            .album-search .results .artist {
+                font-size: 16px;
+                line-height: 20px;
+                color: #fff;
+                margin-left: 20px;
+            }
+
+            .album-search .results img {
+                width: 64px;
+                height: 64px;
+                float: left;
+            }
+
             body {
                 padding-top: 30px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
             }
@@ -102,7 +166,7 @@
                             <a href="#/Pruebas">Pruebas</a>
                         </li>
                         <li>
-                            <a href="#/NuevaPruebaArranques">Nuevo Arranque</a>
+                            <a href="#/NuevoArranque">Nuevo Arranque</a>
                         </li>
                         <li>
                             <a href="#/PruebasArranque">Pruebas Arranque</a>
@@ -125,12 +189,15 @@
                         <li>
                             <a href="#/Carriles" class="dropdown-toggle">Carriles</a>                                        
                         </li> 
+                        <li>
+                            <a href="#/Kits" class="dropdown-toggle">Kits</a>                                        
+                        </li> 
                     </ul>                                
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <a href="#/MisDatos" >
                                 <security:authorize access="isAuthenticated()">
-                                    Bienvenid@: <security:authentication property="principal.username" /> 
+                                    Bienvenid@: <security:authentication property="principal.username" />                                  
                                 </security:authorize>
                             </a>
                         </li>                        <li>

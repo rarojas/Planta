@@ -17,10 +17,10 @@ public class PlantaDTO {
     public PlantaDTO() {
     }
 
-    PlantaDTO(Planta planta) {
+    public PlantaDTO(Planta planta) {
         this.noSerie = planta.getNoSerie();
         if (planta.getMotores() != null) {
-            this.motores = new MotorDTO(planta.getMotores());
+           this.motores = new MotorDTO(planta.getMotores());
         }
         this.controlId = planta.getControlId();
         this.noOp = planta.getNoOp();

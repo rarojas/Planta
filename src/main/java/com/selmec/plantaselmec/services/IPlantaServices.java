@@ -5,14 +5,21 @@
  */
 package com.selmec.plantaselmec.services;
 
+import com.selmec.plantaselmec.Models.Planta;
 import com.selmec.plantaselmec.dto.LecturaPSC;
+import com.selmec.plantaselmec.dto.PlantaDTO;
+import com.selmec.utils.services.IBaseServices;
+import java.util.List;
 
 /**
  *
  * @author rrojase
  */
-public interface IPlantaServices {
+public interface IPlantaServices extends IBaseServices<Planta, String> {
 
     LecturaPSC LecturaPlanta(String Equipo);
 
+    List<PlantaDTO> GetPlantas();
+
+    List<PlantaDTO> GetPlantaByOP(String noOP);
 }

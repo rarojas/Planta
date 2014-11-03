@@ -5,8 +5,8 @@
  */
 package com.selmec.plantaselmec.services;
 
-import com.selmec.plantaselmec.Models.Ensamble;
-import com.selmec.plantaselmec.Models.Usuarios;
+import com.selmec.plantaselmec.Models.Kit;
+import com.selmec.plantaselmec.dto.KitDTO;
 import com.selmec.utils.services.IBaseServices;
 import java.util.List;
 
@@ -14,14 +14,7 @@ import java.util.List;
  *
  * @author rrojase
  */
-public interface IEnsambleService extends IBaseServices<Ensamble, String> {
-
-    void TurnOnCarril(int estado);
-
-    void TurnOffCarril(int estado);
-
-    void ExcuteSPControl(int estado);
-
-    List<Ensamble> GetByUser(Usuarios usuarios);
+public interface IKitsServices extends IBaseServices<Kit, Integer> {
     
+    public List<KitDTO> GetKist();
 }

@@ -86,7 +86,7 @@ var Routes = ['$routeProvider',
                     controller: 'UbicacionesCtrl'
                 }).
                 when('/Ubicaciones/Edit/:id', {
-                    templateUrl: 'templates/Ubicaciones/Edit.html',
+                    templateUrl: '/templates/Ubicaciones/Edit.html',
                     controller: 'UbicacionesSaveCtrl'
                 }).
                 when('/Ubicaciones/Create', {
@@ -104,7 +104,13 @@ var Routes = ['$routeProvider',
                 when('/Clientes/Create', {
                     templateUrl: '/templates/Clientes/Create.html',
                     controller: 'ClientesSaveCtrl'
+                }).
+                when('/NuevoArranque', {
+                    templateUrl: '/templates/EnsambleArranque/Nueva.html',
+                    controller: 'NuevoArranqueCtrl'
                 })
+
+
                 .otherwise({
                     redirectTo: '/'
                 });

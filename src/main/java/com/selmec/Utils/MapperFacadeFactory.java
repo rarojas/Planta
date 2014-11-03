@@ -17,13 +17,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class MapperFacadeFactory implements FactoryBean<MapperFacade> {
 
+        
     @Override
-    public MapperFacade getObject() throws Exception {
+    public MapperFacade getObject() throws Exception {        
         return new DefaultMapperFactory.Builder().build().getMapperFacade();
     }
 
     @Override
-    public Class<?> getObjectType() {
+    public Class<?> getObjectType() {        
         return MapperFacade.class;
     }
 

@@ -5,22 +5,13 @@
  */
 package com.selmec.plantaselmec.services;
 
-import java.util.List;
+import com.selmec.plantaselmec.Models.Pruebaarranque;
+import com.selmec.utils.services.IBaseServices;
 
 /**
  *
  * @author rrojase
  */
-public interface IBaseServices<T,K> {
-     
-    List<T> Get();
-   
-    T Get(K id);
-    
-    void Save(T entity);
-        
-    void Update(T entity);
-        
-    void Delete(K id);    
+public interface IPruebaarranqueService extends IBaseServices<Pruebaarranque,Integer>{
     
 }

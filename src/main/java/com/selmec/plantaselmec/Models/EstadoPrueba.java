@@ -10,6 +10,7 @@ package com.selmec.plantaselmec.Models;
  *
  * @author ricardorojas
  */
+
 public enum EstadoPrueba {
     Creada,
     Ejecutando,

@@ -41,12 +41,26 @@ app.controller("PruebasCtrl", ["$scope", "PlantaServices", "$filter",
         BaseTableController.call(this, $scope, $filter);
         $scope.items = PlantaServices.Ensambles.query($scope.Init);
     }]);
-app.controller("PruebaCtrl", ["$scope", "PlantaServices", "$routeParams",
-    function ($scope, PlantaServices, $routeParams) {
+app.controller("PruebaCtrl", ["$scope", "PlantaServices", "$routeParams", "$filter",
+    function ($scope, PlantaServices, $routeParams, $filter) {
         if (!$routeParams.PruebaID) {
         }
         else
             $scope.prueba = PlantaServices.Ensambles.get({id: $routeParams.PruebaID});
+        $scope.canClose = function () {
+            var total = $filter("filter")($scope.prueba.pruebas, {estatus: "AutorizadaSupervisor"});
+            return  total.length === 4;
+        };
+        $scope.Aprobar = function () {
+            PlantaServices.Pruebas.Aprobar(function () {
+            }, function () {
+            });
+        };
+        $scope.Rechazar = function () {
+            PlantaServices.Pruebas.Rechazar(function () {
+            }, function () {
+            });
+        };
     }]);
 var BaseController = function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location) {
     $scope.OptionsControl = {
@@ -62,11 +76,7 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
         result > 1 ? 1 : result;
         var color = d3.scale.linear().domain([0, 0.5, 1]).range(["green", "yellow", "red"]);
         return color(result);
-
-
     };
-
-
     $scope.Init = function () {
         $scope.incidencias = PlantaServices.Incidencias.query();
         $scope.ensamble = PlantaServices.Ensambles.get({id: $routeParams.EnsambleID}, function () {
@@ -76,7 +86,6 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
                 for (i = 0; i < 2; i++) {
                     var max = ($scope.valores.Max.I1 * 0.25 * (i + 1));
                     var min = ($scope.valores.Min.I1 * 0.25 * (i + 1));
-                    console.log(max);
                     $scope.PruebaCarga[i].Max.I2 = max;
                     $scope.PruebaCarga[i].Max.I1 = max;
                     $scope.PruebaCarga[i].Max.I3 = max;
@@ -135,8 +144,7 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
                 label: "L3-N",
                 color: "#428bca",
                 type: "line",
-                thickness: "1px"
-            },
+                thickness: "1px"},
             {
                 y: "I1",
                 label: "I1",
@@ -148,18 +156,14 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
                 y: "I2",
                 label: "I2",
                 axis: "y2",
-                color: "#FF7C00",
-                type: "line",
+                color: "#FF7C00", type: "line",
                 thickness: "1px"
             }, {
                 y: "I3",
-                label: "I3",
-                axis: "y2",
+                label: "I3", axis: "y2",
                 color: "#FFFF00",
-                type: "line",
-                thickness: "1px"
-            }
-        ],
+                type: "line", thickness: "1px"
+            }],
         axes: {x: {type: "linear", key: "x"}, y: {type: "linear"}, y2: {type: "linear"}},
         lineMode: "bundle",
         tension: 0.7,
@@ -175,8 +179,7 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
             y: "Temp",
             label: "Temp",
             color: "#ff0000",
-            type: "line",
-            thickness: "1px"
+            type: "line", thickness: "1px"
         }, {
             y: "HZ",
             label: "HZ",
@@ -186,9 +189,7 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
             thickness: "1px"
         }
     ];
-
     $scope.CanAprove = true;
-
     $scope.Stop = function () {
         $scope.ParoPlanta();
         $scope.CanAprove = false;
@@ -205,7 +206,6 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
             noty({text: "Apagado de planta exitoso¡¡¡", type: "success"});
         }, function () {
             noty({text: "Error al apagar la planta la planta¡¡¡", type: "error"});
-
         });
     };
     $scope.ArranquePlanta = function () {
@@ -228,7 +228,6 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
                 text: "Ocurrio un error al realizar la operacion¡¡¡", type: "error"
             });
         });
-
     };
     $scope.Rechaza = function () {
         PlantaServices.Pruebas.RechazaE({id: $scope.prueba.id}, {},
@@ -257,7 +256,6 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
                 text: "Ocurrio un error al realizar la operacion¡¡¡", type: "error"
             });
         });
-
     };
     $scope.RechazaS = function () {
         PlantaServices.Pruebas.RechazaS({id: $scope.prueba.id}, {},
@@ -274,7 +272,7 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
         });
     };
     $scope.NowToLastMinute = function () {
-       
+
         if ($scope.valores.Max.L1N > $scope.now.L1N && $scope.valores.Min.L1N < $scope.now.L1N) {
             $scope.log.push($scope.now.L1N);
         }
@@ -310,8 +308,7 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
             L3N: $scope.now.L3N,
             I1: $scope.now.I1,
             I2: $scope.now.I2,
-            I3: $scope.now.I3,
-            HZ: $scope.now.HZ,
+            I3: $scope.now.I3, HZ: $scope.now.HZ,
             Temp: $scope.now.Temp,
             RPM: $scope.now.RPM,
             MaxV: $scope.valores.Max.L1N,
@@ -319,8 +316,6 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
             //bateria: $scope.now.bateria
         };
     };
-
-
     $scope.Start = function () {
         noty({
             text: "¿Confirma el encendido de la planta?", modal: true,
@@ -345,8 +340,7 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
                         $noty.close();
                         noty({text: 'Cancelado', type: 'error'});
                     }
-                }
-            ]
+                }]
         });
     };
 };
@@ -410,8 +404,7 @@ app.controller("PruebaSinCargaController", [
                 ensamble: {id: $scope.ensamble.id},
                 tipo: 0,
                 estatus: 0,
-                dtInicio: new Date(),
-                dtFin: new Date(),
+                dtInicio: new Date(), dtFin: new Date(),
                 comentario: null,
                 incidencias: null
             });
@@ -468,8 +461,7 @@ app.controller("PruebaConCargaController", [
         $scope.Accumulate = [];
         $scope.Iteraciones = {current: 0,
             Iteracciones: [
-                {No: 1, Time: 5 * 60, current: 0, alert: {msg: 'Aumentar la carga a 50%¡¡¡', time: 30}},
-                {No: 2, Time: 5 * 60, current: 0, alert: {msg: 'Aumentar la carga a 75%¡¡¡', time: 30}},
+                {No: 1, Time: 5 * 60, current: 0, alert: {msg: 'Aumentar la carga a 50%¡¡¡', time: 30}}, {No: 2, Time: 5 * 60, current: 0, alert: {msg: 'Aumentar la carga a 75%¡¡¡', time: 30}},
                 {No: 3, Time: 5 * 60, current: 0, alert: {msg: 'Aumentar la carga a 100%¡¡¡', time: 30}},
                 {No: 4, Time: 10 * 60, current: 0},
                 {No: 5, Time: 10 * 60, current: 0},
@@ -487,8 +479,7 @@ app.controller("PruebaConCargaController", [
                 ensamble: $scope.ensamble,
                 tipo: 1,
                 estatus: 0,
-                dtInicio: new Date(),
-                dtFin: new Date()
+                dtInicio: new Date(), dtFin: new Date()
             });
             $scope.prueba.$save(function () {
                 noty({text: "Comenzando Prueba de carga "});
@@ -608,10 +599,11 @@ app.controller("PruebaConCargaSubitaCtrl", [
                 }, 1000);
             }, function () {
                 $scope.Estado = $scope.Estatus.Waiting;
-            });
-        };
+            }
+            );
+        }
+        ;
     }]);
-
 app.controller("PruebaControlCtrl", [
     "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout", "$location",
     function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location) {
@@ -633,7 +625,6 @@ app.controller("PruebaControlCtrl", [
                 $scope.prueba.$save(function () {
                 }, function () {
                 });
-
         };
     }]);
 app.controller("PruebaControlViewCtrl", [
@@ -658,7 +649,6 @@ app.controller("EnsambleController", ["$scope", "PlantaServices", "$filter", "$l
             if (motor.length !== 0)
                 return motor[0];
         };
-
         $scope.planta = {};
         $scope.submit = function () {
             var planta = new PlantaServices.Plantas($scope.planta);
@@ -692,5 +682,46 @@ app.controller("EnsambleController", ["$scope", "PlantaServices", "$filter", "$l
         };
     }]);
 
+app.controller("NuevoArranqueCtrl",
+        ["$scope", "PlantaServices", "$filter", "$location",
+            function ($scope, PlantaServices, $filter, $location) {
+                $scope.motores = PlantaServices.Plantas.query();
+                $scope.ubicaciones = PlantaServices.Ubicaciones.query();
+                $scope.kits = PlantaServices.Kits.query();
+                $scope.clientes = PlantaServices.Clientes.query();
+                $scope.searchPlanta = function (term) {
+                    $scope.plantas = PlantaServices.Plantas.ByOP({noOP: term});
+                };
+                $scope.prueba = new PlantaServices.EnsambleArranque({
+                    folio: "14PR000001", dtCreacion: new Date()
+                });
+                $scope.selectPlanta = function (planta) {
+                    $scope.prueba.planta = planta;
+                };
+                $scope.submit = function () {
+                    $scope.prueba.$save(function () {
+                        noty({text: "Prueba de arranque registrada con el folio : " + prueba.folio + "¡¡¡", type: "success", modal: true});
+                        $location.path("/Pruebas/" + prueba.id);
+                    }, function () {
+                        noty({text: "Ocurrio un error", type: "error"});
+                    });
 
+                };
+            }]);
 
+app.run(["$rootScope", "PlantaServices",
+    function ($rootScope, PlantaServices) {
+        $rootScope.user = PlantaServices.Usuarios.current();
+        $rootScope.hasRole = function (role) {
+
+            if ($rootScope.user === undefined) {
+                return false;
+            }
+
+            if ($rootScope.user.rol === undefined) {
+                return false;
+            }
+
+            return $rootScope.user.rol === role
+        };
+    }]);

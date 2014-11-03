@@ -19,7 +19,7 @@
         <script src="<c:url value="/js/libs/jquery/jquery.js"/>" type="text/javascript"></script>      
         <jsp:invoke fragment="app"/>
         <style>
-            body {
+             body {
                 padding-top: 30px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
             }
 
@@ -37,7 +37,7 @@
                 }
 
                 .navbar-fixed-top .navbar-brand {
-                    padding: 8px 0;
+                    padding: 0;
                 }
             }
         </style>

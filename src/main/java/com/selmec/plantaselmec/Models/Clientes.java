@@ -2,6 +2,7 @@ package com.selmec.plantaselmec.Models;
 // Generated Oct 30, 2014 5:43:43 PM by Hibernate Tools 4.3.1
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -20,28 +21,19 @@ import javax.persistence.Table;
 @Table(name="clientes"
     ,catalog="casetapruebas"
 )
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Clientes  implements java.io.Serializable {
 
 
      private Integer id;
      private String razonSocial;
      private String noCliente;
-     private String clientescol;
+     private String rfc;
      private Set ubicacioneses = new HashSet(0);
 
     public Clientes() {
     }
 
-	
-    public Clientes(String razonSocial) {
-        this.razonSocial = razonSocial;
-    }
-    public Clientes(String razonSocial, String noCliente, String clientescol, Set ubicacioneses) {
-       this.razonSocial = razonSocial;
-       this.noCliente = noCliente;
-       this.clientescol = clientescol;
-       this.ubicacioneses = ubicacioneses;
-    }
    
      @Id @GeneratedValue(strategy=IDENTITY)
 
@@ -76,13 +68,13 @@ public class Clientes  implements java.io.Serializable {
     }
 
     
-    @Column(name="clientescol", length=45)
-    public String getClientescol() {
-        return this.clientescol;
+    @Column(name="rfc", length=45)
+    public String getRfc() {
+        return this.rfc;
     }
     
-    public void setClientescol(String clientescol) {
-        this.clientescol = clientescol;
+    public void setRfc(String rfc) {
+        this.rfc = rfc;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="clientes")

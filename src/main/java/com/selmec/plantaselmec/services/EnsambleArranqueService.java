@@ -12,9 +12,11 @@ import com.selmec.utils.dao.IGenericDao;
 import com.selmec.utils.services.BaseServices;
 import java.util.List;
 import ma.glasnost.orika.MapperFacade;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -28,11 +30,21 @@ public class EnsambleArranqueService extends BaseServices<Ensamblearranque, Inte
     public void setDao(IGenericDao<Ensamblearranque, Integer> daoToSet) {
         this.dao = daoToSet;
         this.dao.setClazz(Ensamblearranque.class);
+        this.DTO = EnsamblearranqueDTO.class;
     }
 
+    Class<EnsamblearranqueDTO> DTO;
+
+    @Transactional(readOnly = true)
     @Override
     public List<EnsamblearranqueDTO> GetByUser(Usuarios usuario) {
-        dao.getCurrentSession().createCriteria(Ensamblearranque.class).add()
+        return mapper.mapAsList(dao.getCurrentSession().createCriteria(Ensamblearranque.class).add(Restrictions.eq("usuarios.id", usuario.getId())).list(), DTO);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public EnsamblearranqueDTO GetById(int id) {
+        return mapper.map(dao.findOne(id), DTO);
     }
 
     @Autowired

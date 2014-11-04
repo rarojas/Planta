@@ -24,6 +24,7 @@ var services = ["PlantaServices",
                 save: {method: "post", url: urlApiBase + "EnsambleArranque/Create"}
             });
             api.Pruebasarranque = $resource(urlApiBase + "Pruebasarranque/:id", {}, {});
+            api.Instalaciones = $resource(urlApiBase + "Instalaciones/:id", {}, {});
             api.Pruebascontrol = $resource(urlApiBase + "Pruebacontrol/:id", {}, {});
             api.Pruebas = $resource(urlApiBase + "Pruebas/:id", {}, {
                 GetValues: {url: urlApiBase + 'Planta/GetValues/:id/:seg/:ite/:equipo'},

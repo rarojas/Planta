@@ -21,17 +21,19 @@ import org.springframework.stereotype.Component;
  *
  * @author rrojase
  */
-//@Component
+@Component
 public class SpringAwareBeanMapper extends ConfigurableMapper implements ApplicationContextAware {
 
     private MapperFactory factory;
 
     @Override
     protected void configureFactoryBuilder(final DefaultMapperFactory.Builder factoryBuilder) {
+        super.configureFactoryBuilder(factoryBuilder);
     }
 
     @Override
     protected void configure(final MapperFactory factory) {
+        super.configure(factory);
         this.factory = factory;
     }
 
@@ -53,8 +55,8 @@ public class SpringAwareBeanMapper extends ConfigurableMapper implements Applica
 //            addConverter(converter);
 //        }
 
-        final Map<String, CustomMapper> mappers = applicationContext.getBeansOfType(CustomMapper.class);
-        for (final CustomMapper mapper : mappers.values()) {
+        final Map<String, Mapper> mappers = applicationContext.getBeansOfType(Mapper.class);
+        for (final Mapper<?, ?> mapper : mappers.values()) {
             addMapper(mapper);
         }
     }
@@ -67,13 +69,12 @@ public class SpringAwareBeanMapper extends ConfigurableMapper implements Applica
 //    public void addConverter(final CostumConve converter) {
 //        factory.getConverterFactory().registerConverter(converter);
 //    }
-
     /**
      * Add a {@link Mapper}.
      *
      * @param mapper The mapper.
      */
-    public void addMapper(final CustomMapper<?, ?> mapper) {
+    public void addMapper(final Mapper<?, ?> mapper) {
         factory.registerMapper(mapper);
     }
 }

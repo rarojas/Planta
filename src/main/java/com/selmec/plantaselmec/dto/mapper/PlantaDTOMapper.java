@@ -15,11 +15,16 @@ import ma.glasnost.orika.MappingContext;
  *
  * @author rrojase
  */
+//@Componentl
 public class PlantaDTOMapper extends CustomMapper<Planta, PlantaDTO> {
 
     @Override
     public void mapAtoB(Planta source, PlantaDTO destination, MappingContext context) {
-        destination = this.mapperFacade.map(source, PlantaDTO.class);
+        //destination = this.mapperFacade.map(source, PlantaDTO.class);
+        destination.noOp = source.getNoOp();
+        destination.noSerie = source.getNoSerie();
+        destination.voltaje  = source.getVoltaje();
+        destination.motorSerie = source.getMotorSerie();                
         destination.motores = this.mapperFacade.map(source.getMotores(), MotorDTO.class);
     }
 }

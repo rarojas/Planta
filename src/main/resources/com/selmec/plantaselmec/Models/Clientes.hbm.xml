@@ -14,8 +14,8 @@
         <property name="noCliente" type="string">
             <column name="noCliente" length="45" />
         </property>
-        <property name="clientescol" type="string">
-            <column name="clientescol" length="45" />
+        <property name="rfc" type="string">
+            <column name="rfc" length="45" />
         </property>
         <set name="ubicacioneses" table="ubicaciones" inverse="true" lazy="true" fetch="select">
             <key>

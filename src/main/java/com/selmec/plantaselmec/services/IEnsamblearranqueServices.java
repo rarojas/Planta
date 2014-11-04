@@ -18,4 +18,6 @@ import java.util.List;
 public interface IEnsamblearranqueServices extends IBaseServices<Ensamblearranque, Integer> {
 
     List<EnsamblearranqueDTO> GetByUser(Usuarios usuario);
+
+    EnsamblearranqueDTO GetById(int id);
 }

@@ -7,6 +7,7 @@ package com.selmec.plantaselmec.controllers;
 
 import com.selmec.plantaselmec.Models.Pruebaarranque;
 import com.selmec.plantaselmec.services.IPruebaarranqueService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,6 +21,7 @@ public class PruebaarranqueController extends BaseController<Pruebaarranque, Int
 
     IPruebaarranqueService PruebaService;
 
+    @Autowired
     public void PruebaService(IPruebaarranqueService PruebaService) {
         this.baseService = PruebaService;
         this.PruebaService = PruebaService;

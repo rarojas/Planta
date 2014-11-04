@@ -108,7 +108,19 @@ app.directive('listPruebas', function () {
             tipo: "@tipo"
         },
         templateUrl: '/templates/directives/listPruebas.html'
-                //template: '<div><span class="glyphicon glyphicon-ok success" ng-show="value === true"></span><span class="glyphicon glyphicon-remove bg-danger" ng-show="value === false"></span></div>'
+    };
+});
+app.directive('listPruebasArranque', function () {
+    return {
+        replace: true,
+        restrict: 'EA',
+        scope: {
+            prueba: "=prueba",
+            url: "@url",
+            urlview: "@urlview",
+            tipo: "@tipo"
+        },
+        templateUrl: '/templates/directives/listPruebasArranque.html'
     };
 });
 app.directive('circle', function () {
@@ -189,8 +201,8 @@ app.directive('autocomplete', ["$timeout", function ($timeout) {
                     this.select = function (item) {
                         $scope.hide = true;
                         $scope.focused = true;
-                        $scope.term =  item.noOp;
-                        $scope.select({item: item});                        
+                        $scope.term = item.noOp;
+                        $scope.select({item: item});
                     };
 
                     $scope.isVisible = function () {

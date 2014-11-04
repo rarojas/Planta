@@ -45,6 +45,8 @@ public class EnsambleService extends BaseServices<Ensamble, String> implements I
     public List<Ensamble> GetByUser(Usuarios usuarios) {
         return dao.getCurrentSession().createCriteria(Ensamble.class).add(Restrictions.eq("usuarios.id", usuarios.getId())).list();
     }
+    
+    
 
     @Override
     public void ExcuteSPControl(int estado) {

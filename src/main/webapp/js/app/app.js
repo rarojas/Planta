@@ -672,7 +672,7 @@ app.controller("PruebaControlCtrl", [
             estatus: "Creada",
             dtInicio: new Date(),
             dtFin: new Date()
-        });       
+        });
         $scope.GuardarPrueba = function () {
             $scope.prueba.ensamble = {id: $scope.ensamble.id};
             $scope.prueba.estatus = "Finalizada";
@@ -775,14 +775,16 @@ app.controller("PruebasArranqueCtrl", ["$scope", "PlantaServices", "$filter",
         BaseTableController.call(this, $scope, $filter);
         $scope.items = PlantaServices.EnsambleArranque.query($scope.Init);
     }]);
-app.controller("PruebaArranqueCtrl", ["$scope", "PlantaServices", "$routeParams", "$filter",
+app.controller("EnsambleArranqueCtrl", ["$scope", "PlantaServices", "$routeParams", "$filter",
     function ($scope, PlantaServices, $routeParams, $filter) {
         if (!$routeParams.PruebaID) {
         }
         else
             $scope.prueba = PlantaServices.EnsambleArranque.get({id: $routeParams.PruebaID});
         $scope.canClose = function () {
-            var total = $filter("filter")($scope.prueba.pruebas, {estatus: "AutorizadaSupervisor"});
+            if (!$scope.prueba.pruebaarranques)
+                return false;
+            var total = $filter("filter")($scope.prueba.pruebaarranques, {estatus: "AutorizadaSupervisor"});
             return  total.length === 4;
         };
         $scope.Aprobar = function () {
@@ -796,6 +798,47 @@ app.controller("PruebaArranqueCtrl", ["$scope", "PlantaServices", "$routeParams"
             });
         };
     }]);
+
+app.controller("PruebaArranqueCtrl", ["$routeParams", "$scope", "PlantaServices", "$timeout",
+    function ($routeParams, $scope, PlantaServices, $timeout) {
+
+    }]);
+app.controller("PruebaInstalacionCtrl", ["$routeParams", "$scope", "PlantaServices", "$timeout",
+    function ($routeParams, $scope, PlantaServices, $timeout) {
+        $scope.ensamble = PlantaServices.EnsambleArranque.get({id: $routeParams.EnsambleID}, function () {
+            $scope.prueba = new PlantaServices.Instalaciones({
+                dtInicio: new Date(),
+                dtFin: new Date(),
+                tipo: 0,
+                estatus: 0,
+                ensamblearranque: {id: $scope.ensamble.id}
+            });
+        });
+        $scope.GuardarPrueba = function () {
+            $scope.prueba.$save(function () {
+                $scope.prueba.estatus = 2;
+            }, function () {
+            });
+        };
+    }]);
+app.controller("PruebaVacioCtrl", ["$routeParams", "$scope", "PlantaServices", "$timeout",
+    function ($routeParams, $scope, PlantaServices, $timeout) {
+
+    }]);
+
+
+app.controller("PruebaInstalacionViewCtrl", ["$routeParams", "$scope", "PlantaServices", "$timeout",
+    function ($routeParams, $scope, PlantaServices, $timeout) {
+        $scope.ensamble = PlantaServices.EnsambleArranque.get({id: $routeParams.EnsambleID}, function () {});
+        $scope.prueba = new PlantaServices.Instalaciones.get({id: $routeParams.PruebaID});
+        $scope.GuardarPrueba = function () {
+            $scope.prueba.$save(function () {
+                $scope.prueba.estatus = 2;
+            }, function () {
+            });
+        };
+    }]);
+
 
 
 app.run(["$rootScope", "PlantaServices",

@@ -5,26 +5,37 @@
  */
 package com.selmec.plantaselmec.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers.DateDeserializer;
+import java.util.Date;
+
 /**
  *
  * @author GEIDAR
  */
 public class InstalacionDTO implements java.io.Serializable {
 
-    private int id;
-    //public PruebaDTO prueba;
-    private boolean ventilacion;
-    private boolean orientacion;
-    private boolean nivel;
-    private boolean silenciador;
-    private boolean combustible;
-    private boolean aterrizado;
-    private boolean neutro;
-    private boolean fuerza;
-    private boolean precalentador;
-    private boolean ubt;
+    public int id;
+    public boolean ventilacion;
+    public boolean orientacion;
+    public boolean nivel;
+    public boolean silenciador;
+    public boolean combustible;
+    public boolean aterrizado;
+    public boolean neutro;
+    public boolean fuerza;
+    public boolean precalentador;
+    public boolean ubt;
 
-    public InstalacionDTO() {
-    }
+    public int tipo;
+    public int estatus;
+    @JsonDeserialize(using = DateDeserializer.class)
+    public Date dtInicio;
+    @JsonDeserialize(using = DateDeserializer.class)
+    public Date dtFin;
+    public String comentario;
+    public IncidenciasDTO incidencias;
+
+    
 
 }

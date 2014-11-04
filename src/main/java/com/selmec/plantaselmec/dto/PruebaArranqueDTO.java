@@ -18,7 +18,7 @@ public class PruebaArranqueDTO {
 
     public int id;
     public int tipo;
-    public EstadoPrueba estatus;
+    public int estatus;
     @JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
     public Date dtInicio;
     @JsonDeserialize(using = DateDeserializers.DateDeserializer.class)

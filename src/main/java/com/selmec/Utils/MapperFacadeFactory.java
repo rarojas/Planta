@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  *
  * @author rrojase
  */
-@Component
+//@Component
 public class MapperFacadeFactory implements FactoryBean<MapperFacade> {
 
         

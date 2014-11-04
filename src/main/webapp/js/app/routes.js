@@ -115,7 +115,23 @@ var Routes = ['$routeProvider',
                 }).
                 when('/PruebasArranque/:PruebaID', {
                     templateUrl: '/templates/EnsambleArranque/Prueba.html',
+                    controller: 'EnsambleArranqueCtrl'
+                }).
+                when('/PruebaArranque/:EnsambleID', {
+                    templateUrl: '/templates/Pruebas/Arranque.html',
                     controller: 'PruebaArranqueCtrl'
+                }).
+                when('/PruebaInstalacion/:EnsambleID', {
+                    templateUrl: '/templates/Pruebas/Instalacion.html',
+                    controller: 'PruebaInstalacionCtrl'
+                }).
+                when('/PruebaInstalacionView/:EnsambleID/:PruebaID', {
+                    templateUrl: '/templates/Pruebas/InstalacionView.html',
+                    controller: 'PruebaInstalacionViewCtrl'
+                }).
+                when('/PruebaVacio/:EnsambleID', {
+                    templateUrl: '/templates/Pruebas/Vacio.html',
+                    controller: 'PruebaVacioCtrl'
                 })
                 .otherwise({
                     redirectTo: '/'

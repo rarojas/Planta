@@ -1,14 +1,13 @@
 package com.selmec.plantaselmec.Models;
 // Generated Oct 30, 2014 5:43:43 PM by Hibernate Tools 4.3.1
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,6 +18,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "pruebaarranque", catalog = "casetapruebas"
 )
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Pruebaarranque extends Pruebabase implements java.io.Serializable {
 
     private Ensamblearranque ensamblearranque;

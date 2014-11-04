@@ -5,7 +5,6 @@
  */
 package com.selmec.plantaselmec.dto;
 
-
 import java.util.Date;
 import java.util.List;
 

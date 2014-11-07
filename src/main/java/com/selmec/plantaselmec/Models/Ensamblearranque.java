@@ -2,6 +2,7 @@ package com.selmec.plantaselmec.Models;
 // Generated Oct 30, 2014 5:43:43 PM by Hibernate Tools 4.3.1
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -26,9 +27,9 @@ public class Ensamblearranque extends Ensamblebase implements java.io.Serializab
     private String tecnico;
     private Set pruebaarranques = new HashSet(0);
     public Kit kit;
-
-    public Ensamblearranque() {
-    }
+    private Usuarios Autorizo;
+    private int Estatus;
+    private Date dtAutorizo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CarrilID", nullable = false)
@@ -39,15 +40,6 @@ public class Ensamblearranque extends Ensamblebase implements java.io.Serializab
     public void setKit(Kit kit) {
         this.kit = kit;
     }
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @PrimaryKeyJoinColumn
-//    public Ensamblebase getEnsamblebase() {
-//        return this.ensamblebase;
-//    }
-//
-//    public void setEnsamblebase(Ensamblebase ensamblebase) {
-//        this.ensamblebase = ensamblebase;
-//    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "UbicacionId", nullable = false)

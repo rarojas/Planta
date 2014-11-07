@@ -23,4 +23,6 @@
     <table-filter match-name="incidencias"/>
     <table-filter match-name="ensamblearranque"/>
     <table-filter match-name="motores"/>
+    <table-filter match-name="roles"/>
+    <table-filter match-name="produccion"/>
 </hibernate-reverse-engineering>

@@ -7,6 +7,7 @@ package com.selmec.plantaselmec.dto.mapper;
 
 import com.selmec.plantaselmec.Models.Ensamblearranque;
 import com.selmec.plantaselmec.dto.EnsamblearranqueDTO;
+import com.selmec.plantaselmec.dto.PlantaDTO;
 import com.selmec.plantaselmec.dto.PruebaArranqueDTO;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;
@@ -23,6 +24,8 @@ public class EnsamblearranqueDTOMapper extends CustomMapper<Ensamblearranque, En
     public void mapAtoB(Ensamblearranque source, EnsamblearranqueDTO destination, MappingContext context) {
         destination.id = source.getId();
         destination.dtCreacion = source.getDtCreacion();
+        destination.dtProgramada = source.getDtProgramada();
+        destination.dtProgramadaReal = source.getDtProgramadaReal();                
         destination.folio = source.getFolio();
         destination.pruebaarranques = mapperFacade.mapAsList(source.getPruebaarranques(), PruebaArranqueDTO.class);
 

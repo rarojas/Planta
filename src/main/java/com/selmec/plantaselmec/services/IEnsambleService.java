@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author rrojase
  */
-public interface IEnsambleService extends IBaseServices<Ensamble, String> {
+public interface IEnsambleService extends IBaseServices<Ensamble, Integer> {
 
     void TurnOnCarril(int estado);
 
@@ -23,5 +23,9 @@ public interface IEnsambleService extends IBaseServices<Ensamble, String> {
     void ExcuteSPControl(int estado);
 
     List<Ensamble> GetByUser(Usuarios usuarios);
-    
+
+    void Rechazar(int id, Usuarios usuario);
+
+    void Aprobar(int id, Usuarios usuario);
+
 }

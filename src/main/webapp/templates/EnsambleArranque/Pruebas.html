@@ -58,7 +58,10 @@
                         <th>No Fases</th>
                         <th>Guardas</th>
                         <th>Radiador</th>
-                        <th>Creación</th>
+                        <th>F Programada</th>
+                        <th>F Programada Real</th>
+                        <th>Estatus</th>
+                        <th>Creación</th>                        
                         <th>Ejecutor</th>
                     </tr>
                 </thead>
@@ -92,6 +95,15 @@
                     </td>
                     <td>
                         {{prueba.rediador}}
+                    </td>
+                    <td>
+                        {{prueba.dtProgramada}}
+                    </td>
+                    <td>
+                        {{prueba.dtProgramadaReal}}
+                    </td>
+                    <td>
+                        {{prueba.estatus}}
                     </td>
                     <td>
                         {{prueba.dtCreacion| date : 'dd-MM-yyyy hh:ss'}}

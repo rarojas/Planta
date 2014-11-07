@@ -23,11 +23,15 @@
         <property name="password" type="string">
             <column name="password" length="50" not-null="true" />
         </property>
-        <set name="ensamblebases" table="ensamblebase" inverse="true" lazy="true" fetch="select">
+        <set name="ensamblebases" table="ensamblebase" inverse="true" lazy="true" fetch="join">
             <key>
                 <column name="UsuarioID" not-null="true" />
             </key>
             <one-to-many class="com.selmec.plantaselmec.Models.Ensamblebase" />
+        </set>
+        <set name="roles" cascade="save-update" table="usuario_rol" fetch="join">
+            <key column="UsuarioID"/>
+            <many-to-many column="RolID" class="com.selmec.plantaselmec.Models.Rol"/>
         </set>
     </class>
 </hibernate-mapping>

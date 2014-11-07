@@ -19,6 +19,8 @@ public class EnsamblearranqueDTO {
     public String folio;
     public UsuarioDTO usuarios;
     public Date dtCreacion;
+    public Date dtProgramada;
+    public Date dtProgramadaReal;
     public KitDTO kit;
     public String recibio;
     public String atendio;

@@ -73,18 +73,10 @@ public class PruebaController extends BaseControllers<Prueba, PruebaDTO> {
         return DTO(prueba, Prueba.class, PruebaDTO.class);
     }
 
-    @Transactional(readOnly = true)
     @RequestMapping(value = "Lecturas/{id}", method = RequestMethod.GET)
     @ResponseBody
     public List<LecturaDTO> Lecturas(@PathVariable("id") int id) {
-        String hql = "from Lecturas l where l.prueba.id = " + id;
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
-        List<Lecturas> results = query.list();
-        List<LecturaDTO> r = new ArrayList<>();
-        for (Lecturas row : results) {
-            r.add(new LecturaDTO(row));
-        }
-        return r;
+        return pruebaServices.Lecturas(id);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

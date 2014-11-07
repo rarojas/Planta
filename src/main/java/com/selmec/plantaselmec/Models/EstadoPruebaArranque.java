@@ -10,5 +10,11 @@ package com.selmec.plantaselmec.Models;
  * @author rrojase
  */
 public enum EstadoPruebaArranque {
-    
+    Creada,
+    Ejecutando,
+    Finalizada,
+    RechazadaEjecutor,
+    AutorizadoEjecutor,
+    RechazadaSupervisor,
+    AutorizadaSupervisor
 }

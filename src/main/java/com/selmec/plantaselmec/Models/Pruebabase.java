@@ -31,23 +31,6 @@ public class Pruebabase implements java.io.Serializable {
     private String comentario;
     private Set lecturases = new HashSet(0);
 
-
-    public Pruebabase() {
-    }
-
-//    public Pruebabase(Incidencias incidencias) {
-//        this.incidencias = incidencias;
-//    }
-//
-//    public Pruebabase(Incidencias incidencias, Date dtInicio, Date dtFin, String comentario, Prueba prueba, Set lecturases, Pruebaarranque pruebaarranque) {
-//        this.incidencias = incidencias;
-//        this.dtInicio = dtInicio;
-//        this.dtFin = dtFin;
-//        this.comentario = comentario;
-//        this.prueba = prueba;
-//        this.lecturases = lecturases;
-//        this.pruebaarranque = pruebaarranque;
-//    }
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID", unique = true, nullable = false)
@@ -98,14 +81,6 @@ public class Pruebabase implements java.io.Serializable {
         this.comentario = comentario;
     }
 
-//@OneToOne(fetch=FetchType.LAZY, mappedBy="pruebabase")
-//    public Prueba getPrueba() {
-//        return this.prueba;
-//    }
-//    
-//    public void setPrueba(Prueba prueba) {
-//        this.prueba = prueba;
-//    }
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pruebabase")
     public Set getLecturases() {
         return this.lecturases;
@@ -115,12 +90,4 @@ public class Pruebabase implements java.io.Serializable {
         this.lecturases = lecturases;
     }
 
-//@OneToOne(fetch=FetchType.LAZY, mappedBy="pruebabase")
-//    public Pruebaarranque getPruebaarranque() {
-//        return this.pruebaarranque;
-//    }
-//    
-//    public void setPruebaarranque(Pruebaarranque pruebaarranque) {
-//        this.pruebaarranque = pruebaarranque;
-//    }
 }

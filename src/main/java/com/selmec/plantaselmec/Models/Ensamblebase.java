@@ -22,18 +22,13 @@ import javax.persistence.TemporalType;
 )
 public class Ensamblebase implements java.io.Serializable {
 
-    private Integer id;    
+    private Integer id;
     private Planta planta;
     private Usuarios usuarios;
     private String folio;
     private Date dtCreacion;
-//    private Ensamblearranque ensamblearranque;
-//    private Ensamble ensamble;
-
-    public Ensamblebase() {
-    }
-
-   
+    private Date dtProgramada;
+    private Date dtProgramadaReal;
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -56,7 +51,6 @@ public class Ensamblebase implements java.io.Serializable {
 //    public void setCariles(Cariles cariles) {
 //        this.cariles = cariles;
 //    }
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PlantaID", nullable = false)
     public Planta getPlanta() {
@@ -96,22 +90,21 @@ public class Ensamblebase implements java.io.Serializable {
         this.dtCreacion = dtCreacion;
     }
 
-//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "ensamblebase")
-//    public Ensamblearranque getEnsamblearranque() {
-//        return this.ensamblearranque;
-//    }
-//
-//    public void setEnsamblearranque(Ensamblearranque ensamblearranque) {
-//        this.ensamblearranque = ensamblearranque;
-//    }
-//
-//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "ensamblebase")
-//    public Ensamble getEnsamble() {
-//        return this.ensamble;
-//    }
-//
-//    public void setEnsamble(Ensamble ensamble) {
-//        this.ensamble = ensamble;
-//    }
+    @Temporal(javax.persistence.TemporalType.DATE)
+    public Date getDtProgramada() {
+        return dtProgramada;
+    }
 
+    public void setDtProgramada(Date dtProgramada) {
+        this.dtProgramada = dtProgramada;
+    }
+
+    @Temporal(javax.persistence.TemporalType.DATE)
+    public Date getDtProgramadaReal() {
+        return dtProgramadaReal;
+    }
+
+    public void setDtProgramadaReal(Date dtProgramadaReal) {
+        this.dtProgramadaReal = dtProgramadaReal;
+    }
 }

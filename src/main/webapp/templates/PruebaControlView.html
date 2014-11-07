@@ -8,7 +8,7 @@
                     Ajuste de Termómetro (°C)
                 </label>
                 <div class="col-md-4">
-                    {{pruebacontrol.termometro}}
+                    {{prueba.termometro}}
                 </div>
             </div>
             <div class="form-group">
@@ -16,7 +16,7 @@
                     Ajuste de Presión de Aceite (BAR)
                 </label>
                 <div class="col-md-4">                    
-                    {{pruebacontrol.presion}}
+                    {{prueba.presion}}
                 </div>
             </div>
             <div class="form-group">
@@ -24,7 +24,7 @@
                     Saque de marcha
                 </label>
                 <div class="col-md-4">                    
-                    {{pruebacontrol.saquemarcha}}
+                    {{prueba.saquemarcha}}
                 </div>
             </div>
             <div class="form-group">
@@ -32,7 +32,7 @@
                     Ajuste de Sobrevelocidad (%)
                 </label>
                 <div class="col-md-4">                    
-                    {{pruebacontrol.sobrevelocidad}}
+                    {{prueba.sobrevelocidad}}
                 </div>
             </div>
         </fieldset>
@@ -48,7 +48,7 @@
         </div>
         <div class="row">     
             <div class="col-md-12">
-                <button class="btn btn-success" ng-click="GuardarPrueba()" ng-disabled="formPrueba.$invalid" ng-show="prueba.estatus !== 2">
+                <button class="btn btn-success" ng-click="GuardarPrueba()" ng-disabled="formPrueba.$invalid" ng-show="prueba.estatus === 'Creada'">
                     Guardar Prueba Control
                 </button>
             </div>
@@ -64,7 +64,7 @@
                     MARCA UBT:
                 </label>
                 <div class="col-md-4">
-                    {{pruebacontrol.ubt}}                    
+                    {{prueba.ubt}}                    
                 </div>
             </div>   
             <div class="form-group">
@@ -72,7 +72,7 @@
                     Operación normal de UBT
                 </label>
                 <div class="col-md-4">                    
-                    <check value="pruebacontrol.operacionubt"></check>
+                    <check value="prueba.operacionubt"></check>
                 </div>
             </div> 
             <div class="form-group">
@@ -80,7 +80,7 @@
                     Transferencia de carga línea normal
                 </label>
                 <div class="col-md-4">                    
-                    <check value="pruebacontrol.cargaliena"></check>
+                    <check value="prueba.cargaliena"></check>
                 </div>
             </div>             
             <div class="row">
@@ -92,7 +92,7 @@
                                 Señal de alta temperatura (contacto seco)
                             </label>
                             <div class="col-md-4">                    
-                                <check value="pruebacontrol.altatemperatura"></check>
+                                <check value="prueba.altatemperatura"></check>
                             </div>
                         </div> 
                         <div class="form-group">
@@ -100,7 +100,7 @@
                                 Señal de baja Presión (contacto seco)
                             </label>
                             <div class="col-md-4">                    
-                                <check value="pruebacontrol.bajapresion"></check>
+                                <check value="prueba.bajapresion"></check>
                             </div>
                         </div>  
                         <div class="form-group">
@@ -108,7 +108,7 @@
                                 Señal falla general (contacto seco)
                             </label>
                             <div class="col-md-4">                    
-                                <check value="pruebacontrol.fallageneral"></check>
+                                <check value="prueba.fallageneral"></check>
                             </div>
                         </div>                                                                                
                     </fieldset>
@@ -124,7 +124,7 @@
                     Arranque manual
                 </label>
                 <div class="col-md-4">                    
-                    <check value="pruebacontrol.arranquemanual"></check>
+                    <check value="prueba.arranquemanual"></check>
                 </div>
             </div>             
             <div class="form-group">
@@ -132,7 +132,7 @@
                     Protección por baja presión de aceite
                 </label>
                 <div class="col-md-4">                    
-                    <check value="pruebacontrol.bajepresion"></check>
+                    <check value="prueba.bajepresion"></check>
                 </div>
             </div>     
             <div class="form-group">
@@ -140,7 +140,7 @@
                     Protección por temperatura
                 </label>
                 <div class="col-md-4">                    
-                    <check value="pruebacontrol.temperatura"></check>
+                    <check value="prueba.temperatura"></check>
                 </div>
             </div> 
             <div class="form-group">
@@ -148,7 +148,7 @@
                     Protección por sobre velocidad
                 </label>
                 <div class="col-md-4">                    
-                    <check value="pruebacontrol.proteccionsobrevelocidad"></check>
+                    <check value="prueba.proteccionsobrevelocidad"></check>
                 </div>
             </div> 
             <div class="form-group">
@@ -156,7 +156,7 @@
                     Protección por intentos de arranque
                 </label>
                 <div class="col-md-4">                    
-                    <check value="pruebacontrol.intentosarranque"></check>
+                    <check value="prueba.intentosarranque"></check>
                 </div>
             </div>             
             <div class="form-group">                                    
@@ -164,7 +164,7 @@
                     Número de pulsos de arranque
                 </label>
                 <div class="col-md-4">                    
-                    {{pruebacontrol.pulsos}}
+                    {{prueba.pulsos}}
                 </div>                                            
             </div>   
             <div class="form-group">                                    
@@ -172,7 +172,7 @@
                     Duración Total (s)
                 </label>
                 <div class="col-md-4">                    
-                    {{pruebacontrol.duraciontotal}}
+                    {{prueba.duraciontotal}}
                 </div>                                            
             </div>   
         </fieldset>

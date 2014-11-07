@@ -1,11 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.selmec.plantaselmec.dto;
 
+import com.selmec.plantaselmec.Models.Rol;
 import com.selmec.plantaselmec.Models.Usuarios;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -18,9 +16,7 @@ public class UsuarioDTO implements java.io.Serializable {
     public String apellidos;
     public String rol;
     public int id;
-    
-    /*private String password;
-     private Set ensambles = new HashSet(0);*/
+    public List<Rol> roles = new ArrayList<>();
 
     public UsuarioDTO() {
     }
@@ -31,6 +27,9 @@ public class UsuarioDTO implements java.io.Serializable {
         this.apellidos = usuarios.getApellidos();
         this.rol = usuarios.getRol();
         this.id = usuarios.getId();
+        for (Object role : usuarios.getRoles()) {
+            this.roles.add((Rol) role);
+        }
     }
 
 }

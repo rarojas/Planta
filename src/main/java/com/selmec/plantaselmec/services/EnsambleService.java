@@ -6,9 +6,11 @@
 package com.selmec.plantaselmec.services;
 
 import com.selmec.plantaselmec.Models.Ensamble;
+import com.selmec.plantaselmec.Models.EstadoEnsamble;
 import com.selmec.plantaselmec.Models.Usuarios;
 import com.selmec.utils.dao.IGenericDao;
 import com.selmec.utils.services.BaseServices;
+import java.util.Date;
 import java.util.List;
 import javax.sql.DataSource;
 import org.hibernate.criterion.Restrictions;
@@ -24,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author rrojase
  */
 @Service
-public class EnsambleService extends BaseServices<Ensamble, String> implements IEnsambleService {
+public class EnsambleService extends BaseServices<Ensamble, Integer> implements IEnsambleService {
 
     private final Logger logger = Logger.getLogger(EnsambleService.class);
 
@@ -35,7 +37,7 @@ public class EnsambleService extends BaseServices<Ensamble, String> implements I
     private JdbcTemplate jdbctemplate;
 
     @Autowired
-    public void setDao(IGenericDao<Ensamble, String> daoToSet) {
+    public void setDao(IGenericDao<Ensamble, Integer> daoToSet) {
         dao = daoToSet;
         dao.setClazz(Ensamble.class);
     }
@@ -45,8 +47,6 @@ public class EnsambleService extends BaseServices<Ensamble, String> implements I
     public List<Ensamble> GetByUser(Usuarios usuarios) {
         return dao.getCurrentSession().createCriteria(Ensamble.class).add(Restrictions.eq("usuarios.id", usuarios.getId())).list();
     }
-    
-    
 
     @Override
     public void ExcuteSPControl(int estado) {
@@ -91,5 +91,21 @@ public class EnsambleService extends BaseServices<Ensamble, String> implements I
         this.jdbctemplate = new JdbcTemplate(dataSource);
         jdbctemplate.update(queryString);
         logger.info("Record inserted successfully");
+    }
+
+    @Transactional
+    @Override
+    public void Rechazar(int id, Usuarios usuario) {
+        Ensamble ensamble = dao.findOne(id);
+        ensamble.setEstatus(EstadoEnsamble.Rechazada);
+        ensamble.setDtAutorizacion(new Date());
+    }
+
+    @Transactional
+    @Override
+    public void Aprobar(int id, Usuarios usuario) {
+        Ensamble ensamble = dao.findOne(id);
+        ensamble.setDtAutorizacion(new Date());
+        ensamble.setEstatus(EstadoEnsamble.Aprobada);
     }
 }

@@ -13,7 +13,6 @@
                                 <div class="col-md-4">
                                     <fieldset>
                                         <legend>Planta de Emergencia</legend> 
-
                                         <div class="row">
                                             <label class="control-label col-md-4">
                                                 Carril                                   
@@ -44,6 +43,11 @@
                                             </label>
                                             <div class="col-md-8">
                                                 {{prueba.planta.noOp}}
+                                            </div>
+                                        </div>
+                                        <div class="row">                                            
+                                            <div class="col-md-12">
+                                                <img src="../img/QR/QR{{prueba.id}}.png">
                                             </div>
                                         </div>
                                     </fieldset>
@@ -132,64 +136,80 @@
                     <h4>Protocolo de Pruebas de Ensamble de Plantas de Emergencia</h4>
                 </div>
             </div>
-            <div class="col-md-3">
-                <h4>1 Pruebas Sin Carga</h4>
+            <div class="col-md-3">                
+                <fieldset>
+                    <legend>
+                        1 Pruebas Sin Carga
+                        <div class="btn-group" ng-show="(prueba.pruebas | filter : {tipo : 0, estatus: 'Autorizad' }).length === 0">
+                            <a class="btn btn-primary" href="#/PruebaSinCarga/{{prueba.id}}">
+                                Entrar
+                            </a>
+                        </div>
+                    </legend>
+                </fieldset>
             </div>
             <div class="col-md-3">
-                <h4>2 Pruebas Con Carga</h4>
+                <fieldset>
+                    <legend>
+                        2 Pruebas Con Carga
+                        <div class="btn-group"ng-show="(prueba.pruebas | filter : {tipo : 1,estatus: 'Autorizad'}).length === 0">
+                            <a class="btn btn-primary" href="#/PruebaConCarga/{{prueba.id}}">
+                                Entrar
+                            </a>
+                        </div>
+                    </legend>
+                </fieldset>
             </div>
             <div class="col-md-3">
-                <h4>3 Pruebas Con Carga Subita</h4>
+                <fieldset>
+                    <legend>
+                        3 Pruebas Con Carga Súbita
+                        <div class="btn-group"ng-show="(prueba.pruebas | filter : {tipo : 2, estatus: 'Autorizad'}).length === 0">
+                            <a class="btn btn-primary" href="#/PruebaConCargaSubita/{{prueba.id}}">
+                                Entrar
+                            </a>
+                        </div>
+                    </legend>
+                </fieldset>
             </div>
             <div class="col-md-3">
-                <h4>4 Pruebas de Control</h4>
+                <fieldset>
+                    <legend>
+                        4 Pruebas de Control 
+                        <div class="btn-group" ng-show="(prueba.pruebas | filter : {tipo : 3, estatus: 'Autorizad'}).length === 0">
+                            <a class="btn btn-primary" href="#/PruebaControl/{{prueba.id}}">
+                                Entrar
+                            </a>
+                        </div>
+                    </legend>
+                </fieldset>                
             </div>            
         </div>
         <div class="row">
-            <div class="col-md-3">             
-                <div class="btn-group" ng-show="(prueba.pruebas | filter : {tipo : 0,estatus: 'AutorizadoEjecutor' }).length === 0">
-                    <a class="btn btn-primary" href="#/PruebaSinCarga/{{prueba.id}}">
-                        Entrar
-                    </a>
-                </div>
+            <div class="col-md-3">                           
                 <list-pruebas prueba="prueba" urlview="PruebaSinCargaView" url="" tipo="0"></list-pruebas>               
             </div>        
             <div class="col-md-3">                             
-                <div class="btn-group"ng-show="(prueba.pruebas | filter : {tipo : 0,estatus: 'AutorizadoEjecutor'}).length !== 0">
-                    <a class="btn btn-primary" href="#/PruebaConCarga/{{prueba.id}}">
-                        Entrar
-                    </a>
-                </div>
                 <list-pruebas prueba="prueba" urlview="PruebaConCargaView" url="" tipo="1"></list-pruebas>
             </div>
             <div class="col-md-3">             
-                <div class="btn-group"ng-show="(prueba.pruebas | filter : {tipo : 1,estatus: 'AutorizadoEjecutor'}).length !== 0">
-                    <a class="btn btn-primary" href="#/PruebaConCargaSubita/{{prueba.id}}">
-                        Entrar
-                    </a>
-                </div>
                 <list-pruebas prueba="prueba" urlview="PruebaConCargaSubitaView" url="" tipo="2"></list-pruebas>
             </div>
-            <div class="col-md-3">              
-                <div class="btn-group" ng-show="(prueba.pruebas | filter : {tipo : 2,estatus: 'AutorizadoEjecutor'}).length !== 0">
-                    <a class="btn btn-primary" href="#/PruebaControl/{{prueba.id}}">
-                        Entrar
-                    </a>
-                </div>
+            <div class="col-md-3">                              
                 <list-pruebas prueba="prueba" urlview="PruebaControlView" url="" tipo="3"></list-pruebas>
             </div>
 
         </div>
         <div class='row' ng-cloak>
-            <div class='col-md-6' ng-hide="!canClose()">
+            <div class='col-md-6' ng-hide="prueba.Estatus === 'Aprobada' || prueba.Estatus === 'Rechazada'">
                 <fieldset>
                     <legend>Autorizar Pruebas</legend>
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="btn btn-success" type="button" ng-click="Aprobar()">
+                            <button class="btn btn-success" type="button" ng-click="Aprobar()" ng-hide="!canClose() && prueba.Estatus === 'Terminada'">
                                 Autorizar Pruebas 
                             </button>
-                            <button class="btn btn-danger"  type="button" ng-click="Rechazar()">
+                            <button class="btn btn-danger"  type="button" ng-click="Rechazar()" >
                                 Rechazar Pruebas 
                             </button>
                         </div>

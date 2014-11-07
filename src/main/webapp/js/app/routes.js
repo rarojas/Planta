@@ -132,9 +132,19 @@ var Routes = ['$routeProvider',
                 when('/PruebaVacio/:EnsambleID', {
                     templateUrl: '/templates/Pruebas/Vacio.html',
                     controller: 'PruebaVacioCtrl'
+                }).
+                when('/ProgramacionPruebasEnsamble', {
+                    templateUrl: '/templates/Ensamble/Programacion.html',
+                    controller: 'MainCtrl'
+                })
+                .
+                when('/ProgramacionPruebasArranque', {
+                    templateUrl: '/templates/EnsambleArranque/Programacion.html',
+                    controller: 'ProgramacionPruebasArranqueCtrl'
                 })
                 .otherwise({
                     redirectTo: '/'
                 });
     }];
 app.config(Routes);
+

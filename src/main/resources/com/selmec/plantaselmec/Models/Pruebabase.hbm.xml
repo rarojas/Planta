@@ -54,7 +54,7 @@
             <property name="dtApruebaSupervisor" type="timestamp">
                 <column name="dtApruebaSupervisor" length="19" />
             </property>          
-<!--            <joined-subclass name="Cargasubita" table="cargasubita" >
+            <!--            <joined-subclass name="Cargasubita" table="cargasubita" >
                 <key column="ID" />      
                 <property name="seg" type="java.lang.Integer">
                     <column name="seg" />

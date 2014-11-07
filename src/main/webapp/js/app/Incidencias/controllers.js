@@ -83,15 +83,14 @@ app.controller("MotoresSaveCtrl",
                     }
         ]);
 app.controller("UsuariosCtrl",
-        ["$scope", "PlantaServices", "$routeParams", "$filter"
+        ["$scope", "PlantaServices", "$filter"
                     , function ($scope, PlantaServices, $filter) {
                         BaseTableController.call(this, $scope, $filter);
                         $scope.items = PlantaServices.Usuarios.query($scope.Init);
-                        $scope.roles = [{text: "Administrador", value: "ROLE_ADMIN"}, {text: "Supervisor", value: "SUPERVISOR"}, {text: "Ejecutor", value: "EJECUTOR"}];
-                        $scope.Rol = function (rol) {
-                            var result = $filter("filter")(roles, {value: rol})[0];
-                            return result.text;
-                        };
+//                        $scope.Rol = function (rol) {
+//                            var result = $filter("filter")(roles, {value: rol})[0];
+//                            return result.text;
+//                        };
                         $scope.Delete = function (usuario) {
                             PlantaServices.Usuarios.delete({id: usuario.id}, function () {
                                 $scope.usuario.pop(usuario);
@@ -107,7 +106,7 @@ app.controller("UsuariosSaveCtrl",
                         $scope.usuario = new PlantaServices.Usuarios();
                         if ($routeParams.id !== undefined)
                             $scope.usuario.$get({id: $routeParams.id});
-                        $scope.roles = [{text: "Administrador", value: "ROLE_ADMIN"}, {text: "Supervisor", value: "SUPERVISOR"}, {text: "Ejecutor", value: "EJECUTOR"}];
+                        $scope.roles = PlantaServices.Roles.query();
                         $scope.Save = function () {
                             $scope.usuario.$save(function () {
                                 if (!$routeParams.id)
@@ -190,7 +189,7 @@ app.controller("UbicacionesCtrl",
 app.controller("UbicacionesSaveCtrl",
         ["$scope", "PlantaServices", "$routeParams", "$location"
                     , function ($scope, PlantaServices, $routeParams, $location) {
-                          $scope.clientes = PlantaServices.Clientes.query();
+                        $scope.clientes = PlantaServices.Clientes.query();
                         $scope.ubicacion = new PlantaServices.Ubicaciones();
                         if ($routeParams.id !== undefined)
                             $scope.ubicacion.$get({id: $routeParams.id});

@@ -7,7 +7,6 @@ package com.selmec.plantaselmec.controllers;
 
 import com.selmec.plantaselmec.Models.Ensamblearranque;
 import com.selmec.plantaselmec.Models.Usuarios;
-import com.selmec.plantaselmec.dto.EnsambleDTO;
 import com.selmec.plantaselmec.dto.EnsamblearranqueDTO;
 import com.selmec.plantaselmec.services.IEnsamblearranqueServices;
 import com.selmec.plantaselmec.services.IUsuariosServices;
@@ -17,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,7 +58,7 @@ public class EnsambleArranqueController {
 
     @RequestMapping(value = "/Create", method = RequestMethod.POST)
     @ResponseBody
-    public Ensamblearranque Post(@RequestBody Ensamblearranque Ensamble, Principal principal) {
+    public EnsamblearranqueDTO Post(@RequestBody Ensamblearranque Ensamble, Principal principal) {
         DateFormat df = new SimpleDateFormat("yyMMddss");
         Date today = Calendar.getInstance().getTime();
         String reportDate = df.format(today);
@@ -66,6 +66,9 @@ public class EnsambleArranqueController {
         Ensamble.setUsuarios(usuario);
         Ensamble.setFolio(reportDate);
         ensambleService.Save(Ensamble);
-        return Ensamble;
+        return mapper.map(Ensamble, EnsamblearranqueDTO.class);
     }
+
+    @Autowired
+    MapperFacade mapper;
 }

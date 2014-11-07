@@ -5,19 +5,22 @@
  */
 package com.selmec.plantaselmec.services;
 
-import com.selmec.plantaselmec.Models.Ensamble;
 import com.selmec.plantaselmec.Models.EstadoPrueba;
+import com.selmec.plantaselmec.Models.Lecturas;
 import com.selmec.plantaselmec.Models.Prueba;
 import com.selmec.plantaselmec.Models.Usuarios;
+import com.selmec.plantaselmec.dto.LecturaDTO;
 import com.selmec.utils.dao.IGenericDao;
 import com.selmec.utils.services.BaseServices;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import ma.glasnost.orika.MapperFacade;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -77,5 +80,13 @@ public class PruebaServices extends BaseServices<Prueba, Integer> implements IPr
 //        ensamble.setEstatus(estatus);
 //        dao.getCurrentSession().merge(prueba);
 //    }
+    @Transactional(readOnly = true)
+    @Override
+    public List<LecturaDTO> Lecturas(@PathVariable("id") int id) {
+        return mapper.mapAsList(dao.getCurrentSession().createCriteria(Lecturas.class).add(Restrictions.eq("pruebabase.id", id)).list(), LecturaDTO.class);
+    }
+    
+    @Autowired
+    MapperFacade mapper;
 
 }

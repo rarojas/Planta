@@ -20,6 +20,12 @@
         <property name="dtCreacion" type="timestamp">
             <column name="dtCreacion" length="19" not-null="true" />
         </property>
+        <property name="dtProgramada" type="date">
+            <column name="dtProgramada" length="19" not-null="true"/>
+        </property>
+        <property name="dtProgramadaReal" type="date">
+            <column name="dtProgramadaReal" length="19"  />
+        </property>
         <joined-subclass name="Ensamblearranque" table="ensamblearranque" >
             <key column="ID" />
             <many-to-one name="ubicaciones" class="com.selmec.plantaselmec.Models.Ubicaciones" fetch="select">
@@ -30,10 +36,10 @@
             </property>
             <property name="tecnico" type="string">
                 <column name="Tecnico" length="100" not-null="true" />
-            </property>
+            </property>            
             <many-to-one name="kit" class="com.selmec.plantaselmec.Models.Kit" fetch="select">
                 <column name="CarrilID" not-null="true" />
-            </many-to-one>
+            </many-to-one>            
             <set name="pruebaarranques" table="pruebaarranque" inverse="true" lazy="true" fetch="select">
                 <key>
                     <column name="EnsambleID" not-null="true" />
@@ -43,6 +49,17 @@
         </joined-subclass>
         <joined-subclass name="Ensamble" table="ensamble" >
             <key column="ID" />         
+            <property name="Estatus"  column="Estatus">
+                <type name="org.hibernate.type.EnumType">
+                    <param name="enumClass">com.selmec.plantaselmec.Models.EstadoEnsamble</param>                    
+                </type>
+            </property>
+            <many-to-one name="autorizo" class="com.selmec.plantaselmec.Models.Usuarios" fetch="select">
+                <column name="autorizoId"  />
+            </many-to-one>            
+            <property name="dtAutorizacion" type="timestamp">
+                <column name="dtAutorizacion" length="19" />
+            </property>
             <many-to-one name="cariles" class="com.selmec.plantaselmec.Models.Cariles" fetch="select">
                 <column name="CarrilID" not-null="true" />
             </many-to-one>                          

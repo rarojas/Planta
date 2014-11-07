@@ -1,8 +1,6 @@
 var ControlPlantaCtrl = function ($scope, PlantaService) {
     $scope.CarrilId = {};
-
 };
-
 app.directive('controlplanta', function () {
     return {
         templateUrl: '/templates/directives/ControlPlanta.html'
@@ -201,17 +199,23 @@ app.directive('autocomplete', ["$timeout", function ($timeout) {
                     this.select = function (item) {
                         $scope.hide = true;
                         $scope.focused = true;
-                        $scope.term = item.noOp;
                         $scope.select({item: item});
                     };
 
                     $scope.isVisible = function () {
                         return !$scope.hide && ($scope.focused || $scope.mousedOver);
                     };
-
+                    var filterTextTimeout;
                     $scope.query = function () {
-                        $scope.hide = false;
-                        $scope.search({term: $scope.term});
+                        if (($scope.term.length | 0) > 2) {
+                            if (filterTextTimeout)
+                                $timeout.cancel(filterTextTimeout);
+                            filterTextTimeout = $timeout(function () {
+                                $scope.hide = false;
+                                $scope.search({term: $scope.term});
+                            }, 250);
+
+                        }
                     };
                 }],
             link: function (scope, element, attrs, controller) {

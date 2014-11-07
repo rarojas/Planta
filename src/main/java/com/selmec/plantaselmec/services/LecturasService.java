@@ -35,19 +35,10 @@ public class LecturasService implements ILecturasService {
     @Transactional
     @Override
     public void Save(LecturaPSC result, int PruebaId) {
-        Pruebabase prueba = (Pruebabase) dao.getCurrentSession().get(Pruebabase.class, PruebaId);
-        Lecturas lectura = mapper.map(result, Lecturas.class);        
+        Pruebabase prueba = new Pruebabase();//(Pruebabase) dao.getCurrentSession().get(Pruebabase.class, PruebaId);
+        prueba.setId(PruebaId);
+        Lecturas lectura = mapper.map(result, Lecturas.class);
         lectura.setPruebabase(prueba);
-        lectura.setHz(result.HZ);
-        lectura.setL1(result.L1N);
-        lectura.setL2(result.L2N);
-        lectura.setL3(result.L3N);
-        lectura.setL1l2(result.L1L2);
-        lectura.setL2l3(result.L2L3);
-        lectura.setL3l1(result.L3L1);
-        lectura.setI1(result.I1);
-        lectura.setI2(result.I2);
-        lectura.setI3(result.I3);
         dao.create(lectura);
     }
 

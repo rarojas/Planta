@@ -8,8 +8,10 @@ package com.selmec.plantaselmec.services;
 import com.selmec.plantaselmec.Models.EstadoPrueba;
 import com.selmec.plantaselmec.Models.Prueba;
 import com.selmec.plantaselmec.Models.Usuarios;
+import com.selmec.plantaselmec.dto.LecturaDTO;
 import com.selmec.utils.services.IBaseServices;
 import java.util.List;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -22,4 +24,6 @@ public interface IPruebaServices extends IBaseServices<Prueba, Integer> {
     String CarrilByPrueba(int id);           
     
     void cambioEstatusPrueba(int id, String nombreUsuario, EstadoPrueba estatus);
+    
+    List<LecturaDTO> Lecturas(@PathVariable("id") int id);
 }

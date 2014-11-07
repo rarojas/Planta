@@ -1,4 +1,12 @@
-var app = angular.module("PlantaAPP", ['nvd3ChartDirectives', 'n3-line-chart', "ngResource", "ngRoute", 'angular-loading-bar']);
+var app = angular.module("PlantaAPP", ['nvd3ChartDirectives', 'n3-line-chart', "ngResource", "ngRoute",
+    'angular-loading-bar', 'vr.directives.slider'
+            , 'gantt', // angular-gantt.
+    'gantt.sortable',
+    'gantt.movable',
+    'gantt.tooltips',
+    'gantt.bounds',
+    'mgcrea.ngStrap', "angularMoment"
+]);
 var BaseTableController = function ($scope, $filter) {
     $scope.current = 0;
     $scope.total = 0;
@@ -47,39 +55,23 @@ app.controller("PruebaCtrl", ["$scope", "PlantaServices", "$routeParams", "$filt
         else
             $scope.prueba = PlantaServices.Ensambles.get({id: $routeParams.PruebaID});
         $scope.canClose = function () {
+            if (!$scope.prueba)
+                return false;
             var total = $filter("filter")($scope.prueba.pruebas, {estatus: "AutorizadaSupervisor"});
             return  total.length === 4;
         };
         $scope.Aprobar = function () {
-            PlantaServices.Pruebas.Aprobar(function () {
+            PlantaServices.Ensambles.Aprobar({id: $scope.prueba.id}, function () {
+                noty({text: "Aprobación de las pruebas con exito¡¡¡", type: "success"});
             }, function () {
+                noty({text: "Ocurrio  un error¡¡", type: "error"});
             });
         };
         $scope.Rechazar = function () {
-            PlantaServices.Pruebas.Rechazar(function () {
+            PlantaServices.Ensambles.Rechazar({id: $scope.prueba.id}, function () {
+                noty({text: "Rechazo de las pruebas con exito¡¡¡", type: "success"});
             }, function () {
-            });
-        };
-    }]);
-
-app.controller("PruebaCtrl", ["$scope", "PlantaServices", "$routeParams", "$filter",
-    function ($scope, PlantaServices, $routeParams, $filter) {
-        if (!$routeParams.PruebaID) {
-        }
-        else
-            $scope.prueba = PlantaServices.Ensambles.get({id: $routeParams.PruebaID});
-        $scope.canClose = function () {
-            var total = $filter("filter")($scope.prueba.pruebas, {estatus: "AutorizadaSupervisor"});
-            return  total.length === 4;
-        };
-        $scope.Aprobar = function () {
-            PlantaServices.Pruebas.Aprobar(function () {
-            }, function () {
-            });
-        };
-        $scope.Rechazar = function () {
-            PlantaServices.Pruebas.Rechazar(function () {
-            }, function () {
+                noty({text: "Ocurrio  un error¡¡", type: "error"});
             });
         };
     }]);
@@ -231,7 +223,6 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
         }
     ];
     $scope.CanAprove = true;
-
     $scope.StopButton = function () {
         $scope.CanAprove = false;
         $scope.Stop();
@@ -397,10 +388,7 @@ app.controller("PruebaSinCargaCtrl", [
     "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$location",
     function ($scope, $http, $interval, $routeParams, PlantaServices, $location) {
         BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $location);
-        $scope.prueba = PlantaServices.Pruebas.get({id: $routeParams.PruebaID}, function () {
-            $scope.valores.Max.I1 = $scope.valores.Max.I2 = $scope.valores.Max.I3 = 0;
-            $scope.valores.Min.I1 = $scope.valores.Min.I2 = $scope.valores.Min.I3 = 0;
-        });
+        $scope.prueba = PlantaServices.Pruebas.get({id: $routeParams.PruebaID});
         $scope.options = {
             series: [
                 {
@@ -423,20 +411,107 @@ app.controller("PruebaSinCargaCtrl", [
                     thickness: "1px"
                 }
             ],
-            axes: {x: {type: "linear", key: "x"}, y: {type: "linear"}, y2: {type: "linear"}},
+            axes: {x: {type: "linear", key: "x"}, y: {type: "linear"}},
             lineMode: "bundle",
             tension: 0.7,
             tooltip: {mode: "scrubber"},
             drawLegend: true
         };
-        $scope.data = PlantaServices.Pruebas.Lecturas({id: $routeParams.PruebaID});
+        $scope.optionsCorriente = {
+            series: [
+                {
+                    y: "I1",
+                    label: "I1",
+                    color: "#ff0000",
+                    type: "line",
+                    thickness: "1px"
+                }, {
+                    y: "I2",
+                    label: "I2",
+                    color: "#64c900",
+                    type: "line",
+                    thickness: "1px"
+                }, {
+                    y: "I3",
+                    label: "I3",
+                    color: "#428bca",
+                    type: "line",
+                    thickness: "1px"
+                }
+            ],
+            axes: {x: {type: "linear", key: "x"}, y: {type: "linear"}},
+            lineMode: "bundle",
+            tension: 0.7,
+            tooltip: {mode: "scrubber"},
+            drawLegend: true
+        };
+        $scope.optionsPresion = {
+            series: [
+                {
+                    y: "Presion",
+                    label: "Presion PSI",
+                    color: "#ff0000",
+                    type: "line",
+                    thickness: "1px"
+                }, {
+                    y: "RPM",
+                    label: "RPM",
+                    color: "#64c900",
+                    type: "line",
+                    thickness: "1px"
+                }, {
+                    y: "Temp",
+                    label: "Temp",
+                    color: "#428bca",
+                    type: "line",
+                    thickness: "1px"
+                }
+            ],
+            axes: {x: {type: "linear", key: "x"}, y: {type: "linear"}},
+            lineMode: "bundle",
+            tension: 0.7,
+            tooltip: {mode: "scrubber"},
+            drawLegend: true
+        };
+        $scope.optionsTemp = {
+            series: [
+                {
+                    y: "Temp",
+                    label: "Temp °C",
+                    color: "#ff0000",
+                    type: "line",
+                    thickness: "1px"
+                }, {
+                    y: "HZ",
+                    label: "HZ",
+                    color: "#64c900",
+                    type: "line",
+                    thickness: "1px"
+                }, {
+                    y: "bateria",
+                    label: "C .Alt Volts",
+                    color: "#428bca",
+                    type: "line",
+                    thickness: "1px"
+                }
+            ],
+            axes: {x: {type: "linear", key: "x"}, y: {type: "linear"}},
+            lineMode: "bundle",
+            tension: 0.7,
+            tooltip: {mode: "scrubber"},
+            drawLegend: true
+        };
+        $scope.data = PlantaServices.Pruebas.Lecturas({id: $routeParams.PruebaID}, function () {
+            $scope.max = Math.floor($scope.data.length / 60);
+            $scope.min = 0;
+        });
         $scope.minute = 1;
         $scope.$watch("minute", function () {
             var index = $scope.minute * 60;
             var i = 0;
             $scope.lastMinute = [];
             if ($scope.data.length >= index + 60)
-                for (i = 0; i > 60; i++) {
+                for (i = 0; i < 60; i++) {
                     $scope.lastMinute.push($scope.data[i + index]);
                 }
         });
@@ -690,7 +765,7 @@ app.controller("PruebaControlViewCtrl", [
     "$scope", "$http", "$interval", "$routeParams", "PlantaServices", "$timeout", "$location",
     function ($scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location) {
         BaseController.call(this, $scope, $http, $interval, $routeParams, PlantaServices, $timeout, $location);
-        $scope.pruebacontrol = PlantaServices.Pruebascontrol.get({id: $routeParams.PruebaID});
+        $scope.prueba = PlantaServices.Pruebascontrol.get({id: $routeParams.PruebaID});
     }]);
 app.controller("EnsambleController", ["$scope", "PlantaServices", "$filter", "$location",
     function ($scope, PlantaServices, $filter, $location) {
@@ -699,6 +774,13 @@ app.controller("EnsambleController", ["$scope", "PlantaServices", "$filter", "$l
         $scope.tipoControl = [{id: 0, text: "Intellite"}, {id: 1, text: "IntelliCompac"}];
         $scope.combustible = [{id: 0, text: "Diesel"}, {id: 1, text: "Gasolina"}];
         $scope.carriles = PlantaServices.Carriles.query();
+        $scope.searchOP = function (term) {
+            $scope.OPS = PlantaServices.Produccion.GetByOP({noOP: term});
+        };
+        $scope.selectOp = function (op) {
+            $scope.planta.op = op;
+            $scope.planta.noOp = op.op;
+        };
         $scope.SelectedMotor = function () {
             if (!$scope.planta.motores)
                 return;
@@ -717,11 +799,13 @@ app.controller("EnsambleController", ["$scope", "PlantaServices", "$filter", "$l
                             folio: "14PR000001",
                             dtCreacion: new Date(),
                             planta: planta,
+                            dtProgramada: $scope.ensamble.dtProgramada,
                             cariles: $scope.ensamble.cariles,
                             altitud: $scope.ensamble.altitud,
                             patin: $scope.ensamble.patin,
                             guardas: $scope.ensamble.guardas,
-                            rediador: $scope.ensamble.rediador
+                            rediador: $scope.ensamble.rediador,
+                            estatus: "Programada"
                         });
                         prueba.$save(function () {
                             noty({text: "Planta registrada con el folio : " + prueba.folio + "¡¡¡"
@@ -740,7 +824,6 @@ app.controller("EnsambleController", ["$scope", "PlantaServices", "$filter", "$l
                     });
         };
     }]);
-
 app.controller("NuevoArranqueCtrl",
         ["$scope", "PlantaServices", "$filter", "$location",
             function ($scope, PlantaServices, $filter, $location) {
@@ -764,12 +847,8 @@ app.controller("NuevoArranqueCtrl",
                     }, function () {
                         noty({text: "Ocurrio un error", type: "error"});
                     });
-
                 };
             }]);
-
-
-
 app.controller("PruebasArranqueCtrl", ["$scope", "PlantaServices", "$filter",
     function ($scope, PlantaServices, $filter) {
         BaseTableController.call(this, $scope, $filter);
@@ -798,7 +877,6 @@ app.controller("EnsambleArranqueCtrl", ["$scope", "PlantaServices", "$routeParam
             });
         };
     }]);
-
 app.controller("PruebaArranqueCtrl", ["$routeParams", "$scope", "PlantaServices", "$timeout",
     function ($routeParams, $scope, PlantaServices, $timeout) {
 
@@ -825,11 +903,10 @@ app.controller("PruebaVacioCtrl", ["$routeParams", "$scope", "PlantaServices", "
     function ($routeParams, $scope, PlantaServices, $timeout) {
 
     }]);
-
-
 app.controller("PruebaInstalacionViewCtrl", ["$routeParams", "$scope", "PlantaServices", "$timeout",
     function ($routeParams, $scope, PlantaServices, $timeout) {
-        $scope.ensamble = PlantaServices.EnsambleArranque.get({id: $routeParams.EnsambleID}, function () {});
+        $scope.ensamble = PlantaServices.EnsambleArranque.get({id: $routeParams.EnsambleID}, function () {
+        });
         $scope.prueba = new PlantaServices.Instalaciones.get({id: $routeParams.PruebaID});
         $scope.GuardarPrueba = function () {
             $scope.prueba.$save(function () {
@@ -838,11 +915,9 @@ app.controller("PruebaInstalacionViewCtrl", ["$routeParams", "$scope", "PlantaSe
             });
         };
     }]);
-
-
-
-app.run(["$rootScope", "PlantaServices",
-    function ($rootScope, PlantaServices) {
+app.run(["$rootScope", "PlantaServices", "amMoment",
+    function ($rootScope, PlantaServices, amMoment) {
+        amMoment.changeLocale('es');
         $rootScope.user = PlantaServices.Usuarios.current();
         $rootScope.hasRole = function (role) {
 
@@ -855,5 +930,132 @@ app.run(["$rootScope", "PlantaServices",
             }
 
             return $rootScope.user.rol === role;
+        };
+    }]);
+
+app.controller('MainCtrl', ['$scope', '$timeout', '$log', 'Uuid', 'Sample', 'ganttMouseOffset', 'moment', "PlantaServices",
+    function ($scope, $timeout, $log, Uuid, Sample, mouseOffset, moment, PlantaServices) {
+        $scope.options = {
+            mode: 'custom',
+            scale: 'day',
+            maxHeight: false,
+            width: false,
+            autoExpand: 'none',
+            taskOutOfRange: 'truncate',
+            fromDate: undefined,
+            toDate: undefined,
+            showLabelsColumn: true,
+            currentDate: 'line',
+            currentDateValue: new Date(),
+            draw: false,
+            readOnly: false,
+            filterTask: undefined,
+            filterRow: undefined,
+            dateFrames: {
+                'weekend': {
+                    evaluator: function (date) {
+                        return date.isoWeekday() === 6 || date.isoWeekday() === 7;
+                    },
+                    targets: ['weekend']
+                }
+            },
+            timeFramesNonWorkingMode: 'visible',
+            columnMagnet: '5 minutes',
+            api: function (api) {
+                $scope.api = api;
+                api.core.on.ready($scope, function () {
+                    $scope.loadData([{"id": "d868e42b-37e2-4d2c-b5a9-3f6d023ff94f", "name": "Carril 3", "tasks": [{"id": "0fd04452-4a5f-4ac6-9434-370eb52e4311", "from": "2014-11-04", "to": 1415167200000, "name": "Planta OP017019", "color": "green"}]}, {"id": "e687a093-7369-4ff1-9a56-f21c2b68a8d9", "name": "Carril 5", "tasks": []}]);
+                    $scope.api.data.clear();
+                    $scope.addSamples();
+                    api.directives.on.destroy($scope, function (directiveName, directiveScope, element) {
+                        if (directiveName === 'ganttRow') {
+                            element.off('mousedown', directiveScope.drawHandler);
+                            delete directiveScope.drawHandler;
+                        }
+                    });
+                });
+            }
+        };
+        $scope.$watch('options.scale', function (newValue) {
+            if (newValue === 'quarter') {
+                $scope.options.headersFormats = {'quarter': '[Q]Q YYYY'};
+                $scope.options.headers = ['quarter'];
+            } else {
+                $scope.options.headersFormats = undefined;
+                $scope.options.headers = undefined;
+            }
+        });
+        $scope.addSamples = function () {
+            $scope.api.timespans.load(Sample.getSampleTimespans().timespan1);
+            Sample.getSample().success(function (response) {
+                $scope.loadData(response);
+            });
+
+        };
+        $scope.loadData = function (data) {
+            $scope.api.data.load(data);
+        };
+    }]);
+
+app.controller('ProgramacionPruebasArranqueCtrl', ['$scope', '$timeout', '$log', 'Uuid', 'Sample', 'ganttMouseOffset', 'moment', "PlantaServices",
+    function ($scope, $timeout, $log, Uuid, Sample, mouseOffset, moment, PlantaServices) {
+        $scope.options = {
+            mode: 'custom',
+            scale: 'day',
+            maxHeight: false,
+            width: false,
+            autoExpand: 'none',
+            taskOutOfRange: 'truncate',
+            fromDate: undefined,
+            toDate: undefined,
+            showLabelsColumn: true,
+            currentDate: 'line',
+            currentDateValue: new Date(),
+            draw: false,
+            readOnly: false,
+            filterTask: undefined,
+            filterRow: undefined,
+            dateFrames: {
+                'weekend': {
+                    evaluator: function (date) {
+                        return date.isoWeekday() === 6 || date.isoWeekday() === 7;
+                    },
+                    targets: ['weekend']
+                }
+            },
+            timeFramesNonWorkingMode: 'visible',
+            columnMagnet: '5 minutes',
+            api: function (api) {
+                $scope.api = api;
+                api.core.on.ready($scope, function () {
+                    $scope.loadData([{"id": "d868e42b-37e2-4d2c-b5a9-3f6d023ff94f", "name": "Carril 3", "tasks": [{"id": "0fd04452-4a5f-4ac6-9434-370eb52e4311", "from": "2014-11-04", "to": 1415167200000, "name": "Planta OP017019", "color": "green"}]}, {"id": "e687a093-7369-4ff1-9a56-f21c2b68a8d9", "name": "Carril 5", "tasks": []}]);
+                    $scope.api.data.clear();
+                    $scope.addSamples();
+                    api.directives.on.destroy($scope, function (directiveName, directiveScope, element) {
+                        if (directiveName === 'ganttRow') {
+                            element.off('mousedown', directiveScope.drawHandler);
+                            delete directiveScope.drawHandler;
+                        }
+                    });
+                });
+            }
+        };
+        $scope.$watch('options.scale', function (newValue) {
+            if (newValue === 'quarter') {
+                $scope.options.headersFormats = {'quarter': '[Q]Q YYYY'};
+                $scope.options.headers = ['quarter'];
+            } else {
+                $scope.options.headersFormats = undefined;
+                $scope.options.headers = undefined;
+            }
+        });
+        $scope.addSamples = function () {
+            $scope.api.timespans.load(Sample.getSampleTimespans().timespan1);
+            PlantaServices.Planeacion.Arranques(function (data) {
+                $scope.loadData(data);
+            });
+        };
+        $scope.loadData = function (data) {
+            $scope.api.data.load(data);
         };
     }]);

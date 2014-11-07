@@ -3,7 +3,9 @@ package com.selmec.plantaselmec.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,6 +35,7 @@ public class Usuarios implements java.io.Serializable, UserDetails {
     private String rol;
     private String password;
     private Set ensamblebases = new HashSet(0);
+    private Set roles = new HashSet(0);
 
     public Usuarios() {
     }
@@ -123,18 +126,13 @@ public class Usuarios implements java.io.Serializable, UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        Set<String> roles = this.getRoles();
-//
-//        if (roles == null) {
-//            return Collections.emptyList();
-//        }
-
+        if (roles == null) {
+            return Collections.emptyList();
+        }
         Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(this.rol));
-//        for (String role : roles) {
-//            authorities.add(new SimpleGrantedAuthority(role));
-//        }
-
+        for (Object role : roles) {
+            authorities.add(new SimpleGrantedAuthority(((Rol) role).getNbRol()));
+        }
         return authorities;
     }
 
@@ -161,6 +159,20 @@ public class Usuarios implements java.io.Serializable, UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    /**
+     * @return the roles
+     */
+    public Set getRoles() {
+        return roles;
+    }
+
+    /**
+     * @param roles the roles to set
+     */
+    public void setRoles(Set roles) {
+        this.roles = roles;
     }
 
 }

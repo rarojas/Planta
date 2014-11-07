@@ -1,6 +1,7 @@
 package com.selmec.plantaselmec.dto;
 
 import com.selmec.plantaselmec.Models.Ensamble;
+import com.selmec.plantaselmec.Models.EstadoEnsamble;
 import com.selmec.plantaselmec.Models.Prueba;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +13,10 @@ import java.util.List;
  */
 public class EnsambleDTO implements java.io.Serializable {
 
+    public Date dtProgramadaReal;
+    public Date dtProgramada;
+    public EstadoEnsamble Estatus;
+
     public EnsambleDTO() {
     }
 
@@ -21,12 +26,16 @@ public class EnsambleDTO implements java.io.Serializable {
         if (ensamble.getPlanta() != null) {
             this.planta = new PlantaDTO(ensamble.getPlanta());
         }
+
         this.dtCreacion = ensamble.getDtCreacion();
         this.altitud = ensamble.getAltitud();
         this.carriles = new CarrilDTO(ensamble.getCariles());
         this.guardas = ensamble.getGuardas();
         this.patin = ensamble.getPatin();
         this.rediador = ensamble.getRediador();
+        this.Estatus = ensamble.getEstatus();
+        this.dtProgramada = ensamble.getDtProgramada();
+        this.dtProgramadaReal = ensamble.getDtProgramadaReal();
         if (ensamble.getUsuarios() != null) {
             this.usuarioId = new UsuarioDTO(ensamble.getUsuarios());
         }
@@ -44,6 +53,9 @@ public class EnsambleDTO implements java.io.Serializable {
             this.planta = new PlantaDTO(ensamble.getPlanta());
         }
         this.dtCreacion = ensamble.getDtCreacion();
+        this.Estatus = ensamble.getEstatus();
+        this.dtProgramada = ensamble.getDtProgramada();
+        this.dtProgramadaReal = ensamble.getDtProgramadaReal();
         this.altitud = ensamble.getAltitud();
         this.carriles = new CarrilDTO(ensamble.getCariles());
         this.guardas = ensamble.getGuardas();

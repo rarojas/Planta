@@ -1,6 +1,6 @@
 <div class="row" >
     <div class="col-md-9" style="max-height: 400px">                  
-        <table class="table table-condensed">
+<!--        <table class="table table-condensed">
             <caption>
                 <h4>
                     Valores Esperados
@@ -65,7 +65,7 @@
                     </th>
                 </tr>               
             </tbody>
-        </table>
+        </table>-->
     </div>
     <div class="col-md-3 ">
         <datosprueba></datosprueba>
@@ -77,13 +77,114 @@
 <div class="row">
     <div class="col-md-12">
         Tablero de Mediciones             
-        <div class="row">         
-            <input ng-model="minute" class="form-control" type="number">
-            <div class="col-md-12">                              
-                <div style="width:1000px;height: 300px">
-                    <linechart data="lastMinute" options="options" mode=""></linechart>
+        <div class="row">                    
+            <slider
+                ng-model="minute" floor="{{min}}" ceiling="{{max}}" step="1">
+            </slider>
+            <div class="col-md-6">
+                <div style="width:500px;height: 300px">
+                    <linechart data="lastMinute" options="options" mode=""></linechart>                    
                 </div>
-            </div>                    
+            </div>
+            <div class="col-md-6">
+                <div style="width:500px;height: 300px">
+                    <linechart data="lastMinute" options="optionsCorriente" mode=""></linechart>                    
+                </div>
+            </div>
+        </div>
+        <div class="row">                                
+            <div class="col-md-6">
+                <div style="width:500px;height: 300px">
+                    <linechart data="lastMinute" options="optionsTemp" mode=""></linechart>                    
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div style="width:500px;height: 300px">
+                    <linechart data="lastMinute" options="optionPresion" mode=""></linechart>                    
+                </div>
+            </div>
         </div>
     </div>
+    <style>
+        slider {
+            display:     block;
+            position:    relative;
+            height:      30px;
+            width:       500px;
+        }
+
+        slider span.bar {
+            height:     50%;
+            z-index:    0;
+            background: #eee;
+            left:       0;
+            top:        25%;
+            cursor:     pointer;
+        }
+
+        slider span.bar.selection, slider span.bar.unselected {
+        }
+
+        slider span.bar.selection {
+            background: #0a0;
+            opacity:    0.5;
+        }
+
+        slider span.bar.unselected {
+            width:      auto;
+            background: #a00;
+            opacity:    0.5;
+        }
+
+        slider span.pointer {
+            cursor:           pointer;
+            width:            15px;
+            top:              0;
+            bottom:           0;
+            background-color: #00a;
+        }
+
+        slider span.pointer:hover {
+        }
+
+        slider span.pointer.active {
+        }
+
+        slider span.bubble {
+            font-size:   0.7em;
+            line-height: 1.4em;
+            font-family: sans-serif;
+            text-align:  center;
+            text-shadow: none;
+            top:         -1.3em;
+            cursor:      pointer;
+        }
+
+        slider span.bubble.selection, slider span.bubble.limit {
+            top: 25%;
+        }
+
+        slider span.bubble.selection {
+        }
+
+        slider span.bubble.limit {
+        }
+
+        slider span.bubble.low, slider span.bubble.high {
+        }
+
+        ::-ms-tooltip {
+            display: none;
+        }
+
+        #slider-container {
+            -webkit-touch-callout: none;
+            -webkit-user-select:   none;
+            -khtml-user-select:    none;
+            -moz-user-select:      -moz-none;
+            -ms-user-select:       none;
+            user-select:           none;
+        }
+
+    </style>
 </div>

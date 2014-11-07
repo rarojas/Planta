@@ -21,18 +21,12 @@ public class PruebaDTO {
     public Date dtInicio;
     @JsonDeserialize(using = DateDeserializer.class)
     public Date dtFin;
-
     public String comentario;
-    public IncidenciasDTO incidencias;
-    
-    
-  
-    //Changes
-     public Integer aprueba;
-     public Date dtAprueba;
-     public Integer apruebaSupervisor;
-     public Date dtApruebaSupervisor;    
-     public PruebaControlDTO pruebacontrol;
+    public IncidenciasDTO incidencias;   
+    public Integer aprueba;
+    public Date dtAprueba;
+    public Integer apruebaSupervisor;
+    public Date dtApruebaSupervisor;    
 
     public PruebaDTO() {
     }
@@ -45,16 +39,12 @@ public class PruebaDTO {
         this.tipo = prueba.getTipo();
         this.comentario = prueba.getComentario();
         //Changes
-        this.aprueba=prueba.getAprueba();
-        this.dtAprueba=prueba.getDtAprueba();
-        this.apruebaSupervisor=prueba.getApruebaSupervisor();
-        this.dtApruebaSupervisor=prueba.getDtApruebaSupervisor();
-//        if(prueba.getPruebacontrol()!=null){
-//          this.pruebacontrol=new PruebaControlDTO(prueba.getPruebacontrol());
-//        }
-        //
+        this.aprueba = prueba.getAprueba();
+        this.dtAprueba = prueba.getDtAprueba();
+        this.apruebaSupervisor = prueba.getApruebaSupervisor();
+        this.dtApruebaSupervisor = prueba.getDtApruebaSupervisor();
         if (prueba.getIncidencias() != null) {
             this.incidencias = new IncidenciasDTO(prueba.getIncidencias());
-        }       
+        }
     }
-   }
+}

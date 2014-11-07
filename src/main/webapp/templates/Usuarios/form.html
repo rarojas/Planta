@@ -24,9 +24,12 @@
 </div>
 <div class="form-group">
     <label class="control-label col-md-4">
-        Rol
+        Roles
     </label>
     <div class="col-md-8">
-        <select ng-model="usuario.rol" required ng-options="r.value as r.text for r in roles" class="form-control" ></select>
-    </div>
+        <button type="button" class="btn btn-default" ng-model="usuarios.roles" data-html="1" data-multiple="1" 
+                data-animation="am-flip-x" ng-options="r.nbRol  for r in roles" bs-select>
+            Roles <span class="caret"></span>
+        </button>
+    </div>    
 </div>

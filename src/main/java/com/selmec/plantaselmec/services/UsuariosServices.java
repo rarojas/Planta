@@ -7,6 +7,7 @@ import com.selmec.utils.dao.IGenericDao;
 import java.util.ArrayList;
 import java.util.List;
 import ma.glasnost.orika.MapperFacade;
+import org.hibernate.FetchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.keygen.KeyGenerators;
@@ -36,7 +37,8 @@ public class UsuariosServices implements IUsuariosServices {
     @Transactional(readOnly = true)
     @Override
     public Usuarios GetByUsername(String username) {
-        List<Usuarios> usuarios = this.dao.getCurrentSession().createCriteria(Usuarios.class).add(Restrictions.eq("email", username)).list();
+        List<Usuarios> usuarios = this.dao.getCurrentSession().createCriteria(Usuarios.class).add(Restrictions.eq("email", username))
+                .setFetchMode("roles", FetchMode.JOIN).list();
         if (usuarios.isEmpty()) {
             return null;
         }
@@ -89,7 +91,7 @@ public class UsuariosServices implements IUsuariosServices {
         return result;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public UsuarioActualDTO getDataUser(String userName) {
         if (userName == null) {

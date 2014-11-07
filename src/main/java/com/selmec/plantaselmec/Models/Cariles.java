@@ -1,6 +1,7 @@
 package com.selmec.plantaselmec.Models;
 // Generated Oct 30, 2014 5:43:43 PM by Hibernate Tools 4.3.1
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -14,7 +15,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "cariles", catalog = "casetapruebas")
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Cariles extends Equipobase implements java.io.Serializable {
 
     private int noCarril;

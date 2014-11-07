@@ -14,24 +14,17 @@ import java.util.logging.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author rrojase
- */
 public abstract class BaseControllers<T, E> {
 
     @Autowired
     SessionFactory sessionFactory;
-        
-    
 
     public List<E> Get(Class<T> type, Class<E> out_type) {
         List<T> result = sessionFactory.getCurrentSession().createCriteria(type).list();
         return DTO(result, type, out_type);
     }
-        
+
     public E Get(Serializable key, Class<T> type, Class<E> out_type) {
-        
         T result = (T) sessionFactory.getCurrentSession().get(type, key);
         return DTO(result, type, out_type);
     }
@@ -46,7 +39,6 @@ public abstract class BaseControllers<T, E> {
     }
 
     protected List<E> DTO(List<T> source, Class<T> type, Class<E> type_out) {
-
         List<E> result = new ArrayList<>();
         for (T item : source) {
             result.add(DTO(item, type, type_out));

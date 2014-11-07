@@ -75,7 +75,7 @@
       
     <security:http 
         realm="Protected API"        
-        auto-config="true"                    
+        auto-config="true"  use-expressions="true"                   
         authentication-manager-ref="authenticationManager">   
         <security:session-management>
             <security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true"  />
@@ -87,7 +87,7 @@
             username-parameter="username"
             password-parameter="password"/>
         <security:logout logout-success-url="/login?logout" />
-        <security:intercept-url pattern="/" access="ROLE_ADMIN"  />                
+        <security:intercept-url pattern="/" access="isAuthenticated()"  />        
     </security:http>
    
     <bean id="authenticationTokenProcessingFilter" class="com.selmec.rest.AuthenticationTokenProcessingFilter" >

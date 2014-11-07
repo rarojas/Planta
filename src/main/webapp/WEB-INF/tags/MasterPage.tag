@@ -15,30 +15,39 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link href="<c:url value="/js/libs/twitter-bootstrap/css/bootstrap-theme.css"/>" rel="stylesheet" type="text/css"/>
         <link href="<c:url value="/js/libs/twitter-bootstrap/css/bootstrap.css"/>" rel="stylesheet" type="text/css"/>
-        <link href="<c:url value="/js/libs/angular-loading-bar/loading-bar.min.css"/>" rel="stylesheet" type="text/css"/>   
+        <link href="<c:url value="/js/libs/angular-loading-bar/loading-bar.css"/>" rel="stylesheet" type="text/css"/>   
+        <link href="<c:url value="/js/libs/angular-gantt/gantt.css"/>" rel="stylesheet" type="text/css"/>   
+
         <script src="<c:url value="/js/libs/jquery/jquery.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/js/libs/d3/d3.v3.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/js/libs/nvd3/nv.d3.js"/>" type="text/javascript"></script>         
-        <script src="<c:url value="/js/libs/angular.js/angular.js"/>"></script>    
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.1/angular.min.js  " type="text/javascript"></script>                         
+<!--        <script src="<c:url value="/js/libs/angular.js/angular.js"/>"></script>    -->
+        <script src="<c:url value="/js/libs/angular.js/i18n/angular-locale_es-mx.js"/>"></script> 
         <script src="<c:url value="/js/libs/angular-directives-d3/angularjs-nvd3-directives.min.js"/>"></script>    
         <script src="<c:url value="/js/libs/n3-linecharts/line-chart.min.js"/>"></script>    
         <script src="<c:url value="/js/libs/angular.js/angular-resource.js"/>"></script>    
+        <script src="<c:url value="/js/libs/angular.js/angular-animate.min.js"/>"></script>    
         <script src="<c:url value="/js/libs/angular.js/angular-route.min.js"/>"></script>    
+        <script src="<c:url value="/js/libs/angular.js/angular-touch.min.js"/>"></script>    
         <script src="<c:url value="/js/app/app.js"/>"></script>            
         <script src="<c:url value="/js/app/services.js"/>"></script>  
         <script src="<c:url value="/js/app/routes.js"/>"></script>  
         <script src="<c:url value="/js/app/directives.js"/>"></script>     
+
+        <script src="<c:url value="/js/libs/moment.js/moment.min.js"/>"></script>     
+        <script src="<c:url value="/js/libs/moment.js/langs.min.js"/>"></script> 
+        <script src="<c:url value="/js/angular-moment/angular-moment.min.js"/>"></script>     
         <script src="<c:url value="/js/libs/angular-loading-bar/loading-bar.min.js"/>"></script>     
+        <script src="<c:url value="/js/libs/angular-slider/angular-slider.min.js"/>"></script>     
 
         <script src="<c:url value="/js/libs/angular-strap/angular-strap.min.js"/>"></script>     
         <script src="<c:url value="/js/libs/angular-strap/angular-strap.tpl.min.js"/>"></script>     
         <script src="<c:url value="/js/libs/angular-ui-bootstrap/angular-ui-bootstrap.min.js"/>"></script>     
         <script src="<c:url value="/js/libs/angular-ui-bootstrap/angular-ui-bootstrap-tpls.min.js"/>"></script>     
-
-
-
-
         <script src="<c:url value="/js/libs/jquery-noty/jquery.noty.packaged.min.js"/>"></script>     
+        <script src="<c:url value="/js/libs/angular-gantt/angular-gantt.js"/>"></script>     
+        <script src="<c:url value="/js/libs/angular-gantt/angular-gantt-plugins.js"/>"></script>     
         <script src="<c:url value="/js/libs/underscore.js/underscore.js"/>"></script>  
         <script>
             function formSubmit() {
@@ -50,16 +59,15 @@
             [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
                 display: none;
             }
-
             .album-search {
                 z-index: 100;
             }
-
-        
             .album-search .menu {
                 background-color: #344251;                                       
+                max-height: 400px;                
+                overflow-y: auto;
+                overflow-x: hidden;
             }
-
             .album-search ul {
                 background-color: #344251;
                 margin: 0;                                        
@@ -67,7 +75,6 @@
                 color: #FFF;
                 list-style: none;
             }
-
             .album-search .results {
                 width: 375px;
                 margin: auto;
@@ -75,11 +82,9 @@
                 min-height:20px;
                 padding: 5px;
             }
-
             .album-search .results.active {
                 background-color: #67B331;
             }
-
             .album-search .results.active .name {
                 color: #ffffff;
             }
@@ -89,47 +94,44 @@
             }
 
             .album-search .results .name {
-                font-size: 14px;
-                line-height: 20px;
+                font-size: 12px;                
             }
-
             .album-search .results p {
                 margin-bottom: 5px;
                 margin-left: 20px;
             }
-
             .album-search .results .artist {
-                font-size: 16px;
-                line-height: 20px;
+                font-size: 12px;                
                 color: #fff;
                 margin-left: 20px;
             }
-
             .album-search .results img {
-                width: 64px;
-                height: 64px;
+                width: 16px;
+                height: 16px;
                 float: left;
             }
-
             body {
                 padding-top: 30px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
             }
-
             .navbar-fixed-top .nav {
                 padding: 10px 0;
+            }
+            .full-circle {                
+                height: 10px;
+                -moz-border-radius:5px;
+                -webkit-border-radius: 5px;
+                width: 10px;
             }
 
             .navbar-fixed-top .navbar-brand {
                 padding: 0 15px;
             }
-
             @media(min-width:768px) {
                 body {
                     padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
                 }
-
                 .navbar-fixed-top .navbar-brand {
-                    padding: 0;
+                    padding: 5px;
                 }
             }
         </style>
@@ -152,7 +154,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">
-                        <img style="width:112px" src="<c:url value="/img/Logos/Logo ok fondos de color RGB-03.png"/>" class="img-responsive" width="100" alt=""/>
+                        <img style="width:180px" src="<c:url value="/img/EV.png"/>" class="img-responsive" width="100" alt=""/>
                     </a>
                 </div>
 
@@ -164,6 +166,12 @@
                         </li>
                         <li>
                             <a href="#/Pruebas">Pruebas</a>
+                        </li>
+                        <li>
+                            <a href="#/ProgramacionPruebasEnsamble">Programación de Pruebas de Ensamble </a>
+                        </li>
+                        <li>
+                            <a href="#/ProgramacionPruebasArranque">Programación de dPruebas de Arranques</a>
                         </li>
                         <li>
                             <a href="#/NuevoArranque">Nuevo Arranque</a>
@@ -197,17 +205,16 @@
                         <li>
                             <a href="#/MisDatos" >
                                 <security:authorize access="isAuthenticated()">
-                                    Bienvenid@: <security:authentication property="principal.username" />                                  
+                                    Bienvenid@: {{user.username}}                                    
                                 </security:authorize>
                             </a>
                         </li>                        <li>
                             <a href="#" style="padding:0px">
-                                <img src="<c:url value="/img/Selmec.png"/>" class="img-responsive" width="150" alt=""/>
+                                <img src="<c:url value="/img/LogoSelmec.png"/>" class="img-responsive" width="150" alt=""/>
                             </a>
                         </li>                        
                         <li>
                             <security:authorize access="isAuthenticated()">
-
                                 <a href="javascript:formSubmit()"> Logout</a>
                             </security:authorize>
                         </li>
@@ -219,10 +226,6 @@
             <div class='col-md-12'>
                 <jsp:doBody/>
             </div>
-        </div>
-        <!--    <div id="pagefooter" style=" background-image:url('../../Content/images/lgrey035.jpg');">
-              <p id="copyright">**** Copyright 1927, Future Bits When There Be Bits Inc. ***</p>
-              jsp:invoke fragment="footer"/
-            </div>-->
+        </div>        
     </body>  
 </html>

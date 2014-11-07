@@ -29,17 +29,8 @@ public class KitsController extends BaseController<Kit, Integer, KitDTO> {
     public void setKitsService(IKitsServices kitsServices) {
         this.kitsServices = kitsServices;
         this.baseService = kitsServices;
+        this.setDTO(KitDTO.class);
     }
-
-    /**
-     *
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody
-    @Override
-    List<KitDTO> Get() {
-        return kitsServices.GetKist();
-    }
+    
 
 }

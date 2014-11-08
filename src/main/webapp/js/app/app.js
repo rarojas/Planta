@@ -248,12 +248,33 @@ var BaseController = function ($scope, $http, $interval, $routeParams, PlantaSer
             noty({text: "Error al apagar la planta la planta¡¡¡", type: "error"});
         });
     };
-    $scope.ArranquePlanta = function () {
-        PlantaServices.Plantas.On({id: $scope.ensamble.id}, {id: $scope.ensamble.id}, function () {
-            noty({text: "Encendido de planta exitoso¡¡¡", type: "success"});
+    $scope.AutoPlanta = function () {
+        PlantaServices.Plantas.Auto({id: $scope.ensamble.id}, {id: $scope.ensamble.id}, function () {
+            noty({text: "Modo Automatico de planta exitoso¡¡¡", type: "success"});
         }, function () {
-            noty({text: "Error al encender la planta¡¡¡", type: "error"});
+            noty({text: "Error al colocar en  Automatico la planta¡¡¡", type: "error"});
         });
+    };
+    $scope.ArranquePlanta = function () {
+        noty({text: "¿Esta seguro de encender la planta de Emergencia?", modal: true,
+            closeWith: [], buttons: [
+                {addClass: 'btn btn-primary', text: 'Ok', onClick: function ($noty) {
+                        $noty.close();
+                        PlantaServices.Plantas.On({id: $scope.ensamble.id}, {id: $scope.ensamble.id}, function () {
+                            noty({text: "Encendido de planta exitoso¡¡¡", type: "success"});
+                        }, function () {
+                            noty({text: "Error al encender la planta¡¡¡", type: "error"});
+                        });
+                    }
+                },
+                {
+                    addClass: 'btn btn-danger', text: 'Cancel', onClick: function ($noty) {
+                        $noty.close();
+                    }
+                }
+            ]
+        });
+
     };
     $scope.Autoriza = function () {
         PlantaServices.Pruebas.AutorizaE({id: $scope.prueba.id}, {},

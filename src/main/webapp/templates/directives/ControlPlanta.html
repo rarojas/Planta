@@ -14,7 +14,7 @@
                 <button type="button" class="btn btn-success" ng-click="Start()" ng-show="!OptionsControl.Locked && Estado !== Estatus.Running && prueba === undefined">
                     <span class='glyphicon glyphicon-play'></span><br>
                     START                           
-                </button>
+                </button>                
                 <button type="button" class="btn btn-danger" ng-click="StopButton()" ng-show="!OptionsControl.Locked && Estado === Estatus.Running">
                     <span class='glyphicon glyphicon-stop'></span><br>
                     STOP                                           
@@ -34,7 +34,10 @@
             </button>
             <button type="button" class="btn" ng-click="ParoPlanta()"    >
                 <img src="../../img/Icons/PARO.png" alt="" width="50"/>                          
-            </button>            
+            </button>  
+            <button type="button" class="btn btn-primary" ng-click="AutoPlanta()"  >
+                Auto                       
+            </button>  
         </div>
     </fieldset>                     
 </div>

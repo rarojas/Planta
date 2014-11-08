@@ -108,8 +108,15 @@ public class PlantaController extends BaseController<Planta, String, PlantaDTO> 
     @RequestMapping(value = "On/{id}", method = RequestMethod.GET)
     @ResponseBody
     public String On(@PathVariable("id") int id) {
-        logger.info(ensambleService);
         ensambleService.TurnOnCarril(id);
+        return "true";
+    }
+
+    @Transactional
+    @RequestMapping(value = "Auto/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public String Auto(@PathVariable("id") int id) {
+        ensambleService.TurnAutoCarril(id);
         return "true";
     }
 

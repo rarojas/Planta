@@ -91,6 +91,23 @@ public class EnsambleService extends BaseServices<Ensamble, Integer> implements 
     }
 
     @Override
+    public void TurnAutoCarril(int estado) {
+        String queryString;
+        Ensamble prueba = (Ensamble) dao.getCurrentSession().get(Ensamble.class, estado);
+        String equipo = prueba.getCariles().getPlanta();
+        queryString = String.format(
+                "update tablaescritura set tagvalue = 2 where variable = 'MODO CONTROL' AND IDEQUIPO = '%s';"
+                + "update  tablaescritura set  tagvalue = 765 where  variable = 'CONTROL1' AND IDEQUIPO = '%s';"
+                + "update  tablaescritura set  tagvalue = 0 where  variable = 'CONTROL2' AND IDEQUIPO = '%s';"
+                + "update  tablaescritura set  tagvalue = 1 where  variable = 'CONTROL3' AND IDEQUIPO = '%s';", equipo, equipo, equipo, equipo);
+        logger.info(estado);
+        logger.info(queryString);
+        this.jdbctemplate = new JdbcTemplate(dataSource);
+        jdbctemplate.update(queryString);
+        logger.info("Record inserted successfully");
+    }
+
+    @Override
     public void TurnOffCarril(int estado) {
         String queryString;
         Ensamble prueba = (Ensamble) dao.getCurrentSession().get(Ensamble.class, estado);

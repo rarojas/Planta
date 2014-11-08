@@ -21,8 +21,8 @@
         <script src="<c:url value="/js/libs/jquery/jquery.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/js/libs/d3/d3.v3.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/js/libs/nvd3/nv.d3.js"/>" type="text/javascript"></script>         
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.1/angular.min.js  " type="text/javascript"></script>                         
-<!--        <script src="<c:url value="/js/libs/angular.js/angular.js"/>"></script>    -->
+        <!--        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.1/angular.min.js  " type="text/javascript"></script>                         -->
+        <script src="<c:url value="/js/libs/angular.js/angular.min.js"/>"></script>    
         <script src="<c:url value="/js/libs/angular.js/i18n/angular-locale_es-mx.js"/>"></script> 
         <script src="<c:url value="/js/libs/angular-directives-d3/angularjs-nvd3-directives.min.js"/>"></script>    
         <script src="<c:url value="/js/libs/n3-linecharts/line-chart.min.js"/>"></script>    

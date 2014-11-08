@@ -20,6 +20,8 @@ public interface IEnsambleService extends IBaseServices<Ensamble, Integer> {
 
     void TurnOffCarril(int estado);
 
+    void TurnAutoCarril(int estado);
+
     void ExcuteSPControl(int estado);
 
     List<Ensamble> GetByUser(Usuarios usuarios);

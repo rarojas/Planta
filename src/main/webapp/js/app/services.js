@@ -19,7 +19,8 @@ var services = ["PlantaServices",
             });
             api.Ensambles = $resource(urlApiBase + "Ensambles/:id", {}, {
                 Aprobar: {url: urlApiBase + "/Ensambles/Aprobar/:id", method: "get"},
-                Rechazar: {url: urlApiBase + "/Ensambles/Rechazar/:id", method: "get"}
+                Rechazar: {url: urlApiBase + "/Ensambles/Rechazar/:id", method: "get"},
+                QR: {url: urlApiBase + "/Ensambles/QR/:id", method: "get"}
             });
             api.Roles = $resource(urlApiBase + "Roles/:id", {}, {});
             api.Iteraciones = $resource(urlApiBase + "Iteraciones/:id", {}, {});

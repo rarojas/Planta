@@ -808,9 +808,13 @@ app.controller("EnsambleController", ["$scope", "PlantaServices", "$filter", "$l
                             estatus: "Programada"
                         });
                         prueba.$save(function () {
-                            noty({text: "Planta registrada con el folio : " + prueba.folio + "¡¡¡"
-                                , type: "success", modal: true});
-                            $location.path("/Pruebas/" + prueba.id);
+                            noty({text: "Planta registrada con el folio : " + prueba.folio + "¡¡¡", type: "success", modal: true});
+                            prueba.$QR({id: prueba.id}, function () {
+                                $location.path("/Pruebas/" + prueba.id);
+                            }, function () {
+                                $location.path("/Pruebas/" + prueba.id);
+                                noty({text: "Ocurrió un error al generar el QR", type: "error"});
+                            });
                         }, function () {
                             planta.$delete(function () {
                             }, function () {
@@ -821,8 +825,10 @@ app.controller("EnsambleController", ["$scope", "PlantaServices", "$filter", "$l
                     },
                     function () {
                         alert("Ocurrio un error");
-                    });
-        };
+                    }
+            );
+        }
+        ;
     }]);
 app.controller("NuevoArranqueCtrl",
         ["$scope", "PlantaServices", "$filter", "$location",
@@ -932,7 +938,6 @@ app.run(["$rootScope", "PlantaServices", "amMoment",
             return $rootScope.user.rol === role;
         };
     }]);
-
 app.controller('MainCtrl', ['$scope', '$timeout', '$log', 'Uuid', 'Sample', 'ganttMouseOffset', 'moment', "PlantaServices",
     function ($scope, $timeout, $log, Uuid, Sample, mouseOffset, moment, PlantaServices) {
         $scope.options = {
@@ -990,13 +995,11 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$log', 'Uuid', 'Sample', 'gan
             Sample.getSample().success(function (response) {
                 $scope.loadData(response);
             });
-
         };
         $scope.loadData = function (data) {
             $scope.api.data.load(data);
         };
     }]);
-
 app.controller('ProgramacionPruebasArranqueCtrl', ['$scope', '$timeout', '$log', 'Uuid', 'Sample', 'ganttMouseOffset', 'moment', "PlantaServices",
     function ($scope, $timeout, $log, Uuid, Sample, mouseOffset, moment, PlantaServices) {
         $scope.options = {

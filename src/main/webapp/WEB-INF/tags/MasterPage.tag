@@ -167,11 +167,11 @@
                         <li>
                             <a href="#/Pruebas">Pruebas</a>
                         </li>
-                        <li>
+                        <li>                            
                             <a href="#/ProgramacionPruebasEnsamble">Programación de Pruebas de Ensamble </a>
                         </li>
                         <li>
-                            <a href="#/ProgramacionPruebasArranque">Programación de dPruebas de Arranques</a>
+                            <a href="#/ProgramacionPruebasArranque">Programación de dPruebas de Arranques</a>                            
                         </li>
                         <li>
                             <a href="#/NuevoArranque">Nuevo Arranque</a>

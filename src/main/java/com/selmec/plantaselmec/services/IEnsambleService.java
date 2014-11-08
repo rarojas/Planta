@@ -28,4 +28,5 @@ public interface IEnsambleService extends IBaseServices<Ensamble, Integer> {
 
     void Aprobar(int id, Usuarios usuario);
 
+    String GenerateQR(int id, String appPath);
 }

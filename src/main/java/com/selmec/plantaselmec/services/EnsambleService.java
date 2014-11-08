@@ -5,13 +5,27 @@
  */
 package com.selmec.plantaselmec.services;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.selmec.plantaselmec.Models.Ensamble;
 import com.selmec.plantaselmec.Models.EstadoEnsamble;
 import com.selmec.plantaselmec.Models.Usuarios;
 import com.selmec.utils.dao.IGenericDao;
 import com.selmec.utils.services.BaseServices;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.logging.Level;
+import javax.imageio.ImageIO;
 import javax.sql.DataSource;
 import org.hibernate.criterion.Restrictions;
 import org.jboss.logging.Logger;
@@ -107,5 +121,50 @@ public class EnsambleService extends BaseServices<Ensamble, Integer> implements 
         Ensamble ensamble = dao.findOne(id);
         ensamble.setDtAutorizacion(new Date());
         ensamble.setEstatus(EstadoEnsamble.Aprobada);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public String GenerateQR(int id, String appPath) {
+        try {
+            String filePath = "/QR%s.png";
+            int size = 125;
+            String fileType = "png";
+            String myCodeText = "";
+            Ensamble ensamble = dao.findOne(id);
+            filePath = String.format(filePath, ensamble.getId());
+            myCodeText = String.format("%s|%s", ensamble.getId(), ensamble.getFolio());
+            File myFile = new File(appPath + filePath);
+
+            Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap;
+            hintMap = new Hashtable<>();
+            hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+            BitMatrix byteMatrix;
+
+            byteMatrix = qrCodeWriter.encode(myCodeText, BarcodeFormat.QR_CODE, size, size, hintMap);
+            int CrunchifyWidth = byteMatrix.getWidth();
+            BufferedImage image = new BufferedImage(CrunchifyWidth, CrunchifyWidth, BufferedImage.TYPE_INT_RGB);
+            image.createGraphics();
+
+            Graphics2D graphics = (Graphics2D) image.getGraphics();
+            graphics.setColor(Color.WHITE);
+            graphics.fillRect(0, 0, CrunchifyWidth, CrunchifyWidth);
+            graphics.setColor(Color.BLACK);
+            for (int i = 0; i < CrunchifyWidth; i++) {
+                for (int j = 0; j < CrunchifyWidth; j++) {
+                    if (byteMatrix.get(i, j)) {
+                        graphics.fillRect(i, j, 1, 1);
+                    }
+                }
+            }
+            ImageIO.write(image, fileType, myFile);
+            return myFile.getName();
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(EnsambleService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (WriterException ex) {
+            java.util.logging.Logger.getLogger(EnsambleService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
     }
 }

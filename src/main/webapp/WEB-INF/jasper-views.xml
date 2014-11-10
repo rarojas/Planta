@@ -1,5 +1,4 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
@@ -13,19 +12,12 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
-    
-  
-            
-    <mvc:resources mapping="/templates/**" location="/templates/" />  
-    
-    <mvc:resources mapping="/**" location="/" />  
-            
-    <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/WEB-INF/views/"
-          p:suffix=".jsp" />
-    <bean id="randomGenerator" class="com.selmec.Utils.RandomGenerator"></bean>
-    <bean class="org.springframework.web.servlet.view.XmlViewResolver"
-         p:location="/WEB-INF/jasper-views.xml"  p:order="0" />
-
+    <bean id="testSummaryPdfReport" 
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+          p:url="classpath:test_sumary.jrxml"
+    />
+    <bean id="htmlReport"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsHtmlView"
+          p:url="classpath:test_sumary.jrxml"/>
 </beans>
+  

@@ -12,11 +12,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=10" />
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
         <title><jsp:invoke fragment="titlePage"/></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <link href="<c:url value="/js/libs/twitter-bootstrap/css/bootstrap-theme.css"/>" rel="stylesheet" type="text/css"/>
-        <link href="<c:url value="/js/libs/twitter-bootstrap/css/bootstrap.css"/>" rel="stylesheet" type="text/css"/>
-        <link href="<c:url value="/js/libs/angular-loading-bar/loading-bar.css"/>" rel="stylesheet" type="text/css"/>   
-        <link href="<c:url value="/js/libs/angular-gantt/gantt.css"/>" rel="stylesheet" type="text/css"/>   
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">      
 
         <script src="<c:url value="/js/libs/jquery/jquery.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/js/libs/d3/d3.v3.js"/>" type="text/javascript"></script>
@@ -40,192 +36,293 @@
         <script src="<c:url value="/js/angular-moment/angular-moment.min.js"/>"></script>     
         <script src="<c:url value="/js/libs/angular-loading-bar/loading-bar.min.js"/>"></script>     
         <script src="<c:url value="/js/libs/angular-slider/angular-slider.min.js"/>"></script>     
-
+        <script src="<c:url value="/js/libs/twitter-bootstrap/js/bootstrap.min.js"/>"></script>     
         <script src="<c:url value="/js/libs/angular-strap/angular-strap.min.js"/>"></script>     
-        <script src="<c:url value="/js/libs/angular-strap/angular-strap.tpl.min.js"/>"></script>     
+        <script src="<c:url value="/js/libs/angular-strap/angular-strap.tpl.min.js"/>"></script> 
+
         <script src="<c:url value="/js/libs/angular-ui-bootstrap/angular-ui-bootstrap.min.js"/>"></script>     
         <script src="<c:url value="/js/libs/angular-ui-bootstrap/angular-ui-bootstrap-tpls.min.js"/>"></script>     
         <script src="<c:url value="/js/libs/jquery-noty/jquery.noty.packaged.min.js"/>"></script>     
         <script src="<c:url value="/js/libs/angular-gantt/angular-gantt.js"/>"></script>     
         <script src="<c:url value="/js/libs/angular-gantt/angular-gantt-plugins.js"/>"></script>     
         <script src="<c:url value="/js/libs/underscore.js/underscore.js"/>"></script>  
+        <link href="<c:url value="/js/libs/twitter-bootstrap/css/bootstrap-theme.css"/>" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="/js/libs/twitter-bootstrap/css/bootstrap.css"/>" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="/js/libs/angular-loading-bar/loading-bar.css"/>" rel="stylesheet" type="text/css"/>   
+        <link href="<c:url value="/js/libs/angular-gantt/gantt.css"/>" rel="stylesheet" type="text/css"/>   
+        <link href="<c:url value="/css/sb-admin.css"/>" rel="stylesheet" type="text/css"/>   
+        <link href="<c:url value="/css/typehead.css"/>" rel="stylesheet" type="text/css"/>   
         <script>
             function formSubmit() {
                 document.getElementById("logoutForm").submit();
             }
+            $(function () {
+                $("#menu-toggle").click(function (e) {
+                    e.preventDefault();
+                    $("#wrapper").toggleClass("toggled");
+                    $(".side-nav").toggleClass("toggled");
+                });
+            });
+
         </script>
-        <jsp:invoke fragment="app"/>
-        <style>
-            [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-                display: none;
-            }
-            .album-search {
-                z-index: 100;
-            }
-            .album-search .menu {
-                background-color: #344251;                                       
-                max-height: 400px;                
-                overflow-y: auto;
-                overflow-x: hidden;
-            }
-            .album-search ul {
-                background-color: #344251;
-                margin: 0;                                        
-                padding: 0;
-                color: #FFF;
-                list-style: none;
-            }
-            .album-search .results {
-                width: 375px;
-                margin: auto;
-                text-align: left;
-                min-height:20px;
-                padding: 5px;
-            }
-            .album-search .results.active {
-                background-color: #67B331;
-            }
-            .album-search .results.active .name {
-                color: #ffffff;
-            }
-
-            .album-search .results.active {
-                background-color: #67B331;
-            }
-
-            .album-search .results .name {
-                font-size: 12px;                
-            }
-            .album-search .results p {
-                margin-bottom: 5px;
-                margin-left: 20px;
-            }
-            .album-search .results .artist {
-                font-size: 12px;                
-                color: #fff;
-                margin-left: 20px;
-            }
-            .album-search .results img {
-                width: 16px;
-                height: 16px;
-                float: left;
-            }
-            body {
-                padding-top: 30px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
-            }
-            .navbar-fixed-top .nav {
-                padding: 10px 0;
-            }
-            .full-circle {                
-                height: 10px;
-                -moz-border-radius:5px;
-                -webkit-border-radius: 5px;
-                width: 10px;
-            }
-
-            .navbar-fixed-top .navbar-brand {
-                padding: 0 15px;
-            }
-            @media(min-width:768px) {
-                body {
-                    padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
-                }
-                .navbar-fixed-top .navbar-brand {
-                    padding: 5px;
-                }
-            }
-        </style>
+        <jsp:invoke fragment="app"/>        
     </head> 
 
     <body ng-app="PlantaAPP">               
-        <form action="${logoutUrl}" method="post" id="logoutForm">
-            <input type="hidden" 
-                   name="${_csrf.parameterName}"
-                   value="${_csrf.token}" />
-        </form>
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="container-fluid">
+        <div id="wrapper">
+
+            <!-- Navigation -->
+            <nav class="navbar navbar-default  navbar-fixed-top" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <button type="button"  class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">
-                        <img style="width:180px" src="<c:url value="/img/EV.png"/>" class="img-responsive" width="100" alt=""/>
-                    </a>
+                    <a class="navbar-brand" href id="menu-toggle">
+                        <img style="width:150px" src="<c:url value="/img/EV.png"/>" class="img-responsive hidden-xs" alt=""/>
+                    </a>                    
                 </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a href="#/NuevaPrueba">Nueva</a>
+                <!-- Top Menu Items -->
+                <ul class="nav navbar-right top-nav">
+                    <!--                    <li class="dropdown">
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                         <ul class="dropdown-menu message-dropdown">
+                             <li class="message-preview">
+                                 <a href="#">
+                                     <div class="media">
+                                         <span class="pull-left">
+                                             <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                         </span>
+                                         <div class="media-body">
+                                             <h5 class="media-heading"><strong>John Smith</strong>
+                                             </h5>
+                                             <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                             <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                         </div>
+                                     </div>
+                                 </a>
+                             </li>
+                             <li class="message-preview">
+                                 <a href="#">
+                                     <div class="media">
+                                         <span class="pull-left">
+                                             <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                         </span>
+                                         <div class="media-body">
+                                             <h5 class="media-heading"><strong>John Smith</strong>
+                                             </h5>
+                                             <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                             <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                         </div>
+                                     </div>
+                                 </a>
+                             </li>
+                             <li class="message-preview">
+                                 <a href="#">
+                                     <div class="media">
+                                         <span class="pull-left">
+                                             <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                         </span>
+                                         <div class="media-body">
+                                             <h5 class="media-heading"><strong>John Smith</strong>
+                                             </h5>
+                                             <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                             <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                         </div>
+                                     </div>
+                                 </a>
+                             </li>
+                             <li class="message-footer">
+                                 <a href="#">Read All New Messages</a>
+                             </li>
+                         </ul>
+                     </li>
+                     <li class="dropdown">
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+                         <ul class="dropdown-menu alert-dropdown">
+                             <li>
+                                 <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
+                             </li>
+                             <li>
+                                 <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
+                             </li>
+                             <li>
+                                 <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
+                             </li>
+                             <li>
+                                 <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
+                             </li>
+                             <li>
+                                 <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
+                             </li>
+                             <li>
+                                 <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
+                             </li>
+                             <li class="divider"></li>
+                             <li>
+                                 <a href="#">View All</a>
+                             </li>
+                         </ul>
+                     </li>-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
+                            Bienvenid@ {{user.username}} <b class="caret"></b></a>
+                        <!--                        <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                                                    </li>
+                                                    <li class="divider"></li>
+                                                    <li>
+                                                        <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                                                    </li>
+                                                </ul>-->
+                    </li>
+                    <li>
+                        <a href style="padding:0px">
+                            <img src="<c:url value="/img/LogoSelmec.png"/>" class="img-responsive" style="width:150px" alt=""/>
+                        </a>
+                    </li>
+                </ul>
+                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+                <div bs-navbar class="collapse navbar-collapse navbar-ex1-collapse"  >
+                    <ul class="nav navbar-nav side-nav">                        
+                        <li data-match-route="/NuevaPrueba">
+                            <a href="#/NuevaPrueba" >Nueva</a>
                         </li>
-                        <li>
+                        <li data-match-route="/Pruebas">
                             <a href="#/Pruebas">Pruebas</a>
                         </li>
-                        <li>                            
+                        <li data-match-route="/ProgramacionPruebasEnsamble">
                             <a href="#/ProgramacionPruebasEnsamble">Programación de Pruebas de Ensamble </a>
                         </li>
-                        <li>
-                            <a href="#/ProgramacionPruebasArranque">Programación de dPruebas de Arranques</a>                            
+                        <li data-match-route="/ProgramacionPruebasArranque">
+                            <a href="#/ProgramacionPruebasArranque">Programación de Pruebas de Arranques</a>                            
                         </li>
-                        <li>
+                        <li data-match-route="/NuevoArranque">
                             <a href="#/NuevoArranque">Nuevo Arranque</a>
                         </li>
-                        <li>
+                        <li data-match-route="/PruebasArranque">
                             <a href="#/PruebasArranque">Pruebas Arranque</a>
                         </li>
-                        <li>
+                        <li data-match-route="/Clientes">
                             <a href="#/Clientes">Clientes</a>
                         </li>
-                        <li>
+                        <li data-match-route="/Motores">
                             <a href="#/Motores" class="dropdown-toggle">Motores</a>                                        
                         </li>
-                        <li>
+                        <li data-match-route="/Incidencias">
                             <a href="#/Incidencias" class="dropdown-toggle">Incidencias</a>                                        
                         </li>
-                        <li>
+                        <li data-match-route="/Usuarios">
                             <a href="#/Usuarios" class="dropdown-toggle">Usuarios</a>                                        
                         </li> 
-                        <li>
+                        <li data-match-route="/Ubicaciones">
                             <a href="#/Ubicaciones" class="dropdown-toggle">Ubicaciones</a>                                        
                         </li> 
-                        <li>
+                        <li data-match-route="/Carriles">
                             <a href="#/Carriles" class="dropdown-toggle">Carriles</a>                                        
                         </li> 
-                        <li>
+                        <li data-match-route="/Kits">
                             <a href="#/Kits" class="dropdown-toggle">Kits</a>                                        
-                        </li> 
-                    </ul>                                
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#/MisDatos" >
-                                <security:authorize access="isAuthenticated()">
-                                    Bienvenid@: {{user.username}}                                    
-                                </security:authorize>
-                            </a>
-                        </li>                        <li>
-                            <a href="#" style="padding:0px">
-                                <img src="<c:url value="/img/LogoSelmec.png"/>" class="img-responsive" width="150" alt=""/>
-                            </a>
-                        </li>                        
-                        <li>
-                            <security:authorize access="isAuthenticated()">
-                                <a href="javascript:formSubmit()"> Logout</a>
-                            </security:authorize>
-                        </li>
+                        </li>                                
                     </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-        </nav>
-        <div class="container-fluid"> 
-            <div class='col-md-12'>
-                <jsp:doBody/>
+                </div>
+                <!-- /.navbar-collapse -->
+            </nav>
+
+            <div id="page-wrapper">
+
+                <!-- Page Content -->
+                <div id="page-content-wrapper">
+                    <!--                    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                                            <div class="container-fluid">
+                                                 Brand and toggle get grouped for better mobile display 
+                                                <div class="navbar-header">
+                                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                                        <span class="sr-only">Toggle navigation</span>
+                                                        <span class="icon-bar"></span>
+                                                        <span class="icon-bar"></span>
+                                                        <span class="icon-bar"></span>
+                                                    </button>
+                                                    <a class="navbar-brand" href="#">
+                                                        <img style="width:180px" src="<c:url value="/img/EV.png"/>" class="img-responsive hidden-xs" alt=""/>
+                                                    </a>
+                                                </div>
+                    
+                                                 Collect the nav links, forms, and other content for toggling 
+                                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                                                                <ul class="nav navbar-nav">
+                                                                                    <li>
+                                                                                        <a href="#/NuevaPrueba" ng-show="hasRole('')">Nueva</a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a href="#/Pruebas">Pruebas</a>
+                                                                                    </li>
+                                                                                    <li>                            
+                                                                                        <a href="#/ProgramacionPruebasEnsamble">Programación de Pruebas de Ensamble </a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a href="#/ProgramacionPruebasArranque">Programación de dPruebas de Arranques</a>                            
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a href="#/NuevoArranque">Nuevo Arranque</a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a href="#/PruebasArranque">Pruebas Arranque</a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a href="#/Clientes">Clientes</a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a href="#/Motores" class="dropdown-toggle">Motores</a>                                        
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a href="#/Incidencias" class="dropdown-toggle">Incidencias</a>                                        
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a href="#/Usuarios" class="dropdown-toggle">Usuarios</a>                                        
+                                                                                    </li> 
+                                                                                    <li>
+                                                                                        <a href="#/Ubicaciones" class="dropdown-toggle">Ubicaciones</a>                                        
+                                                                                    </li> 
+                                                                                    <li>
+                                                                                        <a href="#/Carriles" class="dropdown-toggle">Carriles</a>                                        
+                                                                                    </li> 
+                                                                                    <li>
+                                                                                        <a href="#/Kits" class="dropdown-toggle">Kits</a>                                        
+                                                                                    </li> 
+                                                                                </ul>                                
+                                                    <ul class="nav navbar-nav navbar-right">
+                                                        <li>
+                                                            <a href="#/MisDatos" >                  
+                </a>
+            </li>                        <li>
+                <a href="#" style="padding:0px">
+                    <img src="<c:url value="/img/LogoSelmec.png"/>" class="img-responsive" width="150" alt=""/>
+                </a>
+            </li>                        
+            <li>                 
+                </li>
+            </ul>
+        </div> /.navbar-collapse 
+    </div> /.container-fluid 
+</nav>-->
+                    <div class="container-fluid"> 
+                        <div class='col-md-12'>
+                            <jsp:doBody/>
+                        </div>
+                    </div>   
+                </div>
             </div>
-        </div>        
+        </div>
     </body>  
 </html>

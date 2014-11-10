@@ -952,11 +952,11 @@ app.run(["$rootScope", "PlantaServices", "amMoment",
                 return false;
             }
 
-            if ($rootScope.user.rol === undefined) {
+            if ($rootScope.user.roles[role] === undefined) {
                 return false;
             }
 
-            return $rootScope.user.rol === role;
+            return $rootScope.user.roles[role];
         };
     }]);
 app.controller('MainCtrl', ['$scope', '$timeout', '$log', 'Uuid', 'Sample', 'ganttMouseOffset', 'moment', "PlantaServices",

@@ -109,6 +109,8 @@
     <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
     </bean>
     
+    <import resource="jasper-views.xml" />
+    
 </beans>
 
 

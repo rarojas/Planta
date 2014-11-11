@@ -5,24 +5,17 @@
  */
 package com.selmec.plantaselmec.dto;
 
-import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 /**
  *
  * @author plantas
  */
-public class EnsamblearranqueDTO {
+public class EnsamblearranqueDTO extends EnsambleBaseDTO implements java.io.Serializable {
 
-    public int id;
-    public PlantaDTO planta;
-    public String folio;
-    public UsuarioDTO usuarios;
-    public Date dtCreacion;
-    public Date dtProgramada;
-    public Date dtProgramadaReal;
     public KitDTO kit;
     public String recibio;
     public String atendio;
-    public List<PruebaArranqueDTO> pruebaarranques;
+    public Set pruebaarranques;
+           
 }

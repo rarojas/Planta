@@ -29,18 +29,13 @@ public class InstalacionController extends BaseController<Instalacion, Integer, 
     public void setInstalacionService(IInstalacionService instalacionService) {
         this.instalacionService = instalacionService;
         this.baseService = instalacionService;
+        this.DTO = InstalacionDTO.class;
     }
 
-    /**
-     *
-     * @param id
-     * @return
-     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     @Override
     public InstalacionDTO Get(@PathVariable("id") Integer id) {
         return instalacionService.GetByID(id);
     }
-
 }

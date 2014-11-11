@@ -27,9 +27,9 @@ public class Ensamblearranque extends Ensamblebase implements java.io.Serializab
     private String tecnico;
     private Set pruebaarranques = new HashSet(0);
     public Kit kit;
-    private Usuarios Autorizo;
-    private int Estatus;
-    private Date dtAutorizo;
+//    private Usuarios Autorizo;
+//    private int Estatus;
+//    private Date dtAutorizo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CarrilID", nullable = false)

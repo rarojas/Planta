@@ -12,7 +12,6 @@ package com.selmec.plantaselmec.dto;
 public class ArranqueDTO extends PruebaArranqueDTO implements java.io.Serializable {
 
     public int id;
-
     public boolean instrumentos;
     public boolean regulador;
     public boolean maestro;

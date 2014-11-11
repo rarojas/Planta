@@ -1,10 +1,10 @@
 <form class="form-horizontal"  role="form" novalidate ng-submit="SavePrueba()" name="formPrueba">
     <div class="row">    
-        <div class="col-md-6">       
+        <div class="col-sm-6">       
             <fieldset>
                 <legend>Arranque</legend>
                 <div class="form-group">
-                    <div class="col-md-12">
+                    <div class="col-sm-12">
                         <div class="checkbox">
                             <label>                           
                                 <input type="checkbox" ng-model="prueba.instrumentos" name="instrumentos">
@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-12">
+                    <div class="col-sm-12">
                         <div class="checkbox">
                             <label>                           
                                 <input type="checkbox" ng-model="prueba.regulador" name="regulador">
@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-12">
+                    <div class="col-sm-12">
                         <div class="checkbox">
                             <label>                           
                                 <input type="checkbox" ng-model="prueba.maestro" name="maestro">
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-12">
+                    <div class="col-sm-12">
                         <div class="checkbox">
                             <label>                           
                                 <input type="checkbox" ng-model="prueba.multimetro" name="multimetro">
@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-12">
+                    <div class="col-sm-12">
                         <div class="checkbox">
                             <label>                           
                                 <input type="checkbox" ng-model="prueba.amperimetro" name="amperimetro">
@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-12">
+                    <div class="col-sm-12">
                         <div class="checkbox">
                             <label>                           
                                 <input type="checkbox" ng-model="prueba.frecuencimetro" name="frecuencimetro">
@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-12">
+                    <div class="col-sm-12">
                         <div class="checkbox">
                             <label>                           
                                 <input type="checkbox" ng-model="prueba.horometro" name="horometro">
@@ -81,7 +81,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-12">
+                    <div class="col-sm-12">
                         <div class="checkbox">
                             <label>                           
                                 <input type="checkbox" ng-model="prueba.selector" name="selector">
@@ -92,7 +92,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-12">
+                    <div class="col-sm-12">
                         <div class="checkbox">
                             <label>                           
                                 <input type="checkbox" ng-model="prueba.fusibles" name="fusibles">
@@ -103,14 +103,14 @@
                 </div>             
             </fieldset>
         </div> 
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-sm-12">
                      <datosarranque></datosarranque>
                 </div>
             </div>            
             <div class="row">     
-                <div class="col-md-12">
+                <div class="col-sm-12">
                     <button class="btn btn-success" ng-click="GuardarPrueba()" ng-disabled="formPrueba.$invalid" ng-show="prueba.estatus !== 2">
                         Guardar Prueba Control
                     </button>

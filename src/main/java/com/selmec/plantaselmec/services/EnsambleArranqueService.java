@@ -38,7 +38,8 @@ public class EnsambleArranqueService extends BaseServices<Ensamblearranque, Inte
     @Transactional(readOnly = true)
     @Override
     public List<EnsamblearranqueDTO> GetByUser(Usuarios usuario) {
-        return mapper.mapAsList(dao.getCurrentSession().createCriteria(Ensamblearranque.class).add(Restrictions.eq("usuarios.id", usuario.getId())).list(), DTO);
+        List<EnsamblearranqueDTO> ensambles = dao.getCurrentSession().createCriteria(Ensamblearranque.class).add(Restrictions.eq("usuarios.id", usuario.getId())).list();
+        return mapper.mapAsList(ensambles, DTO);
     }
 
     @Transactional(readOnly = true)

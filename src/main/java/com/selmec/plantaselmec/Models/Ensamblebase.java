@@ -42,15 +42,6 @@ public class Ensamblebase implements java.io.Serializable {
         this.id = id;
     }
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "CarrilID", nullable = false)
-//    public Cariles getCariles() {
-//        return this.cariles;
-//    }
-//
-//    public void setCariles(Cariles cariles) {
-//        this.cariles = cariles;
-//    }
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PlantaID", nullable = false)
     public Planta getPlanta() {

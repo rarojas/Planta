@@ -11,11 +11,7 @@ import java.util.List;
  *
  * @author rrojase
  */
-public class EnsambleDTO implements java.io.Serializable {
-
-    public Date dtProgramadaReal;
-    public Date dtProgramada;
-    public EstadoEnsamble Estatus;
+public class EnsambleDTO extends EnsambleBaseDTO implements java.io.Serializable {
 
     public EnsambleDTO() {
     }
@@ -66,15 +62,12 @@ public class EnsambleDTO implements java.io.Serializable {
         }
     }
 
-    public int id;
-    public PlantaDTO planta;
-    public String folio;
-    public UsuarioDTO usuarioId;
-    public Date dtCreacion;
+    public UsuarioDTO usuarioId;    
     public CarrilDTO carriles;
     public int altitud;
     public String rediador;
     public String patin;
     public String guardas;
-    public List<PruebaDTO> pruebas;
+    public List<PruebaDTO> pruebas;    
+    public EstadoEnsamble Estatus;
 }

@@ -66,7 +66,7 @@ var services = ["PlantaServices",
             api.Planeacion = $resource(urlApiBase + "GanttEnsamble/:id", {}, {
                 Arranques: {url: urlApiBase + "GanttEnsamble/Arranques", method: "get", isArray: true}
             });
-            api.UserService = $resource('rest/user/:action', {}, {authenticate: {method: 'POST', params: {'action': 'authenticate'}, headers: {'Content-Type': 'application/x-www-form-urlencoded'}}});
+            api.UserService = $resource(urlApiBase + 'Usuarios/:action', {}, {authenticate: {method: 'POST', params: {'action': 'authenticate'}, headers: {'Content-Type': 'application/x-www-form-urlencoded'}}});
             return api;
         }]];
 app.factory(services[0], services[1]);

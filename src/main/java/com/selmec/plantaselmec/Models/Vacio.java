@@ -13,7 +13,6 @@ import javax.persistence.Table;
 )
 public class Vacio extends Pruebaarranque implements java.io.Serializable {
 
-//    private Pruebaarranque pruebaarranque;
     private boolean proteccion;
     private boolean presion;
     private boolean temperatura;
@@ -24,32 +23,6 @@ public class Vacio extends Pruebaarranque implements java.io.Serializable {
     private boolean fugaescape;
     private boolean fases;
 
-    public Vacio() {
-    }
-
-//    public Vacio(Pruebaarranque pruebaarranque, boolean proteccion, boolean presion, boolean temperatura, boolean sobrevelocidad, boolean ajustevoltaje, boolean ajustehz, boolean fugas, boolean fugaescape, boolean fases) {
-//        this.pruebaarranque = pruebaarranque;
-//        this.proteccion = proteccion;
-//        this.presion = presion;
-//        this.temperatura = temperatura;
-//        this.sobrevelocidad = sobrevelocidad;
-//        this.ajustevoltaje = ajustevoltaje;
-//        this.ajustehz = ajustehz;
-//        this.fugas = fugas;
-//        this.fugaescape = fugaescape;
-//        this.fases = fases;
-//    }
-
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @PrimaryKeyJoinColumn
-//    public Pruebaarranque getPruebaarranque() {
-//        return this.pruebaarranque;
-//    }
-//
-//    public void setPruebaarranque(Pruebaarranque pruebaarranque) {
-//        this.pruebaarranque = pruebaarranque;
-//    }
-    
     @Column(name = "proteccion", nullable = false)
     public boolean isProteccion() {
         return this.proteccion;

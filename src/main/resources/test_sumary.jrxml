@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 5.6.1.final using JasperReports Library version 5.6.1  -->
+<!-- 2014-11-11T10:45:47 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="test_sumary" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b57508f1-a2ee-40ca-b479-b05582c69217">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="planta_id" class="java.lang.String">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-	</parameter>
-	<queryString>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL"/>	
+	<parameter name="planta_id" class="java.lang.Integer"/>
+	<queryString language="SQL">
 		<![CDATA[select enbs.folio as folio_prueba , date_format(curtime(),'%e-%M-%Y') fecha,
 	   pl.noSerie planta_noserie, pl.noOp planta_noop,
 	   mt.marca motor_marca, mt.modelo motor_modelo, pl.MotorSerie motor_serie,
@@ -27,7 +28,9 @@ and pr.id=$P{planta_id}]]>
 	</queryString>
 	<field name="folio_prueba" class="java.lang.String"/>
 	<field name="fecha" class="java.lang.String"/>
-	<field name="planta_noserie" class="java.lang.String"/>
+	<field name="planta_noserie" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="planta_noop" class="java.lang.String"/>
 	<field name="motor_marca" class="java.lang.String"/>
 	<field name="motor_modelo" class="java.lang.String"/>
@@ -59,7 +62,7 @@ and pr.id=$P{planta_id}]]>
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="573" splitType="Stretch">
+		<band height="528" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="108" height="34" uuid="1a5bd89c-8816-4ba9-8e6b-e9b6a045a673"/>
 				<imageExpression><![CDATA["http://www.selmec.com.mx/themes/selmec/img/selmec.png"]]></imageExpression>
@@ -101,8 +104,8 @@ and pr.id=$P{planta_id}]]>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="85" width="572" height="20" forecolor="#FFFFFF" backcolor="#354251" uuid="012fd868-4597-4b0b-a179-e2b6f1a2c91e"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Glober Book"/>
 				</textElement>
 				<text><![CDATA[DATOS GENERALES DE PLANTA DE EMERGENCIA]]></text>
 			</staticText>
@@ -254,7 +257,7 @@ and pr.id=$P{planta_id}]]>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="218" width="572" height="20" forecolor="#FFFFFF" backcolor="#354251" uuid="c8fae872-3244-4ffd-bc7a-bf8668e26deb"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial"/>
 				</textElement>
 				<text><![CDATA[DATOS ESPECIFICOS DE PLANTA DE EMERGENCIA]]></text>
@@ -486,6 +489,54 @@ and pr.id=$P{planta_id}]]>
 				</textElement>
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
+		</band>
+		<band height="342">
+			<staticText>
+				<reportElement mode="Opaque" x="4" y="100" width="572" height="20" forecolor="#FFFFFF" backcolor="#354251" uuid="006fed79-957e-4b1a-9624-250bf849561c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[VALORES DURANTE PRUEBA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="61" width="289" height="20" forecolor="#666666" uuid="73de9a2d-8202-4935-8254-2b8f854fc024"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Puesta en operación de plantas de emergencia - Ensamble]]></text>
+			</staticText>
+			<image>
+				<reportElement x="11" y="10" width="108" height="34" uuid="e43738f9-adc6-4d08-a2cc-7e89d5c537b3"/>
+				<imageExpression><![CDATA["http://www.selmec.com.mx/themes/selmec/img/selmec.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="412" y="12" width="68" height="20" forecolor="#666666" uuid="d0a0c3d1-649b-4299-8485-624cd1f4316d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Folio Prueba:]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="480" y="12" width="100" height="20" forecolor="#FFFFFF" backcolor="#FF9933" uuid="dc05bc89-1d95-4525-bc79-6d8d40634eae"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{folio_prueba}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="61" width="100" height="20" forecolor="#666666" uuid="2c6de61f-8502-4b4a-a7ee-82b9dab04cae"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="412" y="61" width="68" height="20" forecolor="#666666" uuid="23c9730a-eb44-4bf9-8c95-b1a717bf011e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>			
 		</band>
 	</detail>
 	<columnFooter>

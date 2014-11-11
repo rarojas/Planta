@@ -5,13 +5,17 @@
  */
 package com.selmec.plantaselmec.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
+import com.selmec.plantaselmec.Models.EstadoPruebaArranque;
+import java.util.Date;
+
 /**
  *
  * @author GEIDAR
  */
-public class ArranqueDTO extends PruebaArranqueDTO implements java.io.Serializable {
+public class ArranqueDTO implements java.io.Serializable {
 
-    public int id;
     public boolean instrumentos;
     public boolean regulador;
     public boolean maestro;
@@ -21,5 +25,14 @@ public class ArranqueDTO extends PruebaArranqueDTO implements java.io.Serializab
     public boolean horometro;
     public boolean selector;
     public Boolean fusibles;
+    public int id;
+    public int tipo;
+    public EstadoPruebaArranque estatus;
+    @JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
+    public Date dtInicio;
+    @JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
+    public Date dtFin;
+    public String comentario;
+    public IncidenciasDTO incidencias;
 
 }

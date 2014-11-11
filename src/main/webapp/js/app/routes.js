@@ -22,11 +22,12 @@ var Routes = ['$routeProvider', '$httpProvider',
         $httpProvider.interceptors.push(function ($q, $rootScope, $location) {
             return {
                 'request': function (config) {
-                    var isRestCall = config.url.indexOf('rest') === 0;
+                    var isRestCall = config.url.indexOf('api') !== 0;                                         
                     if (isRestCall && angular.isDefined($rootScope.authToken)) {
                         var authToken = $rootScope.authToken;
-                        if (exampleAppConfig.useAuthTokenHeader) {
-                            config.headers['X-Auth-Token'] = authToken;
+                        if ( true) {
+                               console.log($rootScope.authToken);
+                            config.headers['Authentication'] = authToken;
                         } else {
                             config.url = config.url + "?token=" + authToken;
                         }

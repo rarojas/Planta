@@ -23,21 +23,6 @@ public class Arranque extends Pruebaarranque implements java.io.Serializable {
     private boolean selector;
     private Boolean fusibles;
 
-    public Arranque() {
-    }
-   
-
-   
-
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @PrimaryKeyJoinColumn
-//    public Pruebaarranque getPruebaarranque() {
-//        return this.pruebaarranque;
-//    }
-//
-//    public void setPruebaarranque(Pruebaarranque pruebaarranque) {
-//        this.pruebaarranque = pruebaarranque;
-//    }
     @Column(name = "instrumentos", nullable = false)
     public boolean isInstrumentos() {
         return this.instrumentos;

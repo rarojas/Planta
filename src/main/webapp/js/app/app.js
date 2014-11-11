@@ -947,7 +947,7 @@ app.controller("PruebaVacioCtrl", ["$routeParams", "$scope", "PlantaServices", "
             $scope.prueba = new PlantaServices.Vacios({
                 dtInicio: new Date(),
                 dtFin: new Date(),
-                tipo: 1,
+                tipo: 2,
                 estatus: "Creada",
                 ensamblearranque: {id: $scope.ensamble.id}
             });
@@ -1017,13 +1017,13 @@ app.run(["$rootScope", "PlantaServices", "amMoment", "$cookieStore", "$location"
         };
         /* Try getting valid user from cookie or go to login page */
         var originalPath = $location.path();
-        //$location.path("/login");
+        $location.path("/login");
         var authToken = $cookieStore.get('authToken');
         if (authToken !== undefined) {
             $rootScope.authToken = authToken;
-            PlantaServices.UserService.get(function (user) {
+            PlantaServices.Usuarios.current(function (user) {
                 $rootScope.user = user;
-                $location.path(originalPath);
+                $location.path("/");
             });
         }
 
@@ -1162,17 +1162,18 @@ app.controller('ProgramacionPruebasArranqueCtrl', ['$scope', '$timeout', '$log',
 function LoginController($scope, $rootScope, $location, $cookieStore, PlantaServices) {
     $scope.rememberMe = false;
     $scope.login = function () {
-        PlantaServices.UserService.authenticate($.param({username: $scope.username, password: $scope.password}), function (authenticationResult) {
-            var authToken = authenticationResult.token;
-            $rootScope.authToken = authToken;
-            if ($scope.rememberMe) {
-                $cookieStore.put('authToken', authToken);
-            }
-            PlantaServices.UserService.get(function (user) {
-                $rootScope.user = user;
-                $location.path("/");
-            });
-        });
+        PlantaServices.UserService.authenticate($.param({username: $scope.username, password: $scope.password}),
+                function (authenticationResult) {
+                    var authToken = authenticationResult.token;
+                    $rootScope.authToken = authToken;
+                    if ($scope.rememberMe) {
+                        $cookieStore.put('authToken', authToken);
+                    }
+                    PlantaServices.Usuarios.current(function (user) {
+                        $rootScope.user = user;
+                        $location.path("/");
+                    });
+                });
     };
 }
 ;

@@ -5,11 +5,16 @@
  */
 package com.selmec.plantaselmec.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
+import com.selmec.plantaselmec.Models.EstadoPruebaArranque;
+import java.util.Date;
+
 /**
  *
  * @author GEIDAR
  */
-public class VacioDTO extends  PruebaArranqueDTO implements java.io.Serializable {
+public class VacioDTO implements java.io.Serializable {
 
     public boolean proteccion;
     public boolean presion;
@@ -20,6 +25,14 @@ public class VacioDTO extends  PruebaArranqueDTO implements java.io.Serializable
     public boolean fugas;
     public boolean fugaescape;
     public boolean fases;
-    
+    public int id;
+    public int tipo;
+    public EstadoPruebaArranque estatus;
+    @JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
+    public Date dtInicio;
+    @JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
+    public Date dtFin;
+    public String comentario;
+    public IncidenciasDTO incidencias;
 
 }

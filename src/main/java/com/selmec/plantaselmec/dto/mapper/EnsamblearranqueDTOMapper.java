@@ -25,9 +25,9 @@ public class EnsamblearranqueDTOMapper extends CustomMapper<Ensamblearranque, En
         destination.id = source.getId();
         destination.dtCreacion = source.getDtCreacion();
         destination.dtProgramada = source.getDtProgramada();
-        destination.dtProgramadaReal = source.getDtProgramadaReal();                
+        destination.dtProgramadaReal = source.getDtProgramadaReal();
         destination.folio = source.getFolio();
         destination.pruebaarranques = mapperFacade.mapAsList(source.getPruebaarranques(), PruebaArranqueDTO.class);
-
+        mapperFacade.map(source.getPlanta(), destination.planta);
     }
 }

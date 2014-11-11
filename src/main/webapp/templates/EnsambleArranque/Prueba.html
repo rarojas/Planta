@@ -160,7 +160,7 @@
                         Entrar
                     </a>
                 </div>
-                <list-pruebas-arranque prueba="prueba" urlview="PruebaConCargaView" url="" tipo="1"></list-pruebaarranques>
+                <list-pruebas-arranque prueba="prueba" urlview="PruebaArranqueView" url="" tipo="1"></list-pruebaarranques>
             </div>
             <div class="col-md-3">             
                 <div class="btn-group"ng-show="(prueba.pruebaarranques | filter : {tipo : 1,estatus: 'AutorizadoEjecutor'}).length !== 0">
@@ -168,7 +168,7 @@
                         Entrar
                     </a>
                 </div>
-                <list-pruebas-arranque prueba="prueba" urlview="PruebaConCargaSubitaView" url="" tipo="2"></list-pruebaarranques>
+                <list-pruebas-arranque prueba="prueba" urlview="PruebaVacioView" url="" tipo="2"></list-pruebaarranques>
             </div>
             <div class="col-md-3">              
                 <div class="btn-group" ng-show="(prueba.pruebaarranques | filter : {tipo : 2,estatus: 'AutorizadoEjecutor'}).length !== 0">

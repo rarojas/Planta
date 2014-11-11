@@ -31,6 +31,8 @@ var services = ["PlantaServices",
             });
             api.Pruebasarranque = $resource(urlApiBase + "Pruebasarranque/:id", {}, {});
             api.Instalaciones = $resource(urlApiBase + "Instalaciones/:id", {}, {});
+            api.Arranques = $resource(urlApiBase + "Arranque/:id", {}, {});
+            api.Vacios = $resource(urlApiBase + "Vacio/:id", {}, {});
             api.Pruebascontrol = $resource(urlApiBase + "Pruebacontrol/:id", {}, {});
             api.Pruebas = $resource(urlApiBase + "Pruebas/:id", {}, {
                 GetValues: {url: urlApiBase + 'Planta/GetValues/:id/:seg/:ite/:equipo'},
@@ -64,6 +66,7 @@ var services = ["PlantaServices",
             api.Planeacion = $resource(urlApiBase + "GanttEnsamble/:id", {}, {
                 Arranques: {url: urlApiBase + "GanttEnsamble/Arranques", method: "get", isArray: true}
             });
+            api.UserService = $resource('rest/user/:action', {}, {authenticate: {method: 'POST', params: {'action': 'authenticate'}, headers: {'Content-Type': 'application/x-www-form-urlencoded'}}});
             return api;
         }]];
 app.factory(services[0], services[1]);

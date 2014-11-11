@@ -23,14 +23,12 @@ public class Pruebaarranque extends Pruebabase implements java.io.Serializable {
 
     private Ensamblearranque ensamblearranque;
     private int tipo;
-    private int estatus;
+    private EstadoPruebaArranque estatus;
     private Integer aprueba;
     private Date dtAprueba;
 
     public Pruebaarranque() {
     }
-
-  
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EnsambleID", nullable = false)
@@ -61,11 +59,11 @@ public class Pruebaarranque extends Pruebabase implements java.io.Serializable {
     }
 
     @Column(name = "Estatus", nullable = false)
-    public int getEstatus() {
+    public EstadoPruebaArranque getEstatus() {
         return this.estatus;
     }
 
-    public void setEstatus(int estatus) {
+    public void setEstatus(EstadoPruebaArranque estatus) {
         this.estatus = estatus;
     }
 

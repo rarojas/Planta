@@ -22,7 +22,8 @@
         <script src="<c:url value="/js/libs/angular.js/i18n/angular-locale_es-mx.js"/>"></script> 
         <script src="<c:url value="/js/libs/angular-directives-d3/angularjs-nvd3-directives.min.js"/>"></script>    
         <script src="<c:url value="/js/libs/n3-linecharts/line-chart.min.js"/>"></script>    
-        <script src="<c:url value="/js/libs/angular.js/angular-resource.js"/>"></script>    
+        <script src="<c:url value="/js/libs/angular.js/angular-resource.min.js"/>"></script>    
+        <script src="<c:url value="/js/libs/angular.js/angular-cookies.min.js"/>"></script>    
         <script src="<c:url value="/js/libs/angular.js/angular-animate.min.js"/>"></script>    
         <script src="<c:url value="/js/libs/angular.js/angular-route.min.js"/>"></script>    
         <script src="<c:url value="/js/libs/angular.js/angular-touch.min.js"/>"></script>    
@@ -46,10 +47,12 @@
         <script src="<c:url value="/js/libs/angular-gantt/angular-gantt.js"/>"></script>     
         <script src="<c:url value="/js/libs/angular-gantt/angular-gantt-plugins.js"/>"></script>     
         <script src="<c:url value="/js/libs/underscore.js/underscore.js"/>"></script>  
+        
         <link href="<c:url value="/js/libs/twitter-bootstrap/css/bootstrap-theme.css"/>" rel="stylesheet" type="text/css"/>
         <link href="<c:url value="/js/libs/twitter-bootstrap/css/bootstrap.css"/>" rel="stylesheet" type="text/css"/>
         <link href="<c:url value="/js/libs/angular-loading-bar/loading-bar.css"/>" rel="stylesheet" type="text/css"/>   
         <link href="<c:url value="/js/libs/angular-gantt/gantt.css"/>" rel="stylesheet" type="text/css"/>   
+        <link href="<c:url value="/css/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css"/>   
         <link href="<c:url value="/css/sb-admin.css"/>" rel="stylesheet" type="text/css"/>   
         <link href="<c:url value="/css/typehead.css"/>" rel="stylesheet" type="text/css"/>   
         <script>
@@ -69,7 +72,7 @@
     </head> 
 
     <body ng-app="PlantaAPP">               
-        <div id="wrapper">
+        <div id="wrapper" class="toggled">
 
             <!-- Navigation -->
             <nav class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -168,23 +171,24 @@
                          </ul>
                      </li>-->
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
-                            Bienvenid@ {{user.username}} <b class="caret"></b></a>
-                        <!--                        <ul class="dropdown-menu">
-                                                    <li>
-                                                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                                                    </li>
-                                                    <li class="divider"></li>
-                                                    <li>
-                                                        <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                                                    </li>
-                                                </ul>-->
+                        <a href class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
+                            Bienvenid@ {{user.username}} <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-user"></i> Cuenta</a>
+                            </li>
+                            <!--                            <li>
+                                                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                                                        </li>-->
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-power-off"></i> Cerrar Sesión</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href style="padding:0px">
@@ -193,10 +197,12 @@
                     </li>
                 </ul>
                 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-                <div bs-navbar class="collapse navbar-collapse navbar-ex1-collapse"  >
-                    <ul class="nav navbar-nav side-nav">                        
+                <div bs-navbar class="collapse navbar-collapse navbar-ex1-collapse" >
+                    <ul class="nav navbar-nav side-nav toggled">                        
                         <li data-match-route="/NuevaPrueba">
-                            <a href="#/NuevaPrueba" >Nueva</a>
+                            <a href="#/NuevaPrueba">                                
+                                Nueva
+                            </a>
                         </li>
                         <li data-match-route="/Pruebas">
                             <a href="#/Pruebas">Pruebas</a>

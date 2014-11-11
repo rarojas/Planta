@@ -23,21 +23,20 @@
         </fieldset>
     </div>
 </div>
-<div class="col-md-12" >
-    <fieldset>
-        <legend>Control Planta : <label ng-style="{
-                    color: Estado.color
-                }" class="label">{{Estado.text}}</label>  </legend>    
-        <div class="btn-group">
-            <button type="button" class="btn " ng-click="ArranquePlanta()" >
-                <img src="../../img/Icons/Arranque.png" alt="" width="50"/>
-            </button>
-            <button type="button" class="btn" ng-click="ParoPlanta()"    >
-                <img src="../../img/Icons/PARO.png" alt="" width="50"/>                          
-            </button>  
-            <button type="button" class="btn btn-primary" ng-click="AutoPlanta()"  >
-                Auto                       
-            </button>  
-        </div>
-    </fieldset>                     
-</div>
+<div class="row">
+    <div class="col-md-12" >
+        <fieldset>
+            <legend>Control Planta : <label ng-style="{color: Estado.color}" class="label">{{Estado.text}}</label>  </legend>    
+            <div class="btn-group">
+                <button type="button" class="btn " ng-click="ArranquePlanta()" >
+                    <img src="../../img/Icons/Arranque.png" alt="" width="50"/>
+                </button>
+                <button type="button" class="btn" ng-click="ParoPlanta()"    >
+                    <img src="../../img/Icons/PARO.png" alt="" width="50"/>                          
+                </button>  
+                <button type="button" class="btn btn-primary" ng-click="AutoPlanta()"  >
+                    Auto                       
+                </button>  
+            </div>
+        </fieldset>                     
+    </div></div>

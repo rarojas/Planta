@@ -154,9 +154,13 @@
             <property name="tipo" type="int">
                 <column name="Tipo" not-null="true" />
             </property>
-            <property name="estatus" type="int">
+            <property name="estatus">
                 <column name="Estatus" not-null="true" />
-            </property>
+                <type name="org.hibernate.type.EnumType">
+                    <param name="enumClass">com.selmec.plantaselmec.Models.EstadoPruebaArranque
+                    </param>
+                </type>
+            </property>  
             <property name="aprueba" type="java.lang.Integer">
                 <column name="Aprueba" />
             </property>

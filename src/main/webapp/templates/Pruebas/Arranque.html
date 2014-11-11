@@ -29,7 +29,7 @@
                     <div class="col-md-12">
                         <div class="checkbox">
                             <label>                           
-                                <input type="checkbox" ng-model="prueba.mestro" name="mestro">
+                                <input type="checkbox" ng-model="prueba.maestro" name="maestro">
                                 Conexión y estado del control maestro
                             </label>
                         </div>      
@@ -106,12 +106,9 @@
         <div class="col-md-6">
             <div class="row">
                 <div class="col-md-12">
-                    <datosprueba></datosprueba>
+                     <datosarranque></datosarranque>
                 </div>
-            </div>   
-            <div class="row">            
-                <div class="col-md-12"incidenciasctrl></div>
-            </div>
+            </div>            
             <div class="row">     
                 <div class="col-md-12">
                     <button class="btn btn-success" ng-click="GuardarPrueba()" ng-disabled="formPrueba.$invalid" ng-show="prueba.estatus !== 2">

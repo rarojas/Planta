@@ -9,10 +9,8 @@ package com.selmec.plantaselmec.dto;
  *
  * @author GEIDAR
  */
-public class VacioDTO implements java.io.Serializable {
+public class VacioDTO extends  PruebaArranqueDTO implements java.io.Serializable {
 
-    public int id;
-    //public PruebaDTO prueba;
     public boolean proteccion;
     public boolean presion;
     public boolean temperatura;
@@ -22,8 +20,6 @@ public class VacioDTO implements java.io.Serializable {
     public boolean fugas;
     public boolean fugaescape;
     public boolean fases;
-
-    public VacioDTO() {
-    }
+    
 
 }

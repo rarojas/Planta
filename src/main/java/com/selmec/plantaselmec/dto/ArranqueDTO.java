@@ -9,10 +9,10 @@ package com.selmec.plantaselmec.dto;
  *
  * @author GEIDAR
  */
-public class ArranqueDTO implements java.io.Serializable {
+public class ArranqueDTO extends PruebaArranqueDTO implements java.io.Serializable {
 
     public int id;
-    //public PruebaDTO prueba;
+
     public boolean instrumentos;
     public boolean regulador;
     public boolean maestro;
@@ -23,6 +23,4 @@ public class ArranqueDTO implements java.io.Serializable {
     public boolean selector;
     public Boolean fusibles;
 
-    public ArranqueDTO() {
-    }
 }

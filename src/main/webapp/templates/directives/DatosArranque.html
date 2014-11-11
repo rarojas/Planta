@@ -29,7 +29,7 @@
             <label>Carril de prueba</label>
         </div>                            
         <div class="col-sm-6">
-            <label class="label label-success">{{ensamble.carriles.noCarril}} - De {{ensamble.carriles.minCap}} Kw a {{ensamble.carriles.maxCap}}</label>
+            <label class="label label-success">{{ensamble.kit.descripcion}}</label>
         </div>
     </div>
     <div class="row" ng-show="AccumulateTime !== null">                        
@@ -39,16 +39,7 @@
         <div class="col-sm-6">
             <label  class="label label-primary">{{AccumulateTime| minutos}}</label> 
         </div>
-    </div>   
-
-    <div class="row">                        
-        <div class="col-sm-6">
-            <label>Valores fuera de rango</label>
-        </div>                            
-        <div class="col-sm-6">
-            <label  class="label label-primary">{{log.length}}</label> 
-        </div>
-    </div> 
+    </div>       
     <div class="row">                        
         <div class="col-sm-6">
             <label>Estatus</label>

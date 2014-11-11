@@ -25,6 +25,13 @@ app.directive('datosprueba', function () {
         templateUrl: '/templates/directives/DatosPrueba.html'
     };
 });
+app.directive('datosarranque', function () {
+    return {
+        replace: true,
+        restrict: 'EA',
+        templateUrl: '/templates/directives/DatosArranque.html'
+    };
+});
 app.directive('tableCtrlCarga', function () {
     return {
         replace: true,
@@ -54,9 +61,8 @@ app.directive('check', function () {
         restrict: 'EA',
         scope: {
             value: "=value"
-        },
-        //templateUrl: '/templates/directives/tablesubita.html'
-        template: '<div><span class="glyphicon glyphicon-ok success" ng-show="value === true"></span><span class="glyphicon glyphicon-remove bg-danger" ng-show="value === false"></span></div>'
+        },        
+        template: '<div><i class="fa fa-check text-success" ng-show="value"></i><i class="fa fa-close text-danger" ng-show="!value"></i></div>'
     };
 });
 app.directive('estatusPrueba', function () {
@@ -163,7 +169,7 @@ app.directive('autocomplete', ["$timeout", function ($timeout) {
             restrict: 'E',
             transclude: true,
             replace: true,
-            template: '<div><form><input class="form-control" ng-model="term" ng-change="query()" type="text" autocomplete="off" /></form><div ng-transclude></div></div>',
+            template: '<div><form><input class="form-control" ng-model="term" ng-change="query()" type="text" autocomplete="off" /><i class="fa fa-spinner fa-spin"></i></form><div ng-transclude></div></div>',
             scope: {
                 search: "&",
                 select: "&",
@@ -211,8 +217,10 @@ app.directive('autocomplete', ["$timeout", function ($timeout) {
                             if (filterTextTimeout)
                                 $timeout.cancel(filterTextTimeout);
                             filterTextTimeout = $timeout(function () {
+                                $scope.searching = true;
                                 $scope.hide = false;
                                 $scope.search({term: $scope.term});
+                                $scope.searching = false;
                             }, 250);
 
                         }
@@ -221,6 +229,8 @@ app.directive('autocomplete', ["$timeout", function ($timeout) {
             link: function (scope, element, attrs, controller) {
 
                 var $input = element.find('form > input');
+                var $spinner = element.find('form > i');
+                console.log($spinner);
                 var $list = element.find('> div');
 
                 $input.bind('focus', function () {
@@ -265,7 +275,6 @@ app.directive('autocomplete', ["$timeout", function ($timeout) {
                     if (e.keyCode === 9 || e.keyCode === 13 || e.keyCode === 27) {
                         e.preventDefault();
                     }
-                    ;
 
                     if (e.keyCode === 40) {
                         e.preventDefault();
@@ -286,6 +295,22 @@ app.directive('autocomplete', ["$timeout", function ($timeout) {
                     controller.activate(items.length ? items[0] : null);
                 });
 
+                scope.$watch('searching', function (searching) {
+                    if (searching)
+                    {
+                        var pos = $input.position();
+                        var height = $input[0].offsetHeight;
+                        $spinner.css({
+                            top: pos.top - height,
+                            left: pos.left,
+                            position: 'absolute',
+                            display: 'block'
+                        });
+                    }
+                    else {
+                        $spinner.css({display: 'none'});
+                    }
+                });
                 scope.$watch('focused', function (focused) {
                     if (focused) {
                         $timeout(function () {

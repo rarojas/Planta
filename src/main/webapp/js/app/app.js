@@ -997,7 +997,7 @@ app.controller("PruebaInstalacionViewCtrl", ["$routeParams", "$scope", "PlantaSe
 app.run(["$rootScope", "PlantaServices", "amMoment", "$cookieStore", "$location",
     function ($rootScope, PlantaServices, amMoment, $cookieStore, $location) {
         amMoment.changeLocale('es');
-        $rootScope.user = PlantaServices.Usuarios.current();
+        //$rootScope.user = PlantaServices.Usuarios.current();
         $rootScope.hasRole = function (role) {
             if ($rootScope.user === undefined) {
                 return false;
